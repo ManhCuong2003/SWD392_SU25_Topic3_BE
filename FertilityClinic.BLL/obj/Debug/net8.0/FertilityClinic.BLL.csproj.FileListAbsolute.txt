@@ -1,0 +1,17 @@
+C:\Users\acer\Desktop\123\Cn7\SWD392\SWD392_10W_FertilityClinic\FertilityClinic.BLL\bin\Debug\net8.0\FertilityClinic.BLL.deps.json
+C:\Users\acer\Desktop\123\Cn7\SWD392\SWD392_10W_FertilityClinic\FertilityClinic.BLL\bin\Debug\net8.0\FertilityClinic.BLL.dll
+C:\Users\acer\Desktop\123\Cn7\SWD392\SWD392_10W_FertilityClinic\FertilityClinic.BLL\bin\Debug\net8.0\FertilityClinic.BLL.pdb
+C:\Users\acer\Desktop\123\Cn7\SWD392\SWD392_10W_FertilityClinic\FertilityClinic.BLL\bin\Debug\net8.0\FertilityClinic.DAL.dll
+C:\Users\acer\Desktop\123\Cn7\SWD392\SWD392_10W_FertilityClinic\FertilityClinic.BLL\bin\Debug\net8.0\FertilityClinic.DTO.dll
+C:\Users\acer\Desktop\123\Cn7\SWD392\SWD392_10W_FertilityClinic\FertilityClinic.BLL\bin\Debug\net8.0\FertilityClinic.DAL.pdb
+C:\Users\acer\Desktop\123\Cn7\SWD392\SWD392_10W_FertilityClinic\FertilityClinic.BLL\bin\Debug\net8.0\FertilityClinic.DTO.pdb
+C:\Users\acer\Desktop\123\Cn7\SWD392\SWD392_10W_FertilityClinic\FertilityClinic.BLL\obj\Debug\net8.0\FertilityClinic.BLL.csproj.AssemblyReference.cache
+C:\Users\acer\Desktop\123\Cn7\SWD392\SWD392_10W_FertilityClinic\FertilityClinic.BLL\obj\Debug\net8.0\FertilityClinic.BLL.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\acer\Desktop\123\Cn7\SWD392\SWD392_10W_FertilityClinic\FertilityClinic.BLL\obj\Debug\net8.0\FertilityClinic.BLL.AssemblyInfoInputs.cache
+C:\Users\acer\Desktop\123\Cn7\SWD392\SWD392_10W_FertilityClinic\FertilityClinic.BLL\obj\Debug\net8.0\FertilityClinic.BLL.AssemblyInfo.cs
+C:\Users\acer\Desktop\123\Cn7\SWD392\SWD392_10W_FertilityClinic\FertilityClinic.BLL\obj\Debug\net8.0\FertilityClinic.BLL.csproj.CoreCompileInputs.cache
+C:\Users\acer\Desktop\123\Cn7\SWD392\SWD392_10W_FertilityClinic\FertilityClinic.BLL\obj\Debug\net8.0\Fertilit.6EFF3DB3.Up2Date
+C:\Users\acer\Desktop\123\Cn7\SWD392\SWD392_10W_FertilityClinic\FertilityClinic.BLL\obj\Debug\net8.0\FertilityClinic.BLL.dll
+C:\Users\acer\Desktop\123\Cn7\SWD392\SWD392_10W_FertilityClinic\FertilityClinic.BLL\obj\Debug\net8.0\refint\FertilityClinic.BLL.dll
+C:\Users\acer\Desktop\123\Cn7\SWD392\SWD392_10W_FertilityClinic\FertilityClinic.BLL\obj\Debug\net8.0\FertilityClinic.BLL.pdb
+C:\Users\acer\Desktop\123\Cn7\SWD392\SWD392_10W_FertilityClinic\FertilityClinic.BLL\obj\Debug\net8.0\ref\FertilityClinic.BLL.dll

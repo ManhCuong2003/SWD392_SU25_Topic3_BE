@@ -1,0 +1,17 @@
+C:\Users\acer\Desktop\123\Cn7\SWD392\SWD392_10W_FertilityClinic\FertilityClinic.DAL\bin\Debug\net8.0\FertilityClinic.DAL.deps.json
+C:\Users\acer\Desktop\123\Cn7\SWD392\SWD392_10W_FertilityClinic\FertilityClinic.DAL\bin\Debug\net8.0\FertilityClinic.DAL.runtimeconfig.json
+C:\Users\acer\Desktop\123\Cn7\SWD392\SWD392_10W_FertilityClinic\FertilityClinic.DAL\bin\Debug\net8.0\FertilityClinic.DAL.dll
+C:\Users\acer\Desktop\123\Cn7\SWD392\SWD392_10W_FertilityClinic\FertilityClinic.DAL\bin\Debug\net8.0\FertilityClinic.DAL.pdb
+C:\Users\acer\Desktop\123\Cn7\SWD392\SWD392_10W_FertilityClinic\FertilityClinic.DAL\bin\Debug\net8.0\FertilityClinic.DTO.dll
+C:\Users\acer\Desktop\123\Cn7\SWD392\SWD392_10W_FertilityClinic\FertilityClinic.DAL\bin\Debug\net8.0\FertilityClinic.DTO.pdb
+C:\Users\acer\Desktop\123\Cn7\SWD392\SWD392_10W_FertilityClinic\FertilityClinic.DAL\obj\Debug\net8.0\FertilityClinic.DAL.csproj.AssemblyReference.cache
+C:\Users\acer\Desktop\123\Cn7\SWD392\SWD392_10W_FertilityClinic\FertilityClinic.DAL\obj\Debug\net8.0\FertilityClinic.DAL.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\acer\Desktop\123\Cn7\SWD392\SWD392_10W_FertilityClinic\FertilityClinic.DAL\obj\Debug\net8.0\FertilityClinic.DAL.AssemblyInfoInputs.cache
+C:\Users\acer\Desktop\123\Cn7\SWD392\SWD392_10W_FertilityClinic\FertilityClinic.DAL\obj\Debug\net8.0\FertilityClinic.DAL.AssemblyInfo.cs
+C:\Users\acer\Desktop\123\Cn7\SWD392\SWD392_10W_FertilityClinic\FertilityClinic.DAL\obj\Debug\net8.0\FertilityClinic.DAL.csproj.CoreCompileInputs.cache
+C:\Users\acer\Desktop\123\Cn7\SWD392\SWD392_10W_FertilityClinic\FertilityClinic.DAL\obj\Debug\net8.0\Fertilit.40BC1435.Up2Date
+C:\Users\acer\Desktop\123\Cn7\SWD392\SWD392_10W_FertilityClinic\FertilityClinic.DAL\obj\Debug\net8.0\FertilityClinic.DAL.dll
+C:\Users\acer\Desktop\123\Cn7\SWD392\SWD392_10W_FertilityClinic\FertilityClinic.DAL\obj\Debug\net8.0\refint\FertilityClinic.DAL.dll
+C:\Users\acer\Desktop\123\Cn7\SWD392\SWD392_10W_FertilityClinic\FertilityClinic.DAL\obj\Debug\net8.0\FertilityClinic.DAL.pdb
+C:\Users\acer\Desktop\123\Cn7\SWD392\SWD392_10W_FertilityClinic\FertilityClinic.DAL\obj\Debug\net8.0\FertilityClinic.DAL.genruntimeconfig.cache
+C:\Users\acer\Desktop\123\Cn7\SWD392\SWD392_10W_FertilityClinic\FertilityClinic.DAL\obj\Debug\net8.0\ref\FertilityClinic.DAL.dll

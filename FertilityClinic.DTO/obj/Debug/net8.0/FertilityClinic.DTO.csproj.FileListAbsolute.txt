@@ -1,0 +1,11 @@
+C:\Users\acer\Desktop\123\Cn7\SWD392\SWD392_10W_FertilityClinic\FertilityClinic.DTO\bin\Debug\net8.0\FertilityClinic.DTO.deps.json
+C:\Users\acer\Desktop\123\Cn7\SWD392\SWD392_10W_FertilityClinic\FertilityClinic.DTO\bin\Debug\net8.0\FertilityClinic.DTO.dll
+C:\Users\acer\Desktop\123\Cn7\SWD392\SWD392_10W_FertilityClinic\FertilityClinic.DTO\bin\Debug\net8.0\FertilityClinic.DTO.pdb
+C:\Users\acer\Desktop\123\Cn7\SWD392\SWD392_10W_FertilityClinic\FertilityClinic.DTO\obj\Debug\net8.0\FertilityClinic.DTO.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\acer\Desktop\123\Cn7\SWD392\SWD392_10W_FertilityClinic\FertilityClinic.DTO\obj\Debug\net8.0\FertilityClinic.DTO.AssemblyInfoInputs.cache
+C:\Users\acer\Desktop\123\Cn7\SWD392\SWD392_10W_FertilityClinic\FertilityClinic.DTO\obj\Debug\net8.0\FertilityClinic.DTO.AssemblyInfo.cs
+C:\Users\acer\Desktop\123\Cn7\SWD392\SWD392_10W_FertilityClinic\FertilityClinic.DTO\obj\Debug\net8.0\FertilityClinic.DTO.csproj.CoreCompileInputs.cache
+C:\Users\acer\Desktop\123\Cn7\SWD392\SWD392_10W_FertilityClinic\FertilityClinic.DTO\obj\Debug\net8.0\FertilityClinic.DTO.dll
+C:\Users\acer\Desktop\123\Cn7\SWD392\SWD392_10W_FertilityClinic\FertilityClinic.DTO\obj\Debug\net8.0\refint\FertilityClinic.DTO.dll
+C:\Users\acer\Desktop\123\Cn7\SWD392\SWD392_10W_FertilityClinic\FertilityClinic.DTO\obj\Debug\net8.0\FertilityClinic.DTO.pdb
+C:\Users\acer\Desktop\123\Cn7\SWD392\SWD392_10W_FertilityClinic\FertilityClinic.DTO\obj\Debug\net8.0\ref\FertilityClinic.DTO.dll

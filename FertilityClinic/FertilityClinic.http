@@ -1,0 +1,6 @@
+@FertilityClinic_HostAddress = http://localhost:5022
+
+GET {{FertilityClinic_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
