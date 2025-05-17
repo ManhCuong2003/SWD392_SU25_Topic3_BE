@@ -17,4 +17,9 @@
     <Folder Include="Validators\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\FertilityClinic.DAL\FertilityClinic.DAL.csproj" />
+    <ProjectReference Include="..\FertilityClinic.DTO\FertilityClinic.DTO.csproj" />
+  </ItemGroup>
+
 </Project>
