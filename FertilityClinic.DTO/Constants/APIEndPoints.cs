@@ -6,7 +6,19 @@ using System.Threading.Tasks;
 
 namespace FertilityClinic.DTO.Constants
 {
-    internal class APIEndPoints
+    public static class APIEndPoints
     {
+        public const string Base = "api";
+
+        public static class Auth
+        {
+            public const string Login = $"{Base}/auth/login";
+            public const string Register = $"{Base}/auth/register";
+        }
+
+        public static class Debug
+        {
+            public const string CheckDb = $"{Base}/debug/db-check";
+        }
     }
 }

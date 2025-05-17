@@ -53,12 +53,16 @@ builder.Services.Configure<JwtSettings>(builder.Configuration.GetSection("Jwt"))
 builder.Services.AddSwaggerGen(opt =>
 {
     opt.SwaggerDoc("Users", new OpenApiInfo { Title = "User APIs", Version = "v1" });
-    opt.SwaggerDoc("Auth", new OpenApiInfo { Title = "User APIs", Version = "v1" });
+    opt.SwaggerDoc("Auth", new OpenApiInfo { Title = "Auth APIs", Version = "v1" }); // Fixed title
     opt.SwaggerDoc("Debug", new OpenApiInfo { Title = "Debug APIs", Version = "v1" });
 
+    // Add safe XML documentation loading
     var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
     var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
-    opt.IncludeXmlComments(xmlPath);
+    if (File.Exists(xmlPath))
+    {
+        opt.IncludeXmlComments(xmlPath);
+    }
 
     // Add JWT bearer to Swagger
     var securityScheme = new OpenApiSecurityScheme
@@ -100,7 +104,7 @@ builder.Services.AddControllers();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+
 // Register the DbContext with the connection string
 builder.Services.AddDbContext<FertilityClinicDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
