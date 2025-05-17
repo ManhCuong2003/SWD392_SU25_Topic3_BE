@@ -1,90 +1,54 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\acer\\Desktop\\123\\Cn7\\SWD392\\SWD392_SU25_Topic3_BE\\",
+  "WorkspaceRootPath": "C:\\Users\\phuth\\OneDrive\\Desktop\\SWD392_10W\\SWD392_SU25_Topic3_BE\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{D8DDF674-8E2E-4882-AF21-E095E0D6BC4B}|FertilityClinic.DAL\\FertilityClinic.DAL.csproj|c:\\users\\acer\\desktop\\123\\cn7\\swd392\\swd392_su25_topic3_be\\fertilityclinic.dal\\models\\notification.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D8DDF674-8E2E-4882-AF21-E095E0D6BC4B}|FertilityClinic.DAL\\FertilityClinic.DAL.csproj|solutionrelative:fertilityclinic.dal\\models\\notification.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D8DDF674-8E2E-4882-AF21-E095E0D6BC4B}|FertilityClinic.DAL\\FertilityClinic.DAL.csproj|C:\\Users\\acer\\Desktop\\123\\Cn7\\SWD392\\SWD392_SU25_Topic3_BE\\fertilityclinic.dal\\models\\blog.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D8DDF674-8E2E-4882-AF21-E095E0D6BC4B}|FertilityClinic.DAL\\FertilityClinic.DAL.csproj|solutionrelative:fertilityclinic.dal\\models\\blog.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D8DDF674-8E2E-4882-AF21-E095E0D6BC4B}|FertilityClinic.DAL\\FertilityClinic.DAL.csproj|C:\\Users\\acer\\Desktop\\123\\Cn7\\SWD392\\SWD392_SU25_Topic3_BE\\fertilityclinic.dal\\models\\review.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D8DDF674-8E2E-4882-AF21-E095E0D6BC4B}|FertilityClinic.DAL\\FertilityClinic.DAL.csproj|solutionrelative:fertilityclinic.dal\\models\\review.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D8DDF674-8E2E-4882-AF21-E095E0D6BC4B}|FertilityClinic.DAL\\FertilityClinic.DAL.csproj|C:\\Users\\acer\\Desktop\\123\\Cn7\\SWD392\\SWD392_SU25_Topic3_BE\\fertilityclinic.dal\\models\\appointment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D8DDF674-8E2E-4882-AF21-E095E0D6BC4B}|FertilityClinic.DAL\\FertilityClinic.DAL.csproj|solutionrelative:fertilityclinic.dal\\models\\appointment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D8DDF674-8E2E-4882-AF21-E095E0D6BC4B}|FertilityClinic.DAL\\FertilityClinic.DAL.csproj|C:\\Users\\acer\\Desktop\\123\\Cn7\\SWD392\\SWD392_SU25_Topic3_BE\\fertilityclinic.dal\\models\\inseminationresult.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D8DDF674-8E2E-4882-AF21-E095E0D6BC4B}|FertilityClinic.DAL\\FertilityClinic.DAL.csproj|solutionrelative:fertilityclinic.dal\\models\\inseminationresult.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D8DDF674-8E2E-4882-AF21-E095E0D6BC4B}|FertilityClinic.DAL\\FertilityClinic.DAL.csproj|C:\\Users\\acer\\Desktop\\123\\Cn7\\SWD392\\SWD392_SU25_Topic3_BE\\fertilityclinic.dal\\models\\inseminationschedule.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D8DDF674-8E2E-4882-AF21-E095E0D6BC4B}|FertilityClinic.DAL\\FertilityClinic.DAL.csproj|solutionrelative:fertilityclinic.dal\\models\\inseminationschedule.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D8DDF674-8E2E-4882-AF21-E095E0D6BC4B}|FertilityClinic.DAL\\FertilityClinic.DAL.csproj|C:\\Users\\acer\\Desktop\\123\\Cn7\\SWD392\\SWD392_SU25_Topic3_BE\\fertilityclinic.dal\\models\\labtestresult.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D8DDF674-8E2E-4882-AF21-E095E0D6BC4B}|FertilityClinic.DAL\\FertilityClinic.DAL.csproj|solutionrelative:fertilityclinic.dal\\models\\labtestresult.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D8DDF674-8E2E-4882-AF21-E095E0D6BC4B}|FertilityClinic.DAL\\FertilityClinic.DAL.csproj|C:\\Users\\acer\\Desktop\\123\\Cn7\\SWD392\\SWD392_SU25_Topic3_BE\\fertilityclinic.dal\\models\\labtestschedule.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D8DDF674-8E2E-4882-AF21-E095E0D6BC4B}|FertilityClinic.DAL\\FertilityClinic.DAL.csproj|solutionrelative:fertilityclinic.dal\\models\\labtestschedule.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D8DDF674-8E2E-4882-AF21-E095E0D6BC4B}|FertilityClinic.DAL\\FertilityClinic.DAL.csproj|C:\\Users\\acer\\Desktop\\123\\Cn7\\SWD392\\SWD392_SU25_Topic3_BE\\fertilityclinic.dal\\models\\injectionschedule.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D8DDF674-8E2E-4882-AF21-E095E0D6BC4B}|FertilityClinic.DAL\\FertilityClinic.DAL.csproj|solutionrelative:fertilityclinic.dal\\models\\injectionschedule.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D8DDF674-8E2E-4882-AF21-E095E0D6BC4B}|FertilityClinic.DAL\\FertilityClinic.DAL.csproj|C:\\Users\\acer\\Desktop\\123\\Cn7\\SWD392\\SWD392_SU25_Topic3_BE\\fertilityclinic.dal\\models\\treatmentprocess.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D8DDF674-8E2E-4882-AF21-E095E0D6BC4B}|FertilityClinic.DAL\\FertilityClinic.DAL.csproj|solutionrelative:fertilityclinic.dal\\models\\treatmentprocess.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D8DDF674-8E2E-4882-AF21-E095E0D6BC4B}|FertilityClinic.DAL\\FertilityClinic.DAL.csproj|C:\\Users\\acer\\Desktop\\123\\Cn7\\SWD392\\SWD392_SU25_Topic3_BE\\fertilityclinic.dal\\models\\treatmentmethod.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D8DDF674-8E2E-4882-AF21-E095E0D6BC4B}|FertilityClinic.DAL\\FertilityClinic.DAL.csproj|solutionrelative:fertilityclinic.dal\\models\\treatmentmethod.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D8DDF674-8E2E-4882-AF21-E095E0D6BC4B}|FertilityClinic.DAL\\FertilityClinic.DAL.csproj|C:\\Users\\acer\\Desktop\\123\\Cn7\\SWD392\\SWD392_SU25_Topic3_BE\\fertilityclinic.dal\\models\\doctor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D8DDF674-8E2E-4882-AF21-E095E0D6BC4B}|FertilityClinic.DAL\\FertilityClinic.DAL.csproj|solutionrelative:fertilityclinic.dal\\models\\doctor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D8DDF674-8E2E-4882-AF21-E095E0D6BC4B}|FertilityClinic.DAL\\FertilityClinic.DAL.csproj|C:\\Users\\acer\\Desktop\\123\\Cn7\\SWD392\\SWD392_SU25_Topic3_BE\\fertilityclinic.dal\\models\\patient.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D8DDF674-8E2E-4882-AF21-E095E0D6BC4B}|FertilityClinic.DAL\\FertilityClinic.DAL.csproj|solutionrelative:fertilityclinic.dal\\models\\patient.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D8DDF674-8E2E-4882-AF21-E095E0D6BC4B}|FertilityClinic.DAL\\FertilityClinic.DAL.csproj|C:\\Users\\acer\\Desktop\\123\\Cn7\\SWD392\\SWD392_SU25_Topic3_BE\\fertilityclinic.dal\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D8DDF674-8E2E-4882-AF21-E095E0D6BC4B}|FertilityClinic.DAL\\FertilityClinic.DAL.csproj|solutionrelative:fertilityclinic.dal\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D8DDF674-8E2E-4882-AF21-E095E0D6BC4B}|FertilityClinic.DAL\\FertilityClinic.DAL.csproj|C:\\Users\\acer\\Desktop\\123\\Cn7\\SWD392\\SWD392_SU25_Topic3_BE\\fertilityclinic.dal\\models\\pricelist.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D8DDF674-8E2E-4882-AF21-E095E0D6BC4B}|FertilityClinic.DAL\\FertilityClinic.DAL.csproj|solutionrelative:fertilityclinic.dal\\models\\pricelist.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D8DDF674-8E2E-4882-AF21-E095E0D6BC4B}|FertilityClinic.DAL\\FertilityClinic.DAL.csproj|C:\\Users\\acer\\Desktop\\123\\Cn7\\SWD392\\SWD392_SU25_Topic3_BE\\fertilityclinic.dal\\fertilityclinic.dal.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
-      "RelativeMoniker": "D:0:0:{D8DDF674-8E2E-4882-AF21-E095E0D6BC4B}|FertilityClinic.DAL\\FertilityClinic.DAL.csproj|solutionrelative:fertilityclinic.dal\\fertilityclinic.dal.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2F5F8024-1308-4F23-8938-9D5CA9069A0F}|FertilityClinic.DTO\\FertilityClinic.DTO.csproj|C:\\Users\\acer\\Desktop\\123\\Cn7\\SWD392\\SWD392_SU25_Topic3_BE\\fertilityclinic.dto\\constants\\apiendpoints.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2F5F8024-1308-4F23-8938-9D5CA9069A0F}|FertilityClinic.DTO\\FertilityClinic.DTO.csproj|solutionrelative:fertilityclinic.dto\\constants\\apiendpoints.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2F5F8024-1308-4F23-8938-9D5CA9069A0F}|FertilityClinic.DTO\\FertilityClinic.DTO.csproj|C:\\Users\\acer\\Desktop\\123\\Cn7\\SWD392\\SWD392_SU25_Topic3_BE\\fertilityclinic.dto\\config\\jwtsettings.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2F5F8024-1308-4F23-8938-9D5CA9069A0F}|FertilityClinic.DTO\\FertilityClinic.DTO.csproj|solutionrelative:fertilityclinic.dto\\config\\jwtsettings.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{6022BF70-7F1E-4FFD-A78D-56A3C8DE2F20}|FertilityClinic\\FertilityClinic.csproj|C:\\Users\\acer\\Desktop\\123\\Cn7\\SWD392\\SWD392_SU25_Topic3_BE\\fertilityclinic\\fertilityclinic.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
-      "RelativeMoniker": "D:0:0:{6022BF70-7F1E-4FFD-A78D-56A3C8DE2F20}|FertilityClinic\\FertilityClinic.csproj|solutionrelative:fertilityclinic\\fertilityclinic.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D8DDF674-8E2E-4882-AF21-E095E0D6BC4B}|FertilityClinic.DAL\\FertilityClinic.DAL.csproj|C:\\Users\\acer\\Desktop\\123\\Cn7\\SWD392\\SWD392_SU25_Topic3_BE\\fertilityclinic.dal\\fertilityclinicdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{D8DDF674-8E2E-4882-AF21-E095E0D6BC4B}|FertilityClinic.DAL\\FertilityClinic.DAL.csproj|c:\\users\\phuth\\onedrive\\desktop\\swd392_10w\\swd392_su25_topic3_be\\fertilityclinic.dal\\fertilityclinicdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{D8DDF674-8E2E-4882-AF21-E095E0D6BC4B}|FertilityClinic.DAL\\FertilityClinic.DAL.csproj|solutionrelative:fertilityclinic.dal\\fertilityclinicdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{641DBE15-2460-4C76-9B49-793227B018BC}|FertilityClinic.BLL\\FertilityClinic.BLL.csproj|C:\\Users\\acer\\Desktop\\123\\Cn7\\SWD392\\SWD392_SU25_Topic3_BE\\fertilityclinic.bll\\fertilityclinic.bll.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
-      "RelativeMoniker": "D:0:0:{641DBE15-2460-4C76-9B49-793227B018BC}|FertilityClinic.BLL\\FertilityClinic.BLL.csproj|solutionrelative:fertilityclinic.bll\\fertilityclinic.bll.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
+      "AbsoluteMoniker": "D:0:0:{D8DDF674-8E2E-4882-AF21-E095E0D6BC4B}|FertilityClinic.DAL\\FertilityClinic.DAL.csproj|c:\\users\\phuth\\onedrive\\desktop\\swd392_10w\\swd392_su25_topic3_be\\fertilityclinic.dal\\repositories\\implementations\\igenericrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D8DDF674-8E2E-4882-AF21-E095E0D6BC4B}|FertilityClinic.DAL\\FertilityClinic.DAL.csproj|solutionrelative:fertilityclinic.dal\\repositories\\implementations\\igenericrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D8DDF674-8E2E-4882-AF21-E095E0D6BC4B}|FertilityClinic.DAL\\FertilityClinic.DAL.csproj|c:\\users\\phuth\\onedrive\\desktop\\swd392_10w\\swd392_su25_topic3_be\\fertilityclinic.dal\\unitofwork\\unitofwork.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D8DDF674-8E2E-4882-AF21-E095E0D6BC4B}|FertilityClinic.DAL\\FertilityClinic.DAL.csproj|solutionrelative:fertilityclinic.dal\\unitofwork\\unitofwork.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2F5F8024-1308-4F23-8938-9D5CA9069A0F}|FertilityClinic.DTO\\FertilityClinic.DTO.csproj|c:\\users\\phuth\\onedrive\\desktop\\swd392_10w\\swd392_su25_topic3_be\\fertilityclinic.dto\\config\\jwtsettings.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2F5F8024-1308-4F23-8938-9D5CA9069A0F}|FertilityClinic.DTO\\FertilityClinic.DTO.csproj|solutionrelative:fertilityclinic.dto\\config\\jwtsettings.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D8DDF674-8E2E-4882-AF21-E095E0D6BC4B}|FertilityClinic.DAL\\FertilityClinic.DAL.csproj|c:\\users\\phuth\\onedrive\\desktop\\swd392_10w\\swd392_su25_topic3_be\\fertilityclinic.dal\\repositories\\interfaces\\genericrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D8DDF674-8E2E-4882-AF21-E095E0D6BC4B}|FertilityClinic.DAL\\FertilityClinic.DAL.csproj|solutionrelative:fertilityclinic.dal\\repositories\\interfaces\\genericrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D8DDF674-8E2E-4882-AF21-E095E0D6BC4B}|FertilityClinic.DAL\\FertilityClinic.DAL.csproj|c:\\users\\phuth\\onedrive\\desktop\\swd392_10w\\swd392_su25_topic3_be\\fertilityclinic.dal\\unitofwork\\iunitofwork.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D8DDF674-8E2E-4882-AF21-E095E0D6BC4B}|FertilityClinic.DAL\\FertilityClinic.DAL.csproj|solutionrelative:fertilityclinic.dal\\unitofwork\\iunitofwork.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6022BF70-7F1E-4FFD-A78D-56A3C8DE2F20}|FertilityClinic\\FertilityClinic.csproj|c:\\users\\phuth\\onedrive\\desktop\\swd392_10w\\swd392_su25_topic3_be\\fertilityclinic\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6022BF70-7F1E-4FFD-A78D-56A3C8DE2F20}|FertilityClinic\\FertilityClinic.csproj|solutionrelative:fertilityclinic\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6022BF70-7F1E-4FFD-A78D-56A3C8DE2F20}|FertilityClinic\\FertilityClinic.csproj|c:\\users\\phuth\\onedrive\\desktop\\swd392_10w\\swd392_su25_topic3_be\\fertilityclinic\\middlewares\\globalexceptionmiddleware..cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6022BF70-7F1E-4FFD-A78D-56A3C8DE2F20}|FertilityClinic\\FertilityClinic.csproj|solutionrelative:fertilityclinic\\middlewares\\globalexceptionmiddleware..cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6022BF70-7F1E-4FFD-A78D-56A3C8DE2F20}|FertilityClinic\\FertilityClinic.csproj|c:\\users\\phuth\\onedrive\\desktop\\swd392_10w\\swd392_su25_topic3_be\\fertilityclinic\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{6022BF70-7F1E-4FFD-A78D-56A3C8DE2F20}|FertilityClinic\\FertilityClinic.csproj|solutionrelative:fertilityclinic\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D8DDF674-8E2E-4882-AF21-E095E0D6BC4B}|FertilityClinic.DAL\\FertilityClinic.DAL.csproj|c:\\users\\phuth\\onedrive\\desktop\\swd392_10w\\swd392_su25_topic3_be\\fertilityclinic.dal\\migrations\\20250517035547_initialcreate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D8DDF674-8E2E-4882-AF21-E095E0D6BC4B}|FertilityClinic.DAL\\FertilityClinic.DAL.csproj|solutionrelative:fertilityclinic.dal\\migrations\\20250517035547_initialcreate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D8DDF674-8E2E-4882-AF21-E095E0D6BC4B}|FertilityClinic.DAL\\FertilityClinic.DAL.csproj|c:\\users\\phuth\\onedrive\\desktop\\swd392_10w\\swd392_su25_topic3_be\\fertilityclinic.dal\\migrations\\fertilityclinicdbcontextmodelsnapshot.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D8DDF674-8E2E-4882-AF21-E095E0D6BC4B}|FertilityClinic.DAL\\FertilityClinic.DAL.csproj|solutionrelative:fertilityclinic.dal\\migrations\\fertilityclinicdbcontextmodelsnapshot.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6022BF70-7F1E-4FFD-A78D-56A3C8DE2F20}|FertilityClinic\\FertilityClinic.csproj|c:\\users\\phuth\\onedrive\\desktop\\swd392_10w\\swd392_su25_topic3_be\\fertilityclinic\\controllers\\logincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6022BF70-7F1E-4FFD-A78D-56A3C8DE2F20}|FertilityClinic\\FertilityClinic.csproj|solutionrelative:fertilityclinic\\controllers\\logincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -94,264 +58,153 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 8,
+          "SelectedChildIndex": 0,
           "Children": [
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "InseminationResult.cs",
-              "DocumentMoniker": "C:\\Users\\acer\\Desktop\\123\\Cn7\\SWD392\\SWD392_SU25_Topic3_BE\\FertilityClinic.DAL\\Models\\InseminationResult.cs",
-              "RelativeDocumentMoniker": "FertilityClinic.DAL\\Models\\InseminationResult.cs",
-              "ToolTip": "C:\\Users\\acer\\Desktop\\123\\Cn7\\SWD392\\SWD392_SU25_Topic3_BE\\FertilityClinic.DAL\\Models\\InseminationResult.cs",
-              "RelativeToolTip": "FertilityClinic.DAL\\Models\\InseminationResult.cs",
-              "ViewState": "AQIAAAwAAAAAAAAAAAA0wA8AAAAPAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-15T14:22:32.019Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "LabTestSchedule.cs",
-              "DocumentMoniker": "C:\\Users\\acer\\Desktop\\123\\Cn7\\SWD392\\SWD392_SU25_Topic3_BE\\FertilityClinic.DAL\\Models\\LabTestSchedule.cs",
-              "RelativeDocumentMoniker": "FertilityClinic.DAL\\Models\\LabTestSchedule.cs",
-              "ToolTip": "C:\\Users\\acer\\Desktop\\123\\Cn7\\SWD392\\SWD392_SU25_Topic3_BE\\FertilityClinic.DAL\\Models\\LabTestSchedule.cs",
-              "RelativeToolTip": "FertilityClinic.DAL\\Models\\LabTestSchedule.cs",
-              "ViewState": "AQIAAAoAAAAAAAAAAAAzwA0AAAAPAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-15T14:21:06.103Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "LabTestResult.cs",
-              "DocumentMoniker": "C:\\Users\\acer\\Desktop\\123\\Cn7\\SWD392\\SWD392_SU25_Topic3_BE\\FertilityClinic.DAL\\Models\\LabTestResult.cs",
-              "RelativeDocumentMoniker": "FertilityClinic.DAL\\Models\\LabTestResult.cs",
-              "ToolTip": "C:\\Users\\acer\\Desktop\\123\\Cn7\\SWD392\\SWD392_SU25_Topic3_BE\\FertilityClinic.DAL\\Models\\LabTestResult.cs",
-              "RelativeToolTip": "FertilityClinic.DAL\\Models\\LabTestResult.cs",
-              "ViewState": "AQIAAAoAAAAAAAAAAAAzwA8AAAAPAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-15T14:21:44.023Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "InseminationSchedule.cs",
-              "DocumentMoniker": "C:\\Users\\acer\\Desktop\\123\\Cn7\\SWD392\\SWD392_SU25_Topic3_BE\\FertilityClinic.DAL\\Models\\InseminationSchedule.cs",
-              "RelativeDocumentMoniker": "FertilityClinic.DAL\\Models\\InseminationSchedule.cs",
-              "ToolTip": "C:\\Users\\acer\\Desktop\\123\\Cn7\\SWD392\\SWD392_SU25_Topic3_BE\\FertilityClinic.DAL\\Models\\InseminationSchedule.cs",
-              "RelativeToolTip": "FertilityClinic.DAL\\Models\\InseminationSchedule.cs",
-              "ViewState": "AQIAAAoAAAAAAAAAAAAzwBYAAAAzAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-15T14:22:08.185Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "Appointment.cs",
-              "DocumentMoniker": "C:\\Users\\acer\\Desktop\\123\\Cn7\\SWD392\\SWD392_SU25_Topic3_BE\\FertilityClinic.DAL\\Models\\Appointment.cs",
-              "RelativeDocumentMoniker": "FertilityClinic.DAL\\Models\\Appointment.cs",
-              "ToolTip": "C:\\Users\\acer\\Desktop\\123\\Cn7\\SWD392\\SWD392_SU25_Topic3_BE\\FertilityClinic.DAL\\Models\\Appointment.cs",
-              "RelativeToolTip": "FertilityClinic.DAL\\Models\\Appointment.cs",
-              "ViewState": "AQIAAAoAAAAAAAAAAAAzwBUAAAA0AAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-15T14:22:54.199Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Review.cs",
-              "DocumentMoniker": "C:\\Users\\acer\\Desktop\\123\\Cn7\\SWD392\\SWD392_SU25_Topic3_BE\\FertilityClinic.DAL\\Models\\Review.cs",
-              "RelativeDocumentMoniker": "FertilityClinic.DAL\\Models\\Review.cs",
-              "ToolTip": "C:\\Users\\acer\\Desktop\\123\\Cn7\\SWD392\\SWD392_SU25_Topic3_BE\\FertilityClinic.DAL\\Models\\Review.cs",
-              "RelativeToolTip": "FertilityClinic.DAL\\Models\\Review.cs",
-              "ViewState": "AQIAAAoAAAAAAAAAAAAzwA8AAAAPAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-15T14:23:47.629Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Blog.cs",
-              "DocumentMoniker": "C:\\Users\\acer\\Desktop\\123\\Cn7\\SWD392\\SWD392_SU25_Topic3_BE\\FertilityClinic.DAL\\Models\\Blog.cs",
-              "RelativeDocumentMoniker": "FertilityClinic.DAL\\Models\\Blog.cs",
-              "ToolTip": "C:\\Users\\acer\\Desktop\\123\\Cn7\\SWD392\\SWD392_SU25_Topic3_BE\\FertilityClinic.DAL\\Models\\Blog.cs",
-              "RelativeToolTip": "FertilityClinic.DAL\\Models\\Blog.cs",
-              "ViewState": "AQIAAAgAAAAAAAAAAAAxwBEAAAAvAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-15T14:24:07.331Z"
-            },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "Notification.cs",
-              "DocumentMoniker": "C:\\Users\\acer\\Desktop\\123\\Cn7\\SWD392\\SWD392_SU25_Topic3_BE\\FertilityClinic.DAL\\Models\\Notification.cs",
-              "RelativeDocumentMoniker": "FertilityClinic.DAL\\Models\\Notification.cs",
-              "ToolTip": "C:\\Users\\acer\\Desktop\\123\\Cn7\\SWD392\\SWD392_SU25_Topic3_BE\\FertilityClinic.DAL\\Models\\Notification.cs",
-              "RelativeToolTip": "FertilityClinic.DAL\\Models\\Notification.cs",
-              "ViewState": "AQIAAAgAAAAAAAAAAAAxwA0AAAArAAAA",
+              "Title": "FertilityClinicDbContext.cs",
+              "DocumentMoniker": "C:\\Users\\phuth\\OneDrive\\Desktop\\SWD392_10W\\SWD392_SU25_Topic3_BE\\FertilityClinic.DAL\\FertilityClinicDbContext.cs",
+              "RelativeDocumentMoniker": "FertilityClinic.DAL\\FertilityClinicDbContext.cs",
+              "ToolTip": "C:\\Users\\phuth\\OneDrive\\Desktop\\SWD392_10W\\SWD392_SU25_Topic3_BE\\FertilityClinic.DAL\\FertilityClinicDbContext.cs",
+              "RelativeToolTip": "FertilityClinic.DAL\\FertilityClinicDbContext.cs",
+              "ViewState": "AgIAAAsAAAAAAAAAAAAxwKIAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-15T14:24:34.874Z",
+              "WhenOpened": "2025-05-17T04:43:32.34Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "InjectionSchedule.cs",
-              "DocumentMoniker": "C:\\Users\\acer\\Desktop\\123\\Cn7\\SWD392\\SWD392_SU25_Topic3_BE\\FertilityClinic.DAL\\Models\\InjectionSchedule.cs",
-              "RelativeDocumentMoniker": "FertilityClinic.DAL\\Models\\InjectionSchedule.cs",
-              "ToolTip": "C:\\Users\\acer\\Desktop\\123\\Cn7\\SWD392\\SWD392_SU25_Topic3_BE\\FertilityClinic.DAL\\Models\\InjectionSchedule.cs",
-              "RelativeToolTip": "FertilityClinic.DAL\\Models\\InjectionSchedule.cs",
-              "ViewState": "AQIAAAoAAAAAAAAAAAAzwBcAAAAWAAAA",
+              "DocumentIndex": 1,
+              "Title": "IGenericRepository.cs",
+              "DocumentMoniker": "C:\\Users\\phuth\\OneDrive\\Desktop\\SWD392_10W\\SWD392_SU25_Topic3_BE\\FertilityClinic.DAL\\Repositories\\Implementations\\IGenericRepository.cs",
+              "RelativeDocumentMoniker": "FertilityClinic.DAL\\Repositories\\Implementations\\IGenericRepository.cs",
+              "ToolTip": "C:\\Users\\phuth\\OneDrive\\Desktop\\SWD392_10W\\SWD392_SU25_Topic3_BE\\FertilityClinic.DAL\\Repositories\\Implementations\\IGenericRepository.cs",
+              "RelativeToolTip": "FertilityClinic.DAL\\Repositories\\Implementations\\IGenericRepository.cs",
+              "ViewState": "AgIAAAgAAAAAAAAAAAAcwBYAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-15T14:20:28.973Z"
+              "WhenOpened": "2025-05-17T04:37:50.483Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "UnitOfWork.cs",
+              "DocumentMoniker": "C:\\Users\\phuth\\OneDrive\\Desktop\\SWD392_10W\\SWD392_SU25_Topic3_BE\\FertilityClinic.DAL\\UnitOfWork\\UnitOfWork.cs",
+              "RelativeDocumentMoniker": "FertilityClinic.DAL\\UnitOfWork\\UnitOfWork.cs",
+              "ToolTip": "C:\\Users\\phuth\\OneDrive\\Desktop\\SWD392_10W\\SWD392_SU25_Topic3_BE\\FertilityClinic.DAL\\UnitOfWork\\UnitOfWork.cs",
+              "RelativeToolTip": "FertilityClinic.DAL\\UnitOfWork\\UnitOfWork.cs",
+              "ViewState": "AgIAAAIAAAAAAAAAAAAAABEAAAAZAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-17T04:06:26.684Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "JwtSettings.cs",
+              "DocumentMoniker": "C:\\Users\\phuth\\OneDrive\\Desktop\\SWD392_10W\\SWD392_SU25_Topic3_BE\\FertilityClinic.DTO\\Config\\JwtSettings.cs",
+              "RelativeDocumentMoniker": "FertilityClinic.DTO\\Config\\JwtSettings.cs",
+              "ToolTip": "C:\\Users\\phuth\\OneDrive\\Desktop\\SWD392_10W\\SWD392_SU25_Topic3_BE\\FertilityClinic.DTO\\Config\\JwtSettings.cs",
+              "RelativeToolTip": "FertilityClinic.DTO\\Config\\JwtSettings.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-17T04:45:48.097Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "GenericRepository.cs",
+              "DocumentMoniker": "C:\\Users\\phuth\\OneDrive\\Desktop\\SWD392_10W\\SWD392_SU25_Topic3_BE\\FertilityClinic.DAL\\Repositories\\Interfaces\\GenericRepository.cs",
+              "RelativeDocumentMoniker": "FertilityClinic.DAL\\Repositories\\Interfaces\\GenericRepository.cs",
+              "ToolTip": "C:\\Users\\phuth\\OneDrive\\Desktop\\SWD392_10W\\SWD392_SU25_Topic3_BE\\FertilityClinic.DAL\\Repositories\\Interfaces\\GenericRepository.cs",
+              "RelativeToolTip": "FertilityClinic.DAL\\Repositories\\Interfaces\\GenericRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAARAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-17T04:14:13.762Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "IUnitOfWork.cs",
+              "DocumentMoniker": "C:\\Users\\phuth\\OneDrive\\Desktop\\SWD392_10W\\SWD392_SU25_Topic3_BE\\FertilityClinic.DAL\\UnitOfWork\\IUnitOfWork.cs",
+              "RelativeDocumentMoniker": "FertilityClinic.DAL\\UnitOfWork\\IUnitOfWork.cs",
+              "ToolTip": "C:\\Users\\phuth\\OneDrive\\Desktop\\SWD392_10W\\SWD392_SU25_Topic3_BE\\FertilityClinic.DAL\\UnitOfWork\\IUnitOfWork.cs",
+              "RelativeToolTip": "FertilityClinic.DAL\\UnitOfWork\\IUnitOfWork.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-17T04:05:11.299Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\phuth\\OneDrive\\Desktop\\SWD392_10W\\SWD392_SU25_Topic3_BE\\FertilityClinic\\Program.cs",
+              "RelativeDocumentMoniker": "FertilityClinic\\Program.cs",
+              "ToolTip": "C:\\Users\\phuth\\OneDrive\\Desktop\\SWD392_10W\\SWD392_SU25_Topic3_BE\\FertilityClinic\\Program.cs",
+              "RelativeToolTip": "FertilityClinic\\Program.cs",
+              "ViewState": "AgIAAGwAAAAAAAAAAAAAAH0AAABBAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-17T04:44:58.193Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "GlobalExceptionMiddleware..cs",
+              "DocumentMoniker": "C:\\Users\\phuth\\OneDrive\\Desktop\\SWD392_10W\\SWD392_SU25_Topic3_BE\\FertilityClinic\\Middlewares\\GlobalExceptionMiddleware..cs",
+              "RelativeDocumentMoniker": "FertilityClinic\\Middlewares\\GlobalExceptionMiddleware..cs",
+              "ToolTip": "C:\\Users\\phuth\\OneDrive\\Desktop\\SWD392_10W\\SWD392_SU25_Topic3_BE\\FertilityClinic\\Middlewares\\GlobalExceptionMiddleware..cs",
+              "RelativeToolTip": "FertilityClinic\\Middlewares\\GlobalExceptionMiddleware..cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-17T05:02:39.236Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\phuth\\OneDrive\\Desktop\\SWD392_10W\\SWD392_SU25_Topic3_BE\\FertilityClinic\\appsettings.json",
+              "RelativeDocumentMoniker": "FertilityClinic\\appsettings.json",
+              "ToolTip": "C:\\Users\\phuth\\OneDrive\\Desktop\\SWD392_10W\\SWD392_SU25_Topic3_BE\\FertilityClinic\\appsettings.json",
+              "RelativeToolTip": "FertilityClinic\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-05-17T04:46:03.083Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 9,
-              "Title": "TreatmentProcess.cs",
-              "DocumentMoniker": "C:\\Users\\acer\\Desktop\\123\\Cn7\\SWD392\\SWD392_SU25_Topic3_BE\\FertilityClinic.DAL\\Models\\TreatmentProcess.cs",
-              "RelativeDocumentMoniker": "FertilityClinic.DAL\\Models\\TreatmentProcess.cs",
-              "ToolTip": "C:\\Users\\acer\\Desktop\\123\\Cn7\\SWD392\\SWD392_SU25_Topic3_BE\\FertilityClinic.DAL\\Models\\TreatmentProcess.cs",
-              "RelativeToolTip": "FertilityClinic.DAL\\Models\\TreatmentProcess.cs",
-              "ViewState": "AQIAABIAAAAAAAAAAAAywBgAAABEAAAA",
+              "Title": "20250517035547_InitialCreate.cs",
+              "DocumentMoniker": "C:\\Users\\phuth\\OneDrive\\Desktop\\SWD392_10W\\SWD392_SU25_Topic3_BE\\FertilityClinic.DAL\\Migrations\\20250517035547_InitialCreate.cs",
+              "RelativeDocumentMoniker": "FertilityClinic.DAL\\Migrations\\20250517035547_InitialCreate.cs",
+              "ToolTip": "C:\\Users\\phuth\\OneDrive\\Desktop\\SWD392_10W\\SWD392_SU25_Topic3_BE\\FertilityClinic.DAL\\Migrations\\20250517035547_InitialCreate.cs",
+              "RelativeToolTip": "FertilityClinic.DAL\\Migrations\\20250517035547_InitialCreate.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-15T14:19:21.428Z"
+              "WhenOpened": "2025-05-17T04:44:09.323Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 10,
-              "Title": "TreatmentMethod.cs",
-              "DocumentMoniker": "C:\\Users\\acer\\Desktop\\123\\Cn7\\SWD392\\SWD392_SU25_Topic3_BE\\FertilityClinic.DAL\\Models\\TreatmentMethod.cs",
-              "RelativeDocumentMoniker": "FertilityClinic.DAL\\Models\\TreatmentMethod.cs",
-              "ToolTip": "C:\\Users\\acer\\Desktop\\123\\Cn7\\SWD392\\SWD392_SU25_Topic3_BE\\FertilityClinic.DAL\\Models\\TreatmentMethod.cs",
-              "RelativeToolTip": "FertilityClinic.DAL\\Models\\TreatmentMethod.cs",
-              "ViewState": "AQIAAA0AAAAAAAAAAAA3wBIAAAAPAAAA",
+              "Title": "FertilityClinicDbContextModelSnapshot.cs",
+              "DocumentMoniker": "C:\\Users\\phuth\\OneDrive\\Desktop\\SWD392_10W\\SWD392_SU25_Topic3_BE\\FertilityClinic.DAL\\Migrations\\FertilityClinicDbContextModelSnapshot.cs",
+              "RelativeDocumentMoniker": "FertilityClinic.DAL\\Migrations\\FertilityClinicDbContextModelSnapshot.cs",
+              "ToolTip": "C:\\Users\\phuth\\OneDrive\\Desktop\\SWD392_10W\\SWD392_SU25_Topic3_BE\\FertilityClinic.DAL\\Migrations\\FertilityClinicDbContextModelSnapshot.cs",
+              "RelativeToolTip": "FertilityClinic.DAL\\Migrations\\FertilityClinicDbContextModelSnapshot.cs",
+              "ViewState": "AgIAAKQCAAAAAAAAAAAQwAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-15T14:01:10.478Z"
+              "WhenOpened": "2025-05-17T04:43:49.083Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 11,
-              "Title": "Doctor.cs",
-              "DocumentMoniker": "C:\\Users\\acer\\Desktop\\123\\Cn7\\SWD392\\SWD392_SU25_Topic3_BE\\FertilityClinic.DAL\\Models\\Doctor.cs",
-              "RelativeDocumentMoniker": "FertilityClinic.DAL\\Models\\Doctor.cs",
-              "ToolTip": "C:\\Users\\acer\\Desktop\\123\\Cn7\\SWD392\\SWD392_SU25_Topic3_BE\\FertilityClinic.DAL\\Models\\Doctor.cs",
-              "RelativeToolTip": "FertilityClinic.DAL\\Models\\Doctor.cs",
-              "ViewState": "AQIAABMAAAAAAAAAAAAzwBQAAAAAAAAA",
+              "Title": "LoginController.cs",
+              "DocumentMoniker": "C:\\Users\\phuth\\OneDrive\\Desktop\\SWD392_10W\\SWD392_SU25_Topic3_BE\\FertilityClinic\\Controllers\\LoginController.cs",
+              "RelativeDocumentMoniker": "FertilityClinic\\Controllers\\LoginController.cs",
+              "ToolTip": "C:\\Users\\phuth\\OneDrive\\Desktop\\SWD392_10W\\SWD392_SU25_Topic3_BE\\FertilityClinic\\Controllers\\LoginController.cs",
+              "RelativeToolTip": "FertilityClinic\\Controllers\\LoginController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-15T14:07:20.028Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 12,
-              "Title": "Patient.cs",
-              "DocumentMoniker": "C:\\Users\\acer\\Desktop\\123\\Cn7\\SWD392\\SWD392_SU25_Topic3_BE\\FertilityClinic.DAL\\Models\\Patient.cs",
-              "RelativeDocumentMoniker": "FertilityClinic.DAL\\Models\\Patient.cs",
-              "ToolTip": "C:\\Users\\acer\\Desktop\\123\\Cn7\\SWD392\\SWD392_SU25_Topic3_BE\\FertilityClinic.DAL\\Models\\Patient.cs",
-              "RelativeToolTip": "FertilityClinic.DAL\\Models\\Patient.cs",
-              "ViewState": "AQIAAA8AAAAAAAAAAAA1wBYAAAAtAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-15T13:54:20.816Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 13,
-              "Title": "User.cs",
-              "DocumentMoniker": "C:\\Users\\acer\\Desktop\\123\\Cn7\\SWD392\\SWD392_SU25_Topic3_BE\\FertilityClinic.DAL\\Models\\User.cs",
-              "RelativeDocumentMoniker": "FertilityClinic.DAL\\Models\\User.cs",
-              "ToolTip": "C:\\Users\\acer\\Desktop\\123\\Cn7\\SWD392\\SWD392_SU25_Topic3_BE\\FertilityClinic.DAL\\Models\\User.cs",
-              "RelativeToolTip": "FertilityClinic.DAL\\Models\\User.cs",
-              "ViewState": "AQIAABIAAAAAAAAAAAAywBsAAAAFAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-15T13:41:48.899Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 14,
-              "Title": "PriceList.cs",
-              "DocumentMoniker": "C:\\Users\\acer\\Desktop\\123\\Cn7\\SWD392\\SWD392_SU25_Topic3_BE\\FertilityClinic.DAL\\Models\\PriceList.cs",
-              "RelativeDocumentMoniker": "FertilityClinic.DAL\\Models\\PriceList.cs",
-              "ToolTip": "C:\\Users\\acer\\Desktop\\123\\Cn7\\SWD392\\SWD392_SU25_Topic3_BE\\FertilityClinic.DAL\\Models\\PriceList.cs",
-              "RelativeToolTip": "FertilityClinic.DAL\\Models\\PriceList.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAAeAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-15T14:23:25.025Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 16,
-              "Title": "APIEndPoints.cs",
-              "DocumentMoniker": "C:\\Users\\acer\\Desktop\\123\\Cn7\\SWD392\\SWD392_SU25_Topic3_BE\\FertilityClinic.DTO\\Constants\\APIEndPoints.cs",
-              "RelativeDocumentMoniker": "FertilityClinic.DTO\\Constants\\APIEndPoints.cs",
-              "ToolTip": "C:\\Users\\acer\\Desktop\\123\\Cn7\\SWD392\\SWD392_SU25_Topic3_BE\\FertilityClinic.DTO\\Constants\\APIEndPoints.cs",
-              "RelativeToolTip": "FertilityClinic.DTO\\Constants\\APIEndPoints.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-15T13:29:35.309Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 17,
-              "Title": "JwtSettings.cs",
-              "DocumentMoniker": "C:\\Users\\acer\\Desktop\\123\\Cn7\\SWD392\\SWD392_SU25_Topic3_BE\\FertilityClinic.DTO\\Config\\JwtSettings.cs",
-              "RelativeDocumentMoniker": "FertilityClinic.DTO\\Config\\JwtSettings.cs",
-              "ToolTip": "C:\\Users\\acer\\Desktop\\123\\Cn7\\SWD392\\SWD392_SU25_Topic3_BE\\FertilityClinic.DTO\\Config\\JwtSettings.cs",
-              "RelativeToolTip": "FertilityClinic.DTO\\Config\\JwtSettings.cs",
-              "ViewState": "AQIAAAMAAAAAAAAAAAAAABAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-15T13:28:33.856Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 18,
-              "Title": "FertilityClinic.csproj",
-              "DocumentMoniker": "C:\\Users\\acer\\Desktop\\123\\Cn7\\SWD392\\SWD392_SU25_Topic3_BE\\FertilityClinic\\FertilityClinic.csproj",
-              "RelativeDocumentMoniker": "FertilityClinic\\FertilityClinic.csproj",
-              "ToolTip": "C:\\Users\\acer\\Desktop\\123\\Cn7\\SWD392\\SWD392_SU25_Topic3_BE\\FertilityClinic\\FertilityClinic.csproj",
-              "RelativeToolTip": "FertilityClinic\\FertilityClinic.csproj",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2025-05-15T13:18:34.517Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 19,
-              "Title": "FertilityClinicDbContext.cs",
-              "DocumentMoniker": "C:\\Users\\acer\\Desktop\\123\\Cn7\\SWD392\\SWD392_SU25_Topic3_BE\\FertilityClinic.DAL\\FertilityClinicDbContext.cs",
-              "RelativeDocumentMoniker": "FertilityClinic.DAL\\FertilityClinicDbContext.cs",
-              "ToolTip": "C:\\Users\\acer\\Desktop\\123\\Cn7\\SWD392\\SWD392_SU25_Topic3_BE\\FertilityClinic.DAL\\FertilityClinicDbContext.cs",
-              "RelativeToolTip": "FertilityClinic.DAL\\FertilityClinicDbContext.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-15T13:18:34.177Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 20,
-              "Title": "FertilityClinic.BLL.csproj",
-              "DocumentMoniker": "C:\\Users\\acer\\Desktop\\123\\Cn7\\SWD392\\SWD392_SU25_Topic3_BE\\FertilityClinic.BLL\\FertilityClinic.BLL.csproj",
-              "RelativeDocumentMoniker": "FertilityClinic.BLL\\FertilityClinic.BLL.csproj",
-              "ToolTip": "C:\\Users\\acer\\Desktop\\123\\Cn7\\SWD392\\SWD392_SU25_Topic3_BE\\FertilityClinic.BLL\\FertilityClinic.BLL.csproj",
-              "RelativeToolTip": "FertilityClinic.BLL\\FertilityClinic.BLL.csproj",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2025-05-15T13:18:34.099Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 15,
-              "Title": "FertilityClinic.DAL.csproj",
-              "DocumentMoniker": "C:\\Users\\acer\\Desktop\\123\\Cn7\\SWD392\\SWD392_SU25_Topic3_BE\\FertilityClinic.DAL\\FertilityClinic.DAL.csproj",
-              "RelativeDocumentMoniker": "FertilityClinic.DAL\\FertilityClinic.DAL.csproj",
-              "ToolTip": "C:\\Users\\acer\\Desktop\\123\\Cn7\\SWD392\\SWD392_SU25_Topic3_BE\\FertilityClinic.DAL\\FertilityClinic.DAL.csproj",
-              "RelativeToolTip": "FertilityClinic.DAL\\FertilityClinic.DAL.csproj",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAAOAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2025-05-15T13:18:33.712Z"
+              "WhenOpened": "2025-05-17T04:11:10.471Z"
             }
           ]
         }
