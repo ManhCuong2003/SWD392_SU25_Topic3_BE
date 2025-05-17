@@ -1051,7 +1051,10 @@
       },
       "FertilityClinic.DTO/1.0.0": {
         "runtime": {
-          "FertilityClinic.DTO.dll": {}
+          "FertilityClinic.DTO.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
         }
       }
     }
