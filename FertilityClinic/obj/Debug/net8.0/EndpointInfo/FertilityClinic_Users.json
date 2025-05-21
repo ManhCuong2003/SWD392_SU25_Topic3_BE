@@ -226,6 +226,11 @@
             "default": "Your_password",
             "nullable": true
           },
+          "dateOfBirth": {
+            "type": "string",
+            "format": "date",
+            "nullable": true
+          },
           "phone": {
             "type": "string",
             "nullable": true

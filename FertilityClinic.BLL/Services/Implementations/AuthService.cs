@@ -94,6 +94,9 @@ namespace FertilityClinic.BLL.Services.Implementations
                 FullName = dto.FullName,
                 Email = dto.Email?.Trim().ToLower(),
                 Phone = dto.Phone,
+                DateOfBirth = dto.DateOfBirth.HasValue
+            ? DateOnly.FromDateTime(dto.DateOfBirth.Value)  // Chuyển DateTime? -> DateOnly?
+            : null,
                 Gender = dto.Gender,
                 Address = dto.Address,
                 Password = BCrypt.Net.BCrypt.HashPassword(dto.Password),
@@ -110,6 +113,7 @@ namespace FertilityClinic.BLL.Services.Implementations
             {
                 UserId = newUser.UserId,
                 FullName = newUser.FullName,
+                DateOfBirth = newUser.DateOfBirth,
                 Gender = newUser.Gender,
                 Email = newUser.Email,
                 Phone = newUser.Phone,
