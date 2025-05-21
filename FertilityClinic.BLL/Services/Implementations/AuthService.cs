@@ -113,7 +113,7 @@ namespace FertilityClinic.BLL.Services.Implementations
                 Gender = newUser.Gender,
                 Email = newUser.Email,
                 Phone = newUser.Phone,
-                Role = newUser.Role // Mặc định là "Passenger"
+                Role = newUser.Role // Mặc định là "User"
             };
         }
         #endregion
