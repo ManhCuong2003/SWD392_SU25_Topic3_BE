@@ -78,7 +78,7 @@ namespace FertilityClinic.BLL.Services.Implementations
         {
             var permission = dto.Role ?? "User";
 
-            if (dto.Role != null && dto.Role != "User" && dto.Role != "Admin" && dto.Role != "Doctor" && dto.Role != "Manager" && dto.Role != "Patient")
+            if (dto.Role != null && dto.Role != "User" && dto.Role != "Admin" && dto.Role != "Doctor" && dto.Role != "Manager" /*&& dto.Role != "Patient"*/)
                 permission = "User";
 
             // Kiểm tra email đã tồn tại chưa
