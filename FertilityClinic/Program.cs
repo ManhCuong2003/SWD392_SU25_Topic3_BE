@@ -1,4 +1,8 @@
+﻿using FertilityClinic.BLL.Services.Implementations;
+using FertilityClinic.BLL.Services.Interfaces;
 using FertilityClinic.DAL;
+using FertilityClinic.DAL.Repositories.Implementations;
+using FertilityClinic.DAL.Repositories.Interfaces;
 using FertilityClinic.DAL.UnitOfWork;
 using FertilityClinic.DTO.Config;
 using MetroOne.Api.Middlewares;
@@ -10,6 +14,8 @@ using System.Reflection;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
+
+
 
 #region JWT
 builder.Services.AddAuthentication(options =>
@@ -53,16 +59,12 @@ builder.Services.Configure<JwtSettings>(builder.Configuration.GetSection("Jwt"))
 builder.Services.AddSwaggerGen(opt =>
 {
     opt.SwaggerDoc("Users", new OpenApiInfo { Title = "User APIs", Version = "v1" });
-    opt.SwaggerDoc("Auth", new OpenApiInfo { Title = "Auth APIs", Version = "v1" }); // Fixed title
+    opt.SwaggerDoc("Auth", new OpenApiInfo { Title = "User APIs", Version = "v1" });
     opt.SwaggerDoc("Debug", new OpenApiInfo { Title = "Debug APIs", Version = "v1" });
 
-    // Add safe XML documentation loading
     var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
     var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
-    if (File.Exists(xmlPath))
-    {
-        opt.IncludeXmlComments(xmlPath);
-    }
+    opt.IncludeXmlComments(xmlPath);
 
     // Add JWT bearer to Swagger
     var securityScheme = new OpenApiSecurityScheme
@@ -95,31 +97,36 @@ builder.Services.AddAuthorization();
 #endregion
 
 #region CORS
-//Unit of Work
+
+// Đăng ký UnitOfWork
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
-// Add services to the container.
 builder.Services.AddControllers();
+// Đăng ký các repository
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+
+// Đăng ký các service
+builder.Services.AddScoped<IAuthService, AuthService>();
 #endregion
+
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 
 // Register the DbContext with the connection string
-builder.Services.AddDbContext<FertilityClinicDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+builder.Services.AddDbContext<FertilityClinicDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+// Cấu hình middleware pipeline
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
-    app.UseSwaggerUI(options =>
+    app.UseSwaggerUI(opt =>
     {
-        options.SwaggerEndpoint("/swagger/Auth/swagger.json", "Auth API");
-        options.SwaggerEndpoint("/swagger/Users/swagger.json", "User APIs");
-        options.SwaggerEndpoint("/swagger/Debug/swagger.json", "Debug APIs");
+        opt.SwaggerEndpoint("/swagger/Auth/swagger.json", "Auth APIs");
+        opt.SwaggerEndpoint("/swagger/Users/swagger.json", "User APIs");
+        opt.SwaggerEndpoint("/swagger/Debug/swagger.json", "Debug APIs");
     });
 }
 

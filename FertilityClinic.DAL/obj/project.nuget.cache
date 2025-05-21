@@ -1,11 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "NsT8utEtFlQ=",
+  "dgSpecHash": "sd9Tme+Rsk4=",
   "success": true,
   "projectFilePath": "C:\\Users\\phuth\\OneDrive\\Desktop\\SWD392_10W\\SWD392_SU25_Topic3_BE\\FertilityClinic.DAL\\FertilityClinic.DAL.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\phuth\\.nuget\\packages\\azure.core\\1.25.0\\azure.core.1.25.0.nupkg.sha512",
     "C:\\Users\\phuth\\.nuget\\packages\\azure.identity\\1.7.0\\azure.identity.1.7.0.nupkg.sha512",
+    "C:\\Users\\phuth\\.nuget\\packages\\bcrypt.net-next\\4.0.3\\bcrypt.net-next.4.0.3.nupkg.sha512",
     "C:\\Users\\phuth\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\phuth\\.nuget\\packages\\microsoft.aspnetcore.authentication\\2.3.0\\microsoft.aspnetcore.authentication.2.3.0.nupkg.sha512",
     "C:\\Users\\phuth\\.nuget\\packages\\microsoft.aspnetcore.authentication.abstractions\\2.3.0\\microsoft.aspnetcore.authentication.abstractions.2.3.0.nupkg.sha512",

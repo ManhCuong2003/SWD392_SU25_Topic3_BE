@@ -17,7 +17,7 @@ namespace FertilityClinic.DAL
         {
             _configuration = configuration;
         }
-
+        
         public DbSet<User> Users { get; set; }
         public DbSet<Doctor> Doctors { get; set; }
         public DbSet<Patient> Patients { get; set; }
@@ -33,7 +33,15 @@ namespace FertilityClinic.DAL
         public DbSet<Review> Reviews { get; set; }
         public DbSet<TreatmentMethod> TreatmentMethods { get; set; }
         public DbSet<TreatmentProcess> TreatmentProcesses { get; set; }
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            if (!optionsBuilder.IsConfigured)
+            {
+                var connectionString = _configuration.GetConnectionString("DefaultConnection"); // DefaultConnection is defined in appsettings.json
+                optionsBuilder.UseSqlServer(connectionString);
 
+            }
+        }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
