@@ -14,12 +14,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
     <Folder Include="Middlewares\" />
     <Folder Include="Validators\" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\FertilityClinic.BLL\FertilityClinic.BLL.csproj" />
     <ProjectReference Include="..\FertilityClinic.DAL\FertilityClinic.DAL.csproj" />
     <ProjectReference Include="..\FertilityClinic.DTO\FertilityClinic.DTO.csproj" />
   </ItemGroup>

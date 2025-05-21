@@ -4,5 +4,49 @@
         <name>FertilityClinic</name>
     </assembly>
     <members>
+        <member name="M:FertilityClinic.Controllers.AuthController.Login(FertilityClinic.DTO.Requests.LoginRequest)">
+            <summary>
+            Login a user 
+            </summary>
+            
+        </member>
+        <member name="M:FertilityClinic.Controllers.AuthController.Register(FertilityClinic.DTO.Requests.RegisterRequest)">
+            <summary>
+            Register a new user
+            </summary>
+        </member>
+        <member name="M:FertilityClinic.Controllers.UsersController.UpdateUser(FertilityClinic.DTO.Requests.UpdateUserRequest)">
+             <summary>
+             Update a user's information
+             </summary>
+            
+        </member>
+        <member name="M:FertilityClinic.Controllers.UsersController.SoftDeleteUser(System.Int32)">
+            <summary>
+            Deletes a user 
+            </summary>
+            <param name="id">The ID of the user to delete</param>
+        </member>
+        <member name="M:FertilityClinic.Controllers.UsersController.HardDeleteUser(System.Int32)">
+            <summary>
+            Hard deletes a user from database
+            </summary>
+            <param name="userId">The ID of the user to delete</param>
+            
+        </member>
+        <member name="M:FertilityClinic.Controllers.UsersController.GetAllUsers">
+            <summary>
+            Get all active users
+            </summary>
+            <returns>List of users</returns>
+            
+        </member>
+        <member name="M:FertilityClinic.Controllers.UsersController.GetUserById(System.Int32)">
+            <summary>
+            Get a user by ID 
+            </summary>
+            <param name="id">The ID of the user to delete</param>
+            
+        </member>
     </members>
 </doc>
