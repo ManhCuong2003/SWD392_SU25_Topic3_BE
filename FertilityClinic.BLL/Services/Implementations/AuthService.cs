@@ -7,6 +7,7 @@ using FertilityClinic.DTO.Responses;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System;
+using System.Data;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
@@ -28,31 +29,19 @@ namespace FertilityClinic.BLL.Services.Implementations
         #region Login
         public async Task<LoginResponse?> LoginAsync(LoginRequest dto)
         {
-            // Lấy user theo email
-            // LoginAsync
+            // Check if the user exists and validate the password
             var user = await _unitOfWork.Users.GetByEmailAsync(dto.Email);
-            if (user == null)
-            {
-                // User not found
-                return null;  // hoặc throw với thông báo rõ ràng
-            }
-
-            bool passwordValid = BCrypt.Net.BCrypt.Verify(dto.Password, user.Password);
-            if (!passwordValid)
-            {
-                // Password không đúng
-                return null;  // hoặc throw
-            }
+            if (user == null || !BCrypt.Net.BCrypt.Verify(dto.Password, user.Password))
+                throw new Exception(message: "Invalid email or password");
 
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.UTF8.GetBytes(_jwtSettings.Key);
 
             var claims = new[]
             {
-                new Claim(ClaimTypes.NameIdentifier, user.UserId.ToString()),
-                new Claim(ClaimTypes.Email, user.Email),
-                // Thêm claim role nếu cần
-                //new Claim(ClaimTypes.Role, user.Role ?? "User"),
+            new Claim(ClaimTypes.NameIdentifier, user.UserId.ToString()),
+            new Claim(ClaimTypes.Email, user.Email),
+            new Claim(ClaimTypes.Role, user.Role ?? "User"),
             };
 
             var now = DateTime.UtcNow;
@@ -65,32 +54,39 @@ namespace FertilityClinic.BLL.Services.Implementations
                 Expires = now.AddMinutes(_jwtSettings.ExpiryMinutes),
                 Issuer = _jwtSettings.Issuer,
                 Audience = _jwtSettings.Audience,
-                SigningCredentials = new SigningCredentials(
-                    new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
+                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
             };
 
             var token = tokenHandler.CreateToken(tokenDescriptor);
             var jwt = tokenHandler.WriteToken(token);
 
-            return new LoginResponse
+            var responseOjb = new LoginResponse
             {
                 Token = jwt,
-                FullName = user.FullName,
                 Role = user.Role ?? "User",
+                FullName = user.FullName,
                 ExpiresIn = _jwtSettings.ExpiryMinutes * 60
             };
+
+            return (responseOjb);
         }
+
         #endregion
 
+        #region Register
         public async Task<RegisterResponse> RegisterAsync(RegisterRequest dto)
         {
+            var permission = dto.Role ?? "User";
+
+            if (dto.Role != null && dto.Role != "User" && dto.Role != "Admin" && dto.Role != "Doctor" && dto.Role != "Manager" && dto.Role != "Patient")
+                permission = "User";
+
             // Kiểm tra email đã tồn tại chưa
             // LoginAsync
             var normalizedEmail = dto.Email?.Trim().ToLower();
             var user = await _unitOfWork.Users.GetByEmailAsync(normalizedEmail);
 
-            var existingUser = await _unitOfWork.Users.GetByEmailAsync(dto.Email);
-            if (existingUser != null)
+            if (await _unitOfWork.Users.IsEmailExistsAsync(dto.Email, 0))
                 throw new Exception("Email đã được sử dụng.");
 
             var newUser = new User
@@ -102,7 +98,7 @@ namespace FertilityClinic.BLL.Services.Implementations
                 Address = dto.Address,
                 Password = BCrypt.Net.BCrypt.HashPassword(dto.Password),
                 CreatedAt = DateTime.UtcNow,
-                Role = dto.Role,
+                Role = permission,
             };
 
             // Thêm người dùng mới vào cơ sở dữ liệu
@@ -114,10 +110,13 @@ namespace FertilityClinic.BLL.Services.Implementations
             {
                 UserId = newUser.UserId,
                 FullName = newUser.FullName,
+                Gender = newUser.Gender,
                 Email = newUser.Email,
-                Role = "User" // Mặc định là "Passenger"
+                Phone = newUser.Phone,
+                Role = newUser.Role // Mặc định là "Passenger"
             };
         }
+        #endregion
 
     }
 }
