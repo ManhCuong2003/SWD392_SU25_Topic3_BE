@@ -20,5 +20,16 @@ namespace FertilityClinic.DTO.Constants
         {
             public const string CheckDb = $"{Base}/debug/db-check";
         }
+        public static class Users
+        {
+            public const string BaseUser = $"{Base}/user";
+            public const string Create = $"{Base}/create";
+            public const string GetAll = $"{BaseUser}/all";
+            public const string GetById = $"{BaseUser}/{{id}}";
+            public const string Update = $"{BaseUser}/update";
+            public const string Delete = $"{BaseUser}/delete/{{id}}";
+            public const string HardDelete = $"{BaseUser}/delete-hard/{{userId}}";
+        }
+        
     }
 }

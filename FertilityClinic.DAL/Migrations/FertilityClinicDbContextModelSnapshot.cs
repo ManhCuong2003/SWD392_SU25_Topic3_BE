@@ -17,7 +17,7 @@ namespace FertilityClinic.DAL.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.16")
+                .HasAnnotation("ProductVersion", "8.0.0")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -40,6 +40,7 @@ namespace FertilityClinic.DAL.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Notes")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("PatientId")
@@ -201,7 +202,7 @@ namespace FertilityClinic.DAL.Migrations
 
                     b.HasIndex("TreatmentProcessId1");
 
-                    b.ToTable("InjectionSchedule");
+                    b.ToTable("InjectionSchedules");
                 });
 
             modelBuilder.Entity("FertilityClinic.DAL.Models.InseminationResult", b =>
@@ -241,7 +242,7 @@ namespace FertilityClinic.DAL.Migrations
 
                     b.HasIndex("InseminationScheduleId");
 
-                    b.ToTable("InseminationResult");
+                    b.ToTable("InseminationResults");
                 });
 
             modelBuilder.Entity("FertilityClinic.DAL.Models.InseminationSchedule", b =>
@@ -290,7 +291,7 @@ namespace FertilityClinic.DAL.Migrations
 
                     b.HasIndex("TreatmentProcessId1");
 
-                    b.ToTable("InseminationSchedule");
+                    b.ToTable("InseminationSchedules");
                 });
 
             modelBuilder.Entity("FertilityClinic.DAL.Models.LabTestResult", b =>
@@ -330,7 +331,7 @@ namespace FertilityClinic.DAL.Migrations
 
                     b.HasIndex("LabTestScheduleId");
 
-                    b.ToTable("LabTestResult");
+                    b.ToTable("LabTestResults");
                 });
 
             modelBuilder.Entity("FertilityClinic.DAL.Models.LabTestSchedule", b =>
@@ -379,7 +380,7 @@ namespace FertilityClinic.DAL.Migrations
 
                     b.HasIndex("TreatmentProcessId1");
 
-                    b.ToTable("LabTestSchedule");
+                    b.ToTable("LabTestSchedules");
                 });
 
             modelBuilder.Entity("FertilityClinic.DAL.Models.Notification", b =>
@@ -564,7 +565,7 @@ namespace FertilityClinic.DAL.Migrations
 
                     b.HasKey("TreatmentMethodId");
 
-                    b.ToTable("TreatmentMethod");
+                    b.ToTable("TreatmentMethods");
                 });
 
             modelBuilder.Entity("FertilityClinic.DAL.Models.TreatmentProcess", b =>
@@ -612,7 +613,7 @@ namespace FertilityClinic.DAL.Migrations
 
                     b.HasIndex("TreatmentMethodId");
 
-                    b.ToTable("TreatmentProcess");
+                    b.ToTable("TreatmentProcesses");
                 });
 
             modelBuilder.Entity("FertilityClinic.DAL.Models.User", b =>
@@ -645,7 +646,7 @@ namespace FertilityClinic.DAL.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("PasswordHash")
+                    b.Property<string>("Password")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 

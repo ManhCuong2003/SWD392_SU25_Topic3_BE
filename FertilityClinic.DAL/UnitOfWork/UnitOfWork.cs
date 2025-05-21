@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using FertilityClinic.DAL.Repositories.Implementations;
 using FertilityClinic.DAL.Repositories.Interfaces;
+using Microsoft.AspNetCore.Identity;
 
 namespace FertilityClinic.DAL.UnitOfWork
 {
@@ -15,10 +16,13 @@ namespace FertilityClinic.DAL.UnitOfWork
         private Hashtable _repositories;
         private bool _disposed;
 
-        public UnitOfWork(FertilityClinicDbContext context)
+        public IUserRepository Users { get; }
+
+        public UnitOfWork(FertilityClinicDbContext context, IUserRepository userRepository)
         {
             _context = context;
             _repositories = new Hashtable();
+            Users = userRepository;
         }
         public IGenericRepository<TEntity> Repository<TEntity>() where TEntity : class
         {
