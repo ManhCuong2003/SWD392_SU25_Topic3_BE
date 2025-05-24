@@ -91,6 +91,7 @@ builder.Services.AddScoped<IDoctorRepository, DoctorRepository>();
 // Đăng ký các service
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IDoctorService, DoctorService>();
+builder.Services.AddScoped<IUserService, UserService>();
 #endregion
 
 
