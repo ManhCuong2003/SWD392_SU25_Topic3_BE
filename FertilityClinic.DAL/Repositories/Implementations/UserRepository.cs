@@ -69,9 +69,9 @@ namespace FertilityClinic.DAL.Repositories.Implementations
             return true;
         }
 
-        public Task<User?> GetByIdAsync(int id)
+        public async Task<User?> GetByIdAsync(int Id)
         {
-            throw new NotImplementedException();
+            return await _context.Users.FindAsync(Id);
         }
     }
 }

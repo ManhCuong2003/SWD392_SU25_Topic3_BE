@@ -4,6 +4,7 @@ using FertilityClinic.DAL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FertilityClinic.DAL.Migrations
 {
     [DbContext(typeof(FertilityClinicDbContext))]
-    partial class FertilityClinicDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250522065941_MarriageCertificateTable")]
+    partial class MarriageCertificateTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -105,7 +108,7 @@ namespace FertilityClinic.DAL.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Blog");
+                    b.ToTable("Blogs");
                 });
 
             modelBuilder.Entity("FertilityClinic.DAL.Models.Doctor", b =>
@@ -116,32 +119,30 @@ namespace FertilityClinic.DAL.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("DoctorId"));
 
-                    b.Property<string>("Avatar")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Bio")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Certifications")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Degree")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Education")
+                    b.Property<string>("DoctorCode")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("ExperienceYears")
-                        .HasColumnType("int");
+                    b.Property<double>("Rating")
+                        .HasColumnType("float");
 
                     b.Property<string>("Specialization")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("datetime2");
 
                     b.Property<int>("UserId")
                         .HasColumnType("int");
@@ -395,8 +396,7 @@ namespace FertilityClinic.DAL.Migrations
 
                     b.Property<string>("CertificateNumber")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
@@ -404,20 +404,17 @@ namespace FertilityClinic.DAL.Migrations
                         .HasDefaultValueSql("GETUTCDATE()");
 
                     b.Property<string>("DocumentUrl")
-                        .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
-                    b.Property<DateTime>("IssueDate")
-                        .HasColumnType("datetime2");
+                    b.Property<DateOnly>("IssueDate")
+                        .HasColumnType("date");
 
                     b.Property<string>("IssuedBy")
                         .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Notes")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("PatientId")
@@ -425,13 +422,11 @@ namespace FertilityClinic.DAL.Migrations
 
                     b.Property<string>("SpouseIdNumber")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("SpouseName")
                         .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("UpdatedAt")
                         .ValueGeneratedOnAdd()
@@ -488,7 +483,7 @@ namespace FertilityClinic.DAL.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Notification");
+                    b.ToTable("Notifications");
                 });
 
             modelBuilder.Entity("FertilityClinic.DAL.Models.Patient", b =>
@@ -532,6 +527,39 @@ namespace FertilityClinic.DAL.Migrations
                     b.ToTable("Patients");
                 });
 
+            modelBuilder.Entity("FertilityClinic.DAL.Models.PriceList", b =>
+                {
+                    b.Property<int>("PriceListId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PriceListId"));
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("ServiceName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("PriceListId");
+
+                    b.ToTable("PriceLists");
+                });
+
             modelBuilder.Entity("FertilityClinic.DAL.Models.Review", b =>
                 {
                     b.Property<int>("ReviewId")
@@ -568,7 +596,7 @@ namespace FertilityClinic.DAL.Migrations
 
                     b.HasIndex("PatientId");
 
-                    b.ToTable("Review");
+                    b.ToTable("Reviews");
                 });
 
             modelBuilder.Entity("FertilityClinic.DAL.Models.TreatmentMethod", b =>
@@ -578,14 +606,6 @@ namespace FertilityClinic.DAL.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("TreatmentMethodId"));
-
-                    b.Property<int?>("AverageDuration")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Category")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
@@ -599,21 +619,9 @@ namespace FertilityClinic.DAL.Migrations
 
                     b.Property<string>("MethodCode")
                         .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("MethodName")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<bool>("RequiresMarriageCertificate")
-                        .HasColumnType("bit");
-
-                    b.Property<decimal?>("SuccessRate")
-                        .HasColumnType("decimal(5,2)");
-
-                    b.Property<string>("TechnicalRequirements")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -623,218 +631,6 @@ namespace FertilityClinic.DAL.Migrations
                     b.HasKey("TreatmentMethodId");
 
                     b.ToTable("TreatmentMethods");
-
-                    b.HasData(
-                        new
-                        {
-                            TreatmentMethodId = 1,
-                            AverageDuration = 30,
-                            Category = "Basic",
-                            CreatedAt = new DateTime(2025, 5, 24, 6, 47, 35, 699, DateTimeKind.Utc).AddTicks(2069),
-                            Description = "Bơm tinh trùng đã qua lọc rửa trực tiếp vào buồng tử cung.",
-                            IsActive = true,
-                            MethodCode = "IUI",
-                            MethodName = "Bơm tinh trùng vào buồng tử cung",
-                            RequiresMarriageCertificate = true,
-                            SuccessRate = 15.00m,
-                            TechnicalRequirements = "Tinh trùng đạt chất lượng, buồng tử cung bình thường",
-                            UpdatedAt = new DateTime(2025, 5, 24, 6, 47, 35, 699, DateTimeKind.Utc).AddTicks(2070)
-                        },
-                        new
-                        {
-                            TreatmentMethodId = 2,
-                            AverageDuration = 60,
-                            Category = "Advanced",
-                            CreatedAt = new DateTime(2025, 5, 24, 6, 47, 35, 699, DateTimeKind.Utc).AddTicks(2073),
-                            Description = "Thụ tinh trứng và tinh trùng trong môi trường ống nghiệm.",
-                            IsActive = true,
-                            MethodCode = "IVF",
-                            MethodName = "Thụ tinh trong ống nghiệm",
-                            RequiresMarriageCertificate = true,
-                            SuccessRate = 40.00m,
-                            TechnicalRequirements = "Phòng lab IVF đạt chuẩn",
-                            UpdatedAt = new DateTime(2025, 5, 24, 6, 47, 35, 699, DateTimeKind.Utc).AddTicks(2074)
-                        },
-                        new
-                        {
-                            TreatmentMethodId = 3,
-                            AverageDuration = 60,
-                            Category = "Advanced",
-                            CreatedAt = new DateTime(2025, 5, 24, 6, 47, 35, 699, DateTimeKind.Utc).AddTicks(2076),
-                            Description = "Tiêm trực tiếp một tinh trùng vào trứng để tăng khả năng thụ tinh.",
-                            IsActive = true,
-                            MethodCode = "ICSI",
-                            MethodName = "Tiêm tinh trùng vào bào tương noãn",
-                            RequiresMarriageCertificate = true,
-                            SuccessRate = 50.00m,
-                            TechnicalRequirements = "Máy vi thao tác, chuyên viên có tay nghề cao",
-                            UpdatedAt = new DateTime(2025, 5, 24, 6, 47, 35, 699, DateTimeKind.Utc).AddTicks(2076)
-                        },
-                        new
-                        {
-                            TreatmentMethodId = 4,
-                            AverageDuration = 3,
-                            Category = "Advanced",
-                            CreatedAt = new DateTime(2025, 5, 24, 6, 47, 35, 699, DateTimeKind.Utc).AddTicks(2078),
-                            Description = "Tác động lên vỏ phôi để hỗ trợ thoát màng và tăng tỉ lệ làm tổ.",
-                            IsActive = true,
-                            MethodCode = "AH",
-                            MethodName = "Hỗ trợ phôi thoát màng",
-                            RequiresMarriageCertificate = true,
-                            SuccessRate = 30.00m,
-                            TechnicalRequirements = "Laser hỗ trợ phôi thoát màng",
-                            UpdatedAt = new DateTime(2025, 5, 24, 6, 47, 35, 699, DateTimeKind.Utc).AddTicks(2079)
-                        },
-                        new
-                        {
-                            TreatmentMethodId = 5,
-                            AverageDuration = 1,
-                            Category = "Advanced",
-                            CreatedAt = new DateTime(2025, 5, 24, 6, 47, 35, 699, DateTimeKind.Utc).AddTicks(2082),
-                            Description = "Sử dụng dung dịch keo dính hỗ trợ phôi bám vào niêm mạc tử cung.",
-                            IsActive = true,
-                            MethodCode = "EmbryoGlue",
-                            MethodName = "Kỹ thuật keo dính phôi",
-                            RequiresMarriageCertificate = true,
-                            SuccessRate = 20.00m,
-                            TechnicalRequirements = "Dung dịch hỗ trợ gắn phôi",
-                            UpdatedAt = new DateTime(2025, 5, 24, 6, 47, 35, 699, DateTimeKind.Utc).AddTicks(2082)
-                        },
-                        new
-                        {
-                            TreatmentMethodId = 6,
-                            AverageDuration = 10,
-                            Category = "Advanced",
-                            CreatedAt = new DateTime(2025, 5, 24, 6, 47, 35, 699, DateTimeKind.Utc).AddTicks(2084),
-                            Description = "Nuôi trưởng thành trứng non bên ngoài cơ thể trước khi thụ tinh.",
-                            IsActive = true,
-                            MethodCode = "IVM",
-                            MethodName = "Trưởng thành trứng non",
-                            RequiresMarriageCertificate = true,
-                            SuccessRate = 35.00m,
-                            TechnicalRequirements = "Môi trường nuôi trứng non",
-                            UpdatedAt = new DateTime(2025, 5, 24, 6, 47, 35, 699, DateTimeKind.Utc).AddTicks(2085)
-                        },
-                        new
-                        {
-                            TreatmentMethodId = 7,
-                            AverageDuration = 1,
-                            Category = "Advanced",
-                            CreatedAt = new DateTime(2025, 5, 24, 6, 47, 35, 699, DateTimeKind.Utc).AddTicks(2087),
-                            Description = "Lấy một số tế bào từ phôi để xét nghiệm di truyền.",
-                            IsActive = true,
-                            MethodCode = "Biopsy",
-                            MethodName = "Kỹ thuật sinh thiết phôi",
-                            RequiresMarriageCertificate = true,
-                            SuccessRate = 99.00m,
-                            TechnicalRequirements = "Thiết bị sinh thiết, chuyên viên tay nghề cao",
-                            UpdatedAt = new DateTime(2025, 5, 24, 6, 47, 35, 699, DateTimeKind.Utc).AddTicks(2087)
-                        },
-                        new
-                        {
-                            TreatmentMethodId = 8,
-                            AverageDuration = 1,
-                            Category = "Basic",
-                            CreatedAt = new DateTime(2025, 5, 24, 6, 47, 35, 699, DateTimeKind.Utc).AddTicks(2089),
-                            Description = "Chọc hút và thu thập trứng từ buồng trứng.",
-                            IsActive = true,
-                            MethodCode = "EggRetrieval",
-                            MethodName = "Kỹ thuật gom trứng",
-                            RequiresMarriageCertificate = true,
-                            SuccessRate = 100.00m,
-                            TechnicalRequirements = "Thiết bị siêu âm và hút trứng",
-                            UpdatedAt = new DateTime(2025, 5, 24, 6, 47, 35, 699, DateTimeKind.Utc).AddTicks(2090)
-                        },
-                        new
-                        {
-                            TreatmentMethodId = 9,
-                            AverageDuration = 30,
-                            Category = "Preservation",
-                            CreatedAt = new DateTime(2025, 5, 24, 6, 47, 35, 699, DateTimeKind.Utc).AddTicks(2092),
-                            Description = "Bảo quản trứng ở nhiệt độ cực thấp để sử dụng sau.",
-                            IsActive = true,
-                            MethodCode = "EggFreezing",
-                            MethodName = "Trữ đông noãn",
-                            RequiresMarriageCertificate = false,
-                            SuccessRate = 90.00m,
-                            TechnicalRequirements = "Kỹ thuật trữ đông tiên tiến",
-                            UpdatedAt = new DateTime(2025, 5, 24, 6, 47, 35, 699, DateTimeKind.Utc).AddTicks(2092)
-                        },
-                        new
-                        {
-                            TreatmentMethodId = 10,
-                            AverageDuration = 30,
-                            Category = "Preservation",
-                            CreatedAt = new DateTime(2025, 5, 24, 6, 47, 35, 699, DateTimeKind.Utc).AddTicks(2094),
-                            Description = "Trữ đông phôi để sử dụng trong chu kỳ điều trị sau.",
-                            IsActive = true,
-                            MethodCode = "EmbryoFreezing",
-                            MethodName = "Trữ đông phôi",
-                            RequiresMarriageCertificate = true,
-                            SuccessRate = 85.00m,
-                            TechnicalRequirements = "Kỹ thuật trữ đông phôi",
-                            UpdatedAt = new DateTime(2025, 5, 24, 6, 47, 35, 699, DateTimeKind.Utc).AddTicks(2095)
-                        },
-                        new
-                        {
-                            TreatmentMethodId = 11,
-                            AverageDuration = 1,
-                            Category = "Preservation",
-                            CreatedAt = new DateTime(2025, 5, 24, 6, 47, 35, 699, DateTimeKind.Utc).AddTicks(2097),
-                            Description = "Trữ đông tinh trùng để sử dụng trong tương lai.",
-                            IsActive = true,
-                            MethodCode = "SpermFreezing",
-                            MethodName = "Trữ đông tinh trùng",
-                            RequiresMarriageCertificate = false,
-                            SuccessRate = 90.00m,
-                            TechnicalRequirements = "Nitơ lỏng bảo quản mẫu tinh trùng",
-                            UpdatedAt = new DateTime(2025, 5, 24, 6, 47, 35, 699, DateTimeKind.Utc).AddTicks(2097)
-                        },
-                        new
-                        {
-                            TreatmentMethodId = 12,
-                            AverageDuration = 7,
-                            Category = "Surgical",
-                            CreatedAt = new DateTime(2025, 5, 24, 6, 47, 35, 699, DateTimeKind.Utc).AddTicks(2099),
-                            Description = "Nội soi buồng tử cung để chẩn đoán và điều trị vô sinh.",
-                            IsActive = true,
-                            MethodCode = "HSC",
-                            MethodName = "Phẫu thuật nội soi buồng tử cung trong vô sinh",
-                            RequiresMarriageCertificate = true,
-                            SuccessRate = 60.00m,
-                            TechnicalRequirements = "Phòng mổ nội soi, thiết bị nội soi buồng tử cung",
-                            UpdatedAt = new DateTime(2025, 5, 24, 6, 47, 35, 699, DateTimeKind.Utc).AddTicks(2100)
-                        },
-                        new
-                        {
-                            TreatmentMethodId = 13,
-                            AverageDuration = 1,
-                            Category = "Surgical",
-                            CreatedAt = new DateTime(2025, 5, 24, 6, 47, 35, 699, DateTimeKind.Utc).AddTicks(2102),
-                            Description = "Phẫu thuật lấy tinh trùng trực tiếp từ mào tinh hoặc tinh hoàn.",
-                            IsActive = true,
-                            MethodCode = "PESA_TESA",
-                            MethodName = "Lấy tinh trùng từ mào tinh và tinh hoàn",
-                            RequiresMarriageCertificate = true,
-                            SuccessRate = 70.00m,
-                            TechnicalRequirements = "Phẫu thuật viên có chuyên môn, vô trùng tuyệt đối",
-                            UpdatedAt = new DateTime(2025, 5, 24, 6, 47, 35, 699, DateTimeKind.Utc).AddTicks(2102)
-                        },
-                        new
-                        {
-                            TreatmentMethodId = 14,
-                            AverageDuration = 1,
-                            Category = "Basic",
-                            CreatedAt = new DateTime(2025, 5, 24, 6, 47, 35, 699, DateTimeKind.Utc).AddTicks(2106),
-                            Description = "Lọc rửa tinh trùng để tăng chất lượng trước IUI hoặc IVF.",
-                            IsActive = true,
-                            MethodCode = "SpermWash",
-                            MethodName = "Lọc rửa tinh trùng",
-                            RequiresMarriageCertificate = true,
-                            SuccessRate = 100.00m,
-                            TechnicalRequirements = "Thiết bị ly tâm, kỹ thuật viên chuyên môn",
-                            UpdatedAt = new DateTime(2025, 5, 24, 6, 47, 35, 699, DateTimeKind.Utc).AddTicks(2106)
-                        });
                 });
 
             modelBuilder.Entity("FertilityClinic.DAL.Models.TreatmentProcess", b =>
@@ -854,7 +650,7 @@ namespace FertilityClinic.DAL.Migrations
                     b.Property<DateTime?>("EndDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("MarriageCertificateId")
+                    b.Property<int?>("MarriageCertificateCertificateId")
                         .HasColumnType("int");
 
                     b.Property<string>("Notes")
@@ -869,8 +665,7 @@ namespace FertilityClinic.DAL.Migrations
 
                     b.Property<string>("Status")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("TreatmentMethodId")
                         .HasColumnType("int");
@@ -882,7 +677,7 @@ namespace FertilityClinic.DAL.Migrations
 
                     b.HasIndex("DoctorId");
 
-                    b.HasIndex("MarriageCertificateId");
+                    b.HasIndex("MarriageCertificateCertificateId");
 
                     b.HasIndex("PatientId");
 
@@ -1149,15 +944,14 @@ namespace FertilityClinic.DAL.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("FertilityClinic.DAL.Models.MarriageCertificate", "MarriageCertificate")
+                    b.HasOne("FertilityClinic.DAL.Models.MarriageCertificate", null)
                         .WithMany("TreatmentProcesses")
-                        .HasForeignKey("MarriageCertificateId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .HasForeignKey("MarriageCertificateCertificateId");
 
                     b.HasOne("FertilityClinic.DAL.Models.Patient", "Patient")
                         .WithMany("TreatmentProcesses")
                         .HasForeignKey("PatientId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("FertilityClinic.DAL.Models.TreatmentMethod", "TreatmentMethod")
@@ -1167,8 +961,6 @@ namespace FertilityClinic.DAL.Migrations
                         .IsRequired();
 
                     b.Navigation("Doctor");
-
-                    b.Navigation("MarriageCertificate");
 
                     b.Navigation("Patient");
 

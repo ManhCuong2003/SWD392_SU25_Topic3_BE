@@ -4,7 +4,7 @@ using System.Net;
 using System.Text.Json;
 using System.Threading.Tasks;
 
-namespace MetroOne.Api.Middlewares
+namespace FertilityClinic.Middlewares
 {
     public class GlobalExceptionMiddleware
     {

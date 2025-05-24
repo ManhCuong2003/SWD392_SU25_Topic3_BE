@@ -18,11 +18,14 @@ namespace FertilityClinic.DAL.UnitOfWork
 
         public IUserRepository Users { get; }
 
-        public UnitOfWork(FertilityClinicDbContext context, IUserRepository userRepository)
+        public IDoctorRepository Doctors { get;  }
+
+        public UnitOfWork(FertilityClinicDbContext context, IUserRepository userRepository, IDoctorRepository doctorRepository)
         {
             _context = context;
             _repositories = new Hashtable();
             Users = userRepository;
+            Doctors = doctorRepository;
         }
         public IGenericRepository<TEntity> Repository<TEntity>() where TEntity : class
         {
