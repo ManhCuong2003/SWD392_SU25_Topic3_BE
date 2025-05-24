@@ -5,7 +5,7 @@ using FertilityClinic.DAL.Repositories.Implementations;
 using FertilityClinic.DAL.Repositories.Interfaces;
 using FertilityClinic.DAL.UnitOfWork;
 using FertilityClinic.DTO.Config;
-using MetroOne.Api.Middlewares;
+using FertilityClinic.Middlewares;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -35,24 +35,6 @@ builder.Services.AddAuthentication(options =>
         ValidAudience = builder.Configuration["Jwt:Audience"],
         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
     };
-
-    //options.Events = new JwtBearerEvents
-    //   {
-    //       OnChallenge = context =>
-    //       {
-    //           // Skip the default behavior
-    //           context.HandleResponse();
-    //           context.Response.StatusCode = 401;
-    //           context.Response.ContentType = "application/json";
-    //           return context.Response.WriteAsync("{\"message\": \"You must be logged in to access this resource.\"}");
-    //       },
-    //       OnForbidden = context =>
-    //       {
-    //           context.Response.StatusCode = 403;
-    //           context.Response.ContentType = "application/json";
-    //           return context.Response.WriteAsync("{\"message\": \"You do not have permission to access this resource.\"}");
-    //       }
-    //   };
 });
 builder.Services.Configure<JwtSettings>(builder.Configuration.GetSection("Jwt"));
 
@@ -104,9 +86,11 @@ builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddControllers();
 // Đăng ký các repository
 builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IDoctorRepository, DoctorRepository>();
 
 // Đăng ký các service
 builder.Services.AddScoped<IAuthService, AuthService>();
+builder.Services.AddScoped<IDoctorService, DoctorService>();
 #endregion
 
 

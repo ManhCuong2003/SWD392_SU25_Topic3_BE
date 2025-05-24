@@ -12,6 +12,7 @@ namespace FertilityClinic.DAL.UnitOfWork
     {
         //IGenericRepository<TEntity> Repository<TEntity>() where TEntity : class;
         IUserRepository Users { get; }
+        IDoctorRepository Doctors { get; }
         Task<int> SaveAsync();
     }
 }
