@@ -83,6 +83,23 @@ namespace FertilityClinic.Controllers
             {
                 return BadRequest($"Error updating doctor: {ex.Message}");
             }
-        }   
+        }
+        [Authorize(Roles = "Admin")]
+        [HttpGet(APIEndPoints.Doctor.GetById)]
+        public async Task<IActionResult> GetDoctorById(int id)
+        {
+            try
+            {
+                var doctor = await _doctorService.GetDoctorByIdAsync(id);
+                if (doctor == null)
+                    return NotFound($"Doctor with ID {id} not found.");
+                return Ok(doctor);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest($"Error retrieving doctor: {ex.Message}");
+            }
+
+        }
     }
 }
