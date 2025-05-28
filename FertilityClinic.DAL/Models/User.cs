@@ -19,7 +19,9 @@ namespace FertilityClinic.DAL.Models
         public string Role { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
-        public virtual Patient Patient { get; set; }
+        public virtual ICollection<Review> Reviews { get; set; }
+        public virtual ICollection<Appointment> Appointments { get; set; }
+        public virtual ICollection<AppointmentHistory> GetAppointmentHistories {  get; set; }
         public virtual Doctor Doctor { get; set; }
         public ICollection<Notification> Notifications { get; set; }
         public ICollection<Blog> Blogs { get; set; }

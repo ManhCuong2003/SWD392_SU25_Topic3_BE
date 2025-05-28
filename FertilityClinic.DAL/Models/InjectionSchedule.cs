@@ -18,9 +18,6 @@ namespace FertilityClinic.DAL.Models
         public string Notes { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
-
-
-
         public virtual TreatmentProcess TreatmentProcess { get; set; }
         public Doctor Doctor { get; set; }
     }
