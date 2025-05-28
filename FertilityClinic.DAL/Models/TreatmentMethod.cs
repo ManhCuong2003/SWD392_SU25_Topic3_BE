@@ -25,21 +25,11 @@ namespace FertilityClinic.DAL.Models
     
     public bool IsActive { get; set; } = true;
     
-    [Required]
-    [MaxLength(50)]
-    public string Category { get; set; }// Basic, Advanced, Preservation, Surgical
-    
-    public bool RequiresMarriageCertificate { get; set; } = true;
-    
     public string TechnicalRequirements { get; set; }
-    
-    [Column(TypeName = "decimal(5,2)")]
-    public decimal? SuccessRate { get; set; }
     
     public int? AverageDuration { get; set; } // in days
     
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
-    public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
     
     public ICollection<TreatmentProcess> TreatmentProcesses { get; set; }
 }
