@@ -10,16 +10,17 @@ namespace FertilityClinic.DAL.Models
     public class Doctor
     {
         public int DoctorId { get; set; }
+        public int? RoomId { get; set; }
         public int UserId { get; set; }
-        public string DoctorCode { get; set; }
+        public string Avatar { get; set; }
         public string Specialization { get; set; }
         public string Degree { get; set; }
         public string Certifications { get; set; }
-        public double Rating { get; set; }
-        public DateTime CreatedAt { get; set; }
-        public DateTime UpdatedAt { get; set; }
-
+        public int ExperienceYears { get; set; }
+        public string Bio { get; set; }
+        public List<string> Education { get; set; } = new List<string>();
         public virtual User User { get; set; }
+        public virtual Room Room { get; set; }
         public ICollection<TreatmentProcess> TreatmentProcesses { get; set; }
         public ICollection<InjectionSchedule> InjectionSchedules { get; set; }
         public ICollection<LabTestSchedule> LabTestSchedules { get; set; }

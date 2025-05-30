@@ -17,22 +17,21 @@ namespace FertilityClinic.DAL
         {
             _configuration = configuration;
         }
-        
         public DbSet<User> Users { get; set; }
         public DbSet<Doctor> Doctors { get; set; }
-        public DbSet<Patient> Patients { get; set; }
         public DbSet<Appointment> Appointments { get; set; }
-        public DbSet<Blog> Blogs { get; set; }
-        public DbSet<InseminationResult> InseminationResults { get; set; }
-        public DbSet<InseminationSchedule> InseminationSchedules { get; set; }
-        public DbSet<InjectionSchedule> InjectionSchedules { get; set; }
-        public DbSet<LabTestResult> LabTestResults { get; set; }
-        public DbSet<LabTestSchedule> LabTestSchedules { get; set; }
-        public DbSet<Notification> Notifications { get; set; }
-        public DbSet<PriceList> PriceLists { get; set; }
-        public DbSet<Review> Reviews { get; set; }
         public DbSet<TreatmentMethod> TreatmentMethods { get; set; }
         public DbSet<TreatmentProcess> TreatmentProcesses { get; set; }
+        public DbSet<InjectionSchedule> InjectionSchedules { get; set; }
+        public DbSet<InseminationSchedule> InseminationSchedules { get; set; }
+        public DbSet<InseminationResult> InseminationResults { get; set; }
+        public DbSet<LabTestSchedule> LabTestSchedules { get; set; }
+        public DbSet<LabTestResult> LabTestResults { get; set; }
+        public DbSet<Section> Sections { get; set; }
+        public DbSet<Room> Rooms { get; set; }
+        public DbSet<Floor> Floors { get; set; }
+        public DbSet<AppointmentHistory> AppointmentHistories { get; set; }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
@@ -46,12 +45,52 @@ namespace FertilityClinic.DAL
         {
             base.OnModelCreating(modelBuilder);
 
+            // Section configurations
+            modelBuilder.Entity<Section>(entity =>
+            {
+                entity.HasKey(s => s.Id); // Primary key
+                entity.HasMany(s => s.Floors)
+                      .WithOne(f => f.Section)
+                      .HasForeignKey(f => f.SectionId)
+                      .OnDelete(DeleteBehavior.Cascade); // Cascade delete
+            });
+
+            // Floor configurations
+            modelBuilder.Entity<Floor>(entity =>
+            {
+                entity.HasKey(f => f.FloorId); // Primary key
+                entity.HasOne(f => f.Section)
+                      .WithMany(s => s.Floors)
+                      .HasForeignKey(f => f.SectionId)
+                      .OnDelete(DeleteBehavior.Cascade); // Cascade delete
+                entity.HasMany(f => f.Rooms)
+                      .WithOne(r => r.Floor)
+                      .HasForeignKey(r => r.FloorId)
+                      .OnDelete(DeleteBehavior.Cascade); // Cascade delete
+            });
+
+            // Room configurations
+            modelBuilder.Entity<Room>(entity =>
+            {
+                entity.HasKey(r => r.RoomId); // Primary key is RoomId, not ID
+
+                entity.HasOne(r => r.Floor)
+                      .WithMany(f => f.Rooms)
+                      .HasForeignKey(r => r.FloorId)
+                      .OnDelete(DeleteBehavior.Cascade);
+
+                entity.HasMany(r => r.Doctors)
+                      .WithOne(d => d.Room)
+                      .HasForeignKey(d => d.RoomId)
+                      .OnDelete(DeleteBehavior.Restrict);
+            });
+
             // Appointment configurations
             modelBuilder.Entity<Appointment>(entity =>
             {
-                entity.HasOne(a => a.Patient)
+                entity.HasOne(a => a.User)
                     .WithMany(p => p.Appointments)
-                    .HasForeignKey(a => a.PatientId)
+                    .HasForeignKey(a => a.UserId)
                     .OnDelete(DeleteBehavior.NoAction);
 
                 entity.HasOne(a => a.Doctor)
@@ -60,40 +99,60 @@ namespace FertilityClinic.DAL
                     .OnDelete(DeleteBehavior.NoAction);
             });
 
+            //AppointmentHistory configurations
+            modelBuilder.Entity<AppointmentHistory>(entity =>
+            {
+                entity.HasOne(a => a.User)
+                .WithMany(b => b.GetAppointmentHistories)
+                .HasForeignKey(a => a.UserId)
+                .OnDelete(DeleteBehavior.NoAction);
+            });
+
+
             // Doctor configurations
             modelBuilder.Entity<Doctor>(entity =>
             {
-                entity.HasOne(d => d.User)
-                    .WithOne(u => u.Doctor)
-                    .HasForeignKey<Doctor>(d => d.UserId)
-                    .OnDelete(DeleteBehavior.NoAction);
-            });
+                entity.HasKey(d => d.DoctorId); // Primary key is DoctorId
 
-            // Patient configurations
-            modelBuilder.Entity<Patient>(entity =>
-            {
-                entity.HasOne(p => p.User)
-                    .WithOne(u => u.Patient)
-                    .HasForeignKey<Patient>(p => p.UserId)
-                    .OnDelete(DeleteBehavior.NoAction);
+                entity.HasOne(d => d.User)
+                      .WithOne(u => u.Doctor)
+                      .HasForeignKey<Doctor>(d => d.UserId)
+                      .OnDelete(DeleteBehavior.NoAction);
+
+                entity.HasOne(d => d.Room)
+                      .WithMany(r => r.Doctors)
+                      .HasForeignKey(d => d.RoomId)
+                      .OnDelete(DeleteBehavior.Restrict);
             });
 
             // Review configurations
             modelBuilder.Entity<Review>(entity =>
             {
-                entity.HasOne(r => r.Patient)
+                entity.HasOne(r => r.User)
                     .WithMany(p => p.Reviews)
-                    .HasForeignKey(r => r.PatientId)
+                    .HasForeignKey(r => r.UserId)
                     .OnDelete(DeleteBehavior.NoAction);
             });
 
-            // TreatmentProcess configurations
             modelBuilder.Entity<TreatmentProcess>(entity =>
             {
-                entity.HasOne(tp => tp.Patient)
-                    .WithMany(p => p.TreatmentProcesses)
-                    .HasForeignKey(tp => tp.PatientId)
-                    .OnDelete(DeleteBehavior.NoAction);
+                entity.HasOne(tp => tp.Doctor)
+                      .WithMany(d => d.TreatmentProcesses)
+                      .HasForeignKey(tp => tp.DoctorId)
+                      .OnDelete(DeleteBehavior.Restrict);
+                entity.HasOne(tp => tp.TreatmentMethod)
+                      .WithMany(tm => tm.TreatmentProcesses) 
+                      .HasForeignKey(tp => tp.TreatmentMethodId)
+                      .OnDelete(DeleteBehavior.Restrict);
+                entity.HasMany(tp => tp.InjectionSchedules)
+                      .WithOne(ins => ins.TreatmentProcess)
+                      .HasForeignKey(ins => ins.TreatmentProcessId);
+                entity.HasMany(tp => tp.InseminationSchedules)
+                      .WithOne(insem => insem.TreatmentProcess)
+                      .HasForeignKey(insem => insem.TreatmentProcessId);
+                entity.HasMany(tp => tp.LabTestSchedules)
+                      .WithOne(lab => lab.TreatmentProcess)
+                      .HasForeignKey(lab => lab.TreatmentProcessId);
             });
 
             // InjectionSchedule configurations
@@ -109,7 +168,7 @@ namespace FertilityClinic.DAL
                     .HasForeignKey(i => i.TreatmentProcessId)
                     .OnDelete(DeleteBehavior.NoAction);
             });
-
+            
             // LabTestSchedule configurations
             modelBuilder.Entity<LabTestSchedule>(entity =>
             {
@@ -165,6 +224,7 @@ namespace FertilityClinic.DAL
                     .HasForeignKey(i => i.InseminationScheduleId)
                     .OnDelete(DeleteBehavior.NoAction);
             });
+
         }
     }
 }

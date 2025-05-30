@@ -5,6 +5,8 @@ using FertilityClinic.DAL.Repositories.Implementations;
 using FertilityClinic.DAL.Repositories.Interfaces;
 using FertilityClinic.DAL.UnitOfWork;
 using FertilityClinic.DTO.Config;
+using FertilityClinic.Middlewares;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -14,66 +16,47 @@ using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Đăng ký DbContext
-builder.Services.AddDbContext<FertilityClinicDbContext>(options =>
-{
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"),
-        sqlOptions => sqlOptions.EnableRetryOnFailure());
-});
 
-// Đăng ký các repository
-builder.Services.AddScoped<IUserRepository, UserRepository>();
 
-// Đăng ký UnitOfWork
-builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
-
-// Đăng ký các service
-builder.Services.AddScoped<IAuthService, AuthService>();
-
-// Cấu hình JWT Authentication
+#region JWT
 builder.Services.AddAuthentication(options =>
 {
-    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-    options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = CookieAuthenticationDefaults.AuthenticationScheme;
 })
-.AddJwtBearer(options =>
-{
-    options.TokenValidationParameters = new TokenValidationParameters
+    .AddCookie()
+    .AddJwtBearer(options =>
     {
-        ValidateIssuer = true,
-        ValidateAudience = true,
-        ValidateLifetime = true,
-        ValidateIssuerSigningKey = true,
-        ValidIssuer = builder.Configuration["Jwt:Issuer"],
-        ValidAudience = builder.Configuration["Jwt:Audience"],
-        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
-    };
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuer = true,
+            ValidateAudience = true,
+            ValidateLifetime = true,
+            ValidateIssuerSigningKey = true,
+            ValidIssuer = builder.Configuration["Jwt:Issuer"],
+            ValidAudience = builder.Configuration["Jwt:Audience"],
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
+        };
+    })
+
+.AddGoogle(options =>
+{
+    options.ClientId = builder.Configuration["Authentication:Google:ClientId"];
+    options.ClientSecret = builder.Configuration["Authentication:Google:ClientSecret"];
 });
+builder.Services.Configure<JwtSettings>(builder.Configuration.GetSection("Jwt"));
 
-// Cấu hình JwtSettings
-builder.Services.Configure<JwtSettings>(builder.Configuration.GetSection("JwtS"));
-
-// Thêm các controller
-builder.Services.AddControllers();
-
-// Cấu hình Swagger
-builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(opt =>
 {
-    opt.SwaggerDoc("Auth", new OpenApiInfo { Title = "Auth APIs", Version = "v1" });
     opt.SwaggerDoc("Users", new OpenApiInfo { Title = "User APIs", Version = "v1" });
+    opt.SwaggerDoc("Auth", new OpenApiInfo { Title = "User APIs", Version = "v1" });
     opt.SwaggerDoc("Debug", new OpenApiInfo { Title = "Debug APIs", Version = "v1" });
 
-    // XML comments
     var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
     var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
-    if (File.Exists(xmlPath))
-    {
-        opt.IncludeXmlComments(xmlPath);
-    }
+    opt.IncludeXmlComments(xmlPath);
 
-    // JWT Bearer trong Swagger
+    // Add JWT bearer to Swagger
     var securityScheme = new OpenApiSecurityScheme
     {
         Name = "Authorization",
@@ -81,7 +64,7 @@ builder.Services.AddSwaggerGen(opt =>
         Scheme = "bearer",
         BearerFormat = "JWT",
         In = ParameterLocation.Header,
-        Description = "Nhập JWT Bearer token **_only_**",
+        Description = "Enter JWT Bearer token **_only_**",
 
         Reference = new OpenApiReference
         {
@@ -96,7 +79,35 @@ builder.Services.AddSwaggerGen(opt =>
     {
         { securityScheme, new string[] { } }
     });
+
 });
+
+builder.Services.AddAuthorization();
+
+#endregion
+
+#region CORS
+
+// Đăng ký UnitOfWork
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+builder.Services.AddControllers();
+// Đăng ký các repository
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IDoctorRepository, DoctorRepository>();
+
+// Đăng ký các service
+builder.Services.AddScoped<IAuthService, AuthService>();
+builder.Services.AddScoped<IDoctorService, DoctorService>();
+builder.Services.AddScoped<IUserService, UserService>();
+#endregion
+
+
+// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+builder.Services.AddEndpointsApiExplorer();
+
+// Register the DbContext with the connection string
+builder.Services.AddDbContext<FertilityClinicDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 var app = builder.Build();
 
@@ -114,7 +125,10 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.UseAuthentication(); // Phải gọi trước UseAuthorization
+app.UseMiddleware<GlobalExceptionMiddleware>();
+
+app.UseAuthentication(); // JWT must come before UseAuthorization
+
 app.UseAuthorization();
 
 app.MapControllers();
