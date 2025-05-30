@@ -25,15 +25,29 @@ namespace FertilityClinic.BLL.Services.Implementations
         {
             var user = await _unitOfWork.Users.GetByIdAsync(dto.UserId);
 
-            if (await _unitOfWork.Users.IsEmailExistsAsync(dto.Email, dto.UserId))
+            if (user == null)
+                throw new Exception("User not found");
 
+            // Chỉ kiểm tra email nếu email được cập nhật
+            if (!string.IsNullOrEmpty(dto.Email) && dto.Email != user.Email)
+            {
+                if (await _unitOfWork.Users.IsEmailExistsAsync(dto.Email, dto.UserId))
+                    throw new Exception("Email already exists");
+                user.Email = dto.Email;
+            }
 
-                if (user == null)
-                    throw new Exception("User not found");
-            
-            user.FullName = dto.FullName;
-            user.Email = dto.Email;
-            user.Password = dto.PasswordHash;
+            // Cập nhật FullName nếu có giá trị mới
+            if (!string.IsNullOrEmpty(dto.FullName))
+            {
+                user.FullName = dto.FullName;
+            }
+
+            // Cập nhật Password nếu có giá trị mới
+            if (!string.IsNullOrEmpty(dto.PasswordHash))
+            {
+                user.Password = BCrypt.Net.BCrypt.HashPassword(dto.PasswordHash);
+            }
+
             return await _unitOfWork.Users.UpdateUserAsync(user);
         }
 
@@ -44,7 +58,7 @@ namespace FertilityClinic.BLL.Services.Implementations
             if (user == null)
                 return false;
 
-            
+
             user.Email = $"deleted_{Guid.NewGuid()}@deleted.com";
             user.FullName = "Deleted User";
 
@@ -63,7 +77,7 @@ namespace FertilityClinic.BLL.Services.Implementations
                 UserId = u.UserId,
                 FullName = u.FullName,
                 Email = u.Email,
-                
+
             }).ToList();
         }
 
@@ -83,7 +97,7 @@ namespace FertilityClinic.BLL.Services.Implementations
             {
                 var userId = user.UserId;
 
-                
+
 
                 var result = await _unitOfWork.Users.HardDeleteUserAsync(userId);
                 if (result)

@@ -12,5 +12,6 @@ namespace FertilityClinic.BLL.Services.Interfaces
     {
         Task<LoginResponse?> LoginAsync(LoginRequest dto);
         Task<RegisterResponse?> RegisterAsync(RegisterRequest dto);
+        Task<LoginResponse> LoginWithGoogleAsync(string email, string fullName);
     }
 }
