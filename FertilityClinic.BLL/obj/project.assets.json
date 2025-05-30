@@ -3389,11 +3389,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\acer\\Desktop\\123\\Cn7\\SWD392\\SWD392_SU25_Topic3_BE\\FertilityClinic.BLL\\FertilityClinic.BLL.csproj",
+      "projectUniqueName": "C:\\Users\\acer\\Desktop\\123\\Cn7\\SWD392\\SWD392_SU25_Topic3_BE\\SWD392_SU25_Topic3_BE\\FertilityClinic.BLL\\FertilityClinic.BLL.csproj",
       "projectName": "FertilityClinic.BLL",
-      "projectPath": "C:\\Users\\acer\\Desktop\\123\\Cn7\\SWD392\\SWD392_SU25_Topic3_BE\\FertilityClinic.BLL\\FertilityClinic.BLL.csproj",
+      "projectPath": "C:\\Users\\acer\\Desktop\\123\\Cn7\\SWD392\\SWD392_SU25_Topic3_BE\\SWD392_SU25_Topic3_BE\\FertilityClinic.BLL\\FertilityClinic.BLL.csproj",
       "packagesPath": "C:\\Users\\acer\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\acer\\Desktop\\123\\Cn7\\SWD392\\SWD392_SU25_Topic3_BE\\FertilityClinic.BLL\\obj\\",
+      "outputPath": "C:\\Users\\acer\\Desktop\\123\\Cn7\\SWD392\\SWD392_SU25_Topic3_BE\\SWD392_SU25_Topic3_BE\\FertilityClinic.BLL\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -3416,8 +3416,8 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "C:\\Users\\acer\\Desktop\\123\\Cn7\\SWD392\\SWD392_SU25_Topic3_BE\\FertilityClinic.DAL\\FertilityClinic.DAL.csproj": {
-              "projectPath": "C:\\Users\\acer\\Desktop\\123\\Cn7\\SWD392\\SWD392_SU25_Topic3_BE\\FertilityClinic.DAL\\FertilityClinic.DAL.csproj"
+            "C:\\Users\\acer\\Desktop\\123\\Cn7\\SWD392\\SWD392_SU25_Topic3_BE\\SWD392_SU25_Topic3_BE\\FertilityClinic.DAL\\FertilityClinic.DAL.csproj": {
+              "projectPath": "C:\\Users\\acer\\Desktop\\123\\Cn7\\SWD392\\SWD392_SU25_Topic3_BE\\SWD392_SU25_Topic3_BE\\FertilityClinic.DAL\\FertilityClinic.DAL.csproj"
             }
           }
         }
@@ -3431,7 +3431,8 @@
         "enableAudit": "true",
         "auditLevel": "low",
         "auditMode": "direct"
-      }
+      },
+      "SdkAnalysisLevel": "9.0.300"
     },
     "frameworks": {
       "net8.0": {
@@ -3452,7 +3453,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.204/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.300/PortableRuntimeIdentifierGraph.json"
       }
     }
   }
