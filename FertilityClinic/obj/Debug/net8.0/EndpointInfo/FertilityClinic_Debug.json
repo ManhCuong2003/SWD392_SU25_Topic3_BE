@@ -550,8 +550,7 @@
             "$ref": "#/components/schemas/DateOnly"
           },
           "appointmentTime": {
-            "type": "string",
-            "format": "date-time"
+            "$ref": "#/components/schemas/TimeOnly"
           },
           "status": {
             "type": "string",
@@ -699,6 +698,45 @@
           "role": {
             "type": "string",
             "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "TimeOnly": {
+        "type": "object",
+        "properties": {
+          "hour": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "minute": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "second": {
+            "type": "integer",
+            "format": "int32",
+            "readOnly": true
+          },
+          "millisecond": {
+            "type": "integer",
+            "format": "int32",
+            "readOnly": true
+          },
+          "microsecond": {
+            "type": "integer",
+            "format": "int32",
+            "readOnly": true
+          },
+          "nanosecond": {
+            "type": "integer",
+            "format": "int32",
+            "readOnly": true
+          },
+          "ticks": {
+            "type": "integer",
+            "format": "int64",
+            "readOnly": true
           }
         },
         "additionalProperties": false
