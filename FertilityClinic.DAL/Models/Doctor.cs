@@ -10,7 +10,6 @@ namespace FertilityClinic.DAL.Models
     public class Doctor
     {
         public int DoctorId { get; set; }
-        public int? RoomId { get; set; }
         public int UserId { get; set; }
         public string Avatar { get; set; }
         public string Specialization { get; set; }
@@ -20,7 +19,6 @@ namespace FertilityClinic.DAL.Models
         public string Bio { get; set; }
         public List<string> Education { get; set; } = new List<string>();
         public virtual User User { get; set; }
-        public virtual Room Room { get; set; }
         public ICollection<TreatmentProcess> TreatmentProcesses { get; set; }
         public ICollection<InjectionSchedule> InjectionSchedules { get; set; }
         public ICollection<LabTestSchedule> LabTestSchedules { get; set; }

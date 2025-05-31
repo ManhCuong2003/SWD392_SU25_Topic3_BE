@@ -194,6 +194,29 @@
         }
       }
     },
+    "/api/Doctor/api/doctor/{id}": {
+      "get": {
+        "tags": [
+          "Doctor"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
     "/api/Users/api/user/update": {
       "put": {
         "tags": [
@@ -467,7 +490,7 @@
             "default": "example@email.com",
             "nullable": true
           },
-          "passwordHash": {
+          "password": {
             "type": "string",
             "default": "Your_password",
             "nullable": true

@@ -59,6 +59,22 @@
   },
   {
     "ContainingType": "FertilityClinic.Controllers.DoctorController",
+    "Method": "GetDoctorById",
+    "RelativePath": "api/Doctor/api/doctor/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FertilityClinic.Controllers.DoctorController",
     "Method": "GetAllDoctors",
     "RelativePath": "api/Doctor/api/doctor/all",
     "HttpMethod": "GET",

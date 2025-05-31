@@ -16,6 +16,6 @@ namespace FertilityClinic.DTO.Requests
         [DefaultValue("example@email.com")]
         public string? Email { get; set; }
         [DefaultValue("Your_password")]
-        public string? PasswordHash { get; set; }
+        public string? Password { get; set; }
     }
 }

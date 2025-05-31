@@ -1,4 +1,5 @@
-﻿using FertilityClinic.BLL.Services.Interfaces;
+﻿using Azure.Core;
+using FertilityClinic.BLL.Services.Interfaces;
 using FertilityClinic.DAL.Models;
 using FertilityClinic.DAL.UnitOfWork;
 using FertilityClinic.DTO.Requests;
@@ -26,14 +27,14 @@ namespace FertilityClinic.BLL.Services.Implementations
             var user = await _unitOfWork.Users.GetByIdAsync(dto.UserId);
 
             if (await _unitOfWork.Users.IsEmailExistsAsync(dto.Email, dto.UserId))
-
-
                 if (user == null)
                     throw new Exception("User not found");
-            
-            user.FullName = dto.FullName;
-            user.Email = dto.Email;
-            user.Password = dto.PasswordHash;
+            if (!string.IsNullOrEmpty(dto.FullName))
+                user.FullName = dto.FullName;
+            if (!string.IsNullOrEmpty(dto.Email))
+                user.Email = dto.Email;
+            if (!string.IsNullOrEmpty(dto.Password))
+                user.Password = BCrypt.Net.BCrypt.HashPassword(dto.Password);
             return await _unitOfWork.Users.UpdateUserAsync(user);
         }
 

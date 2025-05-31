@@ -4,6 +4,7 @@ using FertilityClinic.DAL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FertilityClinic.DAL.Migrations
 {
     [DbContext(typeof(FertilityClinicDbContext))]
-    partial class FertilityClinicDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250528081509_removeSectionFloorRoomtable")]
+    partial class removeSectionFloorRoomtable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -53,17 +56,12 @@ namespace FertilityClinic.DAL.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("TreatmentMethodId")
-                        .HasColumnType("int");
-
                     b.Property<int>("UserId")
                         .HasColumnType("int");
 
                     b.HasKey("AppointmentId");
 
                     b.HasIndex("DoctorId");
-
-                    b.HasIndex("TreatmentMethodId");
 
                     b.HasIndex("UserId");
 
@@ -93,10 +91,6 @@ namespace FertilityClinic.DAL.Migrations
 
                     b.Property<int>("FloorNumber")
                         .HasColumnType("int");
-
-                    b.Property<string>("MethodName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PartnerPatientName")
                         .IsRequired()
@@ -664,12 +658,6 @@ namespace FertilityClinic.DAL.Migrations
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("FertilityClinic.DAL.Models.TreatmentMethod", "TreatmentMethod")
-                        .WithMany()
-                        .HasForeignKey("TreatmentMethodId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("FertilityClinic.DAL.Models.User", "User")
                         .WithMany("Appointments")
                         .HasForeignKey("UserId")
@@ -677,8 +665,6 @@ namespace FertilityClinic.DAL.Migrations
                         .IsRequired();
 
                     b.Navigation("Doctor");
-
-                    b.Navigation("TreatmentMethod");
 
                     b.Navigation("User");
                 });
