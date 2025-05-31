@@ -12,18 +12,20 @@ namespace FertilityClinic.DAL.Models
     {
         public int AppointmentId { get; set; }
         public int UserId { get; set; }
+        public int TreatmentMethodId { get; set; }
         public string PartnerName { get; set; }
         public DateOnly PartnerDOB { get; set; }
         public int DoctorId { get; set; }
         [Required]
         [Column(TypeName = "date")]
-        public DateTime AppointmentDate { get; set; }
+        public DateOnly AppointmentDate { get; set; }
         [Required]
         [Column(TypeName = "time")]
-        public TimeSpan AppointmentTime { get; set; }
+        public TimeOnly AppointmentTime { get; set; }
         public string Status { get; set; }
         public DateTime CreatedAt { get; set; }
         public virtual User User { get; set; }
         public virtual Doctor Doctor { get; set; }
+        public virtual TreatmentMethod TreatmentMethod { get; set; }
     }
 }

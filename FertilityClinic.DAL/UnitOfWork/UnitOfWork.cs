@@ -17,15 +17,19 @@ namespace FertilityClinic.DAL.UnitOfWork
         private bool _disposed;
 
         public IUserRepository Users { get; }
-
         public IDoctorRepository Doctors { get;  }
-
-        public UnitOfWork(FertilityClinicDbContext context, IUserRepository userRepository, IDoctorRepository doctorRepository)
+        public IAppoimentRepository Appointments { get; }
+        public IAppoimentHistoryRepository AppointmentHistories { get; }
+        public UnitOfWork(FertilityClinicDbContext context, 
+            IUserRepository userRepository, IDoctorRepository doctorRepository, IAppoimentRepository appoimentRepository, 
+            IAppoimentHistoryRepository appointmentHistories)
         {
             _context = context;
             _repositories = new Hashtable();
             Users = userRepository;
             Doctors = doctorRepository;
+            Appointments = appoimentRepository;
+            AppointmentHistories = appointmentHistories;
         }
         public IGenericRepository<TEntity> Repository<TEntity>() where TEntity : class
         {

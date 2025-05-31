@@ -10,6 +10,7 @@ namespace FertilityClinic.DAL.Models
     {
         public int AppointmentHistoryId { get; set; }
         public int UserId { get; set; }
+        public string MethodName { get; set; }
         public string DoctorName { get; set; }
         public string PatientName { get; set; }
         public DateTime PatientDOB {  get; set; }

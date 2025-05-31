@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Mvc;
 namespace FertilityClinic.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
     public class DoctorController : ControllerBase
     {
         private readonly IDoctorService _doctorService;

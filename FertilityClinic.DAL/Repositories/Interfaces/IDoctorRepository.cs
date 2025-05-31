@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using FertilityClinic.DAL.Models;
 
-namespace FertilityClinic.DAL.Repositories.Implementations
+namespace FertilityClinic.DAL.Repositories.Interfaces
 {
     public interface IDoctorRepository: IGenericRepository<Doctor>
     {

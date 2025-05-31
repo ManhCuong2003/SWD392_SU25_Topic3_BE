@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using FertilityClinic.DAL.Models;
-using FertilityClinic.DAL.Repositories.Implementations;
+using FertilityClinic.DAL.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
-namespace FertilityClinic.DAL.Repositories.Interfaces
+namespace FertilityClinic.DAL.Repositories.Implementations
 {
     public class DoctorRepository : GenericRepository<Doctor>, IDoctorRepository
     {
