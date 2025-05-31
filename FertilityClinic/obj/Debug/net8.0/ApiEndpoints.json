@@ -1,8 +1,102 @@
 [
   {
+    "ContainingType": "FertilityClinic.Controllers.AppointmentController",
+    "Method": "GetAppointmentById",
+    "RelativePath": "api/appointment/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FertilityClinic.Controllers.AppointmentController",
+    "Method": "GetAllAppointments",
+    "RelativePath": "api/appointment/all",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FertilityClinic.Controllers.AppointmentController",
+    "Method": "CreateAppointment",
+    "RelativePath": "api/appointment/create",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "appointmentRequest",
+        "Type": "FertilityClinic.DTO.Requests.AppointmentRequest",
+        "IsRequired": true
+      },
+      {
+        "Name": "userId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "doctorId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "treatmentMethodid",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FertilityClinic.Controllers.AppointmentController",
+    "Method": "DeleteAppointment",
+    "RelativePath": "api/appointment/delete/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FertilityClinic.Controllers.AppointmentController",
+    "Method": "UpdateAppointment",
+    "RelativePath": "api/appointment/update",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "appointmentRequest",
+        "Type": "FertilityClinic.DTO.Requests.UpdateAppointmentRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "FertilityClinic.Controllers.AuthController",
     "Method": "Login",
-    "RelativePath": "api/api/auth/login",
+    "RelativePath": "api/auth/login",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
@@ -18,7 +112,7 @@
   {
     "ContainingType": "FertilityClinic.Controllers.AuthController",
     "Method": "Register",
-    "RelativePath": "api/api/auth/register",
+    "RelativePath": "api/auth/register",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
@@ -34,7 +128,7 @@
   {
     "ContainingType": "FertilityClinic.Controllers.DoctorController",
     "Method": "CreateDoctor",
-    "RelativePath": "api/Doctor/api/create/{id}",
+    "RelativePath": "api/create/{id}",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
@@ -60,7 +154,7 @@
   {
     "ContainingType": "FertilityClinic.Controllers.DoctorController",
     "Method": "GetDoctorById",
-    "RelativePath": "api/Doctor/api/doctor/{id}",
+    "RelativePath": "api/doctor/{id}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -76,7 +170,7 @@
   {
     "ContainingType": "FertilityClinic.Controllers.DoctorController",
     "Method": "GetAllDoctors",
-    "RelativePath": "api/Doctor/api/doctor/all",
+    "RelativePath": "api/doctor/all",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -86,7 +180,7 @@
   {
     "ContainingType": "FertilityClinic.Controllers.DoctorController",
     "Method": "DeleteDoctor",
-    "RelativePath": "api/Doctor/api/doctor/delete/{id}",
+    "RelativePath": "api/doctor/delete/{id}",
     "HttpMethod": "DELETE",
     "IsController": true,
     "Order": 0,
@@ -102,7 +196,7 @@
   {
     "ContainingType": "FertilityClinic.Controllers.DoctorController",
     "Method": "UpdateDoctor",
-    "RelativePath": "api/Doctor/api/doctor/update",
+    "RelativePath": "api/doctor/update",
     "HttpMethod": "PUT",
     "IsController": true,
     "Order": 0,
@@ -123,7 +217,7 @@
   {
     "ContainingType": "FertilityClinic.Controllers.UsersController",
     "Method": "GetUserById",
-    "RelativePath": "api/Users/api/user/{id}",
+    "RelativePath": "api/user/{id}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -139,7 +233,7 @@
   {
     "ContainingType": "FertilityClinic.Controllers.UsersController",
     "Method": "GetAllUsers",
-    "RelativePath": "api/Users/api/user/all",
+    "RelativePath": "api/user/all",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -149,7 +243,7 @@
   {
     "ContainingType": "FertilityClinic.Controllers.UsersController",
     "Method": "HardDeleteUser",
-    "RelativePath": "api/Users/api/user/delete-hard/{userId}",
+    "RelativePath": "api/user/delete-hard/{userId}",
     "HttpMethod": "DELETE",
     "IsController": true,
     "Order": 0,
@@ -165,7 +259,7 @@
   {
     "ContainingType": "FertilityClinic.Controllers.UsersController",
     "Method": "SoftDeleteUser",
-    "RelativePath": "api/Users/api/user/delete/{id}",
+    "RelativePath": "api/user/delete/{id}",
     "HttpMethod": "DELETE",
     "IsController": true,
     "Order": 0,
@@ -181,7 +275,7 @@
   {
     "ContainingType": "FertilityClinic.Controllers.UsersController",
     "Method": "UpdateUser",
-    "RelativePath": "api/Users/api/user/update",
+    "RelativePath": "api/user/update",
     "HttpMethod": "PUT",
     "IsController": true,
     "Order": 0,
@@ -192,6 +286,26 @@
         "IsRequired": true
       }
     ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FertilityClinic.Controllers.AuthController",
+    "Method": "GoogleResponse",
+    "RelativePath": "google-response",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FertilityClinic.Controllers.AuthController",
+    "Method": "LoginWithGoogle",
+    "RelativePath": "login-google",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
     "ReturnTypes": []
   }
 ]

@@ -92,13 +92,18 @@ builder.Services.AddAuthorization();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 builder.Services.AddControllers();
+
 // Đăng ký các repository
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IDoctorRepository, DoctorRepository>();
+builder.Services.AddScoped<IAppoimentRepository, AppoimentRepository>();
+builder.Services.AddScoped<IAppoimentHistoryRepository, AppoimentHistoryRepository>();
+
 // Đăng ký các service
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IDoctorService, DoctorService>();
 builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IAppoimentService, AppoimentService>();
 #endregion
 
 

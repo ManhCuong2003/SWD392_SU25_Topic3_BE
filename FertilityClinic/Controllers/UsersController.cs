@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace FertilityClinic.Controllers
 {
-    [Route("api/[controller]")]
     [ApiController]
     [Authorize(AuthenticationSchemes = "Bearer,Cookies")]
     public class UsersController : ControllerBase

@@ -6,11 +6,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FertilityClinic.DAL.Models
+namespace FertilityClinic.DTO.Requests
 {
-    public class Appointment
+    public class AppointmentRequest
     {
-        public int AppointmentId { get; set; }
         public int UserId { get; set; }
         public int TreatmentMethodId { get; set; }
         public string PartnerName { get; set; }
@@ -24,8 +23,5 @@ namespace FertilityClinic.DAL.Models
         public DateTime AppointmentTime { get; set; }
         public string Status { get; set; }
         public DateTime CreatedAt { get; set; }
-        public virtual User User { get; set; }
-        public virtual Doctor Doctor { get; set; }
-        public virtual TreatmentMethod TreatmentMethod { get; set; }
     }
 }

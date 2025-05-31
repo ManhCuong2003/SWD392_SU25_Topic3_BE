@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("FertilityClinic.DAL")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+1b2c207ce49d109998ea06d04f96af7cde442b5b")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f013a01baa353c6dd7292b9a011b297dc658e330")]
 [assembly: System.Reflection.AssemblyProductAttribute("FertilityClinic.DAL")]
 [assembly: System.Reflection.AssemblyTitleAttribute("FertilityClinic.DAL")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

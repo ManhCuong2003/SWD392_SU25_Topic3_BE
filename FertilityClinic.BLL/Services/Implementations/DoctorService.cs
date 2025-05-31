@@ -36,6 +36,9 @@ namespace FertilityClinic.BLL.Services.Implementations
                 Bio = request.Bio,
                 Education = request.Education ?? new List<string>()
             };
+            
+            user.Role = "Doctor";
+            await _unitOfWork.Users.UpdateUserAsync(user);
 
             // Add doctor using Unit of Work
             await _unitOfWork.Doctors.AddAsync(doctor);
@@ -103,6 +106,7 @@ namespace FertilityClinic.BLL.Services.Implementations
                 Bio = doctor.Bio,
                 Education = doctor.Education
             };
+            
         }
 
         public async Task<DoctorResponse> UpdateDoctorAsync(int id, UpdateDoctorRequest request)

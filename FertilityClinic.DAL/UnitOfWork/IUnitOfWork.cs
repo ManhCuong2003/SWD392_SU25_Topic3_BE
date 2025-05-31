@@ -12,6 +12,8 @@ namespace FertilityClinic.DAL.UnitOfWork
         //IGenericRepository<TEntity> Repository<TEntity>() where TEntity : class;
         IUserRepository Users { get; }
         IDoctorRepository Doctors { get; }
+        IAppoimentRepository Appointments { get; }
+        IAppoimentHistoryRepository AppointmentHistories { get; }
         Task<int> SaveAsync();
     }
 }

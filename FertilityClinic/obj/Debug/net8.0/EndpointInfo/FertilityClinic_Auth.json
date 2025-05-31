@@ -5,7 +5,163 @@
     "version": "v1"
   },
   "paths": {
-    "/api/api/auth/login": {
+    "/api/appointment/create": {
+      "post": {
+        "tags": [
+          "Appointment"
+        ],
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "doctorId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "treatmentMethodid",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AppointmentRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AppointmentRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/AppointmentRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/appointment/delete/{id}": {
+      "delete": {
+        "tags": [
+          "Appointment"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/appointment/all": {
+      "get": {
+        "tags": [
+          "Appointment"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/appointment/{id}": {
+      "get": {
+        "tags": [
+          "Appointment"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/appointment/update": {
+      "get": {
+        "tags": [
+          "Appointment"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateAppointmentRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateAppointmentRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateAppointmentRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/auth/login": {
       "post": {
         "tags": [
           "Auth"
@@ -37,7 +193,7 @@
         }
       }
     },
-    "/api/api/auth/register": {
+    "/api/auth/register": {
       "post": {
         "tags": [
           "Auth"
@@ -69,7 +225,31 @@
         }
       }
     },
-    "/api/Doctor/api/create/{id}": {
+    "/login-google": {
+      "get": {
+        "tags": [
+          "Auth"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/google-response": {
+      "get": {
+        "tags": [
+          "Auth"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/create/{id}": {
       "post": {
         "tags": [
           "Doctor"
@@ -118,7 +298,7 @@
         }
       }
     },
-    "/api/Doctor/api/doctor/all": {
+    "/api/doctor/all": {
       "get": {
         "tags": [
           "Doctor"
@@ -130,7 +310,7 @@
         }
       }
     },
-    "/api/Doctor/api/doctor/delete/{id}": {
+    "/api/doctor/delete/{id}": {
       "delete": {
         "tags": [
           "Doctor"
@@ -153,7 +333,7 @@
         }
       }
     },
-    "/api/Doctor/api/doctor/update": {
+    "/api/doctor/update": {
       "put": {
         "tags": [
           "Doctor"
@@ -194,7 +374,7 @@
         }
       }
     },
-    "/api/Doctor/api/doctor/{id}": {
+    "/api/doctor/{id}": {
       "get": {
         "tags": [
           "Doctor"
@@ -217,7 +397,7 @@
         }
       }
     },
-    "/api/Users/api/user/update": {
+    "/api/user/update": {
       "put": {
         "tags": [
           "Users"
@@ -249,7 +429,7 @@
         }
       }
     },
-    "/api/Users/api/user/delete/{id}": {
+    "/api/user/delete/{id}": {
       "delete": {
         "tags": [
           "Users"
@@ -274,7 +454,7 @@
         }
       }
     },
-    "/api/Users/api/user/delete-hard/{userId}": {
+    "/api/user/delete-hard/{userId}": {
       "delete": {
         "tags": [
           "Users"
@@ -299,7 +479,7 @@
         }
       }
     },
-    "/api/Users/api/user/all": {
+    "/api/user/all": {
       "get": {
         "tags": [
           "Users"
@@ -312,7 +492,7 @@
         }
       }
     },
-    "/api/Users/api/user/{id}": {
+    "/api/user/{id}": {
       "get": {
         "tags": [
           "Users"
@@ -340,6 +520,94 @@
   },
   "components": {
     "schemas": {
+      "AppointmentRequest": {
+        "required": [
+          "appointmentDate",
+          "appointmentTime"
+        ],
+        "type": "object",
+        "properties": {
+          "userId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "treatmentMethodId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "partnerName": {
+            "type": "string",
+            "nullable": true
+          },
+          "partnerDOB": {
+            "$ref": "#/components/schemas/DateOnly"
+          },
+          "doctorId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "appointmentDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "appointmentTime": {
+            "$ref": "#/components/schemas/TimeSpan"
+          },
+          "status": {
+            "type": "string",
+            "nullable": true
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "additionalProperties": false
+      },
+      "DateOnly": {
+        "type": "object",
+        "properties": {
+          "year": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "month": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "day": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "dayOfWeek": {
+            "$ref": "#/components/schemas/DayOfWeek"
+          },
+          "dayOfYear": {
+            "type": "integer",
+            "format": "int32",
+            "readOnly": true
+          },
+          "dayNumber": {
+            "type": "integer",
+            "format": "int32",
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "DayOfWeek": {
+        "enum": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "type": "integer",
+        "format": "int32"
+      },
       "DoctorRequest": {
         "type": "object",
         "properties": {
@@ -430,6 +698,134 @@
           },
           "role": {
             "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "TimeSpan": {
+        "type": "object",
+        "properties": {
+          "ticks": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "days": {
+            "type": "integer",
+            "format": "int32",
+            "readOnly": true
+          },
+          "hours": {
+            "type": "integer",
+            "format": "int32",
+            "readOnly": true
+          },
+          "milliseconds": {
+            "type": "integer",
+            "format": "int32",
+            "readOnly": true
+          },
+          "microseconds": {
+            "type": "integer",
+            "format": "int32",
+            "readOnly": true
+          },
+          "nanoseconds": {
+            "type": "integer",
+            "format": "int32",
+            "readOnly": true
+          },
+          "minutes": {
+            "type": "integer",
+            "format": "int32",
+            "readOnly": true
+          },
+          "seconds": {
+            "type": "integer",
+            "format": "int32",
+            "readOnly": true
+          },
+          "totalDays": {
+            "type": "number",
+            "format": "double",
+            "readOnly": true
+          },
+          "totalHours": {
+            "type": "number",
+            "format": "double",
+            "readOnly": true
+          },
+          "totalMilliseconds": {
+            "type": "number",
+            "format": "double",
+            "readOnly": true
+          },
+          "totalMicroseconds": {
+            "type": "number",
+            "format": "double",
+            "readOnly": true
+          },
+          "totalNanoseconds": {
+            "type": "number",
+            "format": "double",
+            "readOnly": true
+          },
+          "totalMinutes": {
+            "type": "number",
+            "format": "double",
+            "readOnly": true
+          },
+          "totalSeconds": {
+            "type": "number",
+            "format": "double",
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "UpdateAppointmentRequest": {
+        "required": [
+          "appointmentDate",
+          "appointmentTime"
+        ],
+        "type": "object",
+        "properties": {
+          "userId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "treatmentMethodId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "partnerName": {
+            "type": "string",
+            "nullable": true
+          },
+          "partnerDOB": {
+            "$ref": "#/components/schemas/DateOnly"
+          },
+          "doctorId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "appointmentDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "appointmentTime": {
+            "$ref": "#/components/schemas/TimeSpan"
+          },
+          "status": {
+            "type": "string",
+            "nullable": true
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
             "nullable": true
           }
         },
