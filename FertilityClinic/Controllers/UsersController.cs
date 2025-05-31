@@ -8,6 +8,10 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace FertilityClinic.Controllers
 {
+<<<<<<< HEAD
+=======
+    
+>>>>>>> c027741a0ab1fd3dfe87dacd078e50a441a81b2e
     [ApiController]
     [Authorize(AuthenticationSchemes = "Bearer,Cookies")]
     public class UsersController : ControllerBase

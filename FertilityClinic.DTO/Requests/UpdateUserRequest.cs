@@ -17,5 +17,16 @@ namespace FertilityClinic.DTO.Requests
         public string? Email { get; set; }
         [DefaultValue("Your_password")]
         public string? Password { get; set; }
+<<<<<<< HEAD
+=======
+
+        public string? PhoneNumber { get; set; }
+
+        public DateOnly? DateOfBirth { get; set; }
+        public string? Gender { get; set; }
+        public string? Address { get; set; }
+
+        public string? Role { get; set; }
+>>>>>>> c027741a0ab1fd3dfe87dacd078e50a441a81b2e
     }
 }
