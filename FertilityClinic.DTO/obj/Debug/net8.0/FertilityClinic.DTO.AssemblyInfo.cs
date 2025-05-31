@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("FertilityClinic.DTO")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+8212c7bbb73bffba981e0ad01a45f864ef487846")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+1b2c207ce49d109998ea06d04f96af7cde442b5b")]
 [assembly: System.Reflection.AssemblyProductAttribute("FertilityClinic.DTO")]
 [assembly: System.Reflection.AssemblyTitleAttribute("FertilityClinic.DTO")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

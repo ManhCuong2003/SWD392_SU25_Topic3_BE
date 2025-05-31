@@ -26,17 +26,6 @@ namespace FertilityClinic.BLL.Services.Implementations
         {
             var user = await _unitOfWork.Users.GetByIdAsync(dto.UserId);
 
-<<<<<<< HEAD
-            if (await _unitOfWork.Users.IsEmailExistsAsync(dto.Email, dto.UserId))
-                if (user == null)
-                    throw new Exception("User not found");
-            if (!string.IsNullOrEmpty(dto.FullName))
-                user.FullName = dto.FullName;
-            if (!string.IsNullOrEmpty(dto.Email))
-                user.Email = dto.Email;
-            if (!string.IsNullOrEmpty(dto.Password))
-                user.Password = BCrypt.Net.BCrypt.HashPassword(dto.Password);
-=======
             if (user == null)
                 throw new Exception("User not found");
 
@@ -55,12 +44,11 @@ namespace FertilityClinic.BLL.Services.Implementations
             }
 
             // Cập nhật Password nếu có giá trị mới
-            if (!string.IsNullOrEmpty(dto.PasswordHash))
+            if (!string.IsNullOrEmpty(dto.Password))
             {
-                user.Password = BCrypt.Net.BCrypt.HashPassword(dto.PasswordHash);
+                user.Password = BCrypt.Net.BCrypt.HashPassword(dto.Password);
             }
 
->>>>>>> 714f588b60bc8bf13dfaf331ac929a63cbedafb6
             return await _unitOfWork.Users.UpdateUserAsync(user);
         }
 
