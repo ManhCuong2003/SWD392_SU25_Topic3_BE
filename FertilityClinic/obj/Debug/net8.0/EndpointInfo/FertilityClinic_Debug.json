@@ -547,11 +547,11 @@
             "format": "int32"
           },
           "appointmentDate": {
-            "type": "string",
-            "format": "date-time"
+            "$ref": "#/components/schemas/DateOnly"
           },
           "appointmentTime": {
-            "$ref": "#/components/schemas/TimeSpan"
+            "type": "string",
+            "format": "date-time"
           },
           "status": {
             "type": "string",
@@ -889,6 +889,25 @@
           "password": {
             "type": "string",
             "default": "Your_password",
+            "nullable": true
+          },
+          "phoneNumber": {
+            "type": "string",
+            "nullable": true
+          },
+          "dateOfBirth": {
+            "$ref": "#/components/schemas/DateOnly"
+          },
+          "gender": {
+            "type": "string",
+            "nullable": true
+          },
+          "address": {
+            "type": "string",
+            "nullable": true
+          },
+          "role": {
+            "type": "string",
             "nullable": true
           }
         },

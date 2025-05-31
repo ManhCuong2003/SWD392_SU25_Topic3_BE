@@ -22,7 +22,7 @@ namespace FertilityClinic.DTO.Responses
         public DateOnly AppointmentDate { get; set; }
         [Required]
         [Column(TypeName = "time")]
-        public DateTime AppointmentTime { get; set; }
+        public TimeOnly AppointmentTime { get; set; }
         public string Status { get; set; }
         public DateTime CreatedAt { get; set; }
     }

@@ -31,7 +31,7 @@ namespace FertilityClinic.BLL.Services.Implementations
                 PartnerDOB = DateOnly.MinValue,
                 DoctorId = appointment.DoctorId,
                 AppointmentDate = appointment.AppointmentDate,
-                AppointmentTime = DateTime.UtcNow,
+                AppointmentTime = appointment.AppointmentTime,
                 Status = "Pending",
                 CreatedAt = DateTime.Now
             };
