@@ -1,4 +1,5 @@
 ﻿using FertilityClinic.DAL.Models;
+using FertilityClinic.DTO.Responses;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,7 @@ namespace FertilityClinic.DAL.Repositories.Interfaces
 {
     public interface IUserRepository
     {
-        Task<User?> GetByIdAsync(int id);
+        Task<User> GetByIdAsync(int id);
         Task<User?> GetByEmailAsync(string email);
         Task<Boolean> IsEmailExistsAsync(string email, int userId);
         Task<Boolean> CreateAsync(User user);
