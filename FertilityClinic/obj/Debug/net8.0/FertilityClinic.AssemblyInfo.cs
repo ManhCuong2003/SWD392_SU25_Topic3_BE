@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("FertilityClinic")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+fca0bdba3f11560616cc5007936c7236ca38e186")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+8212c7bbb73bffba981e0ad01a45f864ef487846")]
 [assembly: System.Reflection.AssemblyProductAttribute("FertilityClinic")]
 [assembly: System.Reflection.AssemblyTitleAttribute("FertilityClinic")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

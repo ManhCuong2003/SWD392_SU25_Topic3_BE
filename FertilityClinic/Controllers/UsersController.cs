@@ -10,6 +10,7 @@ namespace FertilityClinic.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(AuthenticationSchemes = "Bearer,Cookies")]
     public class UsersController : ControllerBase
     {
         private readonly IUserService _userService;
