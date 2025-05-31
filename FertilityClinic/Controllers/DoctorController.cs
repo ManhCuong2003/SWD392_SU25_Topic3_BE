@@ -18,7 +18,7 @@ namespace FertilityClinic.Controllers
         }
 
         [Authorize(Roles = "Admin")]
-        [HttpPost(APIEndPoints.Doctor.Create)]
+        [HttpPost("api/Doctors/Create")]
         public async Task<IActionResult> CreateDoctor(int userId, [FromBody] DoctorRequest request)
         {
             if (!ModelState.IsValid)
