@@ -15,7 +15,7 @@ namespace FertilityClinic.BLL.Services.Interfaces
         Task<bool> UpdateUserAsync(UpdateUserRequest dto);
         Task<bool> SoftDeleteUserAsync(int userId);
         Task<List<GetAllUsersResponse>> GetAllUsersAsync();
-        Task<User> GetByIdAsync(int id);
+        Task<UserResponse> GetByIdAsync(int id);
         Task<bool> HardDeleteUserAsync(int id);
     }
 }

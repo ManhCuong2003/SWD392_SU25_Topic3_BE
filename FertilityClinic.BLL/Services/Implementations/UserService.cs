@@ -43,9 +43,9 @@ namespace FertilityClinic.BLL.Services.Implementations
             }
 
             // Cập nhật Password nếu có giá trị mới
-            if (!string.IsNullOrEmpty(dto.PasswordHash))
+            if (!string.IsNullOrEmpty(dto.Password))
             {
-                user.Password = BCrypt.Net.BCrypt.HashPassword(dto.PasswordHash);
+                user.Password = BCrypt.Net.BCrypt.HashPassword(dto.Password);
             }
 
             return await _unitOfWork.Users.UpdateUserAsync(user);
@@ -81,15 +81,25 @@ namespace FertilityClinic.BLL.Services.Implementations
             }).ToList();
         }
 
-        public async Task<User> GetByIdAsync(int id)
+        public async Task<UserResponse> GetByIdAsync(int id)
         {
             var user = await _unitOfWork.Users.GetByIdAsync(id);
             if (user == null)
                 throw new Exception("User not found");
 
-            return user;
+            return new UserResponse 
+            {
+                UserId = user.UserId,
+                FullName = user.FullName,
+                Email = user.Email,
+                PhoneNumber = user.Phone,
+                Role = user.Role,
+                
+                CreatedAt = user.CreatedAt,
+                UpdatedAt = user.UpdatedAt
+            };
         }
-
+        
         public async Task<bool> HardDeleteUserAsync(int id)
         {
             var user = await _unitOfWork.Users.GetByIdAsync(id);
@@ -116,5 +126,7 @@ namespace FertilityClinic.BLL.Services.Implementations
             }
 
         }
+
+        
     }
 }

@@ -138,7 +138,7 @@ namespace FertilityClinic.BLL.Services.Implementations
                     DateOfBirth = DateOnly.MinValue, // Hoặc một ngày mặc định nếu NOT NULL
                     Address = "xxx",
                     Gender = "xxx",
-                    Password = "123",
+                    Password = "xxx",
                     CreatedAt = DateTime.UtcNow,
                     UpdatedAt = DateTime.UtcNow,
                     Role = "User"
