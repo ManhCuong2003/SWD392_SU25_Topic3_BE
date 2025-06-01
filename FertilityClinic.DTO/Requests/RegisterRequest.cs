@@ -17,12 +17,5 @@ namespace FertilityClinic.DTO.Requests
             public string? Email { get; set; }
             [DefaultValue("Your_password")]
             public string? Password { get; set; }
-            [DataType(DataType.Date)]  // Chỉ định kiểu Date (ngày-tháng-năm)
-            [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
-            public DateTime? DateOfBirth { get; set; }
-            public string? Phone {  get; set; }
-            public string? Gender { get; set; }
-            public string? Address { get; set; }
-            public string? Role { get; set; }
-        }
+            }
 }

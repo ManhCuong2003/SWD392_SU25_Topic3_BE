@@ -77,11 +77,12 @@ namespace FertilityClinic.BLL.Services.Implementations
         #region Register
         public async Task<RegisterResponse> RegisterAsync(RegisterRequest dto)
         {
-            var permission = dto.Role ?? "User";
+            //var permission = dto.Role ?? "User";
 
-            if (dto.Role != null && dto.Role != "User" && dto.Role != "Admin" && dto.Role != "Doctor" && dto.Role != "Manager" /*&& dto.Role != "Patient"*/)
-                permission = "User";
+            //if (dto.Role != null && dto.Role != "User" && dto.Role != "Admin" && dto.Role != "Doctor" && dto.Role != "Manager" /*&& dto.Role != "Patient"*/)
+            // permission = "User";
 
+            string role = "User";
             // Kiểm tra email đã tồn tại chưa
             // LoginAsync
             var normalizedEmail = dto.Email?.Trim().ToLower();
@@ -93,16 +94,15 @@ namespace FertilityClinic.BLL.Services.Implementations
             var newUser = new User
             {
                 FullName = dto.FullName,
-                Email = dto.Email?.Trim().ToLower(),
-                Phone = dto.Phone,
-                DateOfBirth = dto.DateOfBirth.HasValue
-            ? DateOnly.FromDateTime(dto.DateOfBirth.Value)  // Chuyển DateTime? -> DateOnly?
-            : null,
-                Gender = dto.Gender,
-                Address = dto.Address,
+                Email = normalizedEmail,
                 Password = BCrypt.Net.BCrypt.HashPassword(dto.Password),
+                Phone = "Chưa cập nhật",        
+                Gender = "Chưa cập nhật", 
+                DateOfBirth = null,
+                Address = "Chưa cập nhật",      
                 CreatedAt = DateTime.UtcNow,
-                Role = permission,
+                Role = "User"
+
             };
 
             // Thêm người dùng mới vào cơ sở dữ liệu
@@ -112,13 +112,14 @@ namespace FertilityClinic.BLL.Services.Implementations
             // Trả về thông tin người dùng mới
             return new RegisterResponse
             {
-                UserId = newUser.UserId,
+                
                 FullName = newUser.FullName,
                 DateOfBirth = newUser.DateOfBirth,
                 Gender = newUser.Gender,
                 Email = newUser.Email,
                 Phone = newUser.Phone,
                 Role = newUser.Role // Mặc định là "User"
+                
             };
         }
         #endregion
