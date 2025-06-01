@@ -26,7 +26,7 @@ namespace FertilityClinic.Controllers
         [Authorize]
         [HttpPut]
         [Route(APIEndPoints.Users.Update)]
-        public async Task<IActionResult> UpdateUser(UpdateUserRequest dto)
+        public async Task<IActionResult> UpdateUser([FromBody] UpdateUserRequest dto)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);

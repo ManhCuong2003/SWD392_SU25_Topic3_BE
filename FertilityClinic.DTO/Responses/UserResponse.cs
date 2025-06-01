@@ -13,9 +13,12 @@ namespace FertilityClinic.DTO.Responses
         public string Email { get; set; } = null!;
         public string PhoneNumber { get; set; } = null!;
         public string Role { get; set; } = null!;
-        //public string Avatar { get; set; } = null!;
-        //public bool IsActive { get; set; }
+        public DateOnly? DateOfBirth { get; set; } = null!;
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
+        // Thêm property để hiển thị
+        public string DateOfBirthDisplay => DateOfBirth.HasValue
+            ? DateOfBirth.Value.ToString("dd/MM/yyyy")
+            : "Chưa cập nhật";
     }
 }
