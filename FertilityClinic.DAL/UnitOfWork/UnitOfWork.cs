@@ -20,9 +20,13 @@ namespace FertilityClinic.DAL.UnitOfWork
         public IDoctorRepository Doctors { get;  }
         public IAppoimentRepository Appointments { get; }
         public IAppoimentHistoryRepository AppointmentHistories { get; }
+        public IPartnerRepository Partners { get; }
         public UnitOfWork(FertilityClinicDbContext context, 
-            IUserRepository userRepository, IDoctorRepository doctorRepository, IAppoimentRepository appoimentRepository, 
-            IAppoimentHistoryRepository appointmentHistories)
+            IUserRepository userRepository, 
+            IDoctorRepository doctorRepository, 
+            IAppoimentRepository appoimentRepository, 
+            IAppoimentHistoryRepository appointmentHistories,
+            IPartnerRepository partnerRepository)
         {
             _context = context;
             _repositories = new Hashtable();
@@ -30,6 +34,7 @@ namespace FertilityClinic.DAL.UnitOfWork
             Doctors = doctorRepository;
             Appointments = appoimentRepository;
             AppointmentHistories = appointmentHistories;
+            Partners = partnerRepository;
         }
         public IGenericRepository<TEntity> Repository<TEntity>() where TEntity : class
         {
