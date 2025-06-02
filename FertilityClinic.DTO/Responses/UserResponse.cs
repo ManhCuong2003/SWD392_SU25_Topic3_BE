@@ -14,6 +14,9 @@ namespace FertilityClinic.DTO.Responses
         public string PhoneNumber { get; set; } = null!;
         public string Role { get; set; } = null!;
         public DateOnly? DateOfBirth { get; set; } = null!;
+        public string HealthInsuranceId { get; set; } = null!;
+        public string NationalId { get; set; } = null!;
+        public string Address { get; set; } = null!;
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
         // Thêm property để hiển thị
