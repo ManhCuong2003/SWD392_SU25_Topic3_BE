@@ -99,9 +99,12 @@ namespace FertilityClinic.BLL.Services.Implementations
                 Phone = "Chưa cập nhật",        
                 Gender = "Chưa cập nhật", 
                 DateOfBirth = null,
+                HealthInsuranceId = "Chưa cập nhật",
                 Address = "Chưa cập nhật",      
                 CreatedAt = DateTime.UtcNow,
-                Role = "User"
+                Role = "User",
+                NationalId = "Chưa cập nhật",     // Thêm giá trị mặc định cho NationalId
+                PartnerId = 0
 
             };
 
@@ -120,6 +123,7 @@ namespace FertilityClinic.BLL.Services.Implementations
                 Phone = newUser.Phone,
                 Role = newUser.Role // Mặc định là "User"
                 
+                
             };
         }
         #endregion
@@ -135,14 +139,17 @@ namespace FertilityClinic.BLL.Services.Implementations
                 {
                     Email = email,
                     FullName = fullName ?? "Google User",
-                    Phone = "xxx", // Giá trị mặc định nếu NOT NULL
+                    Phone = "Chưa cập nhập", // Giá trị mặc định nếu NOT NULL
                     DateOfBirth = DateOnly.MinValue, // Hoặc một ngày mặc định nếu NOT NULL
-                    Address = "xxx",
-                    Gender = "xxx",
-                    Password = "xxx",
+                    Address = "Chưa cập nhập",
+                    Gender = "Chưa cập nhập",
+                    Password = "Chưa cập nhập",
                     CreatedAt = DateTime.UtcNow,
                     UpdatedAt = DateTime.UtcNow,
-                    Role = "User"
+                    Role = "User",
+                    NationalId = "Chưa cập nhật",     // Thêm giá trị mặc định cho NationalId
+                    HealthInsuranceId = "Chưa cập nhật",
+                    PartnerId = 0
                 };
                 await _unitOfWork.Users.CreateAsync(user);
                 await _unitOfWork.SaveAsync();
