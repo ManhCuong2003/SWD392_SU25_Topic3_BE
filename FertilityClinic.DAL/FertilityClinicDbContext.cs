@@ -18,6 +18,8 @@ namespace FertilityClinic.DAL
             _configuration = configuration;
         }
         public DbSet<User> Users { get; set; }
+        public DbSet<Review> Reviews { get; set; }
+        public DbSet<Partner> Partners { get; set; }
         public DbSet<Doctor> Doctors { get; set; }
         public DbSet<Appointment> Appointments { get; set; }
         public DbSet<TreatmentMethod> TreatmentMethods { get; set; }
@@ -42,6 +44,16 @@ namespace FertilityClinic.DAL
         {
             base.OnModelCreating(modelBuilder);
 
+            modelBuilder.Entity<Partner>(entity =>
+            {
+                entity.HasKey(p => p.PartnerId);
+
+                // Configure one-to-one relationship between Partner and User
+                entity.HasOne(p => p.User)
+                      .WithOne(u => u.Partner)
+                      .HasForeignKey<Partner>(p => p.UserId)  // Partner is the dependent entity
+                      .OnDelete(DeleteBehavior.NoAction);
+            });
 
             // Appointment configurations
             modelBuilder.Entity<Appointment>(entity =>
