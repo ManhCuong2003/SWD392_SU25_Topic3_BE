@@ -46,8 +46,11 @@ namespace FertilityClinic.DAL.Repositories.Implementations
             var user = await _context.Users.FindAsync(dto.UserId);
             if (user == null) return false;
 
+            user.PartnerId = dto.PartnerId;
+
             if (!string.IsNullOrWhiteSpace(dto.FullName)) user.FullName = dto.FullName;
             if (!string.IsNullOrWhiteSpace(dto.Email)) user.Email = dto.Email;
+
             
 
             _context.Users.Update(user);
