@@ -51,11 +51,30 @@ namespace FertilityClinic.BLL.Services.Implementations
 
 
             };
-            
-            user.PartnerId = partner.PartnerId; // Cập nhật PartnerId cho User
-            await _unitOfWork.Users.UpdateUserAsync(user);
+
             await _unitOfWork.Partners.AddAsync(partner);
             await _unitOfWork.SaveAsync();
+
+            //user.PartnerId = partner.PartnerId; // Cập nhật PartnerId cho User
+            //await _unitOfWork.Users.UpdateUserAsync(user);
+            //await _unitOfWork.Partners.AddAsync(partner);
+            //await _unitOfWork.SaveAsync();
+            // 2. Cập nhật PartnerId trong User
+            try
+            {
+                user.PartnerId = partner.PartnerId;
+                var updateResult = await _unitOfWork.Users.UpdateUserAsync(user);
+                if (!updateResult)
+                {
+                    throw new Exception("Failed to update user's partner information");
+                }
+                await _unitOfWork.SaveAsync();
+            }
+            catch (Exception ex)
+            {
+                // Log lỗi nếu cần
+                throw new Exception($"Error updating user's partner information: {ex.Message}");
+            }
             return new PartnerResponse
             {
                 
