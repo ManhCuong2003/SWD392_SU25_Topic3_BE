@@ -77,11 +77,12 @@ namespace FertilityClinic.BLL.Services.Implementations
         #region Register
         public async Task<RegisterResponse> RegisterAsync(RegisterRequest dto)
         {
-            var permission = dto.Role ?? "User";
+            //var permission = dto.Role ?? "User";
 
-            if (dto.Role != null && dto.Role != "User" && dto.Role != "Admin" && dto.Role != "Doctor" && dto.Role != "Manager" /*&& dto.Role != "Patient"*/)
-                permission = "User";
+            //if (dto.Role != null && dto.Role != "User" && dto.Role != "Admin" && dto.Role != "Doctor" && dto.Role != "Manager" /*&& dto.Role != "Patient"*/)
+            // permission = "User";
 
+            string role = "User";
             // Kiểm tra email đã tồn tại chưa
             // LoginAsync
             var normalizedEmail = dto.Email?.Trim().ToLower();
@@ -93,16 +94,18 @@ namespace FertilityClinic.BLL.Services.Implementations
             var newUser = new User
             {
                 FullName = dto.FullName,
-                Email = dto.Email?.Trim().ToLower(),
-                Phone = dto.Phone,
-                DateOfBirth = dto.DateOfBirth.HasValue
-            ? DateOnly.FromDateTime(dto.DateOfBirth.Value)  // Chuyển DateTime? -> DateOnly?
-            : null,
-                Gender = dto.Gender,
-                Address = dto.Address,
+                Email = normalizedEmail,
                 Password = BCrypt.Net.BCrypt.HashPassword(dto.Password),
+                Phone = "Chưa cập nhật",        
+                Gender = "Chưa cập nhật", 
+                DateOfBirth = null,
+                HealthInsuranceId = "Chưa cập nhật",
+                Address = "Chưa cập nhật",      
                 CreatedAt = DateTime.UtcNow,
-                Role = permission,
+                Role = "User",
+                NationalId = "Chưa cập nhật",     // Thêm giá trị mặc định cho NationalId
+                PartnerId = 0
+
             };
 
             // Thêm người dùng mới vào cơ sở dữ liệu
@@ -112,13 +115,15 @@ namespace FertilityClinic.BLL.Services.Implementations
             // Trả về thông tin người dùng mới
             return new RegisterResponse
             {
-                UserId = newUser.UserId,
+                
                 FullName = newUser.FullName,
                 DateOfBirth = newUser.DateOfBirth,
                 Gender = newUser.Gender,
                 Email = newUser.Email,
                 Phone = newUser.Phone,
                 Role = newUser.Role // Mặc định là "User"
+                
+                
             };
         }
         #endregion
@@ -134,14 +139,17 @@ namespace FertilityClinic.BLL.Services.Implementations
                 {
                     Email = email,
                     FullName = fullName ?? "Google User",
-                    Phone = "xxx", // Giá trị mặc định nếu NOT NULL
+                    Phone = "Chưa cập nhập", // Giá trị mặc định nếu NOT NULL
                     DateOfBirth = DateOnly.MinValue, // Hoặc một ngày mặc định nếu NOT NULL
-                    Address = "xxx",
-                    Gender = "xxx",
-                    Password = "xxx",
+                    Address = "Chưa cập nhập",
+                    Gender = "Chưa cập nhập",
+                    Password = "Chưa cập nhập",
                     CreatedAt = DateTime.UtcNow,
                     UpdatedAt = DateTime.UtcNow,
-                    Role = "User"
+                    Role = "User",
+                    NationalId = "Chưa cập nhật",     // Thêm giá trị mặc định cho NationalId
+                    HealthInsuranceId = "Chưa cập nhật",
+                    PartnerId = 0
                 };
                 await _unitOfWork.Users.CreateAsync(user);
                 await _unitOfWork.SaveAsync();
