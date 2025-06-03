@@ -27,7 +27,17 @@ namespace FertilityClinic.BLL.Services.Implementations
             {
                 throw new Exception("User not found");
             }
-
+            // Kiểm tra xem user đã có partner chưa
+            var existingPartner = await _unitOfWork.Partners.GetPartnerByUserIdAsync(userId);
+            if (existingPartner != null)
+            {
+                throw new Exception("User already has a partner");
+            }
+            // Kiểm tra role của user
+            if (user.Role != "Admin" && user.Role != "User")
+            {
+                throw new Exception("Only Admin or User can create partner");
+            }
             var partner = new Partner
             {
                 UserId = userId,
@@ -41,14 +51,14 @@ namespace FertilityClinic.BLL.Services.Implementations
 
 
             };
-
-            user.Role = "Partner";
+            
+            user.PartnerId = partner.PartnerId; // Cập nhật PartnerId cho User
             await _unitOfWork.Users.UpdateUserAsync(user);
             await _unitOfWork.Partners.AddAsync(partner);
             await _unitOfWork.SaveAsync();
             return new PartnerResponse
             {
-
+                
                 FullName = partner.FullName,
                 DateOfBirth = partner.DateOfBirth,
                 Gender = partner.Gender,
