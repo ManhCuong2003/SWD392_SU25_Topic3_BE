@@ -28,6 +28,14 @@
             }
           },
           {
+            "name": "partnerId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
             "name": "treatmentMethodid",
             "in": "query",
             "schema": {
@@ -121,7 +129,7 @@
       }
     },
     "/api/appointment/update": {
-      "get": {
+      "put": {
         "tags": [
           "Appointment"
         ],
@@ -249,7 +257,7 @@
         }
       }
     },
-    "/api/create/{id}": {
+    "/api/Doctors/Create": {
       "post": {
         "tags": [
           "Doctor"
@@ -261,14 +269,6 @@
             "schema": {
               "type": "integer",
               "format": "int32"
-            }
-          },
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
             }
           }
         ],
@@ -521,33 +521,11 @@
   "components": {
     "schemas": {
       "AppointmentRequest": {
-        "required": [
-          "appointmentDate",
-          "appointmentTime"
-        ],
         "type": "object",
         "properties": {
-          "userId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "treatmentMethodId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "partnerName": {
-            "type": "string",
-            "nullable": true
-          },
-          "partnerDOB": {
-            "$ref": "#/components/schemas/DateOnly"
-          },
-          "doctorId": {
-            "type": "integer",
-            "format": "int32"
-          },
           "appointmentDate": {
-            "$ref": "#/components/schemas/DateOnly"
+            "type": "string",
+            "format": "date"
           },
           "appointmentTime": {
             "$ref": "#/components/schemas/TimeOnly"
@@ -741,91 +719,7 @@
         },
         "additionalProperties": false
       },
-      "TimeSpan": {
-        "type": "object",
-        "properties": {
-          "ticks": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "days": {
-            "type": "integer",
-            "format": "int32",
-            "readOnly": true
-          },
-          "hours": {
-            "type": "integer",
-            "format": "int32",
-            "readOnly": true
-          },
-          "milliseconds": {
-            "type": "integer",
-            "format": "int32",
-            "readOnly": true
-          },
-          "microseconds": {
-            "type": "integer",
-            "format": "int32",
-            "readOnly": true
-          },
-          "nanoseconds": {
-            "type": "integer",
-            "format": "int32",
-            "readOnly": true
-          },
-          "minutes": {
-            "type": "integer",
-            "format": "int32",
-            "readOnly": true
-          },
-          "seconds": {
-            "type": "integer",
-            "format": "int32",
-            "readOnly": true
-          },
-          "totalDays": {
-            "type": "number",
-            "format": "double",
-            "readOnly": true
-          },
-          "totalHours": {
-            "type": "number",
-            "format": "double",
-            "readOnly": true
-          },
-          "totalMilliseconds": {
-            "type": "number",
-            "format": "double",
-            "readOnly": true
-          },
-          "totalMicroseconds": {
-            "type": "number",
-            "format": "double",
-            "readOnly": true
-          },
-          "totalNanoseconds": {
-            "type": "number",
-            "format": "double",
-            "readOnly": true
-          },
-          "totalMinutes": {
-            "type": "number",
-            "format": "double",
-            "readOnly": true
-          },
-          "totalSeconds": {
-            "type": "number",
-            "format": "double",
-            "readOnly": true
-          }
-        },
-        "additionalProperties": false
-      },
       "UpdateAppointmentRequest": {
-        "required": [
-          "appointmentDate",
-          "appointmentTime"
-        ],
         "type": "object",
         "properties": {
           "userId": {
@@ -852,10 +746,11 @@
           },
           "appointmentDate": {
             "type": "string",
-            "format": "date-time"
+            "format": "date",
+            "nullable": true
           },
           "appointmentTime": {
-            "$ref": "#/components/schemas/TimeSpan"
+            "$ref": "#/components/schemas/TimeOnly"
           },
           "status": {
             "type": "string",

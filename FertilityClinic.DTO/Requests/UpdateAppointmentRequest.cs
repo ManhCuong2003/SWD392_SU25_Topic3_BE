@@ -15,12 +15,12 @@ namespace FertilityClinic.DTO.Requests
         public string? PartnerName { get; set; }
         public DateOnly? PartnerDOB { get; set; }
         public int? DoctorId { get; set; }
-        [Required]
-        [Column(TypeName = "date")]
+        [DataType(DataType.Date)]  // Chỉ định kiểu Date (ngày-tháng-năm)
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime? AppointmentDate { get; set; }
-        [Required]
+
         [Column(TypeName = "time")]
-        public TimeSpan? AppointmentTime { get; set; }
+        public TimeOnly? AppointmentTime { get; set; }
         public string? Status { get; set; }
         public DateTime? CreatedAt { get; set; }
     }

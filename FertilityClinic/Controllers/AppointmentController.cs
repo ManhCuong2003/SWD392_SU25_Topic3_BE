@@ -15,7 +15,7 @@ namespace FertilityClinic.Controllers
         }
 
         [HttpPost(APIEndPoints.Appointment.Create)]
-        public async Task<IActionResult> CreateAppointment([FromBody] AppointmentRequest appointmentRequest, int userId, int doctorId, int treatmentMethodid)
+        public async Task<IActionResult> CreateAppointment([FromBody] AppointmentRequest appointmentRequest, int userId, int doctorId, int partnerId, int treatmentMethodid)
         {
             if (!ModelState.IsValid)
             {
@@ -23,12 +23,36 @@ namespace FertilityClinic.Controllers
             }
             try
             {
-                var appointment = await _appointmentService.CreateAppointmentAsync(appointmentRequest, userId, doctorId, treatmentMethodid);
+                var appointment = await _appointmentService.CreateAppointmentAsync(appointmentRequest, userId, doctorId, partnerId, treatmentMethodid);
                 return Ok(appointment);
+            }
+            catch (ArgumentException ex)
+            {
+                return BadRequest(new
+                {
+                    StatusCode = 400,
+                    Message = "Invalid appointment data",
+                    Detailed = ex.Message
+                });
+            }
+            catch (InvalidOperationException ex)
+            {
+                return StatusCode(StatusCodes.Status422UnprocessableEntity, new
+                {
+                    StatusCode = 422,
+                    Message = "Failed to process appointment request",
+                    Detailed = ex.Message
+                });
             }
             catch (Exception ex)
             {
-                return BadRequest($"Error creating appointment: {ex.Message}");
+                // Log the exception here using your logging framework
+                return StatusCode(StatusCodes.Status500InternalServerError, new
+                {
+                    StatusCode = 500,
+                    Message = "An unexpected error occurred while creating the appointment",
+                    Detailed = ex.InnerException?.Message ?? ex.Message
+                });
             }
         }
 
@@ -96,7 +120,7 @@ namespace FertilityClinic.Controllers
             }
         }
 
-        [HttpGet(APIEndPoints.Appointment.Update)]
+        [HttpPut(APIEndPoints.Appointment.Update)]
         public async Task<IActionResult> UpdateAppointment(int id, [FromBody] UpdateAppointmentRequest appointmentRequest)
         {
             if (id <= 0 || !ModelState.IsValid)

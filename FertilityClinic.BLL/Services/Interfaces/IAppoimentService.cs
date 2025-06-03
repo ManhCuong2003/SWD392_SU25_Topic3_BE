@@ -11,7 +11,7 @@ namespace FertilityClinic.BLL.Services.Interfaces
 {
     public interface IAppoimentService
     {
-        Task<AppointmentResponse> CreateAppointmentAsync(AppointmentRequest appointment, int userId, int doctorId, int treatmentMethodId);
+        Task<AppointmentResponse> CreateAppointmentAsync(AppointmentRequest appointment, int userId, int doctorId, int partnerId, int treatmentMethodId);
         Task<bool> DeleteAppointmentAsync(int id);
         Task<List<AppointmentResponse>> GetAllAppointmentsAsync();
         Task<AppointmentResponse> GetAppointmentByIdAsync(int appointmentId);

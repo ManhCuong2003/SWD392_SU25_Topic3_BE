@@ -49,6 +49,11 @@
         "IsRequired": false
       },
       {
+        "Name": "partnerId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
         "Name": "treatmentMethodid",
         "Type": "System.Int32",
         "IsRequired": false
@@ -76,7 +81,7 @@
     "ContainingType": "FertilityClinic.Controllers.AppointmentController",
     "Method": "UpdateAppointment",
     "RelativePath": "api/appointment/update",
-    "HttpMethod": "GET",
+    "HttpMethod": "PUT",
     "IsController": true,
     "Order": 0,
     "Parameters": [
@@ -120,32 +125,6 @@
       {
         "Name": "dto",
         "Type": "FertilityClinic.DTO.Requests.RegisterRequest",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "FertilityClinic.Controllers.DoctorController",
-    "Method": "CreateDoctor",
-    "RelativePath": "api/create/{id}",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "userId",
-        "Type": "System.Int32",
-        "IsRequired": false
-      },
-      {
-        "Name": "request",
-        "Type": "FertilityClinic.DTO.Requests.DoctorRequest",
-        "IsRequired": true
-      },
-      {
-        "Name": "id",
-        "Type": "",
         "IsRequired": true
       }
     ],
@@ -209,6 +188,27 @@
       {
         "Name": "request",
         "Type": "FertilityClinic.DTO.Requests.UpdateDoctorRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FertilityClinic.Controllers.DoctorController",
+    "Method": "CreateDoctor",
+    "RelativePath": "api/Doctors/Create",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "request",
+        "Type": "FertilityClinic.DTO.Requests.DoctorRequest",
         "IsRequired": true
       }
     ],
