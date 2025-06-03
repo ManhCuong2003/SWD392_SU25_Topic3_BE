@@ -10,12 +10,13 @@ namespace FertilityClinic.DTO.Requests
 {
     public class AppointmentHistoryRequest
     {
+        public int UserId { get; set; }
         public string PatientName { get; set; }
         public DateOnly? PatientDOB { get; set; }
         public string PhoneNumber { get; set; }
         public string MethodName { get; set; }
         public string PartnerName { get; set; }
-        public DateOnly? PartnerDOB { get; set; }
+        public DateOnly PartnerDOB { get; set; }
         public string DoctorName { get; set; }
         [DataType(DataType.Date)]  // Chỉ định kiểu Date (ngày-tháng-năm)
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]

@@ -12,6 +12,7 @@ namespace FertilityClinic.BLL.Services.Interfaces
     {
         Task<AppointmentHistoryResponse> CreateAppointmentAsync(AppointmentHistoryRequest appointment);
         Task<List<AppointmentHistoryResponse>> GetAllAppointmentHistoriesAsync();
+        Task<List<AppointmentHistoryResponse>> GetAllAppointmentHistoriesByUserAsync(int userId);
         Task<AppointmentHistoryResponse> GetAppointmentHistoryByIdAsync(int appointmentHistoryId);
     }
 }

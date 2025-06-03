@@ -12,5 +12,6 @@ namespace FertilityClinic.DAL.Repositories.Interfaces
         Task<bool> CreateAppointmentHistoryAsync(AppointmentHistory appointmentHistory);
         Task<List<AppointmentHistory>> GetAllAppointmentHistoriesAsync();
         Task<AppointmentHistory> GetAppointmentHistoryByIdAsync(int appointmentHistoryId);
+        Task<List<AppointmentHistory>> GetAppointmentHistoriesByUserIdAsync(int userId);
     }
 }

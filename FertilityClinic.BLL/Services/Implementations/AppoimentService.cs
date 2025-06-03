@@ -29,6 +29,7 @@ namespace FertilityClinic.BLL.Services.Implementations
                 UserId = user.UserId,
                 PartnerId = user.PartnerId,
                 TreatmentMethodId = treatmentMethodID,
+                //TreatmentMethodId = treatmentMethod.treatmentMethodID,
                 DoctorId = doctor.DoctorId,
                 AppointmentDate = DateOnly.FromDateTime(appointment.AppointmentDate), // Fix for CS0029
                 AppointmentTime = appointment.AppointmentTime,
@@ -42,7 +43,8 @@ namespace FertilityClinic.BLL.Services.Implementations
                 PatientName = user.FullName,
                 PatientDOB = user.DateOfBirth,
                 PhoneNumber = user.Phone,
-                MethodName = "xxx",
+                MethodName = "methodName",
+                //MethodName = treatmentMethod.MethodName,
                 PartnerName = partner.FullName,
                 PartnerDOB = partner.DateOfBirth,
                 DoctorName = doctor.User.FullName,
@@ -79,6 +81,7 @@ namespace FertilityClinic.BLL.Services.Implementations
                 PatientDOB = a.User.DateOfBirth,
                 PhoneNumber = a.User.Phone,
                 MethodName = "methodname",
+                //MethodName = a.TreatmentMethod.MethodName,
                 PartnerName = a.Partner.FullName,
                 PartnerDOB = a.Partner.DateOfBirth,
                 DoctorName = a.User.FullName,
@@ -95,6 +98,7 @@ namespace FertilityClinic.BLL.Services.Implementations
             var user = await _unitOfWork.Users.GetByIdAsync(appointment.UserId);
             var partner = await _unitOfWork.Users.GetByIdAsync(appointment.PartnerId);
             var doctor = await _unitOfWork.Doctors.GetByIdAsync(appointment.DoctorId);
+            //var treatmentMethod = await _unitOfWork.TreatmentMethods.GetByIdAsync(appointment.TreatmentMethodId);
             if (appointment == null)
             {
                 throw new Exception("Appointment not found");
@@ -105,6 +109,7 @@ namespace FertilityClinic.BLL.Services.Implementations
                 PatientDOB = user.DateOfBirth,
                 PhoneNumber = user.Phone,
                 MethodName = "methodname",
+                //MethodName = treatmentMethod.MethodName,
                 PartnerName = partner.FullName,
                 PartnerDOB = partner.DateOfBirth,
                 DoctorName = doctor.User.FullName,
@@ -118,6 +123,10 @@ namespace FertilityClinic.BLL.Services.Implementations
         public async Task<AppointmentResponse> UpdateAppointmentAsync(int id, UpdateAppointmentRequest appointment)
         {
             var existingAppointment = await _unitOfWork.Appointments.GetByIdAsync(id);
+            var user = await _unitOfWork.Users.GetByIdAsync(existingAppointment.UserId);
+            var partner = await _unitOfWork.Users.GetByIdAsync(existingAppointment.PartnerId);
+            var doctor = await _unitOfWork.Doctors.GetByIdAsync(existingAppointment.DoctorId);
+            //var treatmentMethod = await _unitOfWork.Treatments.GetByIdAsync(existingAppointment.TreatmentMethodId);
             if (existingAppointment == null)
             {
                 throw new Exception("Appointment not found");
@@ -152,47 +161,43 @@ namespace FertilityClinic.BLL.Services.Implementations
 
             // Update the appointment using the repository
             await _unitOfWork.Appointments.UpdateAppointmentAsync(existingAppointment);
-            await _unitOfWork.SaveAsync();
-
-            // Refresh the appointment data to get related entities
-            var updatedAppointment = await _unitOfWork.Appointments.GetAppointmentByIdAsync(id);
-            var user = await _unitOfWork.Users.GetByIdAsync(updatedAppointment.UserId);
-            var partner = await _unitOfWork.Users.GetByIdAsync(updatedAppointment.PartnerId);
-            var doctor = await _unitOfWork.Doctors.GetByIdAsync(updatedAppointment.DoctorId);
-
             // Create appointment history
             var appointmentHistory = new AppointmentHistory
             {
+                UserId = user.UserId,
                 PatientName = user.FullName,
                 PatientDOB = user.DateOfBirth,
                 PhoneNumber = user.Phone,
-                MethodName = updatedAppointment.TreatmentMethodId.ToString(), // You might want to get the actual method name
+                MethodName = "methodName",
+                //MethodName = treatmentMethod.MethodName,
                 PartnerName = partner.FullName,
                 PartnerDOB = partner.DateOfBirth,
                 DoctorName = doctor.User.FullName,
-                AppointmentDate = updatedAppointment.AppointmentDate,
-                AppointmentTime = updatedAppointment.AppointmentTime,
-                Status = updatedAppointment.Status,
-                CreatedAt = DateTime.Now
+                AppointmentDate = existingAppointment.AppointmentDate,
+                AppointmentTime = existingAppointment.AppointmentTime,
+                Status = existingAppointment.Status,
+                CreatedAt = existingAppointment.CreatedAt
             };
 
             // Save appointment history
             await _unitOfWork.AppointmentHistories.AddAsync(appointmentHistory);
+            await _unitOfWork.SaveAsync();
 
             // Map to response
             return new AppointmentResponse
             {
-                PatientName = updatedAppointment.User.FullName,
-                PatientDOB = updatedAppointment.User.DateOfBirth,
-                PhoneNumber = updatedAppointment.User.Phone,
+                PatientName = existingAppointment.User.FullName,
+                PatientDOB = existingAppointment.User.DateOfBirth,
+                PhoneNumber = existingAppointment.User.Phone,
                 MethodName = "methodname",
-                PartnerName = updatedAppointment.Partner.FullName,
-                PartnerDOB = updatedAppointment.Partner.DateOfBirth,
-                DoctorName = updatedAppointment.User.FullName,
-                AppointmentDate = updatedAppointment.AppointmentDate,
-                AppointmentTime = updatedAppointment.AppointmentTime,
-                Status = updatedAppointment.Status,
-                CreatedAt = updatedAppointment.CreatedAt
+                //MethodName = existingAppointment.Treatment.TreatmentName,
+                PartnerName = existingAppointment.Partner.FullName,
+                PartnerDOB = existingAppointment.Partner.DateOfBirth,
+                DoctorName = existingAppointment.User.FullName,
+                AppointmentDate = existingAppointment.AppointmentDate,
+                AppointmentTime = existingAppointment.AppointmentTime,
+                Status = existingAppointment.Status,
+                CreatedAt = existingAppointment.CreatedAt
             };
         }
 

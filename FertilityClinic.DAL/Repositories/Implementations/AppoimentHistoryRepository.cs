@@ -27,6 +27,15 @@ namespace FertilityClinic.DAL.Repositories.Implementations
             return await _context.AppointmentHistories
                 .ToListAsync();
         }
+
+        public async Task<List<AppointmentHistory>> GetAppointmentHistoriesByUserIdAsync(int userId)
+        {
+            return await _context.AppointmentHistories
+                .Where(ah => ah.UserId == userId)
+                .OrderByDescending(ah => ah.CreatedAt) // Sắp xếp theo thời gian tạo (mới nhất trước)
+                .ToListAsync();
+        }
+
         public async Task<AppointmentHistory> GetAppointmentHistoryByIdAsync(int appointmentHistoryId)
         {
             return await _context.AppointmentHistories
