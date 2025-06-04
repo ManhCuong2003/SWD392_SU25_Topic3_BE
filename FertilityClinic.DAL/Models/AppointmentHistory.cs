@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,14 +15,12 @@ namespace FertilityClinic.DAL.Models
         public string MethodName { get; set; }
         public string DoctorName { get; set; }
         public string PatientName { get; set; }
-        public DateTime PatientDOB {  get; set; }
-        public string PartnerPatientName { get; set; }
-        public DateTime? PatientDOBDate { get; set; }
-        public DateTime AppointmentDate { get; set; }
-        public TimeSpan AppointmentTime { get; set; }
-        public int RoomNumber { get; set; }
-        public int FloorNumber { get; set; }
-        public string Section { get; set; }
+        public DateOnly? PatientDOB {  get; set; }
+        public string PhoneNumber { get; set; }
+        public string PartnerName { get; set; }
+        public DateOnly? PartnerDOB { get; set; }
+        public DateOnly AppointmentDate { get; set; }
+        public TimeOnly AppointmentTime { get; set; }
         public string Status { get; set; }
         public DateTime CreatedAt { get; set; }
         public virtual User User { get; set; }

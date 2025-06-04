@@ -51,6 +51,14 @@ namespace FertilityClinic.DTO.Constants
             public const string Delete = $"{BaseAppointment}/delete/{{id}}";
         }
 
+        public static class AppointmentHistory
+        {
+            public const string BaseAppointment = $"{Base}/appointmenthistory";
+            public const string GetById = $"{BaseAppointment}/{{id}}";
+            public const string GetByUserId = $"{BaseAppointment}/{{userId}}";
+
+        }
+
         public static class Partner
         {
             public const string BasePartner = $"{Base}/partner";
