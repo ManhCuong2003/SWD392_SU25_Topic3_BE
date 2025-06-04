@@ -49,11 +49,6 @@
         "IsRequired": false
       },
       {
-        "Name": "partnerId",
-        "Type": "System.Int32",
-        "IsRequired": false
-      },
-      {
         "Name": "treatmentMethodid",
         "Type": "System.Int32",
         "IsRequired": false

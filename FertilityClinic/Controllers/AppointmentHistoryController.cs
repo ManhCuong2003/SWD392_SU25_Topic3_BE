@@ -1,10 +1,12 @@
 ﻿using FertilityClinic.BLL.Services.Interfaces;
 using FertilityClinic.DTO.Constants;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FertilityClinic.Controllers
 {
     [ApiController]
+    [Authorize(AuthenticationSchemes = "Bearer,Cookies")]
     public class AppointmentHistoryController : ControllerBase
     {
         private readonly IAppoimentHistoryService _appointmentHistoryService;

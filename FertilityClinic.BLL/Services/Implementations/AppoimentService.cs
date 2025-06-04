@@ -18,18 +18,21 @@ namespace FertilityClinic.BLL.Services.Implementations
         {
             _unitOfWork = unitOfWork;
         }
-        public async Task<AppointmentResponse> CreateAppointmentAsync(AppointmentRequest appointment, int userId, int doctorId, int partnerId, int treatmentMethodID)
+        public async Task<AppointmentResponse> CreateAppointmentAsync(AppointmentRequest appointment, int userId, int doctorId/*, int partnerId*/, int treatmentMethodID)
         {
             // Validate inputs
             var user = await _unitOfWork.Users.GetByIdAsync(userId);
             if (user == null)
                 throw new ArgumentException("User not found");
 
-            var partner = await _unitOfWork.Users.GetByIdAsync(partnerId);
+            if (user.PartnerId<= 0)
+                throw new ArgumentException("User does not have a partner assigned");
+
+            var partner = await _unitOfWork.Partners.GetByIdAsync(user.PartnerId);
             if (partner == null)
                 throw new ArgumentException("Partner not found");
 
-            var doctor = await _unitOfWork.Doctors.GetByIdAsync(doctorId); // Fix: use doctorId instead of userId
+            var doctor = await _unitOfWork.Doctors.GetDoctorByIdAsync(doctorId); // Fix: use doctorId instead of userId
             if (doctor == null)
                 throw new ArgumentException("Doctor not found");
 
@@ -44,7 +47,11 @@ namespace FertilityClinic.BLL.Services.Implementations
                 throw new InvalidOperationException("Doctor already has an appointment at this time");
             }
 
-            //var treatmentMethod = await _unitOfWork.TreatmentMethods.GetByIdAsync(userId);
+            var treatmentMethod = await _unitOfWork.TreatmentMethods.GetByIdAsync(treatmentMethodID);
+            if (treatmentMethod == null)
+            {
+                throw new ArgumentException("Treatment method not found");
+            }
             var patientHasAppointment = await _unitOfWork.Appointments.IsPatientHasAppointmentOnDateAsync(
             userId, appointmentDate);
 
@@ -65,12 +72,11 @@ namespace FertilityClinic.BLL.Services.Implementations
             // Create new appointment
             var newAppointment = new Appointment
             {
-                UserId = user.UserId,
-                PartnerId = user.PartnerId,
+                UserId = userId,
+                PartnerId = user.PartnerId,  
+                DoctorId = doctorId,
                 TreatmentMethodId = treatmentMethodID,
-                //TreatmentMethodId = treatmentMethod.treatmentMethodID,
-                DoctorId = doctor.DoctorId,
-                AppointmentDate = DateOnly.FromDateTime(appointment.AppointmentDate), // Fix for CS0029
+                AppointmentDate = appointmentDate,
                 AppointmentTime = appointment.AppointmentTime,
                 Status = "Pending",
                 CreatedAt = DateTime.Now
@@ -82,8 +88,8 @@ namespace FertilityClinic.BLL.Services.Implementations
                 PatientName = user.FullName,
                 PatientDOB = user.DateOfBirth,
                 PhoneNumber = user.Phone,
-                MethodName = "methodName",
-                //MethodName = treatmentMethod.MethodName,
+                //MethodName = "methodName",
+                MethodName = treatmentMethod.MethodName,
                 PartnerName = partner.FullName,
                 PartnerDOB = partner.DateOfBirth,
                 DoctorName = doctor.User.FullName,
@@ -119,8 +125,8 @@ namespace FertilityClinic.BLL.Services.Implementations
                 PatientName = a.User.FullName,
                 PatientDOB = a.User.DateOfBirth,
                 PhoneNumber = a.User.Phone,
-                MethodName = "methodname",
-                //MethodName = a.TreatmentMethod.MethodName,
+                //MethodName = "methodname",
+                MethodName = a.TreatmentMethod.MethodName,
                 PartnerName = a.Partner.FullName,
                 PartnerDOB = a.Partner.DateOfBirth,
                 DoctorName = a.User.FullName,
@@ -137,7 +143,7 @@ namespace FertilityClinic.BLL.Services.Implementations
             var user = await _unitOfWork.Users.GetByIdAsync(appointment.UserId);
             var partner = await _unitOfWork.Users.GetByIdAsync(appointment.PartnerId);
             var doctor = await _unitOfWork.Doctors.GetByIdAsync(appointment.DoctorId);
-            //var treatmentMethod = await _unitOfWork.TreatmentMethods.GetByIdAsync(appointment.TreatmentMethodId);
+            var treatmentMethod = await _unitOfWork.TreatmentMethods.GetByIdAsync(appointment.TreatmentMethodId);
             if (appointment == null)
             {
                 throw new Exception("Appointment not found");
@@ -147,8 +153,8 @@ namespace FertilityClinic.BLL.Services.Implementations
                 PatientName = user.FullName,
                 PatientDOB = user.DateOfBirth,
                 PhoneNumber = user.Phone,
-                MethodName = "methodname",
-                //MethodName = treatmentMethod.MethodName,
+                //MethodName = "methodname",
+                MethodName = treatmentMethod.MethodName,
                 PartnerName = partner.FullName,
                 PartnerDOB = partner.DateOfBirth,
                 DoctorName = doctor.User.FullName,
@@ -165,7 +171,7 @@ namespace FertilityClinic.BLL.Services.Implementations
             var user = await _unitOfWork.Users.GetByIdAsync(existingAppointment.UserId);
             var partner = await _unitOfWork.Users.GetByIdAsync(existingAppointment.PartnerId);
             var doctor = await _unitOfWork.Doctors.GetByIdAsync(existingAppointment.DoctorId);
-            //var treatmentMethod = await _unitOfWork.Treatments.GetByIdAsync(existingAppointment.TreatmentMethodId);
+            var treatmentMethod = await _unitOfWork.TreatmentMethods.GetByIdAsync(existingAppointment.TreatmentMethodId);
             if (existingAppointment == null)
             {
                 throw new Exception("Appointment not found");
@@ -207,8 +213,8 @@ namespace FertilityClinic.BLL.Services.Implementations
                 PatientName = user.FullName,
                 PatientDOB = user.DateOfBirth,
                 PhoneNumber = user.Phone,
-                MethodName = "methodName",
-                //MethodName = treatmentMethod.MethodName,
+                //MethodName = "methodName",
+                MethodName = treatmentMethod.MethodName,
                 PartnerName = partner.FullName,
                 PartnerDOB = partner.DateOfBirth,
                 DoctorName = doctor.User.FullName,
@@ -228,8 +234,8 @@ namespace FertilityClinic.BLL.Services.Implementations
                 PatientName = existingAppointment.User.FullName,
                 PatientDOB = existingAppointment.User.DateOfBirth,
                 PhoneNumber = existingAppointment.User.Phone,
-                MethodName = "methodname",
-                //MethodName = existingAppointment.Treatment.TreatmentName,
+                //MethodName = "methodname",
+                MethodName = existingAppointment.TreatmentMethod.MethodName,
                 PartnerName = existingAppointment.Partner.FullName,
                 PartnerDOB = existingAppointment.Partner.DateOfBirth,
                 DoctorName = existingAppointment.User.FullName,
