@@ -99,6 +99,7 @@ builder.Services.AddScoped<IDoctorRepository, DoctorRepository>();
 builder.Services.AddScoped<IAppoimentRepository, AppoimentRepository>();
 builder.Services.AddScoped<IAppoimentHistoryRepository, AppoimentHistoryRepository>();
 builder.Services.AddScoped<IPartnerRepository, PartnerRepository>();
+builder.Services.AddScoped<ITreatmentMethodRepository, TreatmentMethodRepository>();
 // Đăng ký các service
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IDoctorService, DoctorService>();
@@ -106,6 +107,7 @@ builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IAppoimentService, AppoimentService>();
 builder.Services.AddScoped<IAppoimentHistoryService, AppoimentHistoryService>();
 builder.Services.AddScoped<IPartnerService, PartnerService>();
+builder.Services.AddScoped<ITreatmentMethodService, TreatmentMethodServicecs>();
 #endregion
 
 
