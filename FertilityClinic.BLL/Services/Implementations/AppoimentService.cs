@@ -20,10 +20,49 @@ namespace FertilityClinic.BLL.Services.Implementations
         }
         public async Task<AppointmentResponse> CreateAppointmentAsync(AppointmentRequest appointment, int userId, int doctorId, int partnerId, int treatmentMethodID)
         {
+            // Validate inputs
             var user = await _unitOfWork.Users.GetByIdAsync(userId);
+            if (user == null)
+                throw new ArgumentException("User not found");
+
             var partner = await _unitOfWork.Users.GetByIdAsync(partnerId);
-            var doctor = await _unitOfWork.Doctors.GetByIdAsync(userId);
+            if (partner == null)
+                throw new ArgumentException("Partner not found");
+
+            var doctor = await _unitOfWork.Doctors.GetByIdAsync(doctorId); // Fix: use doctorId instead of userId
+            if (doctor == null)
+                throw new ArgumentException("Doctor not found");
+
+            var appointmentDate = DateOnly.FromDateTime(appointment.AppointmentDate);
+
+            // Check if doctor already has appointment at this time
+            var isDoctorBusy = await _unitOfWork.Appointments.IsAppointmentTimeConflictAsync(
+                doctorId, appointmentDate, appointment.AppointmentTime);
+
+            if (isDoctorBusy)
+            {
+                throw new InvalidOperationException("Doctor already has an appointment at this time");
+            }
+
             //var treatmentMethod = await _unitOfWork.TreatmentMethods.GetByIdAsync(userId);
+            var patientHasAppointment = await _unitOfWork.Appointments.IsPatientHasAppointmentOnDateAsync(
+            userId, appointmentDate);
+
+            if (patientHasAppointment)
+            {
+                throw new InvalidOperationException("Patient already has an appointment on this date");
+            }
+
+            // Optional: Check for time slot conflicts with buffer time (e.g., 30 minutes)
+            var hasTimeSlotConflict = await _unitOfWork.Appointments.IsTimeSlotConflictAsync(
+                doctorId, appointmentDate, appointment.AppointmentTime, 30);
+
+            if (hasTimeSlotConflict)
+            {
+                throw new InvalidOperationException("This time slot conflicts with another appointment. Please choose a different time");
+            }
+            
+            // Create new appointment
             var newAppointment = new Appointment
             {
                 UserId = user.UserId,
