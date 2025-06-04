@@ -28,14 +28,6 @@
             }
           },
           {
-            "name": "partnerId",
-            "in": "query",
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          },
-          {
             "name": "treatmentMethodid",
             "in": "query",
             "schema": {

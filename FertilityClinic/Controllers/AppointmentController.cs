@@ -1,11 +1,13 @@
 ﻿using FertilityClinic.BLL.Services.Interfaces;
 using FertilityClinic.DTO.Constants;
 using FertilityClinic.DTO.Requests;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FertilityClinic.Controllers
 {
     [ApiController]
+    [Authorize(AuthenticationSchemes = "Bearer,Cookies")]
     public class AppointmentController : Controller
     {
         private readonly IAppoimentService _appointmentService;
@@ -15,7 +17,7 @@ namespace FertilityClinic.Controllers
         }
 
         [HttpPost(APIEndPoints.Appointment.Create)]
-        public async Task<IActionResult> CreateAppointment([FromBody] AppointmentRequest appointmentRequest, int userId, int doctorId, int partnerId, int treatmentMethodid)
+        public async Task<IActionResult> CreateAppointment([FromBody] AppointmentRequest appointmentRequest, int userId, int doctorId/*, int partnerId*/, int treatmentMethodid)
         {
             if (!ModelState.IsValid)
             {
@@ -23,7 +25,7 @@ namespace FertilityClinic.Controllers
             }
             try
             {
-                var appointment = await _appointmentService.CreateAppointmentAsync(appointmentRequest, userId, doctorId, partnerId, treatmentMethodid);
+                var appointment = await _appointmentService.CreateAppointmentAsync(appointmentRequest, userId, doctorId/*, partnerId*/, treatmentMethodid);
                 return Ok(appointment);
             }
             catch (ArgumentException ex)

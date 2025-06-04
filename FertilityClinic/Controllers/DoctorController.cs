@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace FertilityClinic.Controllers
 {
     [ApiController]
+    [Authorize(AuthenticationSchemes = "Bearer,Cookies")]
     public class DoctorController : ControllerBase
     {
         private readonly IDoctorService _doctorService;

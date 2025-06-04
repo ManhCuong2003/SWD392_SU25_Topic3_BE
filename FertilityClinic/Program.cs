@@ -16,8 +16,6 @@ using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
-
-
 #region JWT
 builder.Services.AddAuthentication(options =>
 {
@@ -110,12 +108,19 @@ builder.Services.AddScoped<IPartnerService, PartnerService>();
 builder.Services.AddScoped<ITreatmentMethodService, TreatmentMethodServicecs>();
 #endregion
 
-
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 
 // Register the DbContext with the connection string
 builder.Services.AddDbContext<FertilityClinicDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+builder.WebHost.ConfigureKestrel(options =>
+{
+    options.ListenLocalhost(5194); // HTTP
+    options.ListenLocalhost(7194, listenOptions =>
+    {
+        listenOptions.UseHttps(); // HTTPS
+    });
+});
 
 var app = builder.Build();
 
