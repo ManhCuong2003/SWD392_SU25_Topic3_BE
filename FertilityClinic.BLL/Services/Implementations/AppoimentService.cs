@@ -38,7 +38,7 @@ namespace FertilityClinic.BLL.Services.Implementations
 
             var appointmentDate = DateOnly.FromDateTime(appointment.AppointmentDate);
 
-            // Check if doctor already has appointment at this time
+            // 1. Check if doctor has any appointment at the exact same time
             var isDoctorBusy = await _unitOfWork.Appointments.IsAppointmentTimeConflictAsync(
                 doctorId, appointmentDate, appointment.AppointmentTime);
 
