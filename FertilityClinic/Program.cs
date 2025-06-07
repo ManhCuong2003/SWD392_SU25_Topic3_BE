@@ -122,6 +122,10 @@ builder.WebHost.ConfigureKestrel(options =>
     });
 });
 
+// Add PayOS service
+builder.Services.AddHttpClient();
+builder.Services.AddScoped<PayOSService>();
+
 var app = builder.Build();
 
 // Cấu hình middleware pipeline

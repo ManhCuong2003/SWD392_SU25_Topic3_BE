@@ -29,6 +29,7 @@ namespace FertilityClinic.DAL
         public DbSet<InseminationResult> InseminationResults { get; set; }
         public DbSet<LabTestSchedule> LabTestSchedules { get; set; }
         public DbSet<LabTestResult> LabTestResults { get; set; }
+        public DbSet<Payment> Payments { get; set; }
         public DbSet<AppointmentHistory> AppointmentHistories { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
