@@ -553,6 +553,93 @@
         }
       }
     },
+    "/api/Payment/create": {
+      "post": {
+        "tags": [
+          "Payment"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Payment"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Payment"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Payment"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaymentResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Payment/status/{orderCode}": {
+      "get": {
+        "tags": [
+          "Payment"
+        ],
+        "parameters": [
+          {
+            "name": "orderCode",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaymentStatus"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/TreatmentMethods/Create": {
       "post": {
         "tags": [
@@ -807,6 +894,119 @@
   },
   "components": {
     "schemas": {
+      "Appointment": {
+        "required": [
+          "appointmentDate",
+          "appointmentTime"
+        ],
+        "type": "object",
+        "properties": {
+          "appointmentId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "userId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "treatmentMethodId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "partnerId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "doctorId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "appointmentDate": {
+            "$ref": "#/components/schemas/DateOnly"
+          },
+          "appointmentTime": {
+            "$ref": "#/components/schemas/TimeOnly"
+          },
+          "status": {
+            "type": "string",
+            "nullable": true
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "partner": {
+            "$ref": "#/components/schemas/Partner"
+          },
+          "user": {
+            "$ref": "#/components/schemas/User"
+          },
+          "doctor": {
+            "$ref": "#/components/schemas/Doctor"
+          },
+          "treatmentMethod": {
+            "$ref": "#/components/schemas/TreatmentMethod"
+          }
+        },
+        "additionalProperties": false
+      },
+      "AppointmentHistory": {
+        "type": "object",
+        "properties": {
+          "appointmentHistoryId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "userId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "methodName": {
+            "type": "string",
+            "nullable": true
+          },
+          "doctorName": {
+            "type": "string",
+            "nullable": true
+          },
+          "patientName": {
+            "type": "string",
+            "nullable": true
+          },
+          "patientDOB": {
+            "$ref": "#/components/schemas/DateOnly"
+          },
+          "phoneNumber": {
+            "type": "string",
+            "nullable": true
+          },
+          "partnerName": {
+            "type": "string",
+            "nullable": true
+          },
+          "partnerDOB": {
+            "$ref": "#/components/schemas/DateOnly"
+          },
+          "appointmentDate": {
+            "$ref": "#/components/schemas/DateOnly"
+          },
+          "appointmentTime": {
+            "$ref": "#/components/schemas/TimeOnly"
+          },
+          "status": {
+            "type": "string",
+            "nullable": true
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "user": {
+            "$ref": "#/components/schemas/User"
+          }
+        },
+        "additionalProperties": false
+      },
       "AppointmentRequest": {
         "type": "object",
         "properties": {
@@ -824,6 +1024,50 @@
           "createdAt": {
             "type": "string",
             "format": "date-time"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Blog": {
+        "type": "object",
+        "properties": {
+          "blogId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "userId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "title": {
+            "type": "string",
+            "nullable": true
+          },
+          "content": {
+            "type": "string",
+            "nullable": true
+          },
+          "thumbnailUrl": {
+            "type": "string",
+            "nullable": true
+          },
+          "isPublished": {
+            "type": "boolean"
+          },
+          "publishedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "user": {
+            "$ref": "#/components/schemas/User"
           }
         },
         "additionalProperties": false
@@ -872,6 +1116,110 @@
         "type": "integer",
         "format": "int32"
       },
+      "Doctor": {
+        "type": "object",
+        "properties": {
+          "doctorId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "userId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "avatar": {
+            "type": "string",
+            "nullable": true
+          },
+          "specialization": {
+            "type": "string",
+            "nullable": true
+          },
+          "degree": {
+            "type": "string",
+            "nullable": true
+          },
+          "certifications": {
+            "type": "string",
+            "nullable": true
+          },
+          "experienceYears": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "bio": {
+            "type": "string",
+            "nullable": true
+          },
+          "education": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          },
+          "user": {
+            "$ref": "#/components/schemas/User"
+          },
+          "treatmentProcesses": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TreatmentProcess"
+            },
+            "nullable": true
+          },
+          "injectionSchedules": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/InjectionSchedule"
+            },
+            "nullable": true
+          },
+          "labTestSchedules": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LabTestSchedule"
+            },
+            "nullable": true
+          },
+          "labTestResults": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LabTestResult"
+            },
+            "nullable": true
+          },
+          "inseminationSchedules": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/InseminationSchedule"
+            },
+            "nullable": true
+          },
+          "inseminationResults": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/InseminationResult"
+            },
+            "nullable": true
+          },
+          "appointments": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Appointment"
+            },
+            "nullable": true
+          },
+          "reviews": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Review"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "DoctorRequest": {
         "type": "object",
         "properties": {
@@ -909,6 +1257,242 @@
         },
         "additionalProperties": false
       },
+      "InjectionSchedule": {
+        "type": "object",
+        "properties": {
+          "injectionScheduleId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "treatmentProcessId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "doctorId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "injectionDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "medicationName": {
+            "type": "string",
+            "nullable": true
+          },
+          "dosage": {
+            "type": "string",
+            "nullable": true
+          },
+          "status": {
+            "type": "string",
+            "nullable": true
+          },
+          "notes": {
+            "type": "string",
+            "nullable": true
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "treatmentProcess": {
+            "$ref": "#/components/schemas/TreatmentProcess"
+          },
+          "doctor": {
+            "$ref": "#/components/schemas/Doctor"
+          }
+        },
+        "additionalProperties": false
+      },
+      "InseminationResult": {
+        "type": "object",
+        "properties": {
+          "inseminationResultId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "inseminationScheduleId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "doctorId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "resultDetails": {
+            "type": "string",
+            "nullable": true
+          },
+          "notes": {
+            "type": "string",
+            "nullable": true
+          },
+          "resultDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "inseminationSchedule": {
+            "$ref": "#/components/schemas/InseminationSchedule"
+          },
+          "doctor": {
+            "$ref": "#/components/schemas/Doctor"
+          }
+        },
+        "additionalProperties": false
+      },
+      "InseminationSchedule": {
+        "type": "object",
+        "properties": {
+          "inseminationScheduleId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "treatmentProcessId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "doctorId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "inseminationDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "method": {
+            "type": "string",
+            "nullable": true
+          },
+          "status": {
+            "type": "string",
+            "nullable": true
+          },
+          "notes": {
+            "type": "string",
+            "nullable": true
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "treatmentProcess": {
+            "$ref": "#/components/schemas/TreatmentProcess"
+          },
+          "doctor": {
+            "$ref": "#/components/schemas/Doctor"
+          }
+        },
+        "additionalProperties": false
+      },
+      "LabTestResult": {
+        "type": "object",
+        "properties": {
+          "labTestResultId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "labTestScheduleId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "doctorId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "resultDetails": {
+            "type": "string",
+            "nullable": true
+          },
+          "notes": {
+            "type": "string",
+            "nullable": true
+          },
+          "resultDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "labTestSchedule": {
+            "$ref": "#/components/schemas/LabTestSchedule"
+          },
+          "doctor": {
+            "$ref": "#/components/schemas/Doctor"
+          }
+        },
+        "additionalProperties": false
+      },
+      "LabTestSchedule": {
+        "type": "object",
+        "properties": {
+          "labTestScheduleId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "treatmentProcessId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "doctorId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "testDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "testType": {
+            "type": "string",
+            "nullable": true
+          },
+          "status": {
+            "type": "string",
+            "nullable": true
+          },
+          "notes": {
+            "type": "string",
+            "nullable": true
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "treatmentProcess": {
+            "$ref": "#/components/schemas/TreatmentProcess"
+          },
+          "doctor": {
+            "$ref": "#/components/schemas/Doctor"
+          }
+        },
+        "additionalProperties": false
+      },
       "LoginRequest": {
         "type": "object",
         "properties": {
@@ -921,6 +1505,93 @@
             "type": "string",
             "default": "Your_password",
             "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Notification": {
+        "type": "object",
+        "properties": {
+          "notificationId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "userId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "title": {
+            "type": "string",
+            "nullable": true
+          },
+          "content": {
+            "type": "string",
+            "nullable": true
+          },
+          "isRead": {
+            "type": "boolean"
+          },
+          "sentAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "user": {
+            "$ref": "#/components/schemas/User"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Partner": {
+        "type": "object",
+        "properties": {
+          "partnerId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "userId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "fullName": {
+            "type": "string",
+            "nullable": true
+          },
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "phone": {
+            "type": "string",
+            "nullable": true
+          },
+          "nationalId": {
+            "type": "string",
+            "nullable": true
+          },
+          "gender": {
+            "type": "string",
+            "nullable": true
+          },
+          "healthInsuranceId": {
+            "type": "string",
+            "nullable": true
+          },
+          "healthInsuranceExpirationDate": {
+            "$ref": "#/components/schemas/DateOnly"
+          },
+          "dateOfBirth": {
+            "$ref": "#/components/schemas/DateOnly"
+          },
+          "user": {
+            "$ref": "#/components/schemas/User"
           }
         },
         "additionalProperties": false
@@ -954,6 +1625,106 @@
         },
         "additionalProperties": false
       },
+      "Payment": {
+        "type": "object",
+        "properties": {
+          "paymentId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "appointmentId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "amount": {
+            "type": "number",
+            "format": "double"
+          },
+          "status": {
+            "type": "string",
+            "nullable": true
+          },
+          "paymentMethod": {
+            "type": "string",
+            "nullable": true
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "appointment": {
+            "$ref": "#/components/schemas/Appointment"
+          }
+        },
+        "additionalProperties": false
+      },
+      "PaymentResponse": {
+        "type": "object",
+        "properties": {
+          "paymentUrl": {
+            "type": "string",
+            "nullable": true
+          },
+          "orderCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "status": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "PaymentStatus": {
+        "type": "object",
+        "properties": {
+          "orderCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "status": {
+            "type": "string",
+            "nullable": true
+          },
+          "amount": {
+            "type": "number",
+            "format": "double"
+          },
+          "transactionDate": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ProblemDetails": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "nullable": true
+          },
+          "title": {
+            "type": "string",
+            "nullable": true
+          },
+          "status": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "detail": {
+            "type": "string",
+            "nullable": true
+          },
+          "instance": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": { }
+      },
       "RegisterRequest": {
         "type": "object",
         "properties": {
@@ -971,6 +1742,46 @@
             "type": "string",
             "default": "Your_password",
             "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Review": {
+        "type": "object",
+        "properties": {
+          "reviewId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "userId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "doctorId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "rating": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "comment": {
+            "type": "string",
+            "nullable": true
+          },
+          "reviewDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "user": {
+            "$ref": "#/components/schemas/User"
+          },
+          "doctor": {
+            "$ref": "#/components/schemas/Doctor"
           }
         },
         "additionalProperties": false
@@ -1014,6 +1825,58 @@
         },
         "additionalProperties": false
       },
+      "TreatmentMethod": {
+        "required": [
+          "description",
+          "methodCode",
+          "methodName"
+        ],
+        "type": "object",
+        "properties": {
+          "treatmentMethodId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "methodName": {
+            "maxLength": 100,
+            "minLength": 1,
+            "type": "string"
+          },
+          "methodCode": {
+            "maxLength": 20,
+            "minLength": 1,
+            "type": "string"
+          },
+          "description": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "isActive": {
+            "type": "boolean"
+          },
+          "technicalRequirements": {
+            "type": "string",
+            "nullable": true
+          },
+          "averageDuration": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "treatmentProcesses": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TreatmentProcess"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "TreatmentMethodRequest": {
         "type": "object",
         "properties": {
@@ -1040,6 +1903,77 @@
           "averageDuration": {
             "type": "integer",
             "format": "int32",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "TreatmentProcess": {
+        "required": [
+          "doctorId",
+          "status",
+          "treatmentMethodId",
+          "userId"
+        ],
+        "type": "object",
+        "properties": {
+          "treatmentProcessId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "userId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "user": {
+            "$ref": "#/components/schemas/User"
+          },
+          "doctorId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "doctor": {
+            "$ref": "#/components/schemas/Doctor"
+          },
+          "treatmentMethodId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "treatmentMethod": {
+            "$ref": "#/components/schemas/TreatmentMethod"
+          },
+          "status": {
+            "maxLength": 50,
+            "minLength": 1,
+            "type": "string"
+          },
+          "notes": {
+            "type": "string",
+            "nullable": true
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "injectionSchedules": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/InjectionSchedule"
+            },
+            "nullable": true
+          },
+          "inseminationSchedules": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/InseminationSchedule"
+            },
+            "nullable": true
+          },
+          "labTestSchedules": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LabTestSchedule"
+            },
             "nullable": true
           }
         },
@@ -1196,6 +2130,114 @@
           },
           "role": {
             "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "User": {
+        "type": "object",
+        "properties": {
+          "userId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "partnerId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "healthInsuranceId": {
+            "type": "string",
+            "nullable": true
+          },
+          "healthInsuranceExpirationDate": {
+            "$ref": "#/components/schemas/DateOnly"
+          },
+          "isMarried": {
+            "type": "boolean"
+          },
+          "fullName": {
+            "type": "string",
+            "nullable": true
+          },
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "phone": {
+            "type": "string",
+            "nullable": true
+          },
+          "nationalId": {
+            "type": "string",
+            "nullable": true
+          },
+          "dateOfBirth": {
+            "$ref": "#/components/schemas/DateOnly"
+          },
+          "gender": {
+            "type": "string",
+            "nullable": true
+          },
+          "address": {
+            "type": "string",
+            "nullable": true
+          },
+          "password": {
+            "type": "string",
+            "nullable": true
+          },
+          "role": {
+            "type": "string",
+            "nullable": true
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "partner": {
+            "$ref": "#/components/schemas/Partner"
+          },
+          "reviews": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Review"
+            },
+            "nullable": true
+          },
+          "appointments": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Appointment"
+            },
+            "nullable": true
+          },
+          "getAppointmentHistories": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AppointmentHistory"
+            },
+            "nullable": true
+          },
+          "doctor": {
+            "$ref": "#/components/schemas/Doctor"
+          },
+          "notifications": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Notification"
+            },
+            "nullable": true
+          },
+          "blogs": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Blog"
+            },
             "nullable": true
           }
         },

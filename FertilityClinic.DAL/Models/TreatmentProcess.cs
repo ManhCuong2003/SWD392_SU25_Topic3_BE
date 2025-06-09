@@ -16,10 +16,6 @@ namespace FertilityClinic.DAL.Models
             public User User { get; set; }
     
             [Required]
-            public int DoctorId { get; set; }
-            public Doctor Doctor { get; set; }
-    
-            [Required]
             public int TreatmentMethodId { get; set; }
             public TreatmentMethod TreatmentMethod { get; set; }
     
