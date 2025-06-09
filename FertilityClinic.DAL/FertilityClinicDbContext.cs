@@ -103,10 +103,6 @@ namespace FertilityClinic.DAL
 
             modelBuilder.Entity<TreatmentProcess>(entity =>
             {
-                entity.HasOne(tp => tp.Doctor)
-                      .WithMany(d => d.TreatmentProcesses)
-                      .HasForeignKey(tp => tp.DoctorId)
-                      .OnDelete(DeleteBehavior.Restrict);
                 entity.HasOne(tp => tp.TreatmentMethod)
                       .WithMany(tm => tm.TreatmentProcesses) 
                       .HasForeignKey(tp => tp.TreatmentMethodId)

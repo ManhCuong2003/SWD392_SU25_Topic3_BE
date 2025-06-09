@@ -21,44 +21,44 @@ namespace FertilityClinic.BLL.Services.Implementations
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<CreatePaymentResult> CreateAppointmentPayment(int appointmentId, string returnUrl, string cancelUrl)
-        {
-            // Lấy thông tin appointment
-            var appointment = await _unitOfWork.Appointments.GetAppointmentByIdAsync(appointmentId);
-            if (appointment == null)
-                throw new ArgumentException("Appointment not found");
+        //public async Task<CreatePaymentResult> CreateAppointmentPayment(int appointmentId, string returnUrl, string cancelUrl)
+        //{
+        //    // Lấy thông tin appointment
+        //    var appointment = await _unitOfWork.Appointments.GetAppointmentByIdAsync(appointmentId);
+        //    if (appointment == null)
+        //        throw new ArgumentException("Appointment not found");
 
-            // Lấy thông tin treatment method để biết giá
-            var treatmentMethod = await _unitOfWork.TreatmentMethods.GetByIdAsync(appointment.TreatmentMethodId);
-            if (treatmentMethod == null)
-                throw new ArgumentException("Treatment method not found");
+        //    // Lấy thông tin treatment method để biết giá
+        //    var treatmentMethod = await _unitOfWork.TreatmentMethods.GetByIdAsync(appointment.TreatmentMethodId);
+        //    if (treatmentMethod == null)
+        //        throw new ArgumentException("Treatment method not found");
 
-            // Tạo orderCode unique (có thể dùng appointmentId + timestamp)
-            long orderCode = long.Parse($"{appointmentId}{DateTimeOffset.Now.ToUnixTimeSeconds()}");
+        //    // Tạo orderCode unique (có thể dùng appointmentId + timestamp)
+        //    long orderCode = long.Parse($"{appointmentId}{DateTimeOffset.Now.ToUnixTimeSeconds()}");
 
-            var paymentData = new PaymentData(
-                orderCode: orderCode,
-                amount: (int)treatmentMethod.Price, // Giả sử TreatmentMethod có Price
-                description: $"Thanh toán lịch hẹn - {treatmentMethod.MethodName}",
-                items: new List<ItemData>
-                {
-                    new ItemData(
-                        name: treatmentMethod.MethodName,
-                        quantity: 1,
-                        price: (int)treatmentMethod.Price
-                    )
-                },
-                cancelUrl: cancelUrl,
-                returnUrl: returnUrl
-            );
+        //    //var paymentData = new PaymentData(
+        //    //    orderCode: orderCode,
+        //    //    amount: (int)treatmentMethod.Price, // Giả sử TreatmentMethod có Price
+        //    //    description: $"Thanh toán lịch hẹn - {treatmentMethod.MethodName}",
+        //    //    items: new List<ItemData>
+        //    //    {
+        //    //        new ItemData(
+        //    //            name: treatmentMethod.MethodName,
+        //    //            quantity: 1,
+        //    //            price: (int)treatmentMethod.Price
+        //    //        )
+        //    //    },
+        //    //    cancelUrl: cancelUrl,
+        //    //    returnUrl: returnUrl
+        //    //);
 
-            var result = await _payOS.createPaymentLink(paymentData);
+        //    var result = await _payOS.createPaymentLink(paymentData);
 
-            // Lưu thông tin payment vào database
-            await SavePaymentInfo(appointmentId, orderCode, (int)treatmentMethod.Price);
+        //    // Lưu thông tin payment vào database
+        //    await SavePaymentInfo(appointmentId, orderCode, (int)treatmentMethod.Price);
 
-            return result;
-        }
+        //    return result;
+        //}
 
         public async Task<PaymentLinkInformation> GetPaymentInfo(long orderCode)
         {
@@ -87,32 +87,32 @@ namespace FertilityClinic.BLL.Services.Implementations
                 CreatedAt = DateTime.Now
             };
 
-            await _unitOfWork.Payments.AddAsync(payment);
+            //await _unitOfWork.Payments.AddAsync(payment);
             await _unitOfWork.SaveAsync();
         }
 
-        public async Task UpdatePaymentStatus(long orderCode, string status, string transactionId = null)
-        {
-            var payment = await _unitOfWork.Payments.GetByOrderCodeAsync(orderCode);
-            if (payment != null)
-            {
-                payment.Status = status;
-                payment.TransactionId = transactionId;
-                payment.UpdatedAt = DateTime.Now;
+        //public async Task UpdatePaymentStatus(long orderCode, string status, string transactionId = null)
+        //{
+        //    var payment = await _unitOfWork.Payments.GetByOrderCodeAsync(orderCode);
+        //    if (payment != null)
+        //    {
+        //        payment.Status = status;
+        //        payment.TransactionId = transactionId;
+        //        payment.UpdatedAt = DateTime.Now;
 
-                // Nếu thanh toán thành công, cập nhật trạng thái appointment
-                if (status == "PAID")
-                {
-                    var appointment = await _unitOfWork.Appointments.GetByIdAsync(payment.AppointmentId);
-                    if (appointment != null)
-                    {
-                        appointment.Status = "Confirmed"; // Xác nhận lịch hẹn khi thanh toán thành công
-                        await _unitOfWork.Appointments.UpdateAppointmentAsync(appointment);
-                    }
-                }
+        //        // Nếu thanh toán thành công, cập nhật trạng thái appointment
+        //        if (status == "PAID")
+        //        {
+        //            var appointment = await _unitOfWork.Appointments.GetByIdAsync(payment.AppointmentId);
+        //            if (appointment != null)
+        //            {
+        //                appointment.Status = "Confirmed"; // Xác nhận lịch hẹn khi thanh toán thành công
+        //                await _unitOfWork.Appointments.UpdateAppointmentAsync(appointment);
+        //            }
+        //        }
 
-                await _unitOfWork.SaveAsync();
-            }
-        }
+        //        await _unitOfWork.SaveAsync();
+        //    }
+        //}
     }
 }
