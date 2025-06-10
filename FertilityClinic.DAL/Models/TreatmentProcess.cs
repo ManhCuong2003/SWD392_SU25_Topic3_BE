@@ -21,7 +21,7 @@ namespace FertilityClinic.DAL.Models
     
             [Required]
             [MaxLength(50)]
-            public string Status { get; set; } // InProgress, Completed, Cancelled
+            public string ProcessName { get; set; }
     
             public string Notes { get; set; }
             public DateTime CreatedAt { get; set; } = DateTime.UtcNow;

@@ -16,6 +16,7 @@ namespace FertilityClinic.DAL.UnitOfWork
         IAppoimentHistoryRepository AppointmentHistories { get; }
         IPartnerRepository Partners { get; }
         ITreatmentMethodRepository TreatmentMethods { get; }
+        ITreatmentProcessRepository TreatmentProcesses { get; }
         Task<int> SaveAsync();
     }
 }
