@@ -24,7 +24,7 @@ namespace FertilityClinic.DAL.UnitOfWork
 
         public ITreatmentMethodRepository TreatmentMethods { get; }
 
-        
+        public ITreatmentProcessRepository TreatmentProcesses { get; }
         public UnitOfWork(FertilityClinicDbContext context, 
             IUserRepository userRepository,
             IDoctorRepository doctorRepository,
@@ -32,6 +32,8 @@ namespace FertilityClinic.DAL.UnitOfWork
             IAppoimentHistoryRepository appointmentHistories,
             IPartnerRepository partnerRepository,
             ITreatmentMethodRepository treatMentMethods
+,
+            ITreatmentProcessRepository treatmentProcesses
             )
         {
             _context = context;
@@ -42,6 +44,7 @@ namespace FertilityClinic.DAL.UnitOfWork
             AppointmentHistories = appointmentHistories;
             Partners = partnerRepository;
             TreatmentMethods = treatMentMethods;
+            TreatmentProcesses = treatmentProcesses;
         }
         public IGenericRepository<TEntity> Repository<TEntity>() where TEntity : class
         {
