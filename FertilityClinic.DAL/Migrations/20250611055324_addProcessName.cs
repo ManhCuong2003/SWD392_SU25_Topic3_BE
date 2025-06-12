@@ -5,7 +5,7 @@
 namespace FertilityClinic.DAL.Migrations
 {
     /// <inheritdoc />
-    public partial class removeDoctorIdFromProcess : Migration
+    public partial class addProcessName : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -14,17 +14,14 @@ namespace FertilityClinic.DAL.Migrations
                 name: "FK_TreatmentProcesses_Doctors_DoctorId",
                 table: "TreatmentProcesses");
 
-            migrationBuilder.DropIndex(
-                name: "IX_TreatmentProcesses_DoctorId",
-                table: "TreatmentProcesses");
-
-            migrationBuilder.DropColumn(
-                name: "DoctorId",
-                table: "TreatmentProcesses");
-
             migrationBuilder.DropColumn(
                 name: "PaymentMethod",
                 table: "Payments");
+
+            migrationBuilder.RenameColumn(
+                name: "Status",
+                table: "TreatmentProcesses",
+                newName: "ProcessName");
 
             migrationBuilder.AlterColumn<int>(
                 name: "Amount",
@@ -40,21 +37,31 @@ namespace FertilityClinic.DAL.Migrations
                 type: "bigint",
                 nullable: false,
                 defaultValue: 0L);
+
+            migrationBuilder.AddForeignKey(
+                name: "FK_TreatmentProcesses_Doctors_DoctorId",
+                table: "TreatmentProcesses",
+                column: "DoctorId",
+                principalTable: "Doctors",
+                principalColumn: "DoctorId",
+                onDelete: ReferentialAction.Cascade);
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropForeignKey(
+                name: "FK_TreatmentProcesses_Doctors_DoctorId",
+                table: "TreatmentProcesses");
+
             migrationBuilder.DropColumn(
                 name: "OrderCode",
                 table: "Payments");
 
-            migrationBuilder.AddColumn<int>(
-                name: "DoctorId",
+            migrationBuilder.RenameColumn(
+                name: "ProcessName",
                 table: "TreatmentProcesses",
-                type: "int",
-                nullable: false,
-                defaultValue: 0);
+                newName: "Status");
 
             migrationBuilder.AlterColumn<decimal>(
                 name: "Amount",
@@ -70,11 +77,6 @@ namespace FertilityClinic.DAL.Migrations
                 type: "nvarchar(max)",
                 nullable: false,
                 defaultValue: "");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_TreatmentProcesses_DoctorId",
-                table: "TreatmentProcesses",
-                column: "DoctorId");
 
             migrationBuilder.AddForeignKey(
                 name: "FK_TreatmentProcesses_Doctors_DoctorId",

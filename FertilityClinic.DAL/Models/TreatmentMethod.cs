@@ -21,16 +21,17 @@ namespace FertilityClinic.DAL.Models
     public string MethodCode { get; set; }
     
     [Required]
-    public string Description { get; set; }
+    public string? Description { get; set; }
     
-    public bool IsActive { get; set; } = true;
+    public bool? IsActive { get; set; } = true;
     
-    public string TechnicalRequirements { get; set; }
+    public string? TechnicalRequirements { get; set; }
     
     public int? AverageDuration { get; set; } // in days
     
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
-    
-    public ICollection<TreatmentProcess> TreatmentProcesses { get; set; }
+        private float? Price { get; set; } // Price in VND
+
+        public ICollection<TreatmentProcess>? TreatmentProcesses { get; set; }
 }
 }

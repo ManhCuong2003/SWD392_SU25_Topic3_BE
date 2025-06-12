@@ -22,11 +22,11 @@ namespace FertilityClinic.BLL.Services.Implementations
         {
             var treatmentMethod = new TreatmentMethod
             {
-                MethodName = "Chưa cập nhập",
-                MethodCode = "Chưa cập nhập",
-                Description = "Chưa cập nhập",
+                MethodName = request.MethodName,
+                MethodCode = request.MethodCode,
+                Description = request.Description,
                 IsActive = true,
-                TechnicalRequirements = "Chưa cập nhập",
+                TechnicalRequirements = request.TechnicalRequirements,
                 AverageDuration = 0,
                 CreatedAt = DateTime.UtcNow
             };
@@ -38,7 +38,8 @@ namespace FertilityClinic.BLL.Services.Implementations
                 MethodName = treatmentMethod.MethodName,
                 MethodCode = treatmentMethod.MethodCode,
                 Description = treatmentMethod.Description,
-                IsActive = treatmentMethod.IsActive,
+                IsActive = treatmentMethod.IsActive ?? false, // hoặc true nếu phù hợp
+
                 TechnicalRequirements = treatmentMethod.TechnicalRequirements,
                 AverageDuration = treatmentMethod.AverageDuration
             };
@@ -70,7 +71,7 @@ namespace FertilityClinic.BLL.Services.Implementations
                     MethodName = tm.MethodName,
                     MethodCode = tm.MethodCode,
                     Description = tm.Description,
-                    IsActive = tm.IsActive,
+                    IsActive = tm.IsActive ?? false,
                     TechnicalRequirements = tm.TechnicalRequirements,
                     AverageDuration = tm.AverageDuration
                 }).ToList();
@@ -91,7 +92,8 @@ namespace FertilityClinic.BLL.Services.Implementations
                 MethodName = treatmentMethod.MethodName,
                 MethodCode = treatmentMethod.MethodCode,
                 Description = treatmentMethod.Description,
-                IsActive = treatmentMethod.IsActive,
+                IsActive = treatmentMethod.IsActive ?? false, // hoặc true nếu phù hợp
+
                 TechnicalRequirements = treatmentMethod.TechnicalRequirements,
                 AverageDuration = treatmentMethod.AverageDuration
             };
@@ -130,7 +132,8 @@ namespace FertilityClinic.BLL.Services.Implementations
                 MethodName = treatmentMethod.MethodName,
                 MethodCode = treatmentMethod.MethodCode,
                 Description = treatmentMethod.Description,
-                IsActive = treatmentMethod.IsActive,
+                IsActive = treatmentMethod.IsActive ?? false, // hoặc true nếu phù hợp
+
                 TechnicalRequirements = treatmentMethod.TechnicalRequirements,
                 AverageDuration = treatmentMethod.AverageDuration
             };

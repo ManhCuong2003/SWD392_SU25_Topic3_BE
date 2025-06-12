@@ -20,6 +20,14 @@ namespace FertilityClinic.BLL.Services.Implementations
         }
         public async Task<AppointmentResponse> CreateAppointmentAsync(AppointmentRequest appointment, int userId, int doctorId/*, int partnerId*/, int treatmentMethodID)
         {
+            // Check xem doctor đã có process chưa
+            /*var processes = await _unitOfWork.TreatmentProcesses.GetAllAsync(); // Hoặc method tương tự
+            var hasProcess = processes.Any(p => p.DoctorId == appointment.DoctorId);
+
+            if (hasProcess)
+            {
+                throw new Exception($"Bác sĩ có ID {appointment.DoctorId} đã có quy trình điều trị, không thể tạo lịch hẹn.");
+            }*/
             // Validate inputs
             var user = await _unitOfWork.Users.GetByIdAsync(userId);
             if (user == null)
@@ -28,9 +36,13 @@ namespace FertilityClinic.BLL.Services.Implementations
             if (user.PartnerId<= 0)
                 throw new ArgumentException("User does not have a partner assigned");
 
-            var partner = await _unitOfWork.Partners.GetByIdAsync(user.PartnerId);
-            if (partner == null)
-                throw new ArgumentException("Partner not found");
+
+            if (!user.PartnerId.HasValue || user.PartnerId <= 0)
+                throw new ArgumentException("User does not have a partner assigned");
+            var partner = await _unitOfWork.Partners.GetByIdAsync(user.PartnerId.Value);
+            
+            //if (partner == null)
+            //    throw new ArgumentException("Partner not found");
 
             var doctor = await _unitOfWork.Doctors.GetDoctorByIdAsync(doctorId); // Fix: use doctorId instead of userId
             if (doctor == null)
@@ -73,7 +85,7 @@ namespace FertilityClinic.BLL.Services.Implementations
             var newAppointment = new Appointment
             {
                 UserId = userId,
-                PartnerId = user.PartnerId,  
+                PartnerId = user.PartnerId.Value,  
                 DoctorId = doctorId,
                 TreatmentMethodId = treatmentMethodID,
                 AppointmentDate = appointmentDate,

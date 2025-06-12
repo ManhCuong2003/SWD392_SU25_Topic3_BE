@@ -10,14 +10,14 @@ namespace FertilityClinic.DAL.Models
     {
         public int PartnerId { get; set; }
         public int UserId { get; set; }
-        public string FullName { get; set; }
-        public string Email { get; set; }
-        public string Phone { get; set; }
-        public string NationalId { get; set; }
-        public string Gender { get; set; }
-        public string HealthInsuranceId { get; set; }
+        public string? FullName { get; set; }
+        public string? Email { get; set; }
+        public string? Phone { get; set; }
+        public string? NationalId { get; set; }
+        public string? Gender { get; set; }
+        public string? HealthInsuranceId { get; set; }
         public DateOnly? HealthInsuranceExpirationDate { get; set; }
         public DateOnly? DateOfBirth { get; set; }
-        public virtual User User { get; set; }
+        public virtual User? User { get; set; }
     }
 }
