@@ -15,6 +15,7 @@ namespace FertilityClinic.DTO.Responses
         public bool IsActive { get; set; } = true;
         public string TechnicalRequirements { get; set; }
         public int? AverageDuration { get; set; } // in days
+        public float? Price { get; set; } // Price in VND
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
         
     }

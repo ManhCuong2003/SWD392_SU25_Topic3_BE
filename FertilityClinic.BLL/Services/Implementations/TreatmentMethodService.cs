@@ -28,6 +28,7 @@ namespace FertilityClinic.BLL.Services.Implementations
                 IsActive = true,
                 TechnicalRequirements = request.TechnicalRequirements,
                 AverageDuration = 0,
+                Price = request.Price,
                 CreatedAt = DateTime.UtcNow
             };
             await _unitOfWork.TreatmentMethods.AddAsync(treatmentMethod);
@@ -39,7 +40,7 @@ namespace FertilityClinic.BLL.Services.Implementations
                 MethodCode = treatmentMethod.MethodCode,
                 Description = treatmentMethod.Description,
                 IsActive = treatmentMethod.IsActive ?? false, // hoặc true nếu phù hợp
-
+                Price = treatmentMethod.Price,
                 TechnicalRequirements = treatmentMethod.TechnicalRequirements,
                 AverageDuration = treatmentMethod.AverageDuration
             };
@@ -73,6 +74,7 @@ namespace FertilityClinic.BLL.Services.Implementations
                     Description = tm.Description,
                     IsActive = tm.IsActive ?? false,
                     TechnicalRequirements = tm.TechnicalRequirements,
+                    Price = tm.Price,
                     AverageDuration = tm.AverageDuration
                 }).ToList();
             }
@@ -93,7 +95,7 @@ namespace FertilityClinic.BLL.Services.Implementations
                 MethodCode = treatmentMethod.MethodCode,
                 Description = treatmentMethod.Description,
                 IsActive = treatmentMethod.IsActive ?? false, // hoặc true nếu phù hợp
-
+                Price = treatmentMethod.Price,
                 TechnicalRequirements = treatmentMethod.TechnicalRequirements,
                 AverageDuration = treatmentMethod.AverageDuration
             };
@@ -122,7 +124,10 @@ namespace FertilityClinic.BLL.Services.Implementations
             
             if(request.AverageDuration.HasValue)
                 treatmentMethod.AverageDuration = request.AverageDuration.Value;
-            
+
+            if(request.Price.HasValue)
+                treatmentMethod.Price = request.Price.Value;
+
             _unitOfWork.TreatmentMethods.Update(treatmentMethod);
             await _unitOfWork.SaveAsync();
             var updatedTreatmentMethod = await _unitOfWork.TreatmentMethods.GetByIdAsync(id);
@@ -133,7 +138,7 @@ namespace FertilityClinic.BLL.Services.Implementations
                 MethodCode = treatmentMethod.MethodCode,
                 Description = treatmentMethod.Description,
                 IsActive = treatmentMethod.IsActive ?? false, // hoặc true nếu phù hợp
-
+                Price = treatmentMethod.Price,
                 TechnicalRequirements = treatmentMethod.TechnicalRequirements,
                 AverageDuration = treatmentMethod.AverageDuration
             };

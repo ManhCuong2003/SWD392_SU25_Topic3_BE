@@ -30,8 +30,8 @@ namespace FertilityClinic.DAL.Models
     public int? AverageDuration { get; set; } // in days
     
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
-        private float? Price { get; set; } // Price in VND
+    public float? Price { get; set; } // Price in VND
 
-        public ICollection<TreatmentProcess>? TreatmentProcesses { get; set; }
-}
+    public ICollection<TreatmentProcess>? TreatmentProcesses { get; set; }
+    }
 }
