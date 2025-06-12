@@ -20,8 +20,6 @@ namespace FertilityClinic.DTO.Responses
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
         // Thêm property để hiển thị
-        public string DateOfBirthDisplay => DateOfBirth.HasValue
-            ? DateOfBirth.Value.ToString("dd/MM/yyyy")
-            : "Chưa cập nhật";
+        
     }
 }

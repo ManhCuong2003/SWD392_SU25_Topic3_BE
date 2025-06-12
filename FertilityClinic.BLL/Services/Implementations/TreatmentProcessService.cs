@@ -19,14 +19,24 @@ namespace FertilityClinic.BLL.Services.Implementations
         {
             _unitOfWork = unitOfWork;
         }
-        public async Task<TreatmentProcessResponse> CreateTreatmentProcessAsync(TreatmentProcessRequest request, int userId, int treatmentMethodId)
+        public async Task<TreatmentProcessResponse> CreateTreatmentProcessAsync(TreatmentProcessRequest request, int userId, int treatmentMethodId, int doctorId)
         {
-            var user = _unitOfWork.Users.GetByIdAsync(userId);
-            var treatmentMethod = _unitOfWork.TreatmentMethods.GetByIdAsync(treatmentMethodId);
+            //1. Validate input parameters
+
+            // Trong CreateTreatmentProcessAsync
+            var appointments = await _unitOfWork.Appointments.GetAllAppointmentsAsync();
+            var hasAppointments = appointments.Any(a => a.DoctorId == doctorId);
+            if (hasAppointments)
+            {
+                throw new Exception($"Bác sĩ có ID {doctorId} đã có lịch hẹn, không thể tạo quy trình điều trị.");
+            }
+            var user = await _unitOfWork.Users.GetByIdAsync(userId);
+            var treatmentMethod = await _unitOfWork.TreatmentMethods.GetByIdAsync(treatmentMethodId);
             var treatmentProcess = new TreatmentProcess
             {
                 UserId = userId,
                 TreatmentMethodId = treatmentMethodId,
+                DoctorId = doctorId,
                 ProcessName = request.ProcessName ?? "Chưa cập nhập",
                 Notes = request.Notes ?? "Chưa cập nhập",
                 CreatedAt = DateTime.UtcNow
@@ -37,9 +47,10 @@ namespace FertilityClinic.BLL.Services.Implementations
             {
                 TreatmentProcessId = treatmentProcess.TreatmentProcessId,
                 UserId = userId,
-                UserName = user.Result.FullName,
+                DoctorId = doctorId,
+                UserName = user.FullName,
                 TreatmentMethodId = treatmentMethodId,
-                TreatmentMethodName = treatmentMethod.Result.MethodName,
+                TreatmentMethodName = treatmentMethod.MethodName,
                 ProcessName = request.ProcessName,
                 Notes = request.Notes,
                 CreatedAt = treatmentProcess.CreatedAt
@@ -69,6 +80,7 @@ namespace FertilityClinic.BLL.Services.Implementations
             {
                 TreatmentMethodId = tp.TreatmentMethodId,
                 UserId = tp.UserId,
+                DoctorId = tp.DoctorId,
                 UserName = tp.User?.FullName,
                 TreatmentMethodName = tp.TreatmentMethod?.MethodName,
                 TreatmentProcessId = tp.TreatmentProcessId,
@@ -87,6 +99,7 @@ namespace FertilityClinic.BLL.Services.Implementations
             {
                 TreatmentMethodId = treatmentProcess.TreatmentMethodId,
                 UserId = treatmentProcess.UserId,
+                DoctorId = treatmentProcess.DoctorId,
                 UserName = treatmentProcess.User?.FullName ?? "Unknown",
                 TreatmentMethodName = treatmentProcess.TreatmentMethod?.MethodName ?? "Unknown",
                 TreatmentProcessId = treatmentProcess.TreatmentProcessId,
@@ -115,6 +128,7 @@ namespace FertilityClinic.BLL.Services.Implementations
             {
                 TreatmentProcessId = treatmentProcess.TreatmentProcessId,
                 UserId = treatmentProcess.UserId,
+                DoctorId = treatmentProcess.DoctorId,
                 UserName = updated.User?.FullName ?? "Unknown",
                 TreatmentMethodName = updated.TreatmentMethod?.MethodName ?? "Unknown",
                 TreatmentMethodId = treatmentProcess.TreatmentMethodId,

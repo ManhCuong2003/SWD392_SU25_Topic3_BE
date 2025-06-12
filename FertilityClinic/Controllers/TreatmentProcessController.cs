@@ -18,13 +18,13 @@ namespace FertilityClinic.Controllers
         }
         [Authorize(Roles = "Admin")]
         [HttpPost("api/TreatmentProcesses/Create")]
-        public async Task<IActionResult> CreateTreatmentProcess([FromBody] TreatmentProcessRequest request, int userId, int treatmentMethodId)
+        public async Task<IActionResult> CreateTreatmentProcess([FromBody] TreatmentProcessRequest request, int userId, int treatmentMethodId, int doctorId)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
             try
             {
-                var process = await _treatmentProcessService.CreateTreatmentProcessAsync(request, userId, treatmentMethodId);
+                var process = await _treatmentProcessService.CreateTreatmentProcessAsync(request, userId, treatmentMethodId, doctorId);
                 return Ok(process);
             }
             catch (Exception ex)

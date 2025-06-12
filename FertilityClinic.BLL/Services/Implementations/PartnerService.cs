@@ -41,13 +41,13 @@ namespace FertilityClinic.BLL.Services.Implementations
             var partner = new Partner
             {
                 UserId = userId,
-                FullName = "Chưa cập nhập",
-                Email = "Chưa cập nhật",
-                Phone = "Chưa cập nhật",
+                FullName = request.FullName,
+                Email = user.Email,
+                Phone = request.Phone,
                 DateOfBirth = request.DateOfBirth ?? null,
-                Gender = "Chưa cập nhập",
-                NationalId = "Chưa cập nhập",
-                HealthInsuranceId = "Chưa cập nhập",
+                Gender = request.Gender,
+                NationalId = request.NationalId,
+                HealthInsuranceId = request.HealthInsuranceId,
 
 
             };

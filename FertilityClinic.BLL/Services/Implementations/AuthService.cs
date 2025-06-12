@@ -63,9 +63,9 @@ namespace FertilityClinic.BLL.Services.Implementations
             var responseOjb = new LoginResponse
             {
                 Token = jwt,
-                Role = user.Role ?? "User",
-                FullName = user.FullName,
-                ExpiresIn = _jwtSettings.ExpiryMinutes * 60
+                //Role = user.Role ?? "User",
+                //FullName = user.FullName,
+                //ExpiresIn = _jwtSettings.ExpiryMinutes * 60
             };
 
             return (responseOjb);
@@ -93,18 +93,19 @@ namespace FertilityClinic.BLL.Services.Implementations
 
             var newUser = new User
             {
+                
                 FullName = dto.FullName,
                 Email = normalizedEmail,
                 Password = BCrypt.Net.BCrypt.HashPassword(dto.Password),
-                Phone = "Chưa cập nhật",        
-                Gender = "Chưa cập nhật", 
-                DateOfBirth = null,
-                HealthInsuranceId = "Chưa cập nhật",
-                Address = "Chưa cập nhật",      
+                Phone = null,      
+                Gender = null, 
+                DateOfBirth = DateOnly.FromDateTime(DateTime.Now),
+                HealthInsuranceId = null,
+                Address = null,      
                 CreatedAt = DateTime.UtcNow,
                 Role = "User",
-                NationalId = "Chưa cập nhật",     // Thêm giá trị mặc định cho NationalId
-                PartnerId = 0
+                NationalId = null,     
+                PartnerId = null // Mặc định là null nếu không có thông tin partner
 
             };
 
@@ -115,7 +116,7 @@ namespace FertilityClinic.BLL.Services.Implementations
             // Trả về thông tin người dùng mới
             return new RegisterResponse
             {
-                
+                UserId = newUser.UserId,
                 FullName = newUser.FullName,
                 DateOfBirth = newUser.DateOfBirth,
                 Gender = newUser.Gender,
@@ -139,16 +140,16 @@ namespace FertilityClinic.BLL.Services.Implementations
                 {
                     Email = email,
                     FullName = fullName ?? "Google User",
-                    Phone = "Chưa cập nhập", // Giá trị mặc định nếu NOT NULL
+                    Phone = null, // Giá trị mặc định nếu NOT NULL
                     DateOfBirth = DateOnly.MinValue, // Hoặc một ngày mặc định nếu NOT NULL
-                    Address = "Chưa cập nhập",
-                    Gender = "Chưa cập nhập",
-                    Password = "Chưa cập nhập",
+                    Address = null,
+                    Gender = null,
+                    Password = null,
                     CreatedAt = DateTime.UtcNow,
                     UpdatedAt = DateTime.UtcNow,
                     Role = "User",
-                    NationalId = "Chưa cập nhật",     // Thêm giá trị mặc định cho NationalId
-                    HealthInsuranceId = "Chưa cập nhật",
+                    NationalId = null,     // Thêm giá trị mặc định cho NationalId
+                    HealthInsuranceId = null,
                     PartnerId = 0
                 };
                 await _unitOfWork.Users.CreateAsync(user);
@@ -173,7 +174,7 @@ namespace FertilityClinic.BLL.Services.Implementations
                 Subject = new ClaimsIdentity(claims),
                 NotBefore = now,
                 IssuedAt = now,
-                Expires = now.AddMinutes(_jwtSettings.ExpiryMinutes),
+                //Expires = now.AddMinutes(_jwtSettings.ExpiryMinutes),
                 Issuer = _jwtSettings.Issuer,
                 Audience = _jwtSettings.Audience,
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
@@ -186,9 +187,9 @@ namespace FertilityClinic.BLL.Services.Implementations
             return new LoginResponse
             {
                 Token = jwt,
-                Role = user.Role ?? "User",
-                FullName = user.FullName,
-                ExpiresIn = _jwtSettings.ExpiryMinutes * 60
+                //Role = user.Role ?? "User",
+                //FullName = user.FullName,
+                //ExpiresIn = _jwtSettings.ExpiryMinutes * 60
             };
         }
     }
