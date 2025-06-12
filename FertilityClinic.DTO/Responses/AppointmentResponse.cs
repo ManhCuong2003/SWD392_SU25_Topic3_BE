@@ -10,6 +10,7 @@ namespace FertilityClinic.DTO.Responses
 {
     public class AppointmentResponse
     {
+        public int AppointmentId { get; set; }
         public string PatientName { get; set; }
         public DateOnly? PatientDOB { get; set; }
         public string PhoneNumber { get; set; }

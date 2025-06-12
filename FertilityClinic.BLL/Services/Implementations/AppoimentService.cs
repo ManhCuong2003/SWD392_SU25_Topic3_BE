@@ -122,6 +122,7 @@ namespace FertilityClinic.BLL.Services.Implementations
             }
             return appointments.Select(a => new AppointmentResponse
             {
+                AppointmentId = a.AppointmentId,
                 PatientName = a.User.FullName,
                 PatientDOB = a.User.DateOfBirth,
                 PhoneNumber = a.User.Phone,

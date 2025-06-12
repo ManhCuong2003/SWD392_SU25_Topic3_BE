@@ -108,6 +108,10 @@ builder.Services.AddScoped<IAppoimentHistoryService, AppoimentHistoryService>();
 builder.Services.AddScoped<IPartnerService, PartnerService>();
 builder.Services.AddScoped<ITreatmentMethodService, TreatmentMethodServicecs>();
 builder.Services.AddScoped<ITreatmentProcessService, TreatmentProcessService>();
+// Add these lines in your Program.cs service configuration
+builder.Services.Configure<PayOSSettings>(builder.Configuration.GetSection("PayOS"));
+builder.Services.AddScoped<IPayOSService, PayOSService>();
+
 #endregion
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -126,7 +130,6 @@ builder.WebHost.ConfigureKestrel(options =>
 
 // Add PayOS service
 builder.Services.AddHttpClient();
-builder.Services.AddScoped<PayOSService>();
 
 var app = builder.Build();
 

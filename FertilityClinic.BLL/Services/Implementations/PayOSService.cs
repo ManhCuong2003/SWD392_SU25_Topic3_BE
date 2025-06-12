@@ -1,118 +1,65 @@
-﻿using Net.payOS;
-using Net.payOS.Types;
-using FertilityClinic.DAL.UnitOfWork;
-using Microsoft.Extensions.Configuration;
-using FertilityClinic.DAL.Models;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net.Http.Json;
+using System.Security.Cryptography;
+using System.Text;
+using System.Threading.Tasks;
+using FertilityClinic.BLL.Services.Interfaces;
+using FertilityClinic.DTO.Config;
+using FertilityClinic.DTO.Requests;
+using FertilityClinic.DTO.Responses;
+using Microsoft.Extensions.Options;
 
 namespace FertilityClinic.BLL.Services.Implementations
 {
-    public class PayOSService
+    public class PayOSService : IPayOSService
     {
-        private readonly PayOS _payOS;
-        private readonly IUnitOfWork _unitOfWork;
+        private readonly HttpClient _httpClient;
+        private readonly PayOSSettings _settings;
 
-        public PayOSService(IConfiguration configuration, IUnitOfWork unitOfWork)
+        public PayOSService(HttpClient httpClient, IOptions<PayOSSettings> settings)
         {
-            _payOS = new PayOS(
-                configuration["PayOS:ClientId"],
-                configuration["PayOS:ApiKey"],
-                configuration["PayOS:ChecksumKey"]
-            );
-            _unitOfWork = unitOfWork;
+            _httpClient = httpClient;
+            _settings = settings.Value;
+            _httpClient.BaseAddress = new Uri(_settings.BaseUrl);
+            _httpClient.DefaultRequestHeaders.Add("x-client-id", _settings.ClientId);
+            _httpClient.DefaultRequestHeaders.Add("x-api-key", _settings.ApiKey);
         }
 
-        //public async Task<CreatePaymentResult> CreateAppointmentPayment(int appointmentId, string returnUrl, string cancelUrl)
-        //{
-        //    // Lấy thông tin appointment
-        //    var appointment = await _unitOfWork.Appointments.GetAppointmentByIdAsync(appointmentId);
-        //    if (appointment == null)
-        //        throw new ArgumentException("Appointment not found");
-
-        //    // Lấy thông tin treatment method để biết giá
-        //    var treatmentMethod = await _unitOfWork.TreatmentMethods.GetByIdAsync(appointment.TreatmentMethodId);
-        //    if (treatmentMethod == null)
-        //        throw new ArgumentException("Treatment method not found");
-
-        //    // Tạo orderCode unique (có thể dùng appointmentId + timestamp)
-        //    long orderCode = long.Parse($"{appointmentId}{DateTimeOffset.Now.ToUnixTimeSeconds()}");
-
-        //    //var paymentData = new PaymentData(
-        //    //    orderCode: orderCode,
-        //    //    amount: (int)treatmentMethod.Price, // Giả sử TreatmentMethod có Price
-        //    //    description: $"Thanh toán lịch hẹn - {treatmentMethod.MethodName}",
-        //    //    items: new List<ItemData>
-        //    //    {
-        //    //        new ItemData(
-        //    //            name: treatmentMethod.MethodName,
-        //    //            quantity: 1,
-        //    //            price: (int)treatmentMethod.Price
-        //    //        )
-        //    //    },
-        //    //    cancelUrl: cancelUrl,
-        //    //    returnUrl: returnUrl
-        //    //);
-
-        //    var result = await _payOS.createPaymentLink(paymentData);
-
-        //    // Lưu thông tin payment vào database
-        //    await SavePaymentInfo(appointmentId, orderCode, (int)treatmentMethod.Price);
-
-        //    return result;
-        //}
-
-        public async Task<PaymentLinkInformation> GetPaymentInfo(long orderCode)
+        public async Task<PaymentResponse> CreatePaymentLinkAsync(PaymentRequest request)
         {
-            return await _payOS.getPaymentLinkInformation(orderCode);
-        }
-
-        public async Task<PaymentLinkInformation> CancelPayment(long orderCode, string reason = null)
-        {
-            return await _payOS.cancelPaymentLink(orderCode, reason);
-        }
-
-        public WebhookData VerifyPaymentWebhookData(WebhookType webhookBody)
-        {
-            return _payOS.verifyPaymentWebhookData(webhookBody);
-        }
-
-        private async Task SavePaymentInfo(int appointmentId, long orderCode, int amount)
-        {
-            // Tạo bảng Payment nếu chưa có
-            var payment = new Payment
+            var payload = new
             {
-                AppointmentId = appointmentId,
-                OrderCode = orderCode,
-                Amount = amount,
-                Status = "Pending",
-                CreatedAt = DateTime.Now
+                orderCode = request.OrderId,
+                amount = request.Amount,
+                description = request.Description,
+                cancelUrl = request.CancelUrl,
+                returnUrl = request.ReturnUrl,
+                signature = GenerateSignature(request)
             };
 
-            //await _unitOfWork.Payments.AddAsync(payment);
-            await _unitOfWork.SaveAsync();
+            var response = await _httpClient.PostAsJsonAsync("/v1/payment-requests", payload);
+            response.EnsureSuccessStatusCode();
+
+            return await response.Content.ReadFromJsonAsync<PaymentResponse>();
         }
 
-        //public async Task UpdatePaymentStatus(long orderCode, string status, string transactionId = null)
-        //{
-        //    var payment = await _unitOfWork.Payments.GetByOrderCodeAsync(orderCode);
-        //    if (payment != null)
-        //    {
-        //        payment.Status = status;
-        //        payment.TransactionId = transactionId;
-        //        payment.UpdatedAt = DateTime.Now;
+        public async Task<PaymentStatus> CheckPaymentStatusAsync(string orderId)
+        {
+            var response = await _httpClient.GetAsync($"/v1/payment-requests/{orderId}");
+            response.EnsureSuccessStatusCode();
 
-        //        // Nếu thanh toán thành công, cập nhật trạng thái appointment
-        //        if (status == "PAID")
-        //        {
-        //            var appointment = await _unitOfWork.Appointments.GetByIdAsync(payment.AppointmentId);
-        //            if (appointment != null)
-        //            {
-        //                appointment.Status = "Confirmed"; // Xác nhận lịch hẹn khi thanh toán thành công
-        //                await _unitOfWork.Appointments.UpdateAppointmentAsync(appointment);
-        //            }
-        //        }
+            return await response.Content.ReadFromJsonAsync<PaymentStatus>();
+        }
 
-        //        await _unitOfWork.SaveAsync();
-        //    }
-        //}
+        private string GenerateSignature(PaymentRequest request)
+        {
+            var dataStr = $"{request.OrderId}{request.Amount}{_settings.ChecksumKey}";
+            using var sha256 = SHA256.Create();
+            var hash = sha256.ComputeHash(Encoding.UTF8.GetBytes(dataStr));
+            return BitConverter.ToString(hash).Replace("-", "").ToLower();
+        }
     }
+
 }
