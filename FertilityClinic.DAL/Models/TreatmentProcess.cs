@@ -18,16 +18,20 @@ namespace FertilityClinic.DAL.Models
             [Required]
             public int TreatmentMethodId { get; set; }
             public TreatmentMethod TreatmentMethod { get; set; }
-    
+
+            [Required]
+            public int DoctorId { get; set; }
+            public Doctor Doctor { get; set; }
+
             [Required]
             [MaxLength(50)]
-            public string ProcessName { get; set; }
+            public string? ProcessName { get; set; }
     
-            public string Notes { get; set; }
+            public string? Notes { get; set; }
             public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
     
-            public ICollection<InjectionSchedule> InjectionSchedules { get; set; }
-            public ICollection<InseminationSchedule> InseminationSchedules { get; set; }
-            public ICollection<LabTestSchedule> LabTestSchedules { get; set; }
+            public ICollection<InjectionSchedule>? InjectionSchedules { get; set; }
+            public ICollection<InseminationSchedule>? InseminationSchedules { get; set; }
+            public ICollection<LabTestSchedule>? LabTestSchedules { get; set; }
         }
 }

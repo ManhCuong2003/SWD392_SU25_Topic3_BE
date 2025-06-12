@@ -11,14 +11,14 @@ namespace FertilityClinic.DAL.Models
         public int InseminationResultId { get; set; }
         public int InseminationScheduleId { get; set; }
         public int DoctorId { get; set; }
-        public string ResultDetails { get; set; }
-        public string Notes { get; set; }
+        public string? ResultDetails { get; set; }
+        public string? Notes { get; set; }
         public DateTime ResultDate { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
 
 
-        public virtual InseminationSchedule InseminationSchedule { get; set; }
-        public virtual Doctor Doctor { get; set; }
+        public virtual InseminationSchedule? InseminationSchedule { get; set; }
+        public virtual Doctor? Doctor { get; set; }
     }
 }

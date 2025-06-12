@@ -49,6 +49,20 @@ namespace FertilityClinic.BLL.Services.Implementations
                 user.Password = BCrypt.Net.BCrypt.HashPassword(dto.Password);
             }
 
+            if (!string.IsNullOrEmpty(dto.PhoneNumber))
+                user.Phone = dto.PhoneNumber;
+
+            if (!string.IsNullOrEmpty(dto.Gender))
+                user.Gender = dto.Gender;
+
+            if (!string.IsNullOrEmpty(dto.Address))
+                user.Address = dto.Address;
+
+            if (!string.IsNullOrEmpty(dto.Role))
+                user.Role = dto.Role;
+
+            if (dto.DateOfBirth != null)
+                user.DateOfBirth = dto.DateOfBirth.Value;
             return await _unitOfWork.Users.UpdateUserAsync(user);
         }
 

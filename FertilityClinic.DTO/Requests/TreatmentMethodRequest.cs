@@ -13,6 +13,7 @@ namespace FertilityClinic.DTO.Requests
         public string? Description { get; set; }
         public bool? IsActive { get; set; } = true;
         public string? TechnicalRequirements { get; set; }
+        public float? Price { get; set; } // Price in VND
         public int? AverageDuration { get; set; } // in days
     }
 }
