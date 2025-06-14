@@ -31,6 +31,8 @@ namespace FertilityClinic.DAL
         public DbSet<LabTestResult> LabTestResults { get; set; }
         public DbSet<Payment> Payments { get; set; }
         public DbSet<AppointmentHistory> AppointmentHistories { get; set; }
+        public DbSet<Pills> Pills { get; set; }
+        public DbSet<Prescription> Prescriptions { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -44,6 +46,30 @@ namespace FertilityClinic.DAL
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<Prescription>()
+            .HasOne(p => p.Pill)
+            .WithMany(p => p.Prescriptions)
+            .HasForeignKey(p => p.PillId)
+            .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Prescription>()
+                .HasOne(p => p.Doctor)
+                .WithMany(d => d.Prescriptions)
+                .HasForeignKey(p => p.DoctorId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Prescription>()
+                .HasOne(p => p.Appointment)
+                .WithMany(a => a.Prescriptions)
+                .HasForeignKey(p => p.AppointmentId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Prescription>()
+                .HasOne(p => p.User)
+                .WithMany()
+                .HasForeignKey(p => p.UserId)
+                .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<Partner>(entity =>
             {

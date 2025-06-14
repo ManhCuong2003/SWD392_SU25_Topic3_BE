@@ -19,6 +19,7 @@ namespace FertilityClinic.DAL.Models
         public string Bio { get; set; }
         public List<string> Education { get; set; } = new List<string>();
         public virtual User User { get; set; }
+        public virtual ICollection<Prescription> Prescriptions { get; set; }
         public ICollection<TreatmentProcess> TreatmentProcesses { get; set; }
         public ICollection<InjectionSchedule> InjectionSchedules { get; set; }
         public ICollection<LabTestSchedule> LabTestSchedules { get; set; }

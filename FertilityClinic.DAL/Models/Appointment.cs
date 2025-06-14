@@ -23,6 +23,7 @@ namespace FertilityClinic.DAL.Models
         public TimeOnly AppointmentTime { get; set; }
         public string Status { get; set; }
         public DateTime CreatedAt { get; set; }
+        public virtual ICollection<Prescription> Prescriptions { get; set; }
         public virtual Partner Partner { get; set; }
         public virtual User User { get; set; }
         public virtual Doctor Doctor { get; set; }
