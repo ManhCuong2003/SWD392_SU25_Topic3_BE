@@ -126,10 +126,10 @@ namespace FertilityClinic.DAL
                     .HasForeignKey(i => i.DoctorId)
                     .OnDelete(DeleteBehavior.NoAction);
 
-                entity.HasOne(i => i.TreatmentProcess)
+               /* entity.HasOne(i => i.TreatmentProcess)
                     .WithMany()
                     .HasForeignKey(i => i.TreatmentProcessId)
-                    .OnDelete(DeleteBehavior.NoAction);
+                    .OnDelete(DeleteBehavior.NoAction);*/
             });
             
             // LabTestSchedule configurations
@@ -140,10 +140,10 @@ namespace FertilityClinic.DAL
                     .HasForeignKey(l => l.DoctorId)
                     .OnDelete(DeleteBehavior.NoAction);
 
-                entity.HasOne(l => l.TreatmentProcess)
+               /* entity.HasOne(l => l.TreatmentProcess)
                     .WithMany()
                     .HasForeignKey(l => l.TreatmentProcessId)
-                    .OnDelete(DeleteBehavior.NoAction);
+                    .OnDelete(DeleteBehavior.NoAction);*/
             });
 
             // InseminationSchedule configurations
@@ -154,10 +154,10 @@ namespace FertilityClinic.DAL
                     .HasForeignKey(i => i.DoctorId)
                     .OnDelete(DeleteBehavior.NoAction);
 
-                entity.HasOne(i => i.TreatmentProcess)
+               /* entity.HasOne(i => i.TreatmentProcess)
                     .WithMany()
                     .HasForeignKey(i => i.TreatmentProcessId)
-                    .OnDelete(DeleteBehavior.NoAction);
+                    .OnDelete(DeleteBehavior.NoAction);*/
             });
 
             // LabTestResult configurations

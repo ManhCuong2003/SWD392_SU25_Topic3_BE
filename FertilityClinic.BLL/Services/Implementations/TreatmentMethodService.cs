@@ -137,7 +137,7 @@ namespace FertilityClinic.BLL.Services.Implementations
                 MethodName = treatmentMethod.MethodName,
                 MethodCode = treatmentMethod.MethodCode,
                 Description = treatmentMethod.Description,
-                IsActive = treatmentMethod.IsActive ?? false, // hoặc true nếu phù hợp
+                IsActive = treatmentMethod.IsActive ?? false,
                 Price = treatmentMethod.Price,
                 TechnicalRequirements = treatmentMethod.TechnicalRequirements,
                 AverageDuration = treatmentMethod.AverageDuration
