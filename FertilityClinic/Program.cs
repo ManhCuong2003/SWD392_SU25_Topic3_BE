@@ -99,6 +99,9 @@ builder.Services.AddScoped<IAppoimentHistoryRepository, AppoimentHistoryReposito
 builder.Services.AddScoped<IPartnerRepository, PartnerRepository>();
 builder.Services.AddScoped<ITreatmentMethodRepository, TreatmentMethodRepository>();
 builder.Services.AddScoped<ITreatmentProcessRepository, TreatmentProcessRepository>();
+builder.Services.AddScoped<ILabTestScheduleRepository, LabTestScheduleRepository>();
+builder.Services.AddScoped<ILabTestResultRepository, LabTestResultRepository>();
+builder.Services.AddScoped<IInseminationScheduleRepository, InseminationScheduleRepository>();
 // Đăng ký các service
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IDoctorService, DoctorService>();
@@ -108,6 +111,9 @@ builder.Services.AddScoped<IAppoimentHistoryService, AppoimentHistoryService>();
 builder.Services.AddScoped<IPartnerService, PartnerService>();
 builder.Services.AddScoped<ITreatmentMethodService, TreatmentMethodServicecs>();
 builder.Services.AddScoped<ITreatmentProcessService, TreatmentProcessService>();
+builder.Services.AddScoped<ILabTestScheduleService, LabTestScheduleService>();
+//builder.Services.AddScoped<ILabTestResultService, LabTestResultService>();
+builder.Services.AddScoped<IInseminationScheduleService, InseminationScheduleService>();
 #endregion
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -127,7 +133,17 @@ builder.WebHost.ConfigureKestrel(options =>
 // Add PayOS service
 builder.Services.AddHttpClient();
 builder.Services.AddScoped<PayOSService>();
-
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowFrontend",
+        policy =>
+        {
+            policy.WithOrigins("http://localhost:3000") // Hoặc domain frontend thật
+                  .AllowAnyHeader()
+                  .AllowAnyMethod()
+                  .AllowCredentials();
+        });
+});
 var app = builder.Build();
 
 // Cấu hình middleware pipeline
@@ -143,6 +159,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.UseCors("AllowFrontend");
 
 app.UseMiddleware<GlobalExceptionMiddleware>();
 

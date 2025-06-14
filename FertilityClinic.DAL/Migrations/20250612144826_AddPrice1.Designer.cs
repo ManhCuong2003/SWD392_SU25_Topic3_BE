@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FertilityClinic.DAL.Migrations
 {
     [DbContext(typeof(FertilityClinicDbContext))]
-    [Migration("20250612065429_AddPriceFixed")]
-    partial class AddPriceFixed
+    [Migration("20250612144826_AddPrice1")]
+    partial class AddPrice1
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -416,9 +416,6 @@ namespace FertilityClinic.DAL.Migrations
                     b.Property<int>("TreatmentProcessId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("TreatmentProcessId1")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("datetime2");
 
@@ -427,8 +424,6 @@ namespace FertilityClinic.DAL.Migrations
                     b.HasIndex("DoctorId");
 
                     b.HasIndex("TreatmentProcessId");
-
-                    b.HasIndex("TreatmentProcessId1");
 
                     b.ToTable("LabTestSchedules");
                 });
@@ -881,14 +876,10 @@ namespace FertilityClinic.DAL.Migrations
                         .IsRequired();
 
                     b.HasOne("FertilityClinic.DAL.Models.TreatmentProcess", "TreatmentProcess")
-                        .WithMany()
-                        .HasForeignKey("TreatmentProcessId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
-                    b.HasOne("FertilityClinic.DAL.Models.TreatmentProcess", null)
                         .WithMany("LabTestSchedules")
-                        .HasForeignKey("TreatmentProcessId1");
+                        .HasForeignKey("TreatmentProcessId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Doctor");
 
