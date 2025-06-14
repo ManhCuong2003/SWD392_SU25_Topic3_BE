@@ -27,6 +27,11 @@ namespace FertilityClinic.DAL.UnitOfWork
 
         public ITreatmentProcessRepository TreatmentProcesses { get; }
 
+        public ILabTestScheduleRepository LabTestSchedules { get; }
+        public ILabTestResultRepository LabTestResults { get; }
+        public IInseminationScheduleRepository InseminationSchedules { get; }
+
+
         public IPaymentRepository Payments { get; }
 
         public UnitOfWork(FertilityClinicDbContext context, 
@@ -39,7 +44,11 @@ namespace FertilityClinic.DAL.UnitOfWork
             IPaymentRepository paymentRepository,
             ITreatmentProcessRepository paymentProcessRepository,
             ITreatmentProcessRepository treatmentProcesses
-            )
+,
+            ILabTestScheduleRepository labTestSchedules
+,
+            ILabTestResultRepository labTestResults,
+            IInseminationScheduleRepository inseminationSchedules)
         {
             _context = context;
             _repositories = new Hashtable();
@@ -50,6 +59,9 @@ namespace FertilityClinic.DAL.UnitOfWork
             Partners = partnerRepository;
             TreatmentMethods = treatMentMethods;
             TreatmentProcesses = treatmentProcesses;
+            LabTestSchedules = labTestSchedules;
+            LabTestResults = labTestResults;
+            InseminationSchedules = inseminationSchedules;
         }
         public IGenericRepository<TEntity> Repository<TEntity>() where TEntity : class
         {

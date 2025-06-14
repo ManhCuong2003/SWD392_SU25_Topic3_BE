@@ -97,6 +97,32 @@ namespace FertilityClinic.DTO.Constants
             public const string Update = $"{BaseTreatmentMethod}/update";
             public const string Delete = $"{BaseTreatmentMethod}/delete/{{id}}";
         }
-
+        public static class LabTestSchedule
+        {
+            public const string BaseLabTestSchedule = $"{Base}/lab-test-schedule";
+            public const string Create = $"{BaseLabTestSchedule}/create/{{doctorId}}";
+            public const string GetAll = $"{BaseLabTestSchedule}/all";
+            public const string GetById = $"{BaseLabTestSchedule}/{{labTestScheduleId}}";
+            public const string Update = $"{BaseLabTestSchedule}/update/{{id}}";
+            public const string Delete = $"{BaseLabTestSchedule}/delete/{{id}}";
+        }
+        public static class LabTestResult
+        {
+            public const string BaseLabTestResult = $"{Base}/lab-test-result";
+            public const string Create = $"{BaseLabTestResult}/create/{{labTestScheduleId}}";
+            public const string GetAll = $"{BaseLabTestResult}/all";
+            public const string GetById = $"{BaseLabTestResult}/{{labTestResultId}}";
+            public const string Update = $"{BaseLabTestResult}/update/{{id}}";
+            public const string Delete = $"{BaseLabTestResult}/delete/{{id}}";
+        }
+        public static class InseminationSchedule
+        {
+            public const string BaseInseminationSchedule = $"{Base}/insemination-schedule";
+            public const string Create = $"{BaseInseminationSchedule}/create/{{doctorId}}";
+            public const string GetAll = $"{BaseInseminationSchedule}/all";
+            public const string GetById = $"{BaseInseminationSchedule}/{{inseminationScheduleId}}";
+            public const string Update = $"{BaseInseminationSchedule}/update/{{id}}";
+            public const string Delete = $"{BaseInseminationSchedule}/delete/{{id}}";
+        }
     }
 }

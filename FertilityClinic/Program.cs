@@ -102,6 +102,9 @@ builder.Services.AddScoped<IAppoimentHistoryRepository, AppoimentHistoryReposito
 builder.Services.AddScoped<IPartnerRepository, PartnerRepository>();
 builder.Services.AddScoped<ITreatmentMethodRepository, TreatmentMethodRepository>();
 builder.Services.AddScoped<ITreatmentProcessRepository, TreatmentProcessRepository>();
+builder.Services.AddScoped<ILabTestScheduleRepository, LabTestScheduleRepository>();
+builder.Services.AddScoped<ILabTestResultRepository, LabTestResultRepository>();
+builder.Services.AddScoped<IInseminationScheduleRepository, InseminationScheduleRepository>();
 builder.Services.AddScoped<IPaymentRepository, PaymentRepository>();
 // Đăng ký các service
 builder.Services.AddScoped<IAuthService, AuthService>();
@@ -112,6 +115,9 @@ builder.Services.AddScoped<IAppoimentHistoryService, AppoimentHistoryService>();
 builder.Services.AddScoped<IPartnerService, PartnerService>();
 builder.Services.AddScoped<ITreatmentMethodService, TreatmentMethodServicecs>();
 builder.Services.AddScoped<ITreatmentProcessService, TreatmentProcessService>();
+builder.Services.AddScoped<ILabTestScheduleService, LabTestScheduleService>();
+//builder.Services.AddScoped<ILabTestResultService, LabTestResultService>();
+builder.Services.AddScoped<IInseminationScheduleService, InseminationScheduleService>();
 // Add these lines in your Program.cs service configuration
 builder.Services.Configure<PayOSSettings>(builder.Configuration.GetSection("PayOS"));
 builder.Services.AddScoped<IPaymentService, PaymentService>();
@@ -146,6 +152,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.UseCors("AllowFrontend");
 
 app.UseMiddleware<GlobalExceptionMiddleware>();
 
