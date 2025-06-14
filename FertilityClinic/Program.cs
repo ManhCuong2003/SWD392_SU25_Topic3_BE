@@ -1,6 +1,7 @@
 ﻿using FertilityClinic.BLL.Services.Implementations;
 using FertilityClinic.BLL.Services.Interfaces;
 using FertilityClinic.DAL;
+using FertilityClinic.DAL.Repositories;
 using FertilityClinic.DAL.Repositories.Implementations;
 using FertilityClinic.DAL.Repositories.Interfaces;
 using FertilityClinic.DAL.UnitOfWork;
@@ -84,6 +85,8 @@ builder.Services.AddAuthorization();
 
 #endregion
 
+builder.Services.AddHttpClient();
+
 #region CORS
 
 // Đăng ký UnitOfWork
@@ -99,6 +102,7 @@ builder.Services.AddScoped<IAppoimentHistoryRepository, AppoimentHistoryReposito
 builder.Services.AddScoped<IPartnerRepository, PartnerRepository>();
 builder.Services.AddScoped<ITreatmentMethodRepository, TreatmentMethodRepository>();
 builder.Services.AddScoped<ITreatmentProcessRepository, TreatmentProcessRepository>();
+builder.Services.AddScoped<IPaymentRepository, PaymentRepository>();
 // Đăng ký các service
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IDoctorService, DoctorService>();
@@ -110,8 +114,7 @@ builder.Services.AddScoped<ITreatmentMethodService, TreatmentMethodServicecs>();
 builder.Services.AddScoped<ITreatmentProcessService, TreatmentProcessService>();
 // Add these lines in your Program.cs service configuration
 builder.Services.Configure<PayOSSettings>(builder.Configuration.GetSection("PayOS"));
-builder.Services.AddScoped<IPayOSService, PayOSService>();
-
+builder.Services.AddScoped<IPaymentService, PaymentService>();
 #endregion
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -127,9 +130,6 @@ builder.WebHost.ConfigureKestrel(options =>
         listenOptions.UseHttps(); // HTTPS
     });
 });
-
-// Add PayOS service
-builder.Services.AddHttpClient();
 
 var app = builder.Build();
 

@@ -11,40 +11,10 @@ namespace FertilityClinic.Controllers
     public class AppointmentController : Controller
     {
         private readonly IAppoimentService _appointmentService;
-        private readonly IPayOSService _payOSService;
 
-        public AppointmentController(IAppoimentService appointmentService, IPayOSService payOSService)
+        public AppointmentController(IAppoimentService appointmentService)
         {
             _appointmentService = appointmentService;
-            _payOSService = payOSService;
-        }
-
-        [HttpPost("create-payment")]
-        public async Task<IActionResult> CreatePayment([FromBody] PaymentRequest request)
-        {
-            try
-            {
-                var paymentResponse = await _payOSService.CreatePaymentLinkAsync(request);
-                return Ok(paymentResponse);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(new { message = ex.Message });
-            }
-        }
-
-        [HttpGet("payment-status/{orderId}")]
-        public async Task<IActionResult> CheckPaymentStatus(string orderId)
-        {
-            try
-            {
-                var status = await _payOSService.CheckPaymentStatusAsync(orderId);
-                return Ok(status);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(new { message = ex.Message });
-            }
         }
 
         [HttpPost(APIEndPoints.Appointment.Create)]

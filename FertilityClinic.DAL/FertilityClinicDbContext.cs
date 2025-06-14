@@ -102,7 +102,7 @@ namespace FertilityClinic.DAL
             });
 
             modelBuilder.Entity<TreatmentProcess>(entity =>
-            {
+            {   
                 entity.HasOne(tp => tp.TreatmentMethod)
                       .WithMany(tm => tm.TreatmentProcesses) 
                       .HasForeignKey(tp => tp.TreatmentMethodId)
