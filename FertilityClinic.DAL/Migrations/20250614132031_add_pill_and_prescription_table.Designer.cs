@@ -4,6 +4,7 @@ using FertilityClinic.DAL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FertilityClinic.DAL.Migrations
 {
     [DbContext(typeof(FertilityClinicDbContext))]
-    partial class FertilityClinicDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250614132031_add_pill_and_prescription_table")]
+    partial class add_pill_and_prescription_table
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -245,6 +248,9 @@ namespace FertilityClinic.DAL.Migrations
                     b.Property<int>("TreatmentProcessId")
                         .HasColumnType("int");
 
+                    b.Property<int?>("TreatmentProcessId1")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("datetime2");
 
@@ -253,6 +259,8 @@ namespace FertilityClinic.DAL.Migrations
                     b.HasIndex("DoctorId");
 
                     b.HasIndex("TreatmentProcessId");
+
+                    b.HasIndex("TreatmentProcessId1");
 
                     b.ToTable("InjectionSchedules");
                 });
@@ -324,6 +332,9 @@ namespace FertilityClinic.DAL.Migrations
                     b.Property<int>("TreatmentProcessId")
                         .HasColumnType("int");
 
+                    b.Property<int?>("TreatmentProcessId1")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("datetime2");
 
@@ -332,6 +343,8 @@ namespace FertilityClinic.DAL.Migrations
                     b.HasIndex("DoctorId");
 
                     b.HasIndex("TreatmentProcessId");
+
+                    b.HasIndex("TreatmentProcessId1");
 
                     b.ToTable("InseminationSchedules");
                 });
@@ -403,6 +416,9 @@ namespace FertilityClinic.DAL.Migrations
                     b.Property<int>("TreatmentProcessId")
                         .HasColumnType("int");
 
+                    b.Property<int?>("TreatmentProcessId1")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("datetime2");
 
@@ -411,6 +427,8 @@ namespace FertilityClinic.DAL.Migrations
                     b.HasIndex("DoctorId");
 
                     b.HasIndex("TreatmentProcessId");
+
+                    b.HasIndex("TreatmentProcessId1");
 
                     b.ToTable("LabTestSchedules");
                 });
@@ -894,10 +912,14 @@ namespace FertilityClinic.DAL.Migrations
                         .IsRequired();
 
                     b.HasOne("FertilityClinic.DAL.Models.TreatmentProcess", "TreatmentProcess")
-                        .WithMany("InjectionSchedules")
+                        .WithMany()
                         .HasForeignKey("TreatmentProcessId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
+
+                    b.HasOne("FertilityClinic.DAL.Models.TreatmentProcess", null)
+                        .WithMany("InjectionSchedules")
+                        .HasForeignKey("TreatmentProcessId1");
 
                     b.Navigation("Doctor");
 
@@ -932,10 +954,14 @@ namespace FertilityClinic.DAL.Migrations
                         .IsRequired();
 
                     b.HasOne("FertilityClinic.DAL.Models.TreatmentProcess", "TreatmentProcess")
-                        .WithMany("InseminationSchedules")
+                        .WithMany()
                         .HasForeignKey("TreatmentProcessId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
+
+                    b.HasOne("FertilityClinic.DAL.Models.TreatmentProcess", null)
+                        .WithMany("InseminationSchedules")
+                        .HasForeignKey("TreatmentProcessId1");
 
                     b.Navigation("Doctor");
 
@@ -970,10 +996,14 @@ namespace FertilityClinic.DAL.Migrations
                         .IsRequired();
 
                     b.HasOne("FertilityClinic.DAL.Models.TreatmentProcess", "TreatmentProcess")
-                        .WithMany("LabTestSchedules")
+                        .WithMany()
                         .HasForeignKey("TreatmentProcessId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
+
+                    b.HasOne("FertilityClinic.DAL.Models.TreatmentProcess", null)
+                        .WithMany("LabTestSchedules")
+                        .HasForeignKey("TreatmentProcessId1");
 
                     b.Navigation("Doctor");
 

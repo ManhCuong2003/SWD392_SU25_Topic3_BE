@@ -8,6 +8,7 @@ namespace FertilityClinic.DTO.Requests
 {
     public class PaymentRequest
     {
+        public int OrderId { get; set; }
         public long OrderCode { get; set; }
         public int Amount { get; set; }
         public string Description { get; set; }

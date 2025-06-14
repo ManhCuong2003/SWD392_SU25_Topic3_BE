@@ -11,6 +11,7 @@ namespace FertilityClinic.Controllers
     public class AppointmentController : Controller
     {
         private readonly IAppoimentService _appointmentService;
+
         public AppointmentController(IAppoimentService appointmentService)
         {
             _appointmentService = appointmentService;

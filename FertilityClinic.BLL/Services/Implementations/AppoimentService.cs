@@ -14,10 +14,24 @@ namespace FertilityClinic.BLL.Services.Implementations
     public class AppoimentService : IAppoimentService
     {
         public readonly IUnitOfWork _unitOfWork;
-        public AppoimentService(IUnitOfWork unitOfWork)
+        private readonly IPaymentService _paymentService;
+
+        public AppoimentService(IUnitOfWork unitOfWork, IPaymentService paymentService)
         {
             _unitOfWork = unitOfWork;
+            _paymentService = paymentService;
         }
+
+        public async Task<string> CreatePaymentForAppointment(int appointmentId, int amount)
+        {
+            var payment = await _paymentService.CreatePaymentForAppointment(
+                appointmentId,
+                amount,
+                $"Payment for appointment #{appointmentId}");
+
+            return $"https://pay.payos.vn/web/{payment.OrderCode}";
+        }
+
         public async Task<AppointmentResponse> CreateAppointmentAsync(AppointmentRequest appointment, int userId, int doctorId/*, int partnerId*/, int treatmentMethodID)
         {
             // Check xem doctor đã có process chưa
@@ -134,6 +148,7 @@ namespace FertilityClinic.BLL.Services.Implementations
             }
             return appointments.Select(a => new AppointmentResponse
             {
+                AppointmentId = a.AppointmentId,
                 PatientName = a.User.FullName,
                 PatientDOB = a.User.DateOfBirth,
                 PhoneNumber = a.User.Phone,

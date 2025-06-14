@@ -1,6 +1,7 @@
 ﻿using FertilityClinic.BLL.Services.Implementations;
 using FertilityClinic.BLL.Services.Interfaces;
 using FertilityClinic.DAL;
+using FertilityClinic.DAL.Repositories;
 using FertilityClinic.DAL.Repositories.Implementations;
 using FertilityClinic.DAL.Repositories.Interfaces;
 using FertilityClinic.DAL.UnitOfWork;
@@ -84,6 +85,8 @@ builder.Services.AddAuthorization();
 
 #endregion
 
+builder.Services.AddHttpClient();
+
 #region CORS
 
 // Đăng ký UnitOfWork
@@ -102,6 +105,7 @@ builder.Services.AddScoped<ITreatmentProcessRepository, TreatmentProcessReposito
 builder.Services.AddScoped<ILabTestScheduleRepository, LabTestScheduleRepository>();
 builder.Services.AddScoped<ILabTestResultRepository, LabTestResultRepository>();
 builder.Services.AddScoped<IInseminationScheduleRepository, InseminationScheduleRepository>();
+builder.Services.AddScoped<IPaymentRepository, PaymentRepository>();
 // Đăng ký các service
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IDoctorService, DoctorService>();
@@ -114,6 +118,9 @@ builder.Services.AddScoped<ITreatmentProcessService, TreatmentProcessService>();
 builder.Services.AddScoped<ILabTestScheduleService, LabTestScheduleService>();
 //builder.Services.AddScoped<ILabTestResultService, LabTestResultService>();
 builder.Services.AddScoped<IInseminationScheduleService, InseminationScheduleService>();
+// Add these lines in your Program.cs service configuration
+builder.Services.Configure<PayOSSettings>(builder.Configuration.GetSection("PayOS"));
+builder.Services.AddScoped<IPaymentService, PaymentService>();
 #endregion
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -130,20 +137,6 @@ builder.WebHost.ConfigureKestrel(options =>
     });
 });
 
-// Add PayOS service
-builder.Services.AddHttpClient();
-builder.Services.AddScoped<PayOSService>();
-builder.Services.AddCors(options =>
-{
-    options.AddPolicy("AllowFrontend",
-        policy =>
-        {
-            policy.WithOrigins("http://localhost:3000") // Hoặc domain frontend thật
-                  .AllowAnyHeader()
-                  .AllowAnyMethod()
-                  .AllowCredentials();
-        });
-});
 var app = builder.Build();
 
 // Cấu hình middleware pipeline
