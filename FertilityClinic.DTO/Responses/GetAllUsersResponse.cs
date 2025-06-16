@@ -12,7 +12,12 @@ namespace FertilityClinic.DTO.Responses
 
         public string? FullName { get; set; }
 
-        public string? Email { get; set; }
+        public DateOnly? DateDateOfBirth { get; set; }
+        public string? Gender { get; set; }
+        //public string? DoctorName { get; set; }
+
+        //public DateOnly? AppointmentDate { get; set; }
+
 
     }
 }

@@ -1,6 +1,7 @@
 ﻿using FertilityClinic.DAL.Models;
 using FertilityClinic.DAL.Repositories.Interfaces;
 using FertilityClinic.DTO.Requests;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,14 +35,20 @@ namespace FertilityClinic.DAL.Repositories.Implementations
             return await _context.SaveChangesAsync() > 0;
         }
 
-        public Task<IEnumerable<LabTestResult>> GetAllLabTestResultsAsync()
+        public async Task<IEnumerable<LabTestResult>> GetAllLabTestResultsAsync()
         {
-            throw new NotImplementedException();
+            return await _context.LabTestResults
+                .Include(ltr => ltr.LabTestSchedule)
+                .Include(ltr => ltr.Doctor)
+                .ToListAsync();
         }
 
-        public Task<LabTestResult> GetLabTestResultByIdAsync(int labTestResultId)
+        public async Task<LabTestResult> GetLabTestResultByIdAsync(int labTestResultId)
         {
-            throw new NotImplementedException();
+            return await _context.LabTestResults
+                .Include(ltr => ltr.LabTestSchedule)
+                .Include(ltr => ltr.Doctor)
+                .FirstOrDefaultAsync(ltr => ltr.LabTestResultId == labTestResultId);
         }
     }
 }

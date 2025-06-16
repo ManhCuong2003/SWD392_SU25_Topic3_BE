@@ -17,5 +17,7 @@ namespace FertilityClinic.DAL.Repositories.Interfaces
         Task<bool> UpdateUserAsync(User dto);
         Task<List<User>> GetAllActiveUsersAsync();
         Task<bool> HardDeleteUserAsync(int id);
+       
+        
     }
 }

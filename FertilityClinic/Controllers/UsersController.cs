@@ -125,5 +125,7 @@ namespace FertilityClinic.Controllers
                 return BadRequest(new { message = ex.Message });
             }
         }
+
+        
     }
 }
