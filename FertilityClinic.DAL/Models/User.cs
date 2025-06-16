@@ -10,6 +10,7 @@ namespace FertilityClinic.DAL.Models
     {
         public int UserId { get; set; }
         public int? PartnerId { get; set; }
+        //public int? DoctorId { get; set; }
         public string? HealthInsuranceId { get; set; }
         public DateOnly? HealthInsuranceExpirationDate { get; set; }
         public bool? IsMarried { get; set; }

@@ -1,10 +1,12 @@
 ﻿using Azure.Core;
 using FertilityClinic.BLL.Services.Interfaces;
 using FertilityClinic.DAL.Models;
+using FertilityClinic.DAL.Repositories.Interfaces;
 using FertilityClinic.DAL.UnitOfWork;
 using FertilityClinic.DTO.Requests;
 using FertilityClinic.DTO.Responses;
 using Microsoft.AspNetCore.Identity.Data;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,10 +18,13 @@ namespace FertilityClinic.BLL.Services.Implementations
     public class UserService : IUserService
     {
         private readonly IUnitOfWork _unitOfWork;
+        private readonly IUserRepository _userRepository;
 
-        public UserService(IUnitOfWork unitOfWork)
+
+        public UserService(IUnitOfWork unitOfWork, IUserRepository userRepository)
         {
             _unitOfWork = unitOfWork;
+            _userRepository = userRepository;
         }
 
         public async Task<bool> UpdateUserAsync(UpdateUserRequest dto)
@@ -91,7 +96,10 @@ namespace FertilityClinic.BLL.Services.Implementations
             {
                 UserId = u.UserId,
                 FullName = u.FullName,
-                Email = u.Email,
+                DateDateOfBirth = u.DateOfBirth,
+                Gender = u.Gender,
+                
+               // DoctorName = 
 
             }).ToList();
         }
@@ -109,7 +117,7 @@ namespace FertilityClinic.BLL.Services.Implementations
                 Email = user.Email,
                 PhoneNumber = user.Phone,
                 Role = user.Role,
-                
+                Gender = user.Gender,
                 CreatedAt = user.CreatedAt,
                 UpdatedAt = user.UpdatedAt
             };
