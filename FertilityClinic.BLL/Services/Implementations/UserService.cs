@@ -151,6 +151,27 @@ namespace FertilityClinic.BLL.Services.Implementations
 
         }
 
+        public async Task<UserResponse> GetByEmailAsync(string email)
+        {
+            var user = await _unitOfWork.Users.GetByEmailAsync(email);
+
+            if (user == null)
+                throw new KeyNotFoundException($"User with email {email} not found");
+
+            return new UserResponse
+            {
+                UserId = user.UserId,
+                FullName = user.FullName,
+                Email = user.Email,
+                PhoneNumber = user.Phone,
+                Role = user.Role,
+                Gender = user.Gender,
+                CreatedAt = user.CreatedAt,
+                UpdatedAt = user.UpdatedAt
+                // Thêm các trường khác nếu cần
+            };
+        }
+
         /*public async Task<List<GetAllPatientsResponse>> GetAllPatientAsync()
         {
             var patients = await _userRepository.GetAllPatientsWithDetailsAsync();
