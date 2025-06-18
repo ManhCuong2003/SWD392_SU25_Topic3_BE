@@ -21,6 +21,7 @@ namespace FertilityClinic.BLL.Services.Implementations
         private readonly IUserRepository _userRepository;
 
 
+
         public UserService(IUnitOfWork unitOfWork, IUserRepository userRepository)
         {
             _unitOfWork = unitOfWork;
@@ -98,8 +99,8 @@ namespace FertilityClinic.BLL.Services.Implementations
                 FullName = u.FullName,
                 DateDateOfBirth = u.DateOfBirth,
                 Gender = u.Gender,
-                
-               // DoctorName = 
+
+                DoctorName = u.Doctor?.User?.FullName ?? "Chưa chỉ định",
 
             }).ToList();
         }
@@ -110,7 +111,7 @@ namespace FertilityClinic.BLL.Services.Implementations
             if (user == null)
                 throw new Exception("User not found");
 
-            return new UserResponse 
+            return new UserResponse
             {
                 UserId = user.UserId,
                 FullName = user.FullName,
@@ -122,7 +123,7 @@ namespace FertilityClinic.BLL.Services.Implementations
                 UpdatedAt = user.UpdatedAt
             };
         }
-        
+
         public async Task<bool> HardDeleteUserAsync(int id)
         {
             var user = await _unitOfWork.Users.GetByIdAsync(id);
@@ -150,6 +151,31 @@ namespace FertilityClinic.BLL.Services.Implementations
 
         }
 
-        
+        /*public async Task<List<GetAllPatientsResponse>> GetAllPatientAsync()
+        {
+            var patients = await _userRepository.GetAllPatientsWithDetailsAsync();
+            return await _context.Users
+                .Where(u => u.Role == "User")
+                .Select(u => new GetAllPatientsResponse
+                {
+                    PatientId = u.UserId,
+                    FullName = u.FullName,
+                    DateOfBirth = u.DateOfBirth,
+                    Gender = u.Gender,
+                    treatmentStatus = u.GetAppointmentHistories?
+                .OrderByDescending(h => h.UpdatedAt)
+                .FirstOrDefault()?.Status ?? "Theo dõi",
+
+                    Diagnose = u.Appointments?
+                .OrderByDescending(a => a.AppointmentDate)
+                .FirstOrDefault()?.Diagnosis ?? "Chưa có",
+
+                    lastVisit = u.Appointments?
+                .OrderByDescending(a => a.AppointmentDate)
+                .FirstOrDefault()?.AppointmentDate,
+
+                    doctorInCharge = u.Doctor?.User?.FullName ?? "Chưa chỉ định"
+                }).ToList();
+        }*/
     }
 }

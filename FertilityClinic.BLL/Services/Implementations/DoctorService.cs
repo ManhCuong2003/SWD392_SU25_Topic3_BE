@@ -44,15 +44,11 @@ namespace FertilityClinic.BLL.Services.Implementations
             await _unitOfWork.Doctors.AddAsync(doctor);
             await _unitOfWork.SaveAsync();
             return new DoctorResponse {
-                DoctorId = doctor.DoctorId,
+                
                 DoctorName = user.FullName,
-                Avatar = doctor.Avatar,
                 Specialization = doctor.Specialization,
                 Degree = doctor.Degree,
-                Certifications = doctor.Certifications,
-                ExperienceYear = doctor.ExperienceYears, // Note: property name difference
-                Bio = doctor.Bio,
-                Education = doctor.Education
+                
             };
         }        
 
@@ -77,15 +73,12 @@ namespace FertilityClinic.BLL.Services.Implementations
                 throw new Exception("No doctors found");
             return doctors.Select(d => new DoctorResponse
             {
-                DoctorId = d.DoctorId,
+                
                 DoctorName = d.User.FullName,
-                Avatar = d.Avatar,
+                Email = d.User.Email,
                 Specialization = d.Specialization,
                 Degree = d.Degree,
-                Certifications = d.Certifications,
-                ExperienceYear = d.ExperienceYears, // Note: property name difference
-                Bio = d.Bio,
-                Education = d.Education
+                
             }).ToList();
         }
 
@@ -96,15 +89,12 @@ namespace FertilityClinic.BLL.Services.Implementations
                 throw new Exception("Doctor not found");
             return new DoctorResponse
             {
-                DoctorId = doctor.DoctorId,
+               
                 DoctorName = doctor.User.FullName,
-                Avatar = doctor.Avatar,
+                Email = doctor.User.Email,
                 Specialization = doctor.Specialization,
                 Degree = doctor.Degree,
-                Certifications = doctor.Certifications,
-                ExperienceYear = doctor.ExperienceYears, // Note: property name difference
-                Bio = doctor.Bio,
-                Education = doctor.Education
+                
             };
             
         }
@@ -114,23 +104,23 @@ namespace FertilityClinic.BLL.Services.Implementations
             var doctor = await _unitOfWork.Doctors.GetByIdAsync(id);
             if (doctor == null)
                 throw new Exception("Doctor not found");
-            if (!string.IsNullOrEmpty(request.Avatar))
+            /*if (!string.IsNullOrEmpty(request.Avatar))
                 doctor.Avatar = request.Avatar;
 
             if (!string.IsNullOrEmpty(request.Specialization))
-                doctor.Specialization = request.Specialization;
+                doctor.Specialization = request.Specialization;*/
 
             if (!string.IsNullOrEmpty(request.Degree))
                 doctor.Degree = request.Degree;
 
-            if (!string.IsNullOrEmpty(request.Certifications))
+            /*if (!string.IsNullOrEmpty(request.Certifications))
                 doctor.Certifications = request.Certifications;
 
             if (request.ExperienceYear.HasValue)
                 doctor.ExperienceYears = request.ExperienceYear.Value;
 
             if (!string.IsNullOrEmpty(request.Bio))
-                doctor.Bio = request.Bio;
+                doctor.Bio = request.Bio;*/
 
             if (request.Education != null)
                 doctor.Education = request.Education;
@@ -143,15 +133,12 @@ namespace FertilityClinic.BLL.Services.Implementations
             var updatedDoctor = await _unitOfWork.Doctors.GetDoctorByIdAsync(id);
             return new DoctorResponse
             {
-                DoctorId = updatedDoctor.DoctorId,
+                
                 DoctorName = updatedDoctor.User.FullName,
-                Avatar = updatedDoctor.Avatar,
+                
                 Specialization = updatedDoctor.Specialization,
                 Degree = updatedDoctor.Degree,
-                Certifications = updatedDoctor.Certifications,
-                ExperienceYear = updatedDoctor.ExperienceYears, // Note: property name difference
-                Bio = updatedDoctor.Bio,
-                Education = updatedDoctor.Education
+                
             };
         }
     }
