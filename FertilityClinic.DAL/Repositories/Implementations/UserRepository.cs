@@ -62,7 +62,10 @@ namespace FertilityClinic.DAL.Repositories.Implementations
 
         public async Task<List<User>> GetAllActiveUsersAsync()
         {
-            return await _context.Users.ToListAsync();
+            return await _context.Users
+        .Where(u => u.Role == "User")
+        .Include(u => u.Doctor)
+        .ToListAsync();
         }
 
         public async Task<bool> HardDeleteUserAsync(int userId)
@@ -74,13 +77,21 @@ namespace FertilityClinic.DAL.Repositories.Implementations
             return true;
         }
 
-        
-
         public async Task<User?> GetByIdAsync(int Id)
-         {
-             return await _context.Users.FindAsync(Id);
-         }
-        
+        {
+            return await _context.Users.FindAsync(Id);
+        }
+
+        public async Task<List<User>> GetAllPatientsWithDetailsAsync()
+        {
+            return await _context.Users
+                .Where(u => u.Role == "User")
+                .Include(u => u.Appointments)
+                .Include(u => u.GetAppointmentHistories)
+                .Include(u => u.Doctor)
+                    .ThenInclude(d => d.User)
+                .ToListAsync();
+        }
     }
 }
 

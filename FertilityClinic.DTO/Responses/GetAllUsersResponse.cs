@@ -14,7 +14,7 @@ namespace FertilityClinic.DTO.Responses
 
         public DateOnly? DateDateOfBirth { get; set; }
         public string? Gender { get; set; }
-        //public string? DoctorName { get; set; }
+        public string? DoctorName { get; set; }
 
         //public DateOnly? AppointmentDate { get; set; }
 
