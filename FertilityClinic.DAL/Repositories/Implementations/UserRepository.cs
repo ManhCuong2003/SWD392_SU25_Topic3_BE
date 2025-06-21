@@ -1,11 +1,13 @@
 ﻿using FertilityClinic.DAL.Models;
 using FertilityClinic.DAL.Repositories.Interfaces;
+using FertilityClinic.DTO.Responses;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static FertilityClinic.DTO.Constants.APIEndPoints;
 
 namespace FertilityClinic.DAL.Repositories.Implementations
 {
@@ -23,10 +25,10 @@ namespace FertilityClinic.DAL.Repositories.Implementations
             return await _context.Users.FindAsync(Id);
         }
 
-        
+
         public async Task<User?> GetByEmailAsync(string email)
         {
-            
+
             return await _context.Users.FirstOrDefaultAsync(u => u.Email.ToLower() == email.ToLower());
         }
 
@@ -51,7 +53,7 @@ namespace FertilityClinic.DAL.Repositories.Implementations
             if (!string.IsNullOrWhiteSpace(dto.FullName)) user.FullName = dto.FullName;
             if (!string.IsNullOrWhiteSpace(dto.Email)) user.Email = dto.Email;
 
-            
+
 
             _context.Users.Update(user);
             await _context.SaveChangesAsync();
@@ -60,7 +62,10 @@ namespace FertilityClinic.DAL.Repositories.Implementations
 
         public async Task<List<User>> GetAllActiveUsersAsync()
         {
-            return await _context.Users.ToListAsync();
+            return await _context.Users
+        .Where(u => u.Role == "User")
+        .Include(u => u.Doctor)
+        .ToListAsync();
         }
 
         public async Task<bool> HardDeleteUserAsync(int userId)
@@ -75,6 +80,17 @@ namespace FertilityClinic.DAL.Repositories.Implementations
         public async Task<User?> GetByIdAsync(int Id)
         {
             return await _context.Users.FindAsync(Id);
+        }
+
+        public async Task<List<User>> GetAllPatientsWithDetailsAsync()
+        {
+            return await _context.Users
+                .Where(u => u.Role == "User")
+                .Include(u => u.Appointments)
+                .Include(u => u.GetAppointmentHistories)
+                .Include(u => u.Doctor)
+                    .ThenInclude(d => d.User)
+                .ToListAsync();
         }
     }
 }

@@ -145,8 +145,17 @@ builder.Services.AddCors(options =>
     });
 });
 #endregion
-
-
+// Frontend Connection
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowFrontend",
+        policy =>
+        {
+            policy.WithOrigins("http://localhost:5173") // React frontend
+                  .AllowAnyHeader()
+                  .AllowAnyMethod();
+        });
+});
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 
