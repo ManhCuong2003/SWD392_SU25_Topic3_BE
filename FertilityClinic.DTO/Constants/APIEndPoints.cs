@@ -41,14 +41,17 @@ namespace FertilityClinic.DTO.Constants
             public const string Delete = $"{BaseUser}/delete/{{id}}";
         }
 
+
         public static class Appointment
         {
-            public const string BaseAppointment = $"{Base}/appointment";
-            public const string Create = $"{BaseAppointment}/create";
-            public const string GetAll = $"{BaseAppointment}/all";
-            public const string GetById = $"{BaseAppointment}/{{id}}";
-            public const string Update = $"{BaseAppointment}/update";
-            public const string Delete = $"{BaseAppointment}/delete/{{id}}";
+            public const string Create = "api/appointments/create";
+            public const string CreateWithPayment = "api/appointments/create-with-payment";
+            public const string CreatePayment = "api/appointments/{appointmentId}/create-payment";
+            public const string PaymentCallback = "api/appointments/payment-callback";
+            public const string Delete = "api/appointments/{id}";
+            public const string GetAll = "api/appointments";
+            public const string GetById = "api/appointments/{id}";
+            public const string Update = "api/appointments/{id}";
         }
 
         public static class AppointmentHistory
@@ -85,17 +88,6 @@ namespace FertilityClinic.DTO.Constants
             public const string GetById = $"{BaseTreatmentProcess}/{{id}}";
             public const string Update = $"{BaseTreatmentProcess}/update";
             public const string Delete = $"{BaseTreatmentProcess}/delete/{{id}}";
-        }
-        
-        
-        public static class Payment
-        {
-            public const string BaseTreatmentMethod = $"{Base}/payment";
-            public const string Create = $"{BaseTreatmentMethod}/create";
-            public const string GetAll = $"{BaseTreatmentMethod}/all";
-            public const string GetById = $"{BaseTreatmentMethod}/{{id}}";
-            public const string Update = $"{BaseTreatmentMethod}/update";
-            public const string Delete = $"{BaseTreatmentMethod}/delete/{{id}}";
         }
         public static class LabTestSchedule
         {

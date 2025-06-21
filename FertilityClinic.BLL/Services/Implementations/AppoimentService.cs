@@ -14,23 +14,11 @@ namespace FertilityClinic.BLL.Services.Implementations
     public class AppoimentService : IAppoimentService
     {
         public readonly IUnitOfWork _unitOfWork;
-        private readonly IPaymentService _paymentService;
-
-        public AppoimentService(IUnitOfWork unitOfWork, IPaymentService paymentService)
+        public AppoimentService(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
-            _paymentService = paymentService;
         }
 
-        public async Task<string> CreatePaymentForAppointment(int appointmentId, int amount)
-        {
-            var payment = await _paymentService.CreatePaymentForAppointment(
-                appointmentId,
-                amount,
-                $"Payment for appointment #{appointmentId}");
-
-            return $"https://pay.payos.vn/web/{payment.OrderCode}";
-        }
 
         public async Task<AppointmentResponse> CreateAppointmentAsync(AppointmentRequest appointment, int userId, int doctorId/*, int partnerId*/, int treatmentMethodID)
         {
@@ -47,14 +35,14 @@ namespace FertilityClinic.BLL.Services.Implementations
             if (user == null)
                 throw new ArgumentException("User not found");
 
-            if (user.PartnerId<= 0)
+            if (user.PartnerId <= 0)
                 throw new ArgumentException("User does not have a partner assigned");
 
 
             if (!user.PartnerId.HasValue || user.PartnerId <= 0)
                 throw new ArgumentException("User does not have a partner assigned");
             var partner = await _unitOfWork.Partners.GetByIdAsync(user.PartnerId.Value);
-            
+
             //if (partner == null)
             //    throw new ArgumentException("Partner not found");
 
@@ -94,12 +82,12 @@ namespace FertilityClinic.BLL.Services.Implementations
             {
                 throw new InvalidOperationException("This time slot conflicts with another appointment. Please choose a different time");
             }
-            
+
             // Create new appointment
             var newAppointment = new Appointment
             {
                 UserId = userId,
-                PartnerId = user.PartnerId.Value,  
+                PartnerId = user.PartnerId.Value,
                 DoctorId = doctorId,
                 TreatmentMethodId = treatmentMethodID,
                 AppointmentDate = appointmentDate,
@@ -111,11 +99,13 @@ namespace FertilityClinic.BLL.Services.Implementations
             await _unitOfWork.SaveAsync();
             return new AppointmentResponse
             {
+                AppointmentId = newAppointment.AppointmentId,  // Add this
+                TreatmentMethodId = newAppointment.TreatmentMethodId,  // Add this
                 PatientName = user.FullName,
                 PatientDOB = user.DateOfBirth,
                 PhoneNumber = user.Phone,
-                //MethodName = "methodName",
                 MethodName = treatmentMethod.MethodName,
+                MethodPrice = treatmentMethod.Price ?? 0,  // Add this
                 PartnerName = partner.FullName,
                 PartnerDOB = partner.DateOfBirth,
                 DoctorName = doctor.User.FullName,
@@ -125,6 +115,7 @@ namespace FertilityClinic.BLL.Services.Implementations
                 CreatedAt = newAppointment.CreatedAt
             };
         }
+
 
         public async Task<bool> DeleteAppointmentAsync(int id)
         {
@@ -163,25 +154,58 @@ namespace FertilityClinic.BLL.Services.Implementations
                 CreatedAt = a.CreatedAt
             }).ToList();
         }
-
         public async Task<AppointmentResponse> GetAppointmentByIdAsync(int appointmentId)
         {
+            // First, get and validate the appointment
             var appointment = await _unitOfWork.Appointments.GetByIdAsync(appointmentId);
-            var user = await _unitOfWork.Users.GetByIdAsync(appointment.UserId);
-            var partner = await _unitOfWork.Users.GetByIdAsync(appointment.PartnerId);
-            var doctor = await _unitOfWork.Doctors.GetByIdAsync(appointment.DoctorId);
-            var treatmentMethod = await _unitOfWork.TreatmentMethods.GetByIdAsync(appointment.TreatmentMethodId);
             if (appointment == null)
             {
                 throw new Exception("Appointment not found");
             }
+
+            // Get and validate the treatment method first since this is causing the error
+            var treatmentMethod = await _unitOfWork.TreatmentMethods.GetTreatmentMethodByIdAsync(appointment.TreatmentMethodId);
+            if (treatmentMethod == null)
+            {
+                throw new Exception($"Treatment method with ID {appointment.TreatmentMethodId} not found. Please ensure the treatment method exists in the database.");
+            }
+
+            // Get and validate the user
+            var user = await _unitOfWork.Users.GetByIdAsync(appointment.UserId);
+            if (user == null)
+            {
+                throw new Exception($"User with ID {appointment.UserId} not found");
+            }
+
+            // Get and validate the partner
+            var partner = await _unitOfWork.Users.GetByIdAsync(appointment.PartnerId);
+            if (partner == null)
+            {
+                throw new Exception($"Partner with ID {appointment.PartnerId} not found");
+            }
+
+            // Get and validate the doctor
+            var doctor = await _unitOfWork.Doctors.GetDoctorByIdAsync(appointment.DoctorId);
+            if (doctor == null)
+            {
+                throw new Exception($"Doctor with ID {appointment.DoctorId} not found");
+            }
+
+            if (doctor.User == null)
+            {
+                throw new Exception($"User details for Doctor with ID {appointment.DoctorId} not found");
+            }
+
+            // Create and return the response
             return new AppointmentResponse
             {
+                AppointmentId = appointment.AppointmentId,
+                TreatmentMethodId = appointment.TreatmentMethodId,
                 PatientName = user.FullName,
                 PatientDOB = user.DateOfBirth,
                 PhoneNumber = user.Phone,
-                //MethodName = "methodname",
                 MethodName = treatmentMethod.MethodName,
+                MethodPrice = treatmentMethod.Price ?? 0,
                 PartnerName = partner.FullName,
                 PartnerDOB = partner.DateOfBirth,
                 DoctorName = doctor.User.FullName,
@@ -191,6 +215,7 @@ namespace FertilityClinic.BLL.Services.Implementations
                 CreatedAt = appointment.CreatedAt
             };
         }
+
 
         public async Task<AppointmentResponse> UpdateAppointmentAsync(int id, UpdateAppointmentRequest appointment)
         {
