@@ -104,6 +104,7 @@ namespace FertilityClinic.BLL.Services.Implementations
                 HealthInsuranceId = null,
                 Address = null,      
                 CreatedAt = DateTime.UtcNow,
+                IsMarried = false, // Mặc định là false nếu không có thông tin về tình trạng hôn nhân
                 Role = "User",
                 NationalId = null,     
                 PartnerId = null // Mặc định là null nếu không có thông tin partner
@@ -149,6 +150,7 @@ namespace FertilityClinic.BLL.Services.Implementations
                     CreatedAt = DateTime.UtcNow,
                     UpdatedAt = DateTime.UtcNow,
                     Role = "User",
+                    IsMarried = false, // Hoặc giá trị mặc định khác nếu NOT NULL
                     NationalId = null,     // Thêm giá trị mặc định cho NationalId
                     HealthInsuranceId = null,
                     PartnerId = 0

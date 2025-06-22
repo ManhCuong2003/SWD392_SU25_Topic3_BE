@@ -26,15 +26,9 @@ namespace FertilityClinic.Controllers
                 return BadRequest(ModelState);
             try
             {
-                // Lấy ID của user hiện tại từ token - sử dụng ClaimTypes.NameIdentifier
-                var currentUserId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value ?? "0");
-                var userRole = User.FindFirst(ClaimTypes.Role)?.Value;
+                
 
-                // Kiểm tra quyền
-                if (userRole == "User" && currentUserId != userId)
-                {
-                    return Forbid("User can only create partner for themselves");
-                }
+                
                 var partner = await _partnerService.CreatePartnerAsync(request, userId);
                 return Ok(partner);
             }
