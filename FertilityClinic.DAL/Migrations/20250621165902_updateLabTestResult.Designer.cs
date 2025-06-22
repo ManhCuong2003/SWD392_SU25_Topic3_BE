@@ -4,6 +4,7 @@ using FertilityClinic.DAL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FertilityClinic.DAL.Migrations
 {
     [DbContext(typeof(FertilityClinicDbContext))]
-    partial class FertilityClinicDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250621165902_updateLabTestResult")]
+    partial class updateLabTestResult
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -510,6 +513,9 @@ namespace FertilityClinic.DAL.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PaymentId"));
 
+                    b.Property<int>("Amount")
+                        .HasColumnType("int");
+
                     b.Property<int>("AppointmentId")
                         .HasColumnType("int");
 
@@ -518,13 +524,6 @@ namespace FertilityClinic.DAL.Migrations
 
                     b.Property<long>("OrderCode")
                         .HasColumnType("bigint");
-
-                    b.Property<string>("PaymentUrl")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<float>("Price")
-                        .HasColumnType("real");
 
                     b.Property<string>("Status")
                         .IsRequired()

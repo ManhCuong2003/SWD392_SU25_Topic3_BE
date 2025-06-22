@@ -40,9 +40,9 @@ namespace FertilityClinic.BLL.Services.Implementations
             }
             var partner = new Partner
             {
-                UserId = userId,
+                UserId = user.UserId,
                 FullName = request.FullName,
-                Email = user.Email,
+                Email = request.Email,
                 Phone = request.Phone,
                 DateOfBirth = request.DateOfBirth ?? null,
                 Gender = request.Gender,
@@ -63,6 +63,7 @@ namespace FertilityClinic.BLL.Services.Implementations
             try
             {
                 user.PartnerId = partner.PartnerId;
+
                 var updateResult = await _unitOfWork.Users.UpdateUserAsync(user);
                 if (!updateResult)
                 {
@@ -81,6 +82,7 @@ namespace FertilityClinic.BLL.Services.Implementations
                 FullName = partner.FullName,
                 DateOfBirth = partner.DateOfBirth,
                 Gender = partner.Gender,
+                //Email = partner.Email,
                 Phone = partner.Phone,
                 NationalId = partner.NationalId,
                 HealthInsuranceId = partner.HealthInsuranceId

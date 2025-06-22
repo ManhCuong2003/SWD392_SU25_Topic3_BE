@@ -25,11 +25,13 @@ namespace FertilityClinic.BLL.Services.Implementations
             {
                 LabTestScheduleId = labTestScheduleId,
                 DoctorId = docterId,
-                ResultDetails = labTestResult.ResultDetails,
-                Notes = labTestResult.Notes,
-                ResultDate = labTestResult.ResultDate,
-                CreatedAt = DateTime.UtcNow,
-                UpdatedAt = DateTime.UtcNow
+                Name = labTestResult.Name,
+                Result = labTestResult.Result,
+                Normal = labTestResult.Normal,
+                Unit = labTestResult.Unit,
+                Bold = labTestResult.Bold,
+                Date = labTestResult.Date,
+
             };
             await _unitOfWork.LabTestResults.AddAsync(newLabTestResult);
             await _unitOfWork.SaveAsync();
@@ -38,27 +40,70 @@ namespace FertilityClinic.BLL.Services.Implementations
                 LabTestResultId = newLabTestResult.LabTestResultId,
                 LabTestScheduleId = newLabTestResult.LabTestScheduleId,
                 DoctorId = newLabTestResult.DoctorId,
-                ResultDetails = newLabTestResult.ResultDetails,
-                Notes = newLabTestResult.Notes,
-                ResultDate = newLabTestResult.ResultDate,
-                CreatedAt = newLabTestResult.CreatedAt,
-                UpdatedAt = newLabTestResult.UpdatedAt
+                Name = newLabTestResult.Name,
+                Result = newLabTestResult.Result,
+                Normal = newLabTestResult.Normal,
+                Unit = newLabTestResult.Unit,
+                Bold = newLabTestResult.Bold,
+                Date = newLabTestResult.Date
             };
         }
 
-        public Task<bool> DeleteLabTestResultAsync(int id)
+        public async Task<bool> DeleteLabTestResultAsync(int id)
         {
-            throw new NotImplementedException();
+            var labTestResult = await _unitOfWork.LabTestResults.GetByIdAsync(id);
+            if (labTestResult == null)
+            {
+                throw new Exception("Lab Test Result not found");
+            }
+            _unitOfWork.LabTestResults.Remove(labTestResult);
+            await _unitOfWork.SaveAsync();
+            return true;
         }
 
-        public Task<List<LabTestResultResponse>> GetAllLabTestResultsAsync()
+        public async Task<List<LabTestResultResponse>> GetAllLabTestResultsAsync()
         {
-            throw new NotImplementedException();
+            var labTestResults = await _unitOfWork.LabTestResults.GetAllAsync();
+            if (labTestResults == null || !labTestResults.Any())
+            {
+                return new List<LabTestResultResponse>();
+            }
+            return labTestResults.Select(result => new LabTestResultResponse
+            {
+                LabTestResultId = result.LabTestResultId,
+                LabTestScheduleId = result.LabTestScheduleId,
+                DoctorId = result.DoctorId,
+                Name = result.Name,
+                Result = result.Result,
+                Normal = result.Normal,
+                Unit = result.Unit,
+                Bold = result.Bold,
+                Date = result.Date
+
+            }).ToList();
         }
 
-        public Task<LabTestResultResponse> GetLabTestResultByIdAsync(int id)
+        public async Task<LabTestResultResponse> GetLabTestResultByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            var labTestResult = await _unitOfWork.LabTestResults.GetByIdAsync(id);
+            if (labTestResult == null)
+            {
+                throw new Exception("Lab Test Result not found");
+            }
+            var labTestSchedule = await _unitOfWork.LabTestSchedules.GetByIdAsync(labTestResult.LabTestScheduleId);
+            var doctor = await _unitOfWork.Doctors.GetByIdAsync(labTestResult.DoctorId);
+            return new LabTestResultResponse
+            {
+                LabTestResultId = labTestResult.LabTestResultId,
+                LabTestScheduleId = labTestResult.LabTestScheduleId,
+                DoctorId = labTestResult.DoctorId,
+                Name = labTestResult.Name,
+                Result = labTestResult.Result,
+                Normal = labTestResult.Normal,
+                Unit = labTestResult.Unit,
+                Bold = labTestResult.Bold,
+                Date = labTestResult.Date
+            };
         }
     }
 }

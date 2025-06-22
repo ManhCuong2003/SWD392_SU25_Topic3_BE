@@ -29,7 +29,9 @@ namespace FertilityClinic.DAL.Repositories.Implementations
         public async Task<User?> GetByEmailAsync(string email)
         {
 
-            return await _context.Users.FirstOrDefaultAsync(u => u.Email.ToLower() == email.ToLower());
+            return await _context.Users
+                .Include(u => u.Partner)
+                .FirstOrDefaultAsync(u => u.Email.ToLower() == email.ToLower());
         }
 
         public async Task<bool> IsEmailExistsAsync(string email, int userId)
@@ -49,7 +51,7 @@ namespace FertilityClinic.DAL.Repositories.Implementations
             if (user == null) return false;
 
             user.PartnerId = dto.PartnerId;
-
+            user.IsMarried = dto.IsMarried;
             if (!string.IsNullOrWhiteSpace(dto.FullName)) user.FullName = dto.FullName;
             if (!string.IsNullOrWhiteSpace(dto.Email)) user.Email = dto.Email;
 
