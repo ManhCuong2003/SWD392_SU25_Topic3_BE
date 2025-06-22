@@ -12,7 +12,6 @@ namespace FertilityClinic.DAL.Models
     {
         public int AppointmentId { get; set; }
         public int UserId { get; set; }
-        public int TreatmentMethodId { get; set; }
         public int PartnerId { get; set; }
         public int DoctorId { get; set; }
         [Required]
@@ -28,6 +27,5 @@ namespace FertilityClinic.DAL.Models
         public virtual Partner Partner { get; set; }
         public virtual User User { get; set; }
         public virtual Doctor Doctor { get; set; }
-        public virtual TreatmentMethod TreatmentMethod { get; set; }
     }
 }
