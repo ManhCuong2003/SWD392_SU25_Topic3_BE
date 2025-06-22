@@ -69,6 +69,10 @@ namespace FertilityClinic.BLL.Services.Implementations
 
             if (dto.DateOfBirth != null)
                 user.DateOfBirth = dto.DateOfBirth.Value;
+            if (dto.IsMarried != null)
+                user.IsMarried = dto.IsMarried;
+            user.IsMarried = dto.IsMarried;
+
             return await _unitOfWork.Users.UpdateUserAsync(user);
         }
 
@@ -121,6 +125,7 @@ namespace FertilityClinic.BLL.Services.Implementations
                 Gender = user.Gender,
                 CreatedAt = user.CreatedAt,
                 UpdatedAt = user.UpdatedAt
+
             };
         }
 
@@ -158,45 +163,33 @@ namespace FertilityClinic.BLL.Services.Implementations
             if (user == null)
                 throw new KeyNotFoundException($"User with email {email} not found");
 
-            return new UserResponse
+            var response = new UserResponse
             {
                 UserId = user.UserId,
-                FullName = user.FullName,
-                Email = user.Email,
-                PhoneNumber = user.Phone,
-                Role = user.Role,
-                Gender = user.Gender,
+                FullName = user.FullName ?? "",
+                Email = user.Email ?? "",
+                PhoneNumber = user.Phone ?? "",
+                Role = user.Role ?? "",
+                Gender = user.Gender ?? "",
                 CreatedAt = user.CreatedAt,
-                UpdatedAt = user.UpdatedAt
-                // Thêm các trường khác nếu cần
+                UpdatedAt = user.UpdatedAt,
+                IsMarried = user.IsMarried ?? false
             };
-        }
 
-        /*public async Task<List<GetAllPatientsResponse>> GetAllPatientAsync()
-        {
-            var patients = await _userRepository.GetAllPatientsWithDetailsAsync();
-            return await _context.Users
-                .Where(u => u.Role == "User")
-                .Select(u => new GetAllPatientsResponse
+            if (user.IsMarried == true && user.Partner != null)
+            {
+                response.Partner = new PartnerResponse
                 {
-                    PatientId = u.UserId,
-                    FullName = u.FullName,
-                    DateOfBirth = u.DateOfBirth,
-                    Gender = u.Gender,
-                    treatmentStatus = u.GetAppointmentHistories?
-                .OrderByDescending(h => h.UpdatedAt)
-                .FirstOrDefault()?.Status ?? "Theo dõi",
+                    FullName = user.Partner.FullName ?? "",
+                    DateOfBirth = user.Partner.DateOfBirth,
+                    Gender = user.Partner.Gender ?? "",
+                    Phone = user.Partner.Phone ?? "",
+                    NationalId = user.Partner.NationalId ?? "",
+                    HealthInsuranceId = user.Partner.HealthInsuranceId ?? ""
+                };
+            }
 
-                    Diagnose = u.Appointments?
-                .OrderByDescending(a => a.AppointmentDate)
-                .FirstOrDefault()?.Diagnosis ?? "Chưa có",
-
-                    lastVisit = u.Appointments?
-                .OrderByDescending(a => a.AppointmentDate)
-                .FirstOrDefault()?.AppointmentDate,
-
-                    doctorInCharge = u.Doctor?.User?.FullName ?? "Chưa chỉ định"
-                }).ToList();
-        }*/
+            return response;
+        }
     }
 }

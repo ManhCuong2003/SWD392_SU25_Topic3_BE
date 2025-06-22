@@ -18,10 +18,11 @@ namespace FertilityClinic.DTO.Responses
         public string NationalId { get; set; } = null!;
         public string Address { get; set; } = null!;
         public string Gender { get; set; } = null!;
+        public bool IsMarried { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
-        
-        
+
+        public PartnerResponse? Partner { get; set; }
 
     }
 }

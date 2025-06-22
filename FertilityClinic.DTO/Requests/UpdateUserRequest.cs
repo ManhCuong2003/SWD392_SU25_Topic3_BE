@@ -23,7 +23,7 @@ namespace FertilityClinic.DTO.Requests
         public DateOnly? DateOfBirth { get; set; }
         public string? Gender { get; set; }
         public string? Address { get; set; }
-
+        public bool? IsMarried { get; set; } = false;
         public string? Role { get; set; }
     }
 }

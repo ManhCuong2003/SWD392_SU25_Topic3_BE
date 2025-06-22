@@ -87,8 +87,8 @@ namespace FertilityClinic.DTO.Constants
             public const string Update = $"{BaseTreatmentProcess}/update";
             public const string Delete = $"{BaseTreatmentProcess}/delete/{{id}}";
         }
-        
-        
+
+
         public static class Payment
         {
             public const string BaseTreatmentMethod = $"{Base}/payment";
@@ -124,6 +124,14 @@ namespace FertilityClinic.DTO.Constants
             public const string GetById = $"{BaseInseminationSchedule}/{{inseminationScheduleId}}";
             public const string Update = $"{BaseInseminationSchedule}/update/{{id}}";
             public const string Delete = $"{BaseInseminationSchedule}/delete/{{id}}";
+        }
+
+        public static class InseminationResult
+        {
+            public const string BaseInseminationResult = $"{Base}/insemination-result";
+            public const string Create = $"{BaseInseminationResult}/create/{{inseminationScheduleId}}";
+            public const string GetAll = $"{BaseInseminationResult}/all";
+            public const string GetById = $"{BaseInseminationResult}/{{inseminationResultId}}";
         }
     }
 }
