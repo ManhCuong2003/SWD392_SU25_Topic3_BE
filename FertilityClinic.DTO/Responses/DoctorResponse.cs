@@ -8,7 +8,7 @@ namespace FertilityClinic.DTO.Responses
 {
     public class DoctorResponse
     {
-        
+        public int DotorId { get; set; }
         public string DoctorName { get; set; } = null!;
         public string Email { get; set; } = null!;
 
