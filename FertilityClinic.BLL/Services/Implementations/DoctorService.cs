@@ -44,7 +44,7 @@ namespace FertilityClinic.BLL.Services.Implementations
             await _unitOfWork.Doctors.AddAsync(doctor);
             await _unitOfWork.SaveAsync();
             return new DoctorResponse {
-                
+                DotorId = doctor.DoctorId,
                 DoctorName = user.FullName,
                 Specialization = doctor.Specialization,
                 Degree = doctor.Degree,
@@ -73,7 +73,7 @@ namespace FertilityClinic.BLL.Services.Implementations
                 throw new Exception("No doctors found");
             return doctors.Select(d => new DoctorResponse
             {
-                
+                DotorId = d.DoctorId,
                 DoctorName = d.User.FullName,
                 Email = d.User.Email,
                 Specialization = d.Specialization,
@@ -89,7 +89,7 @@ namespace FertilityClinic.BLL.Services.Implementations
                 throw new Exception("Doctor not found");
             return new DoctorResponse
             {
-               
+               DotorId = doctor.DoctorId,
                 DoctorName = doctor.User.FullName,
                 Email = doctor.User.Email,
                 Specialization = doctor.Specialization,
