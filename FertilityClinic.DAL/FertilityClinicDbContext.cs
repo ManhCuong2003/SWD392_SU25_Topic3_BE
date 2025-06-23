@@ -27,7 +27,7 @@ namespace FertilityClinic.DAL
         public DbSet<InjectionSchedule> InjectionSchedules { get; set; }
         public DbSet<InseminationSchedule> InseminationSchedules { get; set; }
         public DbSet<InseminationResult> InseminationResults { get; set; }
-        public DbSet<LabTestSchedule> LabTestSchedules { get; set; }
+        //public DbSet<LabTestSchedule> LabTestSchedules { get; set; }
         public DbSet<LabTestResult> LabTestResults { get; set; }
         public DbSet<Payment> Payments { get; set; }
         public DbSet<AppointmentHistory> AppointmentHistories { get; set; }
@@ -139,9 +139,9 @@ namespace FertilityClinic.DAL
                 entity.HasMany(tp => tp.InseminationSchedules)
                       .WithOne(insem => insem.TreatmentProcess)
                       .HasForeignKey(insem => insem.TreatmentProcessId);
-                entity.HasMany(tp => tp.LabTestSchedules)
+                /*entity.HasMany(tp => tp.LabTestSchedules)
                       .WithOne(lab => lab.TreatmentProcess)
-                      .HasForeignKey(lab => lab.TreatmentProcessId);
+                      .HasForeignKey(lab => lab.TreatmentProcessId);*/
             });
 
             // InjectionSchedule configurations
@@ -159,18 +159,18 @@ namespace FertilityClinic.DAL
             });
             
             // LabTestSchedule configurations
-            modelBuilder.Entity<LabTestSchedule>(entity =>
+           /* modelBuilder.Entity<LabTestSchedule>(entity =>
             {
                 entity.HasOne(l => l.Doctor)
                     .WithMany(d => d.LabTestSchedules)
                     .HasForeignKey(l => l.DoctorId)
                     .OnDelete(DeleteBehavior.NoAction);
 
-               /* entity.HasOne(l => l.TreatmentProcess)
+                entity.HasOne(l => l.TreatmentProcess)
                     .WithMany()
                     .HasForeignKey(l => l.TreatmentProcessId)
-                    .OnDelete(DeleteBehavior.NoAction);*/
-            });
+                    .OnDelete(DeleteBehavior.NoAction);
+            });*/
 
             // InseminationSchedule configurations
             modelBuilder.Entity<InseminationSchedule>(entity =>
@@ -194,10 +194,10 @@ namespace FertilityClinic.DAL
                     .HasForeignKey(l => l.DoctorId)
                     .OnDelete(DeleteBehavior.NoAction);
 
-                entity.HasOne(l => l.LabTestSchedule)
+                /*entity.HasOne(l => l.LabTestSchedule)
                     .WithMany()
                     .HasForeignKey(l => l.LabTestScheduleId)
-                    .OnDelete(DeleteBehavior.NoAction);
+                    .OnDelete(DeleteBehavior.NoAction);*/
             });
 
             // InseminationResult configurations

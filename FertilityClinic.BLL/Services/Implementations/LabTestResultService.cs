@@ -19,11 +19,11 @@ namespace FertilityClinic.BLL.Services.Implementations
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<LabTestResultResponse> CreateLabTestResultAsync(LabTestResultRequest labTestResult, int labTestScheduleId, int docterId)
+        public async Task<LabTestResultResponse> CreateLabTestResultAsync(LabTestResultRequest labTestResult, int docterId)
         {
             var newLabTestResult = new LabTestResult
             {
-                LabTestScheduleId = labTestScheduleId,
+                //LabTestScheduleId = labTestScheduleId,
                 DoctorId = docterId,
                 Name = labTestResult.Name,
                 Result = labTestResult.Result,
@@ -90,7 +90,7 @@ namespace FertilityClinic.BLL.Services.Implementations
             {
                 throw new Exception("Lab Test Result not found");
             }
-            var labTestSchedule = await _unitOfWork.LabTestSchedules.GetByIdAsync(labTestResult.LabTestScheduleId);
+            //var labTestSchedule = await _unitOfWork.LabTestSchedules.GetByIdAsync(labTestResult.LabTestScheduleId);
             var doctor = await _unitOfWork.Doctors.GetByIdAsync(labTestResult.DoctorId);
             return new LabTestResultResponse
             {

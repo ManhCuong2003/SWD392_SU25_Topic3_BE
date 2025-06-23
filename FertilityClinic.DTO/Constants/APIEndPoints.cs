@@ -101,7 +101,7 @@ namespace FertilityClinic.DTO.Constants
             public const string Update = $"{BaseTreatmentMethod}/update";
             public const string Delete = $"{BaseTreatmentMethod}/delete/{{id}}";
         }
-        public static class LabTestSchedule
+        /*public static class LabTestSchedule
         {
             public const string BaseLabTestSchedule = $"{Base}/lab-test-schedule";
             public const string Create = $"{BaseLabTestSchedule}/create/{{doctorId}}";
@@ -109,7 +109,7 @@ namespace FertilityClinic.DTO.Constants
             public const string GetById = $"{BaseLabTestSchedule}/{{labTestScheduleId}}";
             public const string Update = $"{BaseLabTestSchedule}/update/{{id}}";
             public const string Delete = $"{BaseLabTestSchedule}/delete/{{id}}";
-        }
+        }*/
         public static class LabTestResult
         {
             public const string BaseLabTestResult = $"{Base}/lab-test-result";

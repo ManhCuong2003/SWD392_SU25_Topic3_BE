@@ -38,7 +38,7 @@ namespace FertilityClinic.DAL.Repositories.Implementations
         public async Task<IEnumerable<LabTestResult>> GetAllLabTestResultsAsync()
         {
             return await _context.LabTestResults
-                .Include(ltr => ltr.LabTestSchedule)
+                //.Include(ltr => ltr.LabTestSchedule)
                 .Include(ltr => ltr.Doctor)
                 .ToListAsync();
         }
@@ -46,7 +46,7 @@ namespace FertilityClinic.DAL.Repositories.Implementations
         public async Task<LabTestResult> GetLabTestResultByIdAsync(int labTestResultId)
         {
             return await _context.LabTestResults
-                .Include(ltr => ltr.LabTestSchedule)
+                //.Include(ltr => ltr.LabTestSchedule)
                 .Include(ltr => ltr.Doctor)
                 .FirstOrDefaultAsync(ltr => ltr.LabTestResultId == labTestResultId);
         }
