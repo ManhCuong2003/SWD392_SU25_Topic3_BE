@@ -18,7 +18,7 @@ namespace FertilityClinic.DAL.Models
         public bool Bold { get; set; } = false;
         public DateTime Date { get; set; }
         
-        public  virtual LabTestSchedule? LabTestSchedule { get; set; }
+        //public  virtual LabTestSchedule? LabTestSchedule { get; set; }
         public  virtual Doctor? Doctor { get; set; }
     }
 }
