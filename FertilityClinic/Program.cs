@@ -107,7 +107,6 @@ builder.Services.AddScoped<ITreatmentProcessRepository, TreatmentProcessReposito
 //builder.Services.AddScoped<ILabTestScheduleRepository, LabTestScheduleRepository>();
 builder.Services.AddScoped<ILabTestResultRepository, LabTestResultRepository>();
 builder.Services.AddScoped<IInseminationScheduleRepository, InseminationScheduleRepository>();
-builder.Services.AddScoped<IPaymentRepository, PaymentRepository>();
 builder.Services.AddScoped<IInseminationResultRepository, InseminationResultRepository>();
 builder.Services.AddScoped<IPillRepository, PillRepository>();
 // Đăng ký các service

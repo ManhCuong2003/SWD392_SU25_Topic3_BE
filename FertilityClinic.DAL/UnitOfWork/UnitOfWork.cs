@@ -30,12 +30,7 @@ namespace FertilityClinic.DAL.UnitOfWork
         //public ILabTestScheduleRepository LabTestSchedules { get; }
         public ILabTestResultRepository LabTestResults { get; }
         public IInseminationScheduleRepository InseminationSchedules { get; }
-
-
-        public IPaymentRepository Payments { get; }
-
         public IInseminationResultRepository InseminationResults { get; }
-
         public UnitOfWork(FertilityClinicDbContext context, 
             IUserRepository userRepository,
             IDoctorRepository doctorRepository,
@@ -43,15 +38,9 @@ namespace FertilityClinic.DAL.UnitOfWork
             IAppoimentHistoryRepository appointmentHistories,
             IPartnerRepository partnerRepository,
             ITreatmentMethodRepository treatMentMethods,
-            IPaymentRepository paymentRepository,
             ITreatmentProcessRepository paymentProcessRepository,
-            ITreatmentProcessRepository treatmentProcesses
-
-            //ILabTestScheduleRepository labTestSchedules
-,
             ITreatmentProcessRepository treatmentProcesses,
             IPillRepository pills,
-            ILabTestScheduleRepository labTestSchedules,
             ILabTestResultRepository labTestResults,
             IInseminationScheduleRepository inseminationSchedules,
             IInseminationResultRepository inseminationResults)
