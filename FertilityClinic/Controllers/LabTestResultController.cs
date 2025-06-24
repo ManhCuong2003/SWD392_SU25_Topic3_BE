@@ -64,8 +64,8 @@ namespace FertilityClinic.Controllers
             }
         }
 
-        [HttpPost("CreateLabTestResult/{labTestScheduleId}/{doctorId}")]
-        public async Task<IActionResult> CreateLabTestResult(int labTestScheduleId, int doctorId, [FromBody] LabTestResultRequest labTestResultRequest)
+        [HttpPost("CreateLabTestResult/{doctorId}")]
+        public async Task<IActionResult> CreateLabTestResult(int doctorId, [FromBody] LabTestResultRequest labTestResultRequest)
         {
             try
             {
@@ -77,7 +77,7 @@ namespace FertilityClinic.Controllers
                         Message = "Invalid lab test result data"
                     });
                 }
-                var createdLabTestResult = await _labTestResultService.CreateLabTestResultAsync(labTestResultRequest, labTestScheduleId, doctorId);
+                var createdLabTestResult = await _labTestResultService.CreateLabTestResultAsync(labTestResultRequest, doctorId);
                 return CreatedAtAction(nameof(GetLabTestResultById), new { id = createdLabTestResult.LabTestResultId }, createdLabTestResult);
             }
             catch (Exception ex)

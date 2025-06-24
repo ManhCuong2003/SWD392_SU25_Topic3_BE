@@ -19,7 +19,7 @@ namespace FertilityClinic.DAL.UnitOfWork
         ITreatmentMethodRepository TreatmentMethods { get; }
         IPaymentRepository Payments { get; }
         ITreatmentProcessRepository TreatmentProcesses { get; }
-        ILabTestScheduleRepository LabTestSchedules { get; }
+        //ILabTestScheduleRepository LabTestSchedules { get; }
         ILabTestResultRepository LabTestResults { get; }
         IInseminationScheduleRepository InseminationSchedules { get; }
         IInseminationResultRepository InseminationResults { get; }

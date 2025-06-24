@@ -27,7 +27,7 @@ namespace FertilityClinic.DAL.UnitOfWork
         public IPillRepository Pills { get; }
         public ITreatmentProcessRepository TreatmentProcesses { get; }
 
-        public ILabTestScheduleRepository LabTestSchedules { get; }
+        //public ILabTestScheduleRepository LabTestSchedules { get; }
         public ILabTestResultRepository LabTestResults { get; }
         public IInseminationScheduleRepository InseminationSchedules { get; }
 
@@ -45,6 +45,10 @@ namespace FertilityClinic.DAL.UnitOfWork
             ITreatmentMethodRepository treatMentMethods,
             IPaymentRepository paymentRepository,
             ITreatmentProcessRepository paymentProcessRepository,
+            ITreatmentProcessRepository treatmentProcesses
+
+            //ILabTestScheduleRepository labTestSchedules
+,
             ITreatmentProcessRepository treatmentProcesses,
             IPillRepository pills,
             ILabTestScheduleRepository labTestSchedules,
@@ -61,7 +65,7 @@ namespace FertilityClinic.DAL.UnitOfWork
             Partners = partnerRepository;
             TreatmentMethods = treatMentMethods;
             TreatmentProcesses = treatmentProcesses;
-            LabTestSchedules = labTestSchedules;
+            //LabTestSchedules = labTestSchedules;
             LabTestResults = labTestResults;
             InseminationSchedules = inseminationSchedules;
             InseminationResults = inseminationResults;

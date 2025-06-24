@@ -104,7 +104,7 @@ builder.Services.AddScoped<IAppoimentHistoryRepository, AppoimentHistoryReposito
 builder.Services.AddScoped<IPartnerRepository, PartnerRepository>();
 builder.Services.AddScoped<ITreatmentMethodRepository, TreatmentMethodRepository>();
 builder.Services.AddScoped<ITreatmentProcessRepository, TreatmentProcessRepository>();
-builder.Services.AddScoped<ILabTestScheduleRepository, LabTestScheduleRepository>();
+//builder.Services.AddScoped<ILabTestScheduleRepository, LabTestScheduleRepository>();
 builder.Services.AddScoped<ILabTestResultRepository, LabTestResultRepository>();
 builder.Services.AddScoped<IInseminationScheduleRepository, InseminationScheduleRepository>();
 builder.Services.AddScoped<IPaymentRepository, PaymentRepository>();
@@ -119,7 +119,7 @@ builder.Services.AddScoped<IAppoimentHistoryService, AppoimentHistoryService>();
 builder.Services.AddScoped<IPartnerService, PartnerService>();
 builder.Services.AddScoped<ITreatmentMethodService, TreatmentMethodServicecs>();
 builder.Services.AddScoped<ITreatmentProcessService, TreatmentProcessService>();
-builder.Services.AddScoped<ILabTestScheduleService, LabTestScheduleService>();
+//builder.Services.AddScoped<ILabTestScheduleService, LabTestScheduleService>();
 builder.Services.AddScoped<ILabTestResultService, LabTestResultService>();
 builder.Services.AddScoped<IInseminationScheduleService, InseminationScheduleService>();
 builder.Services.AddScoped<IInseminationResultService, InseminationResultService>();
