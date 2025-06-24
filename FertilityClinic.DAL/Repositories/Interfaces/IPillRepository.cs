@@ -4,15 +4,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using FertilityClinic.DAL.Models;
 
 namespace FertilityClinic.DAL.Repositories.Interfaces
 {
-    public interface IPillRepository : IGenericRepository<Pills>
+    public interface IPillRepository
     {
-        Task<bool> CreatePillAsync(Pills pill);
-        Task<IEnumerable<Pills>> GetAllPillsAsync();
+        Task<List<Pills>> GetAllPillsAsync();
         Task<Pills> GetPillByIdAsync(int pillId);
-        Task<bool> UpdatePillAsync(Pills pill);
+        Task<List<Pills>> GetPillsByNameAsync(string name);
+        Task<Pills> AddPillAsync(Pills pill);
+        Task<Pills> UpdatePillAsync(Pills pill);
         Task<bool> DeletePillAsync(int pillId);
     }
 }

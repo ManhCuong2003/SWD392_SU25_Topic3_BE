@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using Net.payOS;
 using System.Reflection;
 using System.Text;
 
@@ -50,6 +51,7 @@ builder.Services.AddSwaggerGen(opt =>
     opt.SwaggerDoc("Users", new OpenApiInfo { Title = "User APIs", Version = "v1" });
     opt.SwaggerDoc("Auth", new OpenApiInfo { Title = "User APIs", Version = "v1" });
     opt.SwaggerDoc("Debug", new OpenApiInfo { Title = "Debug APIs", Version = "v1" });
+    opt.SwaggerDoc("Payments", new OpenApiInfo { Title = "Payment APIs", Version = "v1" });
 
     var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
     var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
@@ -105,10 +107,8 @@ builder.Services.AddScoped<ITreatmentProcessRepository, TreatmentProcessReposito
 //builder.Services.AddScoped<ILabTestScheduleRepository, LabTestScheduleRepository>();
 builder.Services.AddScoped<ILabTestResultRepository, LabTestResultRepository>();
 builder.Services.AddScoped<IInseminationScheduleRepository, InseminationScheduleRepository>();
-builder.Services.AddScoped<IPaymentRepository, PaymentRepository>();
 builder.Services.AddScoped<IInseminationResultRepository, InseminationResultRepository>();
 builder.Services.AddScoped<IPillRepository, PillRepository>();
-builder.Services.AddScoped<IPrescriptionRepository, PrescriptionRepository>();
 // Đăng ký các service
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IDoctorService, DoctorService>();
@@ -123,10 +123,30 @@ builder.Services.AddScoped<ILabTestResultService, LabTestResultService>();
 builder.Services.AddScoped<IInseminationScheduleService, InseminationScheduleService>();
 builder.Services.AddScoped<IInseminationResultService, InseminationResultService>();
 builder.Services.AddScoped<IPillService, PillService>();
-builder.Services.AddScoped<IPrescriptionService, PrescriptionService>();
 // Add these lines in your Program.cs service configuration
-builder.Services.Configure<PayOSSettings>(builder.Configuration.GetSection("PayOS"));
-builder.Services.AddScoped<IPaymentService, PaymentService>();
+// PayOS Configuration
+var payOSConfig = builder.Configuration.GetSection("PayOS");
+if (payOSConfig.Exists())
+{
+    builder.Services.AddSingleton<PayOS>(_ => new PayOS(
+        payOSConfig["ClientId"] ?? throw new ArgumentNullException("PayOS:ClientId"),
+        payOSConfig["ApiKey"] ?? throw new ArgumentNullException("PayOS:ApiKey"),
+        payOSConfig["ChecksumKey"] ?? throw new ArgumentNullException("PayOS:ChecksumKey")
+    ));
+}
+else
+{
+    throw new Exception("PayOS configuration section not found in appsettings.json");
+}
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAll", builder =>
+    {
+        builder.AllowAnyOrigin()
+               .AllowAnyMethod()
+               .AllowAnyHeader();
+    });
+});
 #endregion
 // Frontend Connection
 builder.Services.AddCors(options =>
@@ -164,6 +184,7 @@ if (app.Environment.IsDevelopment())
         opt.SwaggerEndpoint("/swagger/Auth/swagger.json", "Auth APIs");
         opt.SwaggerEndpoint("/swagger/Users/swagger.json", "User APIs");
         opt.SwaggerEndpoint("/swagger/Debug/swagger.json", "Debug APIs");
+        opt.SwaggerEndpoint("/swagger/Payments/swagger.json", "Payment APIs"); // Thêm dòng này
     });
 }
 

@@ -29,7 +29,6 @@ namespace FertilityClinic.DAL
         public DbSet<InseminationResult> InseminationResults { get; set; }
         //public DbSet<LabTestSchedule> LabTestSchedules { get; set; }
         public DbSet<LabTestResult> LabTestResults { get; set; }
-        public DbSet<Payment> Payments { get; set; }
         public DbSet<AppointmentHistory> AppointmentHistories { get; set; }
         public DbSet<Pills> Pills { get; set; }
         public DbSet<Prescription> Prescriptions { get; set; }

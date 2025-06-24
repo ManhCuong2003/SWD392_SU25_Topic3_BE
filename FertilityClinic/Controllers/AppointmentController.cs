@@ -18,7 +18,7 @@ namespace FertilityClinic.Controllers
         }
 
         [HttpPost(APIEndPoints.Appointment.Create)]
-        public async Task<IActionResult> CreateAppointment([FromBody] AppointmentRequest appointmentRequest, int userId, int doctorId/*, int partnerId*/, int treatmentMethodid)
+        public async Task<IActionResult> CreateAppointment([FromBody] AppointmentRequest appointmentRequest, int userId, int doctorId)
         {
             if (!ModelState.IsValid)
             {
@@ -26,7 +26,7 @@ namespace FertilityClinic.Controllers
             }
             try
             {
-                var appointment = await _appointmentService.CreateAppointmentAsync(appointmentRequest, userId, doctorId/*, partnerId*/, treatmentMethodid);
+                var appointment = await _appointmentService.CreateAppointmentAsync(appointmentRequest, userId, doctorId);
                 return Ok(appointment);
             }
             catch (ArgumentException ex)

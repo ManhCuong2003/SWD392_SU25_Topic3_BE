@@ -1,4 +1,9 @@
-﻿using FertilityClinic.BLL.Services.Interfaces;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using FertilityClinic.BLL.Services.Interfaces;
 using FertilityClinic.DAL.Models;
 using FertilityClinic.DAL.UnitOfWork;
 using FertilityClinic.DTO.Requests;
@@ -18,64 +23,48 @@ namespace FertilityClinic.BLL.Services.Implementations
         {
             _unitOfWork = unitOfWork;
         }
-        public async Task<PillResponse> CreatePillAsync(PillRequest request)
+        public async Task<List<PillResponse>> GetAllPillsAsync()
         {
-            var existingPill = await _unitOfWork.Pills
-       .FindAsync(p => p.NameAndContent!.ToLower() == request.NameAndContent!.ToLower());
-
-            if (existingPill.Any())
-                throw new Exception("Tên thuốc đã tồn tại trong hệ thống.");
-            if (string.IsNullOrWhiteSpace(request.NameAndContent))
-                throw new Exception("Tên thuốc không được để trống.");
-            if (request.NameAndContent.Length > 255)
-                throw new Exception("Tên thuốc vượt quá giới hạn 255 ký tự.");
-            if (string.IsNullOrWhiteSpace(request.Unit))
-                throw new Exception("Đơn vị không được để trống.");
-            if (request.Quantity < 0)
-                throw new Exception("Số lượng phải lớn hơn hoặc bằng 0.");
-            if (request.UnitPrice < 0)
-                throw new Exception("Giá tiền phải lớn hơn hoặc bằng 0.");
-            var pill = new Pills
+            var pills = await _unitOfWork.Pills.GetAllPillsAsync();
+            return pills.Select(p => new PillResponse
             {
-                NameAndContent = request.NameAndContent,
-                Description = request.Description,
-                Unit = request.Unit,
-                Quantity = request.Quantity,
-                UnitPrice = request.UnitPrice,
-                CreatedAt = DateTime.UtcNow,
-                UpdatedAt = DateTime.Now
-
-            };
-            await _unitOfWork.Pills.AddAsync(pill);
-            await _unitOfWork.SaveAsync();
+                PillId = p.PillId,
+                Name = p.Name,
+                Description = p.Description,
+                UnitPrice = p.UnitPrice,
+                Unit = p.Unit,
+                CreatedAt = p.CreatedAt,
+                UpdatedAt = p.UpdatedAt
+            }).ToList();
+        }
+        public async Task<PillResponse> GetPillByIdAsync(int pillId)
+        {
+            var pill = await _unitOfWork.Pills.GetPillByIdAsync(pillId);
+            if (pill == null)
+            {
+                throw new Exception("Pill not found");
+            }
             return new PillResponse
             {
                 PillId = pill.PillId,
-                NameAndContent = pill.NameAndContent,
-                Unit = pill.Unit,
-                Quantity = pill.Quantity,
+                Name = pill.Name,
                 Description = pill.Description,
                 UnitPrice = pill.UnitPrice,
+                Unit = pill.Unit,
                 CreatedAt = pill.CreatedAt,
                 UpdatedAt = pill.UpdatedAt
             };
 
         }
-
-        public async Task<bool> DeletePillAsync(int pillid)
+        public async Task<List<PillResponse>> GetPillsByNameAsync(string name)
         {
-            var pill = await _unitOfWork.Pills.GetByIdAsync(pillid);
-            if (pill == null)
+            var pill = await _unitOfWork.Pills.GetPillsByNameAsync(name);
+            if (pill == null || !pill.Any())
             {
-                throw new Exception("Pill not found");
+                throw new Exception("No pills found with the specified name");
             }
-            _unitOfWork.Pills.Remove(pill);
-            await _unitOfWork.SaveAsync();
-            return true;
-        }
-
-        public async Task<List<PillResponse>> GetAllPillsAsync()
-        {
+            return pill.Select(p => new PillResponse
+            {
             var pills = await _unitOfWork.Pills.GetAllAsync();
             if (pills == null || !pills.Any())
             {
@@ -84,82 +73,83 @@ namespace FertilityClinic.BLL.Services.Implementations
             return pills.Select(p => new PillResponse
             {
                 PillId = p.PillId,
-                NameAndContent = p.NameAndContent,
-                Unit = p.Unit,
-                Quantity = p.Quantity,
+                Name = p.Name,
                 Description = p.Description,
                 UnitPrice = p.UnitPrice,
+                Unit = p.Unit,
                 CreatedAt = p.CreatedAt,
                 UpdatedAt = p.UpdatedAt
             }).ToList();
         }
-
-        public async Task<PillResponse?> GetPillByIdAsync(int pillid)
+        public async Task<PillResponse> AddPillAsync(PillRequest pillRequest)
         {
-            var pill = await _unitOfWork.Pills.GetByIdAsync(pillid);
+            var pill = new Pills
+            {
+                Name = pillRequest.PillName,
+                Description = pillRequest.Description,
+                UnitPrice = pillRequest.UnitPrice,
+                Unit = pillRequest.Unit,
+                RequiresPrescription = pillRequest.RequiresPrescription,
+                CreatedAt = DateTime.UtcNow,
+                UpdatedAt = null
+            };
+            //validate pill name
+            var existingPill = await _unitOfWork.Pills.GetPillsByNameAsync(pill.Name);
+            if (existingPill != null)
+            {
+                throw new Exception("A pill with this name already exists.");
+            }
+            // Add pill using Unit of Work
+            var addedPill = await _unitOfWork.Pills.AddPillAsync(pill);
+            await _unitOfWork.SaveAsync();
+            return new PillResponse
+            {
+                PillId = addedPill.PillId,
+                Name = addedPill.Name,
+                Description = addedPill.Description,
+                UnitPrice = addedPill.UnitPrice,
+                Unit = addedPill.Unit,
+                CreatedAt = addedPill.CreatedAt,
+                UpdatedAt = addedPill.UpdatedAt
+            };
+        }
+        public async Task<PillResponse> UpdatePillAsync(UpdatePillRequest updatePill, int id)
+        {
+            var pill = await _unitOfWork.Pills.GetPillByIdAsync(id);
             if (pill == null)
             {
                 throw new Exception("Pill not found");
             }
-            return new PillResponse
+            if(!string.IsNullOrEmpty(updatePill.Name))
             {
-                PillId = pill.PillId,
-                NameAndContent = pill.NameAndContent,
-                Unit = pill.Unit,
-                Quantity = pill.Quantity,
-                Description = pill.Description,
-                UnitPrice = pill.UnitPrice,
-                CreatedAt = pill.CreatedAt,
-                UpdatedAt = pill.UpdatedAt
-            };
-        }
-
-        public async Task<PillResponse> UpdatePillAsync(int pillId, PillRequest request)
-        {
-            var existingPill = await _unitOfWork.Pills.GetByIdAsync(pillId);
-            if (existingPill == null)
-                throw new Exception("Không tìm thấy thuốc cần cập nhật.");
-
-            // Nếu có thay đổi tên thuốc => kiểm tra trùng
-            if (!string.IsNullOrWhiteSpace(request.NameAndContent) &&
-                !request.NameAndContent.Equals(existingPill.NameAndContent, StringComparison.OrdinalIgnoreCase))
-            {
-                var duplicate = await _unitOfWork.Pills
-                    .FindAsync(p => p.PillId != pillId &&
-                                    p.NameAndContent!.ToLower() == request.NameAndContent.ToLower());
-
-                if (duplicate.Any())
-                    throw new Exception("Tên thuốc đã tồn tại trong hệ thống.");
-
-                if (request.NameAndContent.Length > 255)
-                    throw new Exception("Tên thuốc vượt quá giới hạn 255 ký tự.");
-
-                existingPill.NameAndContent = request.NameAndContent;
+                pill.Name = updatePill.Name;
+                if (await _unitOfWork.Pills.GetPillsByNameAsync(pill.Name) != null)
+                {
+                    throw new Exception("A pill with this name already exists.");
+                }
             }
-
-            // Cập nhật các field khác nếu có
-            if (!string.IsNullOrWhiteSpace(request.Unit))
+            if (!string.IsNullOrEmpty(updatePill.Description))
             {
-                existingPill.Unit = request.Unit;
+                pill.Description = updatePill.Description;
             }
-
-            if (!string.IsNullOrWhiteSpace(request.Description))
+            if (updatePill.UnitPrice.HasValue)
             {
-                existingPill.Description = request.Description;
+                pill.UnitPrice = updatePill.UnitPrice.Value;
             }
-
-            if (request.Quantity.HasValue)
+            if (!string.IsNullOrEmpty(updatePill.Unit))
             {
-                if (request.Quantity < 0)
-                    throw new Exception("Số lượng phải lớn hơn hoặc bằng 0.");
-                existingPill.Quantity = request.Quantity.Value;
+                pill.Unit = updatePill.Unit;
             }
-
-            if (request.UnitPrice.HasValue)
+            if (updatePill.RequiresPrescription.HasValue)
             {
-                if (request.UnitPrice < 0)
-                    throw new Exception("Giá tiền phải lớn hơn hoặc bằng 0.");
-                existingPill.UnitPrice = request.UnitPrice.Value;
+                pill.RequiresPrescription = updatePill.RequiresPrescription.Value;
+            }
+            pill.UpdatedAt = DateTime.UtcNow;
+            // Update pill using Unit of Work
+            var updatedPill = await _unitOfWork.Pills.UpdatePillAsync(pill);
+            if (updatedPill == null)
+            {
+                throw new Exception("Failed to update pill");
             }
 
             existingPill.UpdatedAt = DateTime.UtcNow;
@@ -169,17 +159,23 @@ namespace FertilityClinic.BLL.Services.Implementations
 
             return new PillResponse
             {
-                PillId = existingPill.PillId,
-                NameAndContent = existingPill.NameAndContent,
-                Unit = existingPill.Unit,
-                Quantity = existingPill.Quantity,
-                Description = existingPill.Description,
-                UnitPrice = existingPill.UnitPrice,
-                CreatedAt = existingPill.CreatedAt,
-                UpdatedAt = existingPill.UpdatedAt
+                PillId = updatedPill.PillId,
+                Name = updatedPill.Name,
+                Description = updatedPill.Description,
+                UnitPrice = updatedPill.UnitPrice,
+                Unit = updatedPill.Unit,
+                CreatedAt = updatedPill.CreatedAt,
+                UpdatedAt = updatedPill.UpdatedAt
             };
         }
-
-
+        public async Task<bool> DeletePillAsync(int pillId)
+        {
+            var pill = await _unitOfWork.Pills.DeletePillAsync(pillId);
+            if (!pill)
+            {
+                throw new Exception("Failed to delete pill or pill not found");
+            }
+            return true;
+        }
     }
 }
