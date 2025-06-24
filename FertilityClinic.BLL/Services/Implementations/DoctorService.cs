@@ -104,23 +104,23 @@ namespace FertilityClinic.BLL.Services.Implementations
             var doctor = await _unitOfWork.Doctors.GetByIdAsync(id);
             if (doctor == null)
                 throw new Exception("Doctor not found");
-            /*if (!string.IsNullOrEmpty(request.Avatar))
+            if (!string.IsNullOrEmpty(request.Avatar))
                 doctor.Avatar = request.Avatar;
 
             if (!string.IsNullOrEmpty(request.Specialization))
-                doctor.Specialization = request.Specialization;*/
+                doctor.Specialization = request.Specialization;
 
             if (!string.IsNullOrEmpty(request.Degree))
                 doctor.Degree = request.Degree;
 
-            /*if (!string.IsNullOrEmpty(request.Certifications))
+            if (!string.IsNullOrEmpty(request.Certifications))
                 doctor.Certifications = request.Certifications;
 
             if (request.ExperienceYear.HasValue)
                 doctor.ExperienceYears = request.ExperienceYear.Value;
 
             if (!string.IsNullOrEmpty(request.Bio))
-                doctor.Bio = request.Bio;*/
+                doctor.Bio = request.Bio;
 
             if (request.Education != null)
                 doctor.Education = request.Education;

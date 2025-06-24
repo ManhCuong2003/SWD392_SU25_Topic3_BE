@@ -20,7 +20,7 @@ namespace FertilityClinic.BLL.Services.Implementations
         }
 
 
-        public async Task<AppointmentResponse> CreateAppointmentAsync(AppointmentRequest appointment, int userId, int doctorId/*, int partnerId*/, int treatmentMethodID)
+        public async Task<AppointmentResponse> CreateAppointmentAsync(AppointmentRequest appointment, int userId, int doctorId)
         {
             // Check xem doctor đã có process chưa
             /*var processes = await _unitOfWork.TreatmentProcesses.GetAllAsync(); // Hoặc method tương tự
@@ -60,12 +60,7 @@ namespace FertilityClinic.BLL.Services.Implementations
             {
                 throw new InvalidOperationException("Doctor already has an appointment at this time");
             }
-
-            var treatmentMethod = await _unitOfWork.TreatmentMethods.GetByIdAsync(treatmentMethodID);
-            if (treatmentMethod == null)
-            {
-                throw new ArgumentException("Treatment method not found");
-            }
+            
             var patientHasAppointment = await _unitOfWork.Appointments.IsPatientHasAppointmentOnDateAsync(
             userId, appointmentDate);
 
@@ -102,8 +97,6 @@ namespace FertilityClinic.BLL.Services.Implementations
                 PatientName = user.FullName,
                 PatientDOB = user.DateOfBirth,
                 PhoneNumber = user.Phone,
-                MethodName = treatmentMethod.MethodName,
-                MethodPrice = treatmentMethod.Price ?? 0,  // Add this
                 PartnerName = partner.FullName,
                 PartnerDOB = partner.DateOfBirth,
                 DoctorName = doctor.User.FullName,

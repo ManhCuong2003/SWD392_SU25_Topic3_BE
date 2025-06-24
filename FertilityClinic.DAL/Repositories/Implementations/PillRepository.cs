@@ -10,10 +10,10 @@ using static FertilityClinic.DTO.Constants.APIEndPoints;
 
 namespace FertilityClinic.DAL.Repositories.Implementations
 {
-    public class PillRepository : IPillRepository
+    public class PillRepository :GenericRepository<Pills>, IPillRepository
     {
         private readonly FertilityClinicDbContext _context;
-        public PillRepository(FertilityClinicDbContext context)
+        public PillRepository(FertilityClinicDbContext context) : base(context)
         {
             _context = context;
         }
@@ -51,11 +51,11 @@ namespace FertilityClinic.DAL.Repositories.Implementations
                 .ToListAsync();
         }
 
-        //public async Task<Pills> UpdatePillAsync(Pills pill)
-        //{
-        //    Update(pill);
-        //    await _context.SaveChangesAsync();
-        //    return await GetPillByIdAsync(pill.PillId) ?? pill;
-        //}
+        public async Task<Pills> UpdatePillAsync(Pills pill)
+        {
+            Update(pill);
+            await _context.SaveChangesAsync();
+            return await GetPillByIdAsync(pill.PillId) ?? pill;
+        }
     }
 }
