@@ -109,6 +109,7 @@ builder.Services.AddScoped<ILabTestResultRepository, LabTestResultRepository>();
 builder.Services.AddScoped<IInseminationScheduleRepository, InseminationScheduleRepository>();
 builder.Services.AddScoped<IPaymentRepository, PaymentRepository>();
 builder.Services.AddScoped<IInseminationResultRepository, InseminationResultRepository>();
+builder.Services.AddScoped<IPillRepository, PillRepository>();
 // Đăng ký các service
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IDoctorService, DoctorService>();
@@ -122,6 +123,7 @@ builder.Services.AddScoped<ILabTestScheduleService, LabTestScheduleService>();
 builder.Services.AddScoped<ILabTestResultService, LabTestResultService>();
 builder.Services.AddScoped<IInseminationScheduleService, InseminationScheduleService>();
 builder.Services.AddScoped<IInseminationResultService, InseminationResultService>();
+builder.Services.AddScoped<IPillService, PillService>();
 // Add these lines in your Program.cs service configuration
 // PayOS Configuration
 var payOSConfig = builder.Configuration.GetSection("PayOS");

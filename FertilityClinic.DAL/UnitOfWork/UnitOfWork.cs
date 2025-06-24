@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using FertilityClinic.DAL.Models;
 using FertilityClinic.DAL.Repositories;
 using FertilityClinic.DAL.Repositories.Implementations;
 using FertilityClinic.DAL.Repositories.Interfaces;
@@ -16,7 +17,6 @@ namespace FertilityClinic.DAL.UnitOfWork
         private readonly FertilityClinicDbContext _context;
         private Hashtable _repositories;
         private bool _disposed;
-
         public IUserRepository Users { get; }
         public IDoctorRepository Doctors { get;  }
         public IAppoimentRepository Appointments { get; }
@@ -24,7 +24,7 @@ namespace FertilityClinic.DAL.UnitOfWork
         public IPartnerRepository Partners { get; }
 
         public ITreatmentMethodRepository TreatmentMethods { get; }
-
+        public IPillRepository Pills { get; }
         public ITreatmentProcessRepository TreatmentProcesses { get; }
 
         public ILabTestScheduleRepository LabTestSchedules { get; }
@@ -45,10 +45,9 @@ namespace FertilityClinic.DAL.UnitOfWork
             ITreatmentMethodRepository treatMentMethods,
             IPaymentRepository paymentRepository,
             ITreatmentProcessRepository paymentProcessRepository,
-            ITreatmentProcessRepository treatmentProcesses
-,
-            ILabTestScheduleRepository labTestSchedules
-,
+            ITreatmentProcessRepository treatmentProcesses,
+            IPillRepository pills,
+            ILabTestScheduleRepository labTestSchedules,
             ILabTestResultRepository labTestResults,
             IInseminationScheduleRepository inseminationSchedules,
             IInseminationResultRepository inseminationResults)
@@ -66,6 +65,7 @@ namespace FertilityClinic.DAL.UnitOfWork
             LabTestResults = labTestResults;
             InseminationSchedules = inseminationSchedules;
             InseminationResults = inseminationResults;
+            Pills = pills;
         }
         public IGenericRepository<TEntity> Repository<TEntity>() where TEntity : class
         {

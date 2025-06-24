@@ -13,7 +13,7 @@ namespace FertilityClinic.DAL.Repositories.Interfaces
         Task<Pills> GetPillByIdAsync(int pillId);
         Task<List<Pills>> GetPillsByNameAsync(string name);
         Task<Pills> AddPillAsync(Pills pill);
-        //Task<Pills> UpdatePillAsync(Pills pill);
+        Task<Pills> UpdatePillAsync(Pills pill);
         Task<bool> DeletePillAsync(int pillId);
     }
 }

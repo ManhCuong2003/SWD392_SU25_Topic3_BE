@@ -10,7 +10,7 @@ namespace FertilityClinic.DAL.UnitOfWork
 {
     public interface IUnitOfWork: IDisposable
     {
-        //IGenericRepository<TEntity> Repository<TEntity>() where TEntity : class;
+        IGenericRepository<TEntity> Repository<TEntity>() where TEntity : class;
         IUserRepository Users { get; }
         IDoctorRepository Doctors { get; }
         IAppoimentRepository Appointments { get; }
@@ -23,6 +23,7 @@ namespace FertilityClinic.DAL.UnitOfWork
         ILabTestResultRepository LabTestResults { get; }
         IInseminationScheduleRepository InseminationSchedules { get; }
         IInseminationResultRepository InseminationResults { get; }
+        IPillRepository Pills { get; }
         Task<int> SaveAsync();
     }
 }
