@@ -133,5 +133,24 @@ namespace FertilityClinic.DTO.Constants
             public const string GetAll = $"{BaseInseminationResult}/all";
             public const string GetById = $"{BaseInseminationResult}/{{inseminationResultId}}";
         }
+
+        public static class Pills
+        {
+            public const string BasePills = $"{Base}/pills";
+            public const string Create = $"{BasePills}/create";
+            public const string GetAll = $"{BasePills}/all";
+            public const string GetById = $"{BasePills}/{{id}}";
+            public const string Update = $"{BasePills}/update";
+            public const string Delete = $"{BasePills}/delete/{{id}}";
+        }
+        public static class Prescription
+        {
+            public const string BasePrescription = $"{Base}/prescription";
+            public const string Create = $"{BasePrescription}/create";
+            public const string GetAll = $"{BasePrescription}/all";
+            public const string GetById = $"{BasePrescription}/{{id}}";
+            public const string Update = $"{BasePrescription}/update";
+            public const string Delete = $"{BasePrescription}/delete/{{id}}";
+        }
     }
 }

@@ -12,22 +12,22 @@ namespace FertilityClinic.DAL.Models
         
         [Required]
         [StringLength(255)]
-        public string Name { get; set; }
-
-        [StringLength(500)]
-        public string Description { get; set; }
-
-        public decimal UnitPrice { get; set; }
+        public string? NameAndContent { get; set; }
 
         [StringLength(50)]
-        public string Unit { get; set; } // e.g., mg, ml, tablets
-        
-        public bool RequiresPrescription { get; set; }
-        
+        public string? Unit { get; set; }
+
+        public int? Quantity { get; set; }
+
+        [StringLength(500)]
+        public string? Description { get; set; }
+
+        public decimal? UnitPrice { get; set; }
+
         public DateTime CreatedAt { get; set; }
         public DateTime? UpdatedAt { get; set; }
 
         // Navigation properties
-        public virtual ICollection<Prescription> Prescriptions { get; set; } = new List<Prescription>();
+        public virtual ICollection<PrescriptionDetails> PrescriptionDetails { get; set; } = new List<PrescriptionDetails>();
     }
 }

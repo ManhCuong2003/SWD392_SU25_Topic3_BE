@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using FertilityClinic.DAL.Models;
 using FertilityClinic.DAL.Repositories;
 using FertilityClinic.DAL.Repositories.Implementations;
 using FertilityClinic.DAL.Repositories.Interfaces;
@@ -36,6 +37,9 @@ namespace FertilityClinic.DAL.UnitOfWork
 
         public IInseminationResultRepository InseminationResults { get; }
 
+        public IPillRepository Pills { get; }
+        public IPrescriptionRepository Prescriptions { get; }
+
         public UnitOfWork(FertilityClinicDbContext context, 
             IUserRepository userRepository,
             IDoctorRepository doctorRepository,
@@ -45,13 +49,13 @@ namespace FertilityClinic.DAL.UnitOfWork
             ITreatmentMethodRepository treatMentMethods,
             IPaymentRepository paymentRepository,
             ITreatmentProcessRepository paymentProcessRepository,
-            ITreatmentProcessRepository treatmentProcesses
+            ITreatmentProcessRepository treatmentProcessesRepository,
+            ILabTestResultRepository labTestResultsRepository,
+            IInseminationScheduleRepository inseminationSchedulesRepository,
+            IInseminationResultRepository inseminationResultsRepository,
+            IPillRepository pillRepository,
+            IPrescriptionRepository prescriptionRepository)
 
-            //ILabTestScheduleRepository labTestSchedules
-,
-            ILabTestResultRepository labTestResults,
-            IInseminationScheduleRepository inseminationSchedules,
-            IInseminationResultRepository inseminationResults)
         {
             _context = context;
             _repositories = new Hashtable();
@@ -61,11 +65,13 @@ namespace FertilityClinic.DAL.UnitOfWork
             AppointmentHistories = appointmentHistories;
             Partners = partnerRepository;
             TreatmentMethods = treatMentMethods;
-            TreatmentProcesses = treatmentProcesses;
+            TreatmentProcesses = treatmentProcessesRepository;
             //LabTestSchedules = labTestSchedules;
-            LabTestResults = labTestResults;
-            InseminationSchedules = inseminationSchedules;
-            InseminationResults = inseminationResults;
+            LabTestResults = labTestResultsRepository;
+            InseminationSchedules = inseminationSchedulesRepository;
+            InseminationResults = inseminationResultsRepository;
+            Pills = pillRepository;
+            Prescriptions = prescriptionRepository;
         }
         public IGenericRepository<TEntity> Repository<TEntity>() where TEntity : class
         {

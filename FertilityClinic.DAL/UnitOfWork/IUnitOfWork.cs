@@ -23,6 +23,8 @@ namespace FertilityClinic.DAL.UnitOfWork
         ILabTestResultRepository LabTestResults { get; }
         IInseminationScheduleRepository InseminationSchedules { get; }
         IInseminationResultRepository InseminationResults { get; }
+        IPillRepository Pills { get; }
+        IPrescriptionRepository Prescriptions { get; }
         Task<int> SaveAsync();
     }
 }

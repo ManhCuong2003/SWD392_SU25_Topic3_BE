@@ -47,11 +47,7 @@ namespace FertilityClinic.DAL
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<Prescription>()
-            .HasOne(p => p.Pill)
-            .WithMany(p => p.Prescriptions)
-            .HasForeignKey(p => p.PillId)
-            .OnDelete(DeleteBehavior.Restrict);
+            
 
             modelBuilder.Entity<Prescription>()
                 .HasOne(p => p.Doctor)
@@ -69,6 +65,11 @@ namespace FertilityClinic.DAL
                 .HasOne(p => p.User)
                 .WithMany()
                 .HasForeignKey(p => p.UserId)
+                .OnDelete(DeleteBehavior.Restrict);
+            modelBuilder.Entity<Prescription>()
+                .HasOne(p => p.TreatmentMethod)
+                .WithMany(tm => tm.Prescriptions)
+                .HasForeignKey(p => p.TreatmentMethodId)
                 .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<Partner>(entity =>
@@ -157,20 +158,17 @@ namespace FertilityClinic.DAL
                     .HasForeignKey(i => i.TreatmentProcessId)
                     .OnDelete(DeleteBehavior.NoAction);*/
             });
-            
-            // LabTestSchedule configurations
-           /* modelBuilder.Entity<LabTestSchedule>(entity =>
-            {
-                entity.HasOne(l => l.Doctor)
-                    .WithMany(d => d.LabTestSchedules)
-                    .HasForeignKey(l => l.DoctorId)
-                    .OnDelete(DeleteBehavior.NoAction);
 
-                entity.HasOne(l => l.TreatmentProcess)
-                    .WithMany()
-                    .HasForeignKey(l => l.TreatmentProcessId)
-                    .OnDelete(DeleteBehavior.NoAction);
-            });*/
+            // LabTestSchedule configurations
+            modelBuilder.Entity<PrescriptionDetails>()
+                    .HasOne(d => d.Prescription)
+                    .WithMany(p => p.PrescriptionDetails)
+                    .HasForeignKey(d => d.PrescriptionId);
+
+            modelBuilder.Entity<PrescriptionDetails>()
+                    .HasOne(d => d.Pill)
+                    .WithMany(p => p.PrescriptionDetails)
+                    .HasForeignKey(d => d.PillId);
 
             // InseminationSchedule configurations
             modelBuilder.Entity<InseminationSchedule>(entity =>
