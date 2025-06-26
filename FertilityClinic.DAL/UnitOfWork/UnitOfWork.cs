@@ -31,6 +31,9 @@ namespace FertilityClinic.DAL.UnitOfWork
         public ILabTestResultRepository LabTestResults { get; }
         public IInseminationScheduleRepository InseminationSchedules { get; }
         public IInseminationResultRepository InseminationResults { get; }
+
+        public IReviewRepository Reviews { get; }
+        public IPrescriptionRepository Prescriptions { get; }
         public UnitOfWork(FertilityClinicDbContext context, 
             IUserRepository userRepository,
             IDoctorRepository doctorRepository,
@@ -39,11 +42,13 @@ namespace FertilityClinic.DAL.UnitOfWork
             IPartnerRepository partnerRepository,
             ITreatmentMethodRepository treatMentMethods,
             ITreatmentProcessRepository paymentProcessRepository,
-            ITreatmentProcessRepository treatmentProcesses,
+            ITreatmentProcessRepository treatmentProcessesRepository,
             IPillRepository pills,
-            ILabTestResultRepository labTestResults,
+            ILabTestResultRepository labTestResultsRepository,
             IInseminationScheduleRepository inseminationSchedules,
-            IInseminationResultRepository inseminationResults)
+            IInseminationResultRepository inseminationResults,
+            IReviewRepository reviews,
+            IPrescriptionRepository prescriptions)
         {
             _context = context;
             _repositories = new Hashtable();
@@ -55,10 +60,12 @@ namespace FertilityClinic.DAL.UnitOfWork
             TreatmentMethods = treatMentMethods;
             TreatmentProcesses = treatmentProcessesRepository;
             //LabTestSchedules = labTestSchedules;
-            LabTestResults = labTestResults;
+            LabTestResults = labTestResultsRepository;
             InseminationSchedules = inseminationSchedules;
             InseminationResults = inseminationResults;
             Pills = pills;
+            Reviews = reviews;
+            Prescriptions = prescriptions;
         }
         public IGenericRepository<TEntity> Repository<TEntity>() where TEntity : class
         {

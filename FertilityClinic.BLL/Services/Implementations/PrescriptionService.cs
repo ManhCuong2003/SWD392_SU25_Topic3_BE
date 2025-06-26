@@ -20,23 +20,7 @@ namespace FertilityClinic.BLL.Services.Implementations
         }
         public async Task<PrescriptionResponse> CreatePrescriptionAsync(PrescriptionRequest request, int userId, int doctorId, int appointmentId, int treatmentMethodId)
         {
-            var newPrescription = new Prescription
-            {
-                DoctorId = doctorId,
-                AppointmentId = appointmentId,
-                UserId = userId,
-                PrescribedDate = DateTime.Now,
-                TrackingMode = request.TrackingMode,
-                TreatmentMethodId = treatmentMethodId,
-            };
-            var treatmentMethod = await _unitOfWork.TreatmentMethods.GetByIdAsync(treatmentMethodId);
-            await _unitOfWork.Prescriptions.AddAsync(newPrescription);
-            await _unitOfWork.SaveAsync();
-            return new PrescriptionResponse
-            {
-                MethodName = treatmentMethod?.MethodName,
-                TrackingMode = request.TrackingMode,
-            };
+            throw new NotImplementedException();
         }
 
         public Task<bool> DeletePrescriptionAsync(int id)
@@ -50,6 +34,11 @@ namespace FertilityClinic.BLL.Services.Implementations
         }
 
         public Task<PrescriptionResponse?> GetPrescriptionByIdAsync(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<PrescriptionResponse> UpdatePrescriptionAsync(int id, PrescriptionRequest request)
         {
             throw new NotImplementedException();
         }

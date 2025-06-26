@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FertilityClinic.DAL.Models
+namespace FertilityClinic.DTO.Responses
 {
-    public class Review
+    public class ReviewResponse
     {
         public int ReviewId { get; set; }
         public int UserId { get; set; }
@@ -15,8 +15,5 @@ namespace FertilityClinic.DAL.Models
         public string? Comment { get; set; }
         public DateTime ReviewDate { get; set; }
         public DateTime CreatedAt { get; set; }
-
-        public virtual User? User { get; set; }
-        public  virtual Doctor? Doctor { get; set; }
     }
 }

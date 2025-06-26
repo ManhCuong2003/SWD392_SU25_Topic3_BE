@@ -101,15 +101,15 @@ namespace FertilityClinic.DTO.Constants
             public const string Update = $"{BaseTreatmentMethod}/update";
             public const string Delete = $"{BaseTreatmentMethod}/delete/{{id}}";
         }
-        /*public static class LabTestSchedule
+        public static class InjectionSchedule
         {
-            public const string BaseLabTestSchedule = $"{Base}/lab-test-schedule";
-            public const string Create = $"{BaseLabTestSchedule}/create/{{doctorId}}";
-            public const string GetAll = $"{BaseLabTestSchedule}/all";
-            public const string GetById = $"{BaseLabTestSchedule}/{{labTestScheduleId}}";
-            public const string Update = $"{BaseLabTestSchedule}/update/{{id}}";
-            public const string Delete = $"{BaseLabTestSchedule}/delete/{{id}}";
-        }*/
+            public const string BaseInjectionSchedule = $"{Base}/injectionSchedule";
+            public const string Create = $"{BaseInjectionSchedule}/create/{{doctorId}}";
+            public const string GetAll = $"{BaseInjectionSchedule}/all";
+            public const string GetById = $"{BaseInjectionSchedule}/{{injectionScheduleId}}";
+            public const string Update = $"{BaseInjectionSchedule}/update/{{id}}";
+            public const string Delete = $"{BaseInjectionSchedule}/delete/{{id}}";
+        }
         public static class LabTestResult
         {
             public const string BaseLabTestResult = $"{Base}/lab-test-result";
@@ -154,6 +154,16 @@ namespace FertilityClinic.DTO.Constants
             public const string GetById = $"{BasePrescription}/{{id}}";
             public const string Update = $"{BasePrescription}/update";
             public const string Delete = $"{BasePrescription}/delete/{{id}}";
+        }
+
+        public static class Review
+        {
+            public const string BaseReview = $"{Base}/review";
+            public const string Create = $"{BaseReview}/create";
+            public const string GetAll = $"{BaseReview}/all";
+            public const string GetById = $"{BaseReview}/{{id}}";
+            public const string Update = $"{BaseReview}/update";
+            public const string Delete = $"{BaseReview}/delete/{{id}}";
         }
     }
 }

@@ -8,11 +8,6 @@ using FertilityClinic.DAL.Models;
 using FertilityClinic.DAL.UnitOfWork;
 using FertilityClinic.DTO.Requests;
 using FertilityClinic.DTO.Responses;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FertilityClinic.BLL.Services.Implementations
 {
@@ -54,7 +49,6 @@ namespace FertilityClinic.BLL.Services.Implementations
                 CreatedAt = pill.CreatedAt,
                 UpdatedAt = pill.UpdatedAt
             };
-
         }
         public async Task<List<PillResponse>> GetPillsByNameAsync(string name)
         {
@@ -64,13 +58,6 @@ namespace FertilityClinic.BLL.Services.Implementations
                 throw new Exception("No pills found with the specified name");
             }
             return pill.Select(p => new PillResponse
-            {
-            var pills = await _unitOfWork.Pills.GetAllAsync();
-            if (pills == null || !pills.Any())
-            {
-                throw new Exception("No pills found in the system.");
-            }
-            return pills.Select(p => new PillResponse
             {
                 PillId = p.PillId,
                 Name = p.Name,
@@ -120,7 +107,7 @@ namespace FertilityClinic.BLL.Services.Implementations
             {
                 throw new Exception("Pill not found");
             }
-            if(!string.IsNullOrEmpty(updatePill.Name))
+            if (!string.IsNullOrEmpty(updatePill.Name))
             {
                 pill.Name = updatePill.Name;
                 if (await _unitOfWork.Pills.GetPillsByNameAsync(pill.Name) != null)
@@ -151,12 +138,6 @@ namespace FertilityClinic.BLL.Services.Implementations
             {
                 throw new Exception("Failed to update pill");
             }
-
-            existingPill.UpdatedAt = DateTime.UtcNow;
-
-            _unitOfWork.Pills.Update(existingPill);
-            await _unitOfWork.SaveAsync();
-
             return new PillResponse
             {
                 PillId = updatedPill.PillId,

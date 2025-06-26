@@ -9,11 +9,11 @@ using Microsoft.Extensions.Configuration;
 
 namespace FertilityClinic.DAL
 {
-    public class FertilityClinicDbContext: DbContext
+    public class FertilityClinicDbContext : DbContext
     {
         public readonly IConfiguration _configuration;
-    public FertilityClinicDbContext(DbContextOptions<FertilityClinicDbContext> options, IConfiguration configuration)
-            : base(options)
+        public FertilityClinicDbContext(DbContextOptions<FertilityClinicDbContext> options, IConfiguration configuration)
+                : base(options)
         {
             _configuration = configuration;
         }
@@ -27,7 +27,7 @@ namespace FertilityClinic.DAL
         public DbSet<InjectionSchedule> InjectionSchedules { get; set; }
         public DbSet<InseminationSchedule> InseminationSchedules { get; set; }
         public DbSet<InseminationResult> InseminationResults { get; set; }
-        //public DbSet<LabTestSchedule> LabTestSchedules { get; set; }
+        
         public DbSet<LabTestResult> LabTestResults { get; set; }
         public DbSet<AppointmentHistory> AppointmentHistories { get; set; }
         public DbSet<Pills> Pills { get; set; }
@@ -37,7 +37,7 @@ namespace FertilityClinic.DAL
         {
             if (!optionsBuilder.IsConfigured)
             {
-                var connectionString = _configuration.GetConnectionString("DefaultConnection"); // DefaultConnection is defined in appsettings.json
+                var connectionString = _configuration.GetConnectionString("DefaultConnection");
                 optionsBuilder.UseSqlServer(connectionString);
 
             }
@@ -46,7 +46,11 @@ namespace FertilityClinic.DAL
         {
             base.OnModelCreating(modelBuilder);
 
-            
+            modelBuilder.Entity<Prescription>()
+            .HasOne(p => p.Pill)
+            .WithMany(p => p.Prescriptions)
+            .HasForeignKey(p => p.PillId)
+            .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<Prescription>()
                 .HasOne(p => p.Doctor)
@@ -64,11 +68,6 @@ namespace FertilityClinic.DAL
                 .HasOne(p => p.User)
                 .WithMany()
                 .HasForeignKey(p => p.UserId)
-                .OnDelete(DeleteBehavior.Restrict);
-            modelBuilder.Entity<Prescription>()
-                .HasOne(p => p.TreatmentMethod)
-                .WithMany(tm => tm.Prescriptions)
-                .HasForeignKey(p => p.TreatmentMethodId)
                 .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<Partner>(entity =>
@@ -128,9 +127,9 @@ namespace FertilityClinic.DAL
             });
 
             modelBuilder.Entity<TreatmentProcess>(entity =>
-            {   
+            {
                 entity.HasOne(tp => tp.TreatmentMethod)
-                      .WithMany(tm => tm.TreatmentProcesses) 
+                      .WithMany(tm => tm.TreatmentProcesses)
                       .HasForeignKey(tp => tp.TreatmentMethodId)
                       .OnDelete(DeleteBehavior.Restrict);
                 entity.HasMany(tp => tp.InjectionSchedules)
@@ -152,22 +151,25 @@ namespace FertilityClinic.DAL
                     .HasForeignKey(i => i.DoctorId)
                     .OnDelete(DeleteBehavior.NoAction);
 
-               /* entity.HasOne(i => i.TreatmentProcess)
-                    .WithMany()
-                    .HasForeignKey(i => i.TreatmentProcessId)
-                    .OnDelete(DeleteBehavior.NoAction);*/
+                /* entity.HasOne(i => i.TreatmentProcess)
+                     .WithMany()
+                     .HasForeignKey(i => i.TreatmentProcessId)
+                     .OnDelete(DeleteBehavior.NoAction);*/
             });
 
             // LabTestSchedule configurations
-            modelBuilder.Entity<PrescriptionDetails>()
-                    .HasOne(d => d.Prescription)
-                    .WithMany(p => p.PrescriptionDetails)
-                    .HasForeignKey(d => d.PrescriptionId);
+            /* modelBuilder.Entity<LabTestSchedule>(entity =>
+             {
+                 entity.HasOne(l => l.Doctor)
+                     .WithMany(d => d.LabTestSchedules)
+                     .HasForeignKey(l => l.DoctorId)
+                     .OnDelete(DeleteBehavior.NoAction);
 
-            modelBuilder.Entity<PrescriptionDetails>()
-                    .HasOne(d => d.Pill)
-                    .WithMany(p => p.PrescriptionDetails)
-                    .HasForeignKey(d => d.PillId);
+                 entity.HasOne(l => l.TreatmentProcess)
+                     .WithMany()
+                     .HasForeignKey(l => l.TreatmentProcessId)
+                     .OnDelete(DeleteBehavior.NoAction);
+             });*/
 
             // InseminationSchedule configurations
             modelBuilder.Entity<InseminationSchedule>(entity =>
@@ -177,10 +179,10 @@ namespace FertilityClinic.DAL
                     .HasForeignKey(i => i.DoctorId)
                     .OnDelete(DeleteBehavior.NoAction);
 
-               /* entity.HasOne(i => i.TreatmentProcess)
-                    .WithMany()
-                    .HasForeignKey(i => i.TreatmentProcessId)
-                    .OnDelete(DeleteBehavior.NoAction);*/
+                /* entity.HasOne(i => i.TreatmentProcess)
+                     .WithMany()
+                     .HasForeignKey(i => i.TreatmentProcessId)
+                     .OnDelete(DeleteBehavior.NoAction);*/
             });
 
             // LabTestResult configurations
@@ -214,4 +216,3 @@ namespace FertilityClinic.DAL
         }
     }
 }
-

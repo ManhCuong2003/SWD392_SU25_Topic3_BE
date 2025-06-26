@@ -1,6 +1,7 @@
 ﻿using FertilityClinic.BLL.Services.Implementations;
 using FertilityClinic.BLL.Services.Interfaces;
 using FertilityClinic.DAL;
+using FertilityClinic.DAL.Models;
 using FertilityClinic.DAL.Repositories;
 using FertilityClinic.DAL.Repositories.Implementations;
 using FertilityClinic.DAL.Repositories.Interfaces;
@@ -109,6 +110,8 @@ builder.Services.AddScoped<ILabTestResultRepository, LabTestResultRepository>();
 builder.Services.AddScoped<IInseminationScheduleRepository, InseminationScheduleRepository>();
 builder.Services.AddScoped<IInseminationResultRepository, InseminationResultRepository>();
 builder.Services.AddScoped<IPillRepository, PillRepository>();
+builder.Services.AddScoped<IReviewRepository, ReviewRepository>();
+builder.Services.AddScoped<IPrescriptionRepository, PrescriptionRepository>();
 // Đăng ký các service
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IDoctorService, DoctorService>();
@@ -123,6 +126,8 @@ builder.Services.AddScoped<ILabTestResultService, LabTestResultService>();
 builder.Services.AddScoped<IInseminationScheduleService, InseminationScheduleService>();
 builder.Services.AddScoped<IInseminationResultService, InseminationResultService>();
 builder.Services.AddScoped<IPillService, PillService>();
+builder.Services.AddScoped<IReviewService, ReviewService>();
+builder.Services.AddScoped<IPrescriptionService, PrescriptionService>();
 // Add these lines in your Program.cs service configuration
 // PayOS Configuration
 var payOSConfig = builder.Configuration.GetSection("PayOS");
