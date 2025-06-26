@@ -33,5 +33,8 @@ namespace FertilityClinic.DAL.Models
     public float? Price { get; set; } // Price in VND
 
     public ICollection<TreatmentProcess>? TreatmentProcesses { get; set; }
+
+    public virtual ICollection<Prescription> Prescriptions { get; set; } = new List<Prescription>();
+
     }
 }

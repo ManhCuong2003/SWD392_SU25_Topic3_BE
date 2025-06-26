@@ -107,7 +107,7 @@ namespace FertilityClinic.BLL.Services.Implementations
             {
                 throw new Exception("Pill not found");
             }
-            if(!string.IsNullOrEmpty(updatePill.Name))
+            if (!string.IsNullOrEmpty(updatePill.Name))
             {
                 pill.Name = updatePill.Name;
                 if (await _unitOfWork.Pills.GetPillsByNameAsync(pill.Name) != null)

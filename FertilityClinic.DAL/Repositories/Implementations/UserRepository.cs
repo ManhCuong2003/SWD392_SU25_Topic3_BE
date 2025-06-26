@@ -66,6 +66,7 @@ namespace FertilityClinic.DAL.Repositories.Implementations
         {
             return await _context.Users
         .Where(u => u.Role == "User")
+        .Include(u => u.Partner)
         .Include(u => u.Doctor)
         .ToListAsync();
         }
@@ -88,6 +89,7 @@ namespace FertilityClinic.DAL.Repositories.Implementations
         {
             return await _context.Users
                 .Where(u => u.Role == "User")
+                .Include(u => u.Partner)
                 .Include(u => u.Appointments)
                 .Include(u => u.GetAppointmentHistories)
                 .Include(u => u.Doctor)

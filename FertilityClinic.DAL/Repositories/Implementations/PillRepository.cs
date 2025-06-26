@@ -1,4 +1,7 @@
-﻿using System;
+﻿using FertilityClinic.DAL.Models;
+using FertilityClinic.DAL.Repositories.Interfaces;
+using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,6 +10,7 @@ using FertilityClinic.DAL.Models;
 using FertilityClinic.DAL.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using static FertilityClinic.DTO.Constants.APIEndPoints;
+using Pills = FertilityClinic.DAL.Models.Pills;
 
 namespace FertilityClinic.DAL.Repositories.Implementations
 {

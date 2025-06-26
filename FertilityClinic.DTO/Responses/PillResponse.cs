@@ -23,5 +23,7 @@ namespace FertilityClinic.DTO.Responses
 
         public DateTime CreatedAt { get; set; }
         public DateTime? UpdatedAt { get; set; }
+        // Navigation properties can be added if needed
+        // public virtual ICollection<PrescriptionResponse> Prescriptions { get; set; } = new List<PrescriptionResponse>();
     }
 }

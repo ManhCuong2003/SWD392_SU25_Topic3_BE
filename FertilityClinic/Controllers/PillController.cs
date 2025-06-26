@@ -16,6 +16,7 @@ namespace FertilityClinic.Controllers
             _pillService = pillService;
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<IActionResult> CreatePill([FromBody] PillRequest request)
         {
@@ -31,6 +32,7 @@ namespace FertilityClinic.Controllers
                 return BadRequest($"Error creating pill: {ex.Message}");
             }
         }
+        [Authorize(Roles = "Admin")]
         [HttpGet("{pillId}")]
         public async Task<IActionResult> GetPillById(int pillId)
         {
@@ -46,6 +48,7 @@ namespace FertilityClinic.Controllers
                 return BadRequest($"Error retrieving pill: {ex.Message}");
             }
         }
+        [Authorize(Roles = "Admin")]
         [HttpGet("search")]
         public async Task<IActionResult> SearchPills([FromQuery] string name)
         {
@@ -59,6 +62,7 @@ namespace FertilityClinic.Controllers
                 return BadRequest($"Error searching pills: {ex.Message}");
             }
         }
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         public async Task<IActionResult> GetAllPills()
         {
@@ -72,6 +76,7 @@ namespace FertilityClinic.Controllers
                 return BadRequest($"Error retrieving doctors: {ex.Message}");
             }
         }
+        [Authorize(Roles = "Admin")]
         [HttpDelete("{pillId}")]
         public async Task<IActionResult> DeletePill(int pillId)
         {
@@ -88,6 +93,7 @@ namespace FertilityClinic.Controllers
                 return BadRequest($"Error deleting pill: {ex.Message}");
             }
         }
+        [Authorize(Roles = "Admin")]
         [HttpPut("{pillId}")]
         public async Task<IActionResult> UpdatePill(int pillId, [FromBody] UpdatePillRequest request)
         {

@@ -9,7 +9,7 @@ namespace FertilityClinic.DAL.Models
     {
         [Key]
         public int PillId { get; set; }
-        
+
         [Required]
         [StringLength(255)]
         public string Name { get; set; }
@@ -21,9 +21,9 @@ namespace FertilityClinic.DAL.Models
 
         [StringLength(50)]
         public string Unit { get; set; } // e.g., mg, ml, tablets
-        
+
         public bool RequiresPrescription { get; set; }
-        
+
         public DateTime CreatedAt { get; set; }
         public DateTime? UpdatedAt { get; set; }
 

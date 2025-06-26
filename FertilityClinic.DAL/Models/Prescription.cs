@@ -20,6 +20,8 @@ namespace FertilityClinic.DAL.Models
 
         [Required]
         public int UserId { get; set; }
+        [Required]
+        public int TreatmentMethodId { get; set; }
 
         [Required]
         [StringLength(100)]
@@ -51,5 +53,6 @@ namespace FertilityClinic.DAL.Models
         public virtual Doctor Doctor { get; set; }
         public virtual Appointment Appointment { get; set; }
         public virtual User User { get; set; }
+        public virtual TreatmentMethod TreatmentMethod { get; set; }
     }
 }
