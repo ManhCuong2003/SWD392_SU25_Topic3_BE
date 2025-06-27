@@ -32,7 +32,8 @@ namespace FertilityClinic.DAL
         public DbSet<AppointmentHistory> AppointmentHistories { get; set; }
         public DbSet<Pills> Pills { get; set; }
         public DbSet<Prescription> Prescriptions { get; set; }
-
+        public DbSet<Notification> Notifications { get; set; }
+        public DbSet<Blog> Blogs { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
@@ -157,19 +158,13 @@ namespace FertilityClinic.DAL
                      .OnDelete(DeleteBehavior.NoAction);*/
             });
 
-            // LabTestSchedule configurations
-            /* modelBuilder.Entity<LabTestSchedule>(entity =>
-             {
-                 entity.HasOne(l => l.Doctor)
-                     .WithMany(d => d.LabTestSchedules)
-                     .HasForeignKey(l => l.DoctorId)
-                     .OnDelete(DeleteBehavior.NoAction);
-
-                 entity.HasOne(l => l.TreatmentProcess)
-                     .WithMany()
-                     .HasForeignKey(l => l.TreatmentProcessId)
-                     .OnDelete(DeleteBehavior.NoAction);
-             });*/
+            modelBuilder.Entity<Blog>(entity =>
+            {
+                entity.HasOne(b => b.User)
+                      .WithMany(u => u.Blogs)
+                      .HasForeignKey(b => b.UserId)
+                      .OnDelete(DeleteBehavior.NoAction);
+            });
 
             // InseminationSchedule configurations
             modelBuilder.Entity<InseminationSchedule>(entity =>
@@ -212,7 +207,13 @@ namespace FertilityClinic.DAL
                     .HasForeignKey(i => i.InseminationScheduleId)
                     .OnDelete(DeleteBehavior.NoAction);
             });
-
+            modelBuilder.Entity<Notification>(entity =>
+            {
+                entity.HasOne(n => n.User)
+                      .WithMany(u => u.Notifications)
+                      .HasForeignKey(n => n.UserId)
+                      .OnDelete(DeleteBehavior.Cascade);
+            });
         }
     }
 }
