@@ -34,6 +34,8 @@ namespace FertilityClinic.DAL.UnitOfWork
 
         public IReviewRepository Reviews { get; }
         public IPrescriptionRepository Prescriptions { get; }
+        public INotificationRepository Notifications { get; }
+        public IBlogRepository Blogs { get; }
         public UnitOfWork(FertilityClinicDbContext context, 
             IUserRepository userRepository,
             IDoctorRepository doctorRepository,
@@ -48,7 +50,9 @@ namespace FertilityClinic.DAL.UnitOfWork
             IInseminationScheduleRepository inseminationSchedules,
             IInseminationResultRepository inseminationResults,
             IReviewRepository reviews,
-            IPrescriptionRepository prescriptions)
+            IPrescriptionRepository prescriptions,
+            INotificationRepository notifications,
+            IBlogRepository blogs)
         {
             _context = context;
             _repositories = new Hashtable();
@@ -66,6 +70,8 @@ namespace FertilityClinic.DAL.UnitOfWork
             Pills = pills;
             Reviews = reviews;
             Prescriptions = prescriptions;
+            Notifications = notifications;
+            Blogs = blogs;
         }
         public IGenericRepository<TEntity> Repository<TEntity>() where TEntity : class
         {

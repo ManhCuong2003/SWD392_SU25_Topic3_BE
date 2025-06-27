@@ -162,7 +162,7 @@ namespace FertilityClinic.DAL.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Blog");
+                    b.ToTable("Blogs");
                 });
 
             modelBuilder.Entity("FertilityClinic.DAL.Models.Doctor", b =>
@@ -408,7 +408,7 @@ namespace FertilityClinic.DAL.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Notification");
+                    b.ToTable("Notifications");
                 });
 
             modelBuilder.Entity("FertilityClinic.DAL.Models.Partner", b =>
@@ -791,7 +791,7 @@ namespace FertilityClinic.DAL.Migrations
                     b.HasOne("FertilityClinic.DAL.Models.User", "User")
                         .WithMany("Blogs")
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("User");

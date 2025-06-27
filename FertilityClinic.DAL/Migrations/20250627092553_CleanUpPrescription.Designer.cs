@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FertilityClinic.DAL.Migrations
 {
     [DbContext(typeof(FertilityClinicDbContext))]
-    [Migration("20250624074840_removePrescriptionDetail")]
-    partial class removePrescriptionDetail
+    [Migration("20250627092553_CleanUpPrescription")]
+    partial class CleanUpPrescription
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -165,7 +165,7 @@ namespace FertilityClinic.DAL.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Blog");
+                    b.ToTable("Blogs");
                 });
 
             modelBuilder.Entity("FertilityClinic.DAL.Models.Doctor", b =>
@@ -411,7 +411,7 @@ namespace FertilityClinic.DAL.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Notification");
+                    b.ToTable("Notifications");
                 });
 
             modelBuilder.Entity("FertilityClinic.DAL.Models.Partner", b =>
@@ -553,7 +553,7 @@ namespace FertilityClinic.DAL.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("TreatmentMethodId")
+                    b.Property<int>("TreatmentMethodId")
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("UpdatedAt")
@@ -586,7 +586,6 @@ namespace FertilityClinic.DAL.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ReviewId"));
 
                     b.Property<string>("Comment")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("CreatedAt")
@@ -795,7 +794,7 @@ namespace FertilityClinic.DAL.Migrations
                     b.HasOne("FertilityClinic.DAL.Models.User", "User")
                         .WithMany("Blogs")
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("User");
@@ -922,9 +921,11 @@ namespace FertilityClinic.DAL.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("FertilityClinic.DAL.Models.TreatmentMethod", null)
+                    b.HasOne("FertilityClinic.DAL.Models.TreatmentMethod", "TreatmentMethod")
                         .WithMany("Prescriptions")
-                        .HasForeignKey("TreatmentMethodId");
+                        .HasForeignKey("TreatmentMethodId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("FertilityClinic.DAL.Models.User", "User")
                         .WithMany()
@@ -937,6 +938,8 @@ namespace FertilityClinic.DAL.Migrations
                     b.Navigation("Doctor");
 
                     b.Navigation("Pill");
+
+                    b.Navigation("TreatmentMethod");
 
                     b.Navigation("User");
                 });

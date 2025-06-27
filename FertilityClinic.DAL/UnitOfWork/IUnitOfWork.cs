@@ -25,6 +25,8 @@ namespace FertilityClinic.DAL.UnitOfWork
         IPillRepository Pills { get; }
         IPrescriptionRepository Prescriptions { get; }
         IReviewRepository Reviews { get; }
+        INotificationRepository Notifications { get; }
+        IBlogRepository Blogs { get; }
         Task<int> SaveAsync();
     }
 }
