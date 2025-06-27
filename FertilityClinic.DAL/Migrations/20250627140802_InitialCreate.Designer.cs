@@ -12,15 +12,15 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FertilityClinic.DAL.Migrations
 {
     [DbContext(typeof(FertilityClinicDbContext))]
-    [Migration("20250520142714_UserPassword")]
-    partial class UserPassword
+    [Migration("20250627140802_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.0")
+                .HasAnnotation("ProductVersion", "8.0.16")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -33,23 +33,82 @@ namespace FertilityClinic.DAL.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("AppointmentId"));
 
-                    b.Property<DateTime>("AppointmentDate")
-                        .HasColumnType("datetime2");
+                    b.Property<DateOnly>("AppointmentDate")
+                        .HasColumnType("date");
+
+                    b.Property<TimeOnly>("AppointmentTime")
+                        .HasColumnType("time");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("Diagnosis")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("DoctorId")
                         .HasColumnType("int");
 
-                    b.Property<string>("Notes")
+                    b.Property<int>("PartnerId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Status")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("PatientId")
+                    b.Property<int>("UserId")
                         .HasColumnType("int");
 
-                    b.Property<string>("Reason")
+                    b.HasKey("AppointmentId");
+
+                    b.HasIndex("DoctorId");
+
+                    b.HasIndex("PartnerId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Appointments");
+                });
+
+            modelBuilder.Entity("FertilityClinic.DAL.Models.AppointmentHistory", b =>
+                {
+                    b.Property<int>("AppointmentHistoryId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("AppointmentHistoryId"));
+
+                    b.Property<DateOnly>("AppointmentDate")
+                        .HasColumnType("date");
+
+                    b.Property<TimeOnly>("AppointmentTime")
+                        .HasColumnType("time");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("DoctorName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MethodName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateOnly?>("PartnerDOB")
+                        .HasColumnType("date");
+
+                    b.Property<string>("PartnerName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateOnly?>("PatientDOB")
+                        .HasColumnType("date");
+
+                    b.Property<string>("PatientName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhoneNumber")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -57,16 +116,14 @@ namespace FertilityClinic.DAL.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("UpdatedAt")
-                        .HasColumnType("datetime2");
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
 
-                    b.HasKey("AppointmentId");
+                    b.HasKey("AppointmentHistoryId");
 
-                    b.HasIndex("DoctorId");
+                    b.HasIndex("UserId");
 
-                    b.HasIndex("PatientId");
-
-                    b.ToTable("Appointments");
+                    b.ToTable("AppointmentHistories");
                 });
 
             modelBuilder.Entity("FertilityClinic.DAL.Models.Blog", b =>
@@ -119,30 +176,32 @@ namespace FertilityClinic.DAL.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("DoctorId"));
 
-                    b.Property<string>("Certifications")
+                    b.Property<string>("Avatar")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
+                    b.Property<string>("Bio")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Certifications")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Degree")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("DoctorCode")
+                    b.Property<string>("Education")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<double>("Rating")
-                        .HasColumnType("float");
+                    b.Property<int>("ExperienceYears")
+                        .HasColumnType("int");
 
                     b.Property<string>("Specialization")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("UpdatedAt")
-                        .HasColumnType("datetime2");
 
                     b.Property<int>("UserId")
                         .HasColumnType("int");
@@ -170,28 +229,21 @@ namespace FertilityClinic.DAL.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Dosage")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("InjectionDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("MedicationName")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Notes")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Status")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("TreatmentProcessId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("TreatmentProcessId1")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("UpdatedAt")
@@ -202,8 +254,6 @@ namespace FertilityClinic.DAL.Migrations
                     b.HasIndex("DoctorId");
 
                     b.HasIndex("TreatmentProcessId");
-
-                    b.HasIndex("TreatmentProcessId1");
 
                     b.ToTable("InjectionSchedules");
                 });
@@ -226,14 +276,12 @@ namespace FertilityClinic.DAL.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Notes")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("ResultDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("ResultDetails")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("UpdatedAt")
@@ -266,21 +314,15 @@ namespace FertilityClinic.DAL.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Method")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Notes")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Status")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("TreatmentProcessId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("TreatmentProcessId1")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("UpdatedAt")
@@ -291,8 +333,6 @@ namespace FertilityClinic.DAL.Migrations
                     b.HasIndex("DoctorId");
 
                     b.HasIndex("TreatmentProcessId");
-
-                    b.HasIndex("TreatmentProcessId1");
 
                     b.ToTable("InseminationSchedules");
                 });
@@ -305,7 +345,10 @@ namespace FertilityClinic.DAL.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("LabTestResultId"));
 
-                    b.Property<DateTime>("CreatedAt")
+                    b.Property<bool>("Bold")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
 
                     b.Property<int>("DoctorId")
@@ -314,76 +357,23 @@ namespace FertilityClinic.DAL.Migrations
                     b.Property<int>("LabTestScheduleId")
                         .HasColumnType("int");
 
-                    b.Property<string>("Notes")
-                        .IsRequired()
+                    b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("ResultDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("ResultDetails")
-                        .IsRequired()
+                    b.Property<string>("Normal")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("UpdatedAt")
-                        .HasColumnType("datetime2");
+                    b.Property<string>("Result")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Unit")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("LabTestResultId");
 
                     b.HasIndex("DoctorId");
 
-                    b.HasIndex("LabTestScheduleId");
-
                     b.ToTable("LabTestResults");
-                });
-
-            modelBuilder.Entity("FertilityClinic.DAL.Models.LabTestSchedule", b =>
-                {
-                    b.Property<int>("LabTestScheduleId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("LabTestScheduleId"));
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("DoctorId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Notes")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Status")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("TestDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("TestType")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("TreatmentProcessId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("TreatmentProcessId1")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("UpdatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("LabTestScheduleId");
-
-                    b.HasIndex("DoctorId");
-
-                    b.HasIndex("TreatmentProcessId");
-
-                    b.HasIndex("TreatmentProcessId1");
-
-                    b.ToTable("LabTestSchedules");
                 });
 
             modelBuilder.Entity("FertilityClinic.DAL.Models.Notification", b =>
@@ -424,78 +414,167 @@ namespace FertilityClinic.DAL.Migrations
                     b.ToTable("Notifications");
                 });
 
-            modelBuilder.Entity("FertilityClinic.DAL.Models.Patient", b =>
+            modelBuilder.Entity("FertilityClinic.DAL.Models.Partner", b =>
                 {
-                    b.Property<int>("PatientId")
+                    b.Property<int>("PartnerId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PatientId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PartnerId"));
 
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
+                    b.Property<DateOnly?>("DateOfBirth")
+                        .HasColumnType("date");
 
-                    b.Property<string>("MedicalHistory")
-                        .IsRequired()
+                    b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("MedicalRecordCode")
-                        .IsRequired()
+                    b.Property<string>("FullName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Notes")
-                        .IsRequired()
+                    b.Property<string>("Gender")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Status")
-                        .IsRequired()
+                    b.Property<DateOnly?>("HealthInsuranceExpirationDate")
+                        .HasColumnType("date");
+
+                    b.Property<string>("HealthInsuranceId")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("UpdatedAt")
-                        .HasColumnType("datetime2");
+                    b.Property<string>("NationalId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Phone")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("UserId")
                         .HasColumnType("int");
 
-                    b.HasKey("PatientId");
+                    b.HasKey("PartnerId");
 
                     b.HasIndex("UserId")
                         .IsUnique();
 
-                    b.ToTable("Patients");
+                    b.ToTable("Partners");
                 });
 
-            modelBuilder.Entity("FertilityClinic.DAL.Models.PriceList", b =>
+            modelBuilder.Entity("FertilityClinic.DAL.Models.Pills", b =>
                 {
-                    b.Property<int>("PriceListId")
+                    b.Property<int>("PillId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PriceListId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PillId"));
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
 
-                    b.Property<bool>("IsActive")
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<bool>("RequiresPrescription")
                         .HasColumnType("bit");
 
-                    b.Property<decimal>("Price")
+                    b.Property<string>("Unit")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<decimal>("UnitPrice")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<string>("ServiceName")
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("PillId");
+
+                    b.ToTable("Pills");
+                });
+
+            modelBuilder.Entity("FertilityClinic.DAL.Models.Prescription", b =>
+                {
+                    b.Property<int>("PrescriptionId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PrescriptionId"));
+
+                    b.Property<int>("AppointmentId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("DoctorId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Dosage")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("Duration")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<DateTime?>("EndDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Frequency")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("Instructions")
+                        .IsRequired()
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<int>("PillId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("PrescribedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("StartDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Status")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("UpdatedAt")
+                    b.Property<int>("TreatmentMethodId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime2");
 
-                    b.HasKey("PriceListId");
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
 
-                    b.ToTable("PriceLists");
+                    b.HasKey("PrescriptionId");
+
+                    b.HasIndex("AppointmentId");
+
+                    b.HasIndex("DoctorId");
+
+                    b.HasIndex("PillId");
+
+                    b.HasIndex("TreatmentMethodId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Prescriptions");
                 });
 
             modelBuilder.Entity("FertilityClinic.DAL.Models.Review", b =>
@@ -507,7 +586,6 @@ namespace FertilityClinic.DAL.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ReviewId"));
 
                     b.Property<string>("Comment")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("CreatedAt")
@@ -516,23 +594,20 @@ namespace FertilityClinic.DAL.Migrations
                     b.Property<int>("DoctorId")
                         .HasColumnType("int");
 
-                    b.Property<int>("PatientId")
-                        .HasColumnType("int");
-
                     b.Property<int>("Rating")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("ReviewDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("UpdatedAt")
-                        .HasColumnType("datetime2");
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
 
                     b.HasKey("ReviewId");
 
                     b.HasIndex("DoctorId");
 
-                    b.HasIndex("PatientId");
+                    b.HasIndex("UserId");
 
                     b.ToTable("Reviews");
                 });
@@ -545,6 +620,9 @@ namespace FertilityClinic.DAL.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("TreatmentMethodId"));
 
+                    b.Property<int?>("AverageDuration")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
@@ -552,19 +630,24 @@ namespace FertilityClinic.DAL.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("IsActive")
+                    b.Property<bool?>("IsActive")
                         .HasColumnType("bit");
 
                     b.Property<string>("MethodCode")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
                     b.Property<string>("MethodName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
-                    b.Property<DateTime>("UpdatedAt")
-                        .HasColumnType("datetime2");
+                    b.Property<float?>("Price")
+                        .HasColumnType("real");
+
+                    b.Property<string>("TechnicalRequirements")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("TreatmentMethodId");
 
@@ -585,36 +668,27 @@ namespace FertilityClinic.DAL.Migrations
                     b.Property<int>("DoctorId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime?>("EndDate")
-                        .HasColumnType("datetime2");
-
                     b.Property<string>("Notes")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("PatientId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("StartDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Status")
+                    b.Property<string>("ProcessName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<int>("TreatmentMethodId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("UpdatedAt")
-                        .HasColumnType("datetime2");
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
 
                     b.HasKey("TreatmentProcessId");
 
                     b.HasIndex("DoctorId");
 
-                    b.HasIndex("PatientId");
-
                     b.HasIndex("TreatmentMethodId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("TreatmentProcesses");
                 });
@@ -628,37 +702,45 @@ namespace FertilityClinic.DAL.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UserId"));
 
                     b.Property<string>("Address")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime?>("DateOfBirth")
-                        .HasColumnType("datetime2");
+                    b.Property<DateOnly?>("DateOfBirth")
+                        .HasColumnType("date");
 
                     b.Property<string>("Email")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("FullName")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Gender")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<DateOnly?>("HealthInsuranceExpirationDate")
+                        .HasColumnType("date");
+
+                    b.Property<string>("HealthInsuranceId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool?>("IsMarried")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("NationalId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("PartnerId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Password")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Phone")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Role")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("UpdatedAt")
@@ -677,15 +759,34 @@ namespace FertilityClinic.DAL.Migrations
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("FertilityClinic.DAL.Models.Patient", "Patient")
+                    b.HasOne("FertilityClinic.DAL.Models.Partner", "Partner")
+                        .WithMany()
+                        .HasForeignKey("PartnerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("FertilityClinic.DAL.Models.User", "User")
                         .WithMany("Appointments")
-                        .HasForeignKey("PatientId")
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Doctor");
 
-                    b.Navigation("Patient");
+                    b.Navigation("Partner");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("FertilityClinic.DAL.Models.AppointmentHistory", b =>
+                {
+                    b.HasOne("FertilityClinic.DAL.Models.User", "User")
+                        .WithMany("GetAppointmentHistories")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("FertilityClinic.DAL.Models.Blog", b =>
@@ -693,7 +794,7 @@ namespace FertilityClinic.DAL.Migrations
                     b.HasOne("FertilityClinic.DAL.Models.User", "User")
                         .WithMany("Blogs")
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("User");
@@ -719,14 +820,10 @@ namespace FertilityClinic.DAL.Migrations
                         .IsRequired();
 
                     b.HasOne("FertilityClinic.DAL.Models.TreatmentProcess", "TreatmentProcess")
-                        .WithMany()
-                        .HasForeignKey("TreatmentProcessId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
-                    b.HasOne("FertilityClinic.DAL.Models.TreatmentProcess", null)
                         .WithMany("InjectionSchedules")
-                        .HasForeignKey("TreatmentProcessId1");
+                        .HasForeignKey("TreatmentProcessId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Doctor");
 
@@ -761,14 +858,10 @@ namespace FertilityClinic.DAL.Migrations
                         .IsRequired();
 
                     b.HasOne("FertilityClinic.DAL.Models.TreatmentProcess", "TreatmentProcess")
-                        .WithMany()
-                        .HasForeignKey("TreatmentProcessId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
-                    b.HasOne("FertilityClinic.DAL.Models.TreatmentProcess", null)
                         .WithMany("InseminationSchedules")
-                        .HasForeignKey("TreatmentProcessId1");
+                        .HasForeignKey("TreatmentProcessId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Doctor");
 
@@ -783,38 +876,7 @@ namespace FertilityClinic.DAL.Migrations
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("FertilityClinic.DAL.Models.LabTestSchedule", "LabTestSchedule")
-                        .WithMany()
-                        .HasForeignKey("LabTestScheduleId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
                     b.Navigation("Doctor");
-
-                    b.Navigation("LabTestSchedule");
-                });
-
-            modelBuilder.Entity("FertilityClinic.DAL.Models.LabTestSchedule", b =>
-                {
-                    b.HasOne("FertilityClinic.DAL.Models.Doctor", "Doctor")
-                        .WithMany("LabTestSchedules")
-                        .HasForeignKey("DoctorId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
-                    b.HasOne("FertilityClinic.DAL.Models.TreatmentProcess", "TreatmentProcess")
-                        .WithMany()
-                        .HasForeignKey("TreatmentProcessId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
-                    b.HasOne("FertilityClinic.DAL.Models.TreatmentProcess", null)
-                        .WithMany("LabTestSchedules")
-                        .HasForeignKey("TreatmentProcessId1");
-
-                    b.Navigation("Doctor");
-
-                    b.Navigation("TreatmentProcess");
                 });
 
             modelBuilder.Entity("FertilityClinic.DAL.Models.Notification", b =>
@@ -828,13 +890,56 @@ namespace FertilityClinic.DAL.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("FertilityClinic.DAL.Models.Patient", b =>
+            modelBuilder.Entity("FertilityClinic.DAL.Models.Partner", b =>
                 {
                     b.HasOne("FertilityClinic.DAL.Models.User", "User")
-                        .WithOne("Patient")
-                        .HasForeignKey("FertilityClinic.DAL.Models.Patient", "UserId")
+                        .WithOne("Partner")
+                        .HasForeignKey("FertilityClinic.DAL.Models.Partner", "UserId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("FertilityClinic.DAL.Models.Prescription", b =>
+                {
+                    b.HasOne("FertilityClinic.DAL.Models.Appointment", "Appointment")
+                        .WithMany("Prescriptions")
+                        .HasForeignKey("AppointmentId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("FertilityClinic.DAL.Models.Doctor", "Doctor")
+                        .WithMany("Prescriptions")
+                        .HasForeignKey("DoctorId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("FertilityClinic.DAL.Models.Pills", "Pill")
+                        .WithMany("Prescriptions")
+                        .HasForeignKey("PillId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("FertilityClinic.DAL.Models.TreatmentMethod", "TreatmentMethod")
+                        .WithMany("Prescriptions")
+                        .HasForeignKey("TreatmentMethodId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("FertilityClinic.DAL.Models.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Appointment");
+
+                    b.Navigation("Doctor");
+
+                    b.Navigation("Pill");
+
+                    b.Navigation("TreatmentMethod");
 
                     b.Navigation("User");
                 });
@@ -847,15 +952,15 @@ namespace FertilityClinic.DAL.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("FertilityClinic.DAL.Models.Patient", "Patient")
+                    b.HasOne("FertilityClinic.DAL.Models.User", "User")
                         .WithMany("Reviews")
-                        .HasForeignKey("PatientId")
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Doctor");
 
-                    b.Navigation("Patient");
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("FertilityClinic.DAL.Models.TreatmentProcess", b =>
@@ -866,23 +971,28 @@ namespace FertilityClinic.DAL.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("FertilityClinic.DAL.Models.Patient", "Patient")
-                        .WithMany("TreatmentProcesses")
-                        .HasForeignKey("PatientId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
                     b.HasOne("FertilityClinic.DAL.Models.TreatmentMethod", "TreatmentMethod")
                         .WithMany("TreatmentProcesses")
                         .HasForeignKey("TreatmentMethodId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("FertilityClinic.DAL.Models.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Doctor");
 
-                    b.Navigation("Patient");
-
                     b.Navigation("TreatmentMethod");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("FertilityClinic.DAL.Models.Appointment", b =>
+                {
+                    b.Navigation("Prescriptions");
                 });
 
             modelBuilder.Entity("FertilityClinic.DAL.Models.Doctor", b =>
@@ -897,24 +1007,22 @@ namespace FertilityClinic.DAL.Migrations
 
                     b.Navigation("LabTestResults");
 
-                    b.Navigation("LabTestSchedules");
+                    b.Navigation("Prescriptions");
 
                     b.Navigation("Reviews");
 
                     b.Navigation("TreatmentProcesses");
                 });
 
-            modelBuilder.Entity("FertilityClinic.DAL.Models.Patient", b =>
+            modelBuilder.Entity("FertilityClinic.DAL.Models.Pills", b =>
                 {
-                    b.Navigation("Appointments");
-
-                    b.Navigation("Reviews");
-
-                    b.Navigation("TreatmentProcesses");
+                    b.Navigation("Prescriptions");
                 });
 
             modelBuilder.Entity("FertilityClinic.DAL.Models.TreatmentMethod", b =>
                 {
+                    b.Navigation("Prescriptions");
+
                     b.Navigation("TreatmentProcesses");
                 });
 
@@ -923,21 +1031,23 @@ namespace FertilityClinic.DAL.Migrations
                     b.Navigation("InjectionSchedules");
 
                     b.Navigation("InseminationSchedules");
-
-                    b.Navigation("LabTestSchedules");
                 });
 
             modelBuilder.Entity("FertilityClinic.DAL.Models.User", b =>
                 {
+                    b.Navigation("Appointments");
+
                     b.Navigation("Blogs");
 
-                    b.Navigation("Doctor")
-                        .IsRequired();
+                    b.Navigation("Doctor");
+
+                    b.Navigation("GetAppointmentHistories");
 
                     b.Navigation("Notifications");
 
-                    b.Navigation("Patient")
-                        .IsRequired();
+                    b.Navigation("Partner");
+
+                    b.Navigation("Reviews");
                 });
 #pragma warning restore 612, 618
         }
