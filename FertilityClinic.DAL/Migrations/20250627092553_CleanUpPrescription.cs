@@ -10,6 +10,12 @@ namespace FertilityClinic.DAL.Migrations
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.Sql(@"
+        IF EXISTS (SELECT * FROM sys.tables WHERE name = 'PrescriptionDetail')
+        BEGIN
+            DROP TABLE [PrescriptionDetail];
+        END
+    ");
             migrationBuilder.DropForeignKey(
                 name: "FK_Blog_Users_UserId",
                 table: "Blog");
