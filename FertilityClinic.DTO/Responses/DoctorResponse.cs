@@ -18,6 +18,7 @@ namespace FertilityClinic.DTO.Responses
         public int ExperienceYears { get; set; }
         public string Bio { get; set; }
         public List<string> Education { get; set; } = new List<string>();
+        public bool Status { get; set; }
 
     }
 }

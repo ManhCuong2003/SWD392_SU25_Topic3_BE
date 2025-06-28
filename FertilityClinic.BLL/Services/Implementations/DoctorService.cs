@@ -138,9 +138,13 @@ namespace FertilityClinic.BLL.Services.Implementations
 
             if (request.Education != null)
                 doctor.Education = request.Education;
+            if (request.Status.HasValue)
+            {
+                doctor.Status = request.Status.Value;
+            }
 
             // Update doctor
-            _unitOfWork.Doctors.Update(doctor);
+            _unitOfWork.Doctors.Update(doctor); 
             await _unitOfWork.SaveAsync();
 
             // Fetch updated doctor with user data
