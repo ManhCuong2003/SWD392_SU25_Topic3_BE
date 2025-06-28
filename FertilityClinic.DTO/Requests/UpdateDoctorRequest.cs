@@ -15,5 +15,6 @@ namespace FertilityClinic.DTO.Requests
         public int? ExperienceYear { get; set; }
         public string? Bio { get; set; } = null!;
         public List<string>? Education { get; set; } = new();
+        public bool? Status { get; set; } = true;
     }
 }
