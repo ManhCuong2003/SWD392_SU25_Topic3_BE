@@ -45,10 +45,15 @@ namespace FertilityClinic.BLL.Services.Implementations
             await _unitOfWork.SaveAsync();
             return new DoctorResponse {
                 DotorId = doctor.DoctorId,
-                DoctorName = user.FullName,
+                DoctorName = doctor.User.FullName,
+                Avatar = doctor.Avatar,
                 Specialization = doctor.Specialization,
                 Degree = doctor.Degree,
-                
+                Experience = doctor.Experience,
+                ExperienceYears = doctor.ExperienceYears,
+                Bio = doctor.Bio,
+                Education = doctor.Education,
+                Email = doctor.User.Email
             };
         }        
 
@@ -73,28 +78,37 @@ namespace FertilityClinic.BLL.Services.Implementations
                 throw new Exception("No doctors found");
             return doctors.Select(d => new DoctorResponse
             {
-                DotorId = d.DoctorId,
+                 DotorId = d.DoctorId,
                 DoctorName = d.User.FullName,
-                Email = d.User.Email,
+                Avatar = d.Avatar,
                 Specialization = d.Specialization,
                 Degree = d.Degree,
-                
+                Experience = d.Experience,
+                ExperienceYears = d.ExperienceYears,
+                Bio = d.Bio,
+                Education = d.Education,
+                Email = d.User.Email,
             }).ToList();
         }
 
         public async Task<DoctorResponse?> GetDoctorByIdAsync(int id)
         {
             var doctor = await _unitOfWork.Doctors.GetDoctorByIdAsync(id);
+            var user = await _unitOfWork.Users.GetByIdAsync(doctor.UserId);
             if (doctor == null)
                 throw new Exception("Doctor not found");
             return new DoctorResponse
             {
-               DotorId = doctor.DoctorId,
+                DotorId = doctor.DoctorId,
                 DoctorName = doctor.User.FullName,
-                Email = doctor.User.Email,
+                Avatar = doctor.Avatar,
                 Specialization = doctor.Specialization,
                 Degree = doctor.Degree,
-                
+                Experience = doctor.Experience,
+                ExperienceYears = doctor.ExperienceYears,
+                Bio = doctor.Bio,
+                Education = doctor.Education,
+                Email = user.Email,
             };
             
         }
@@ -133,12 +147,14 @@ namespace FertilityClinic.BLL.Services.Implementations
             var updatedDoctor = await _unitOfWork.Doctors.GetDoctorByIdAsync(id);
             return new DoctorResponse
             {
-                
-                DoctorName = updatedDoctor.User.FullName,
-                
-                Specialization = updatedDoctor.Specialization,
-                Degree = updatedDoctor.Degree,
-                
+                DotorId = doctor.DoctorId,
+                Avatar = doctor.Avatar,
+                Specialization = doctor.Specialization,
+                Degree = doctor.Degree,
+                Experience = doctor.Experience,
+                ExperienceYears = doctor.ExperienceYears,
+                Bio = doctor.Bio,
+                Education = doctor.Education,
             };
         }
     }
