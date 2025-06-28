@@ -14,7 +14,7 @@ namespace FertilityClinic.DAL.Models
         public string Avatar { get; set; }
         public string Specialization { get; set; }
         public string Degree { get; set; }
-        public string Certifications { get; set; }
+        public List<string> Experience { get; set; } = new List<string>();
         public int ExperienceYears { get; set; }
         public string Bio { get; set; }
         public List<string> Education { get; set; } = new List<string>();
