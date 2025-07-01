@@ -19,14 +19,14 @@ namespace FertilityClinic.Controllers
         }
 
         [Authorize(Roles = "Admin")]
-        [HttpPost("api/Doctors/Create")]
-        public async Task<IActionResult> CreateDoctor(int userId, [FromBody] DoctorRequest request)
+        [HttpPost(APIEndPoints.Doctor.Create)]
+        public async Task<IActionResult> CreateDoctor([FromRoute] int id, [FromBody] DoctorRequest request)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
             try
             {
-                var doctor = await _doctorService.CreateDoctorAsync(request, userId);
+                var doctor = await _doctorService.CreateDoctorAsync(request, id);
                 return Ok(doctor);
             }
             catch (Exception ex)
