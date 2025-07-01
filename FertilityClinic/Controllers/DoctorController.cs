@@ -35,7 +35,7 @@ namespace FertilityClinic.Controllers
             }
         }
 
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin, User")]
         [HttpGet(APIEndPoints.Doctor.GetAll)]
         public async Task<IActionResult> GetAllDoctors()
         {
