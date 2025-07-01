@@ -214,61 +214,6 @@ namespace FertilityClinic.DAL
                       .HasForeignKey(n => n.UserId)
                       .OnDelete(DeleteBehavior.Cascade);
             });
-            modelBuilder.Entity<User>().HasData(
-        new User
-        {
-            UserId = 1,
-            FullName = "Admin",
-            Email = "admin@email.com",
-            Phone = "1234567890",
-            NationalId = "ADMIN123",
-            DateOfBirth = new DateOnly(1980, 1, 1),
-            Gender = "Male",
-            Address = "123 Admin Street",
-            Password = "123",
-            Role = "Admin"
-        },
-        new User
-        {
-            UserId = 2,
-            FullName = "Dr. John Doe",
-            Email = "doctor@email.com",
-            Phone = "0987654321",
-            NationalId = "DOC123456",
-            DateOfBirth = new DateOnly(1975, 5, 15),
-            Gender = "Male",
-            Address = "456 Doctor Avenue",
-            Password = "123",
-            Role = "Doctor",
-            CreatedAt = DateTime.Now,
-            UpdatedAt = DateTime.Now
-        }
-    );
-
-            modelBuilder.Entity<Doctor>().HasData(
-                new Doctor
-                {
-                    DoctorId = 1,
-                    UserId = 2, // Matches the doctor user above
-                    Specialization = "Sản khoa",
-                    Avatar = "https://www.future-doctor.de/wp-content/uploads/2024/11/shutterstock_2173377961-1000x667.jpg",
-                    Degree = "Tiến sĩ, Bác sĩ Chuyên khoa II",
-                    Experience = new List<string>
-                    {
-                        "2010 - Nay: Trưởng khoa Sản, Bệnh viện Medico",
-      "2005 - 2010: Bác sĩ Sản khoa, Bệnh viện Phụ sản Trung ương",
-                    },
-                    ExperienceYears = 15,
-                    Bio = "Thạc sĩ, Bác sĩ Chuyên khoa II Nguyễn Thị Thanh có hơn 15 năm kinh nghiệm trong lĩnh vực Sản phụ khoa. Bác sĩ đã từng công tác tại Bệnh viện Phụ sản Trung ương và hiện là trưởng khoa Sản tại Bệnh viện Đa khoa Quốc tế.",
-                    Education = new List<string>
-                    {
-                        "2000 - 2004: Đại học Y Hà Nội",
-      "2006 - 2008: Thạc sĩ Y học, Đại học Y Hà Nội",
-      "2015 - 2017: Bác sĩ Chuyên khoa II, Đại học Y Dược TP.HCM",
-                    }
-
-                }
-            );
         }
     }
 }
