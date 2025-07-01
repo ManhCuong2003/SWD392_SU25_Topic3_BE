@@ -84,7 +84,7 @@ namespace FertilityClinic.Controllers
                 return BadRequest($"Error updating doctor: {ex.Message}");
             }
         }
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin, User")]
         [HttpGet(APIEndPoints.Doctor.GetById)]
         public async Task<IActionResult> GetDoctorById(int id)
         {
