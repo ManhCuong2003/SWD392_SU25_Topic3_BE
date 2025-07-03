@@ -32,7 +32,7 @@ namespace FertilityClinic.Controllers
                 return BadRequest($"Error creating pill: {ex.Message}");
             }
         }
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin, Doctor")]
         [HttpGet("{pillId}")]
         public async Task<IActionResult> GetPillById(int pillId)
         {
@@ -48,7 +48,7 @@ namespace FertilityClinic.Controllers
                 return BadRequest($"Error retrieving pill: {ex.Message}");
             }
         }
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin, Doctor")]
         [HttpGet("search")]
         public async Task<IActionResult> SearchPills([FromQuery] string name)
         {
@@ -62,7 +62,7 @@ namespace FertilityClinic.Controllers
                 return BadRequest($"Error searching pills: {ex.Message}");
             }
         }
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin, Doctor")]
         [HttpGet]
         public async Task<IActionResult> GetAllPills()
         {
