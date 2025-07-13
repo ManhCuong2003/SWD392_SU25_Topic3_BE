@@ -198,6 +198,7 @@ namespace FertilityClinic.BLL.Services.Implementations
             {
                 response.Partner = new PartnerResponse
                 {
+                    PartnerId = user.PartnerId,
                     FullName = user.Partner.FullName ?? "",
                     DateOfBirth = user.Partner.DateOfBirth,
                     Gender = user.Partner.Gender ?? "",
