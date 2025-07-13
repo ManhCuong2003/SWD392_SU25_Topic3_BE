@@ -114,6 +114,15 @@ namespace FertilityClinic.BLL.Services.Implementations
                 {
                     throw new Exception("A pill with this name already exists.");
                 }
+               /* var existingPills = await _unitOfWork.Pills.GetPillsByNameAsync(updatePill.Name);
+                var duplicate = existingPills.FirstOrDefault(p => p.PillId != pill.PillId);
+
+                if (duplicate != null)
+                {
+                    throw new Exception("A pill with this name already exists.");
+                }*/
+
+                pill.Name = updatePill.Name;
             }
             if (!string.IsNullOrEmpty(updatePill.Description))
             {

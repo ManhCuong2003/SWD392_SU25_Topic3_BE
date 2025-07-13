@@ -131,6 +131,7 @@ builder.Services.AddScoped<IPillService, PillService>();
 builder.Services.AddScoped<IReviewService, ReviewService>();
 builder.Services.AddScoped<IPrescriptionService, PrescriptionService>();
 builder.Services.AddScoped<INotificationService, NotificationService>();
+builder.Services.AddScoped<IBlogService, BlogService>();
 // Add these lines in your Program.cs service configuration
 // PayOS Configuration
 var payOSConfig = builder.Configuration.GetSection("PayOS");

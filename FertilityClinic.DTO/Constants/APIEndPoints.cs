@@ -184,5 +184,14 @@ namespace FertilityClinic.DTO.Constants
             public const string Update = $"{BaseBlog}/update";
             public const string Delete = $"{BaseBlog}/delete/{{id}}";
         }
+        public static class Injection
+        {
+            public const string BaseInjection = $"{Base}/injection";
+            public const string Create = $"{BaseInjection}/create";
+            public const string GetAll = $"{BaseInjection}/all";
+            public const string GetById = $"{BaseInjection}/{{id}}";
+            public const string Update = $"{BaseInjection}/update";
+            public const string Delete = $"{BaseInjection}/delete/{{id}}";
+        }
     }
 }
