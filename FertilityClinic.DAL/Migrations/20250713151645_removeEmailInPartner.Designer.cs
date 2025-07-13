@@ -4,6 +4,7 @@ using FertilityClinic.DAL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FertilityClinic.DAL.Migrations
 {
     [DbContext(typeof(FertilityClinicDbContext))]
-    partial class FertilityClinicDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250713151645_removeEmailInPartner")]
+    partial class removeEmailInPartner
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -181,15 +184,15 @@ namespace FertilityClinic.DAL.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Certifications")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Degree")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Education")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Experience")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -200,9 +203,6 @@ namespace FertilityClinic.DAL.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("Status")
-                        .HasColumnType("bit");
-
                     b.Property<int>("UserId")
                         .HasColumnType("int");
 
@@ -212,21 +212,6 @@ namespace FertilityClinic.DAL.Migrations
                         .IsUnique();
 
                     b.ToTable("Doctors");
-
-                    b.HasData(
-                        new
-                        {
-                            DoctorId = 1,
-                            Avatar = "https://www.future-doctor.de/wp-content/uploads/2024/11/shutterstock_2173377961-1000x667.jpg",
-                            Bio = "Thạc sĩ, Bác sĩ Chuyên khoa II Nguyễn Thị Thanh có hơn 15 năm kinh nghiệm trong lĩnh vực Sản phụ khoa. Bác sĩ đã từng công tác tại Bệnh viện Phụ sản Trung ương và hiện là trưởng khoa Sản tại Bệnh viện Đa khoa Quốc tế.",
-                            Degree = "Tiến sĩ, Bác sĩ Chuyên khoa II",
-                            Education = "[\"2000 - 2004: \\u0110\\u1EA1i h\\u1ECDc Y H\\u00E0 N\\u1ED9i\",\"2006 - 2008: Th\\u1EA1c s\\u0129 Y h\\u1ECDc, \\u0110\\u1EA1i h\\u1ECDc Y H\\u00E0 N\\u1ED9i\",\"2015 - 2017: B\\u00E1c s\\u0129 Chuy\\u00EAn khoa II, \\u0110\\u1EA1i h\\u1ECDc Y D\\u01B0\\u1EE3c TP.HCM\"]",
-                            Experience = "[\"2010 - Nay: Tr\\u01B0\\u1EDFng khoa S\\u1EA3n, B\\u1EC7nh vi\\u1EC7n Medico\",\"2005 - 2010: B\\u00E1c s\\u0129 S\\u1EA3n khoa, B\\u1EC7nh vi\\u1EC7n Ph\\u1EE5 s\\u1EA3n Trung \\u01B0\\u01A1ng\"]",
-                            ExperienceYears = 15,
-                            Specialization = "Sản khoa",
-                            Status = true,
-                            UserId = 2
-                        });
                 });
 
             modelBuilder.Entity("FertilityClinic.DAL.Models.InjectionSchedule", b =>
@@ -761,38 +746,6 @@ namespace FertilityClinic.DAL.Migrations
                     b.HasKey("UserId");
 
                     b.ToTable("Users");
-
-                    b.HasData(
-                        new
-                        {
-                            UserId = 1,
-                            Address = "123 Admin Street",
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DateOfBirth = new DateOnly(1980, 1, 1),
-                            Email = "admin@email.com",
-                            FullName = "Admin",
-                            Gender = "Male",
-                            NationalId = "ADMIN123",
-                            Password = "123",
-                            Phone = "1234567890",
-                            Role = "Admin",
-                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            UserId = 2,
-                            Address = "456 Doctor Avenue",
-                            CreatedAt = new DateTime(2025, 6, 28, 19, 10, 11, 118, DateTimeKind.Local).AddTicks(8413),
-                            DateOfBirth = new DateOnly(1975, 5, 15),
-                            Email = "doctor@email.com",
-                            FullName = "Dr. John Doe",
-                            Gender = "Male",
-                            NationalId = "DOC123456",
-                            Password = "123",
-                            Phone = "0987654321",
-                            Role = "Doctor",
-                            UpdatedAt = new DateTime(2025, 6, 28, 19, 10, 11, 118, DateTimeKind.Local).AddTicks(8425)
-                        });
                 });
 
             modelBuilder.Entity("FertilityClinic.DAL.Models.Appointment", b =>

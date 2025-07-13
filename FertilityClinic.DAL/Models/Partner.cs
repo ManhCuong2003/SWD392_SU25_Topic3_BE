@@ -11,7 +11,7 @@ namespace FertilityClinic.DAL.Models
         public int PartnerId { get; set; }
         public int UserId { get; set; }
         public string? FullName { get; set; }
-        public string? Email { get; set; }
+        
         public string? Phone { get; set; }
         public string? NationalId { get; set; }
         public string? Gender { get; set; }
