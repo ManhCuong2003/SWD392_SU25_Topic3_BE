@@ -54,7 +54,13 @@ namespace FertilityClinic.BLL.Services.Implementations
             {
                 user.Password = BCrypt.Net.BCrypt.HashPassword(dto.Password);
             }
-
+            
+            if (!string.IsNullOrEmpty(dto.HealthInsuranceId))
+                user.HealthInsuranceId = dto.HealthInsuranceId;
+            
+            if (!string.IsNullOrEmpty(dto.NationalId))
+                user.NationalId = dto.NationalId;
+            
             if (!string.IsNullOrEmpty(dto.PhoneNumber))
                 user.Phone = dto.PhoneNumber;
 
@@ -69,11 +75,18 @@ namespace FertilityClinic.BLL.Services.Implementations
 
             if (dto.DateOfBirth != null)
                 user.DateOfBirth = dto.DateOfBirth.Value;
+            
             if (dto.IsMarried != null)
                 user.IsMarried = dto.IsMarried;
+            
             user.IsMarried = dto.IsMarried;
+            var result = await _unitOfWork.Users.UpdateUserAsync(user);
+            if (result)
+                await _unitOfWork.SaveAsync();
+            return result;
 
-            return await _unitOfWork.Users.UpdateUserAsync(user);
+            //return await _unitOfWork.Users.UpdateUserAsync(user);
+
         }
 
         public async Task<bool> SoftDeleteUserAsync(int userId)
@@ -171,9 +184,13 @@ namespace FertilityClinic.BLL.Services.Implementations
                 PhoneNumber = user.Phone ?? "",
                 Role = user.Role ?? "",
                 Gender = user.Gender ?? "",
+                DateOfBirth = user.DateOfBirth,
+                HealthInsuranceId = user.HealthInsuranceId ?? "",
+                NationalId = user.NationalId ?? "",
                 CreatedAt = user.CreatedAt,
                 UpdatedAt = user.UpdatedAt,
-                IsMarried = user.IsMarried ?? false
+                IsMarried = user.IsMarried ?? false,
+                Address = user.Address ?? ""
             };
 
             if (user.IsMarried == true && user.Partner != null)
@@ -184,8 +201,10 @@ namespace FertilityClinic.BLL.Services.Implementations
                     DateOfBirth = user.Partner.DateOfBirth,
                     Gender = user.Partner.Gender ?? "",
                     Phone = user.Partner.Phone ?? "",
+                    
                     NationalId = user.Partner.NationalId ?? "",
-                    HealthInsuranceId = user.Partner.HealthInsuranceId ?? ""
+                    HealthInsuranceId = user.Partner.HealthInsuranceId ?? "",
+
                 };
             }
 

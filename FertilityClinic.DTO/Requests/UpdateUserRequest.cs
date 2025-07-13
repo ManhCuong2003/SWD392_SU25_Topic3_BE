@@ -25,5 +25,7 @@ namespace FertilityClinic.DTO.Requests
         public string? Address { get; set; }
         public bool? IsMarried { get; set; } = false;
         public string? Role { get; set; }
+        public string? HealthInsuranceId { get; set; }
+        public string? NationalId { get; set; }
     }
 }

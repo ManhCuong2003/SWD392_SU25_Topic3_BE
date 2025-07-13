@@ -73,7 +73,7 @@ namespace FertilityClinic.BLL.Services.Implementations
                 ThumbnailUrl = r.ThumbnailUrl,
                 IsPublished = r.IsPublished,
                 PublishedAt = r.PublishedAt,
-                UpdatedAt = DateTime.Now,
+                UpdatedAt = r.UpdatedAt,
                 CreatedAt = DateTime.Now,
             }).ToList();
         }
@@ -95,7 +95,7 @@ namespace FertilityClinic.BLL.Services.Implementations
                 ThumbnailUrl = blog.ThumbnailUrl,
                 IsPublished = blog.IsPublished,
                 PublishedAt = blog.PublishedAt,
-                UpdatedAt = DateTime.Now,
+                UpdatedAt = blog.UpdatedAt,
                 CreatedAt = DateTime.Now
             };
         }
@@ -115,13 +115,23 @@ namespace FertilityClinic.BLL.Services.Implementations
             
             if (!string.IsNullOrEmpty(request.ThumbnailUrl))
                 blog.ThumbnailUrl = request.ThumbnailUrl;
-            
+            blog.IsPublished = request.IsPublished;
+
             _unitOfWork.Blogs.Update(blog);
             await _unitOfWork.SaveAsync();
             var updateBlog = await _unitOfWork.Blogs.GetByIdAsync(id);
             return new BlogResponse
             {
-                
+                BlogId = updateBlog.BlogId,
+                UserId = updateBlog.UserId,
+                Title = updateBlog.Title,
+                Content = updateBlog.Content,
+                ThumbnailUrl = updateBlog.ThumbnailUrl,
+                IsPublished = updateBlog.IsPublished,
+                PublishedAt = updateBlog.PublishedAt,
+                UpdatedAt = updateBlog.UpdatedAt,
+                CreatedAt = DateTime.Now
+
             };
         }
     }
