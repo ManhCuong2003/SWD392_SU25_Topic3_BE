@@ -79,7 +79,7 @@ namespace FertilityClinic.BLL.Services.Implementations
             if (dto.IsMarried != null)
                 user.IsMarried = dto.IsMarried;
             
-            user.IsMarried = dto.IsMarried;
+            //user.IsMarried = dto.IsMarried;
             var result = await _unitOfWork.Users.UpdateUserAsync(user);
             if (result)
                 await _unitOfWork.SaveAsync();
@@ -179,6 +179,7 @@ namespace FertilityClinic.BLL.Services.Implementations
             var response = new UserResponse
             {
                 UserId = user.UserId,
+                
                 FullName = user.FullName ?? "",
                 Email = user.Email ?? "",
                 PhoneNumber = user.Phone ?? "",
