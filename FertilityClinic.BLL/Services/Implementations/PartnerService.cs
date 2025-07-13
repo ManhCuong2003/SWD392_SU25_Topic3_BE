@@ -41,6 +41,7 @@ namespace FertilityClinic.BLL.Services.Implementations
             var partner = new Partner
             {
                 UserId = user.UserId,
+                
                 FullName = request.FullName,
                 Email = request.Email,
                 Phone = request.Phone,
@@ -110,6 +111,7 @@ namespace FertilityClinic.BLL.Services.Implementations
 
             return partners.Select(p => new PartnerResponse
             {
+                PartnerId = p.PartnerId,
                 FullName = p.FullName,
                 DateOfBirth = p.DateOfBirth,
                 Gender = p.Gender,
