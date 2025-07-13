@@ -43,7 +43,7 @@ namespace FertilityClinic.BLL.Services.Implementations
                 UserId = user.UserId,
                 
                 FullName = request.FullName,
-                Email = request.Email,
+                
                 Phone = request.Phone,
                 DateOfBirth = request.DateOfBirth ?? null,
                 Gender = request.Gender,
@@ -79,7 +79,7 @@ namespace FertilityClinic.BLL.Services.Implementations
             }
             return new PartnerResponse
             {
-                
+                PartnerId = partner.PartnerId,
                 FullName = partner.FullName,
                 DateOfBirth = partner.DateOfBirth,
                 Gender = partner.Gender,
@@ -129,6 +129,7 @@ namespace FertilityClinic.BLL.Services.Implementations
             }
             return new PartnerResponse
             {
+                PartnerId = partner.PartnerId,
                 FullName = partner.FullName,
                 DateOfBirth = partner.DateOfBirth,
                 Gender = partner.Gender,
@@ -170,6 +171,7 @@ namespace FertilityClinic.BLL.Services.Implementations
 
             return new PartnerResponse
             {
+                PartnerId = updatedPartner.PartnerId,
                 FullName = updatedPartner.FullName,
                 DateOfBirth = updatedPartner.DateOfBirth,
                 Gender = updatedPartner.Gender,
