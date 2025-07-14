@@ -212,5 +212,44 @@ namespace FertilityClinic.BLL.Services.Implementations
 
             return response;
         }
+
+        public async Task<List<GetAllPatientsResponse>> GetAllPatientAsync()
+        {
+            var users = await _unitOfWork.Users.GetAllActiveUsersAsync();
+
+            var patients = users
+                .Where(u => u.Role != null && u.Role.Equals("User", StringComparison.OrdinalIgnoreCase))
+                .Select(user => new GetAllPatientsResponse
+                {
+                    UserId = user.UserId,
+                    FullName = user.FullName ?? "",
+                    Email = user.Email ?? "",
+                    PhoneNumber = user.Phone ?? "",
+                    Role = user.Role ?? "",
+                    Gender = user.Gender ?? "",
+                    DateOfBirth = user.DateOfBirth,
+                    HealthInsuranceId = user.HealthInsuranceId ?? "",
+                    NationalId = user.NationalId ?? "",
+                    CreatedAt = user.CreatedAt,
+                    UpdatedAt = user.UpdatedAt,
+                    IsMarried = user.IsMarried ?? false,
+                    Address = user.Address ?? "",
+                    Partner = user.IsMarried == true && user.Partner != null
+                        ? new PartnerResponse
+                        {
+                            PartnerId = user.PartnerId,
+                            FullName = user.Partner.FullName ?? "",
+                            DateOfBirth = user.Partner.DateOfBirth,
+                            Gender = user.Partner.Gender ?? "",
+                            Phone = user.Partner.Phone ?? "",
+                            NationalId = user.Partner.NationalId ?? "",
+                            HealthInsuranceId = user.Partner.HealthInsuranceId ?? ""
+                        }
+                        : null
+                }).ToList();
+
+            return patients;
+        }
+        
     }
 }

@@ -85,7 +85,7 @@ namespace FertilityClinic.DAL.Repositories.Implementations
             return await _context.Users.FindAsync(Id);
         }
 
-        public async Task<List<User>> GetAllPatientsWithDetailsAsync()
+        public async Task<List<User>> GetAllPatientsAsync()
         {
             return await _context.Users
                 .Where(u => u.Role == "User")

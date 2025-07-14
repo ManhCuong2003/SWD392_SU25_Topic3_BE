@@ -31,7 +31,7 @@ namespace FertilityClinic.BLL.Services.Implementations
                 Avatar = request.Avatar,
                 Specialization = request.Specialization,
                 Degree = request.Degree,
-                Certifications = request.Certifications,
+                //Certifications = request.Certifications,
                 ExperienceYears = request.ExperienceYear, // Note: property name difference
                 Bio = request.Bio,
                 Education = request.Education ?? new List<string>()
@@ -113,8 +113,8 @@ namespace FertilityClinic.BLL.Services.Implementations
             if (!string.IsNullOrEmpty(request.Degree))
                 doctor.Degree = request.Degree;
 
-            if (!string.IsNullOrEmpty(request.Certifications))
-                doctor.Certifications = request.Certifications;
+            //if (!string.IsNullOrEmpty(request.Certifications))
+              //  doctor.Certifications = request.Certifications;
 
             if (request.ExperienceYear.HasValue)
                 doctor.ExperienceYears = request.ExperienceYear.Value;
