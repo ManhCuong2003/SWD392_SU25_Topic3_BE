@@ -33,7 +33,7 @@ namespace FertilityClinic.Controllers
                 return BadRequest($"Error creating treatment method: {ex.Message}");
             }
         }
-        [Authorize(Roles = "Admin, User")]
+        [Authorize(Roles = "Admin, User, Doctor")]
         [HttpGet("api/TreatmentMethods/GetAll")]
         public async Task<IActionResult> GetAllTreatmentMethods()
         {
@@ -47,7 +47,7 @@ namespace FertilityClinic.Controllers
                 return BadRequest($"Error retrieving treatment methods: {ex.Message}");
             }
         }
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin, Doctor, User")]
         [HttpGet("api/TreatmentMethods/GetById/{id}")]
         public async Task<IActionResult> GetTreatmentMethodById(int id)
         {

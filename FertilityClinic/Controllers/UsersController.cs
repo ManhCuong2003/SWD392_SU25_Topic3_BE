@@ -145,6 +145,15 @@ namespace FertilityClinic.Controllers
             {
                 return StatusCode(500, ex.Message);
             }
+
+        }
+        [Authorize(Roles = "Admin, User")]
+        [HttpGet]
+        [Route(APIEndPoints.Users.GetAllPatients)]
+        public async Task<IActionResult> GetAllPatients()
+        {
+            var users = await _userService.GetAllPatientAsync();
+            return Ok(users);
         }
         [Authorize(Roles = "Doctor")]
         [HttpGet("api/users/appointments/me")]
