@@ -212,44 +212,38 @@ namespace FertilityClinic.BLL.Services.Implementations
 
             return response;
         }
-
-        public async Task<List<GetAllPatientsResponse>> GetAllPatientAsync()
+        public async Task<List<UserResponse>> GetUsersByCurrentDoctorAsync(int userId)
         {
-            var users = await _unitOfWork.Users.GetAllActiveUsersAsync();
+            // Lấy doctor dựa trên userId hiện tại
+            var doctor = await _unitOfWork.Doctors.GetDoctorByUserIdAsync(userId);
+            if (doctor == null)
+                throw new Exception("Doctor not found");
 
-            var patients = users
-                .Where(u => u.Role != null && u.Role.Equals("User", StringComparison.OrdinalIgnoreCase))
-                .Select(user => new GetAllPatientsResponse
-                {
-                    UserId = user.UserId,
-                    FullName = user.FullName ?? "",
-                    Email = user.Email ?? "",
-                    PhoneNumber = user.Phone ?? "",
-                    Role = user.Role ?? "",
-                    Gender = user.Gender ?? "",
-                    DateOfBirth = user.DateOfBirth,
-                    HealthInsuranceId = user.HealthInsuranceId ?? "",
-                    NationalId = user.NationalId ?? "",
-                    CreatedAt = user.CreatedAt,
-                    UpdatedAt = user.UpdatedAt,
-                    IsMarried = user.IsMarried ?? false,
-                    Address = user.Address ?? "",
-                    Partner = user.IsMarried == true && user.Partner != null
-                        ? new PartnerResponse
-                        {
-                            PartnerId = user.PartnerId,
-                            FullName = user.Partner.FullName ?? "",
-                            DateOfBirth = user.Partner.DateOfBirth,
-                            Gender = user.Partner.Gender ?? "",
-                            Phone = user.Partner.Phone ?? "",
-                            NationalId = user.Partner.NationalId ?? "",
-                            HealthInsuranceId = user.Partner.HealthInsuranceId ?? ""
-                        }
-                        : null
-                }).ToList();
+            var appointments = await _unitOfWork.Appointments.GetAllAppointmentsAsync();
 
-            return patients;
+            var users = appointments
+                .Where(a => a.DoctorId == doctor.DoctorId && a.User != null)
+                .Select(a => a.User)
+                .Distinct()
+                .ToList();
+
+            return users.Select(u => new UserResponse
+            {
+                UserId = u.UserId,
+                FullName = u.FullName ?? "",
+                Email = u.Email ?? "",
+                PhoneNumber = u.Phone ?? "",
+                Role = u.Role ?? "",
+                Gender = u.Gender ?? "",
+                DateOfBirth = u.DateOfBirth,
+                HealthInsuranceId = u.HealthInsuranceId ?? "",
+                NationalId = u.NationalId ?? "",
+                Address = u.Address ?? "",
+                CreatedAt = u.CreatedAt,
+                UpdatedAt = u.UpdatedAt,
+                IsMarried = u.IsMarried ?? false
+            }).ToList();
         }
-        
+
     }
 }

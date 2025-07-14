@@ -61,5 +61,12 @@ namespace FertilityClinic.DAL.Repositories.Implementations
             await _context.SaveChangesAsync();
             return await GetDoctorByIdAsync(doctor.DoctorId) ?? doctor;
         }
+        public async Task<Doctor?> GetDoctorByUserIdAsync(int userId)
+        {
+            return await _context.Doctors
+                .Include(d => d.User)
+                .FirstOrDefaultAsync(d => d.UserId == userId);
+        }
+
     }
 }
