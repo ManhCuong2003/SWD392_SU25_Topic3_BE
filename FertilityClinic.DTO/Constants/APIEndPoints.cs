@@ -31,6 +31,8 @@ namespace FertilityClinic.DTO.Constants
             public const string Delete = $"{BaseUser}/delete/{{id}}";
             public const string HardDelete = $"{BaseUser}/delete-hard/{{userId}}";
             public const string GetByEmail = $"{BaseUser}/by-email/{{email}}";
+            public const string GetAllPatients = $"{BaseUser}/patients/all";
+
         }
 
         public static class Doctor

@@ -9,7 +9,7 @@ namespace FertilityClinic.DTO.Responses
     public class GetAllUsersResponse
     {
         public int UserId { get; set; }
-
+        
         public string? FullName { get; set; }
 
         public DateOnly? DateDateOfBirth { get; set; }

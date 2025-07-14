@@ -18,6 +18,7 @@ namespace FertilityClinic.BLL.Services.Interfaces
         Task<UserResponse> GetByIdAsync(int id);
         Task<bool> HardDeleteUserAsync(int id);
         Task<UserResponse> GetByEmailAsync(string email);
-        //Task<List<GetAllPatientsResponse>> GetAllPatientAsync();
+        Task<List<GetAllPatientsResponse>> GetAllPatientAsync();
+        
     }
 }

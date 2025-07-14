@@ -32,6 +32,7 @@ namespace FertilityClinic.BLL.Services.Implementations
                 Specialization = request.Specialization,
                 Degree = request.Degree,
                 Experience = request.Experience,
+
                 ExperienceYears = request.ExperienceYear, // Note: property name difference
                 Bio = request.Bio,
                 Education = request.Education ?? new List<string>()
@@ -127,8 +128,11 @@ namespace FertilityClinic.BLL.Services.Implementations
             if (!string.IsNullOrEmpty(request.Degree))
                 doctor.Degree = request.Degree;
 
+
+
             if (request.Experience!=null)
                 doctor.Experience = request.Experience;
+
 
             if (request.ExperienceYear.HasValue)
                 doctor.ExperienceYears = request.ExperienceYear.Value;
