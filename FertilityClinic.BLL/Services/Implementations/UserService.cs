@@ -227,6 +227,10 @@ namespace FertilityClinic.BLL.Services.Implementations
                 .Distinct()
                 .ToList();
 
+            // ✅ Nếu không có user nào được tìm thấy trong cuộc hẹn
+            if (users == null || users.Count == 0)
+                throw new Exception("Bác sĩ hiện chưa có cuộc hẹn nào");
+
             return users.Select(u => new UserResponse
             {
                 UserId = u.UserId,
@@ -244,6 +248,7 @@ namespace FertilityClinic.BLL.Services.Implementations
                 IsMarried = u.IsMarried ?? false
             }).ToList();
         }
+
 
     }
 }
