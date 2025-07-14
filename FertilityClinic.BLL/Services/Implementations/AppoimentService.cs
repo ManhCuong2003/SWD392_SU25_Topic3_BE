@@ -271,6 +271,30 @@ namespace FertilityClinic.BLL.Services.Implementations
                 CreatedAt = existingAppointment.CreatedAt
             };
         }
+        public async Task<List<AppointmentResponse>> GetAppointmentsByUserIdAsync(int userId)
+        {
+            var appointments = await _unitOfWork.Appointments.GetAppointmentsByUserIdAsync(userId);
+
+            if (appointments == null || !appointments.Any())
+            {
+                throw new Exception("No appointments found for this user.");
+            }
+
+            return appointments.Select(a => new AppointmentResponse
+            {
+                AppointmentId = a.AppointmentId,
+                PatientName = a.User.FullName,
+                PatientDOB = a.User.DateOfBirth,
+                PhoneNumber = a.User.Phone,
+                PartnerName = a.Partner?.FullName,
+                PartnerDOB = a.Partner?.DateOfBirth,
+                DoctorName = a.Doctor?.User?.FullName ?? "Unknown",
+                AppointmentDate = a.AppointmentDate,
+                AppointmentTime = a.AppointmentTime,
+                Status = a.Status,
+                CreatedAt = a.CreatedAt
+            }).ToList();
+        }
 
     }
 }

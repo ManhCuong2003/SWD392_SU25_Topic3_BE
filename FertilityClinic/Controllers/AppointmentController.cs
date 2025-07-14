@@ -1,4 +1,5 @@
-﻿using FertilityClinic.BLL.Services.Interfaces;
+﻿using System.Security.Claims;
+using FertilityClinic.BLL.Services.Interfaces;
 using FertilityClinic.DTO.Constants;
 using FertilityClinic.DTO.Requests;
 using Microsoft.AspNetCore.Authorization;
@@ -140,5 +141,29 @@ namespace FertilityClinic.Controllers
                 return BadRequest($"Error updating appointment: {ex.Message}");
             }
         }
+        [HttpGet("api/appointments/user")]
+        public async Task<IActionResult> GetAppointmentsByCurrentUser()
+        {
+            try
+            {
+                // Lấy userId từ token
+                var userIdClaim = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier);
+                if (userIdClaim == null)
+                {
+                    return Unauthorized("User ID not found in token.");
+                }
+
+                int userId = int.Parse(userIdClaim.Value);
+
+                // Gọi service để lấy tất cả cuộc hẹn theo userId
+                var appointments = await _appointmentService.GetAppointmentsByUserIdAsync(userId);
+                return Ok(appointments);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Error retrieving user's appointments: {ex.Message}");
+            }
+        }
+
     }
 }
