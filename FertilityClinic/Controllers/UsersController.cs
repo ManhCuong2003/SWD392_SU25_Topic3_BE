@@ -1,4 +1,5 @@
-﻿using FertilityClinic.BLL.Services.Interfaces;
+﻿using System.Security.Claims;
+using FertilityClinic.BLL.Services.Interfaces;
 using FertilityClinic.DTO.Constants;
 using FertilityClinic.DTO.Requests;
 using Microsoft.AspNetCore.Authorization;
@@ -145,5 +146,21 @@ namespace FertilityClinic.Controllers
                 return StatusCode(500, ex.Message);
             }
         }
+        [Authorize(Roles = "Doctor")]
+        [HttpGet("api/users/appointments/me")]
+        public async Task<IActionResult> GetUsersByCurrentDoctor()
+        {
+            try
+            {
+                var userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value ?? "0");
+                var users = await _userService.GetUsersByCurrentDoctorAsync(userId);
+                return Ok(users);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { message = ex.Message });
+            }
+        }
+
     }
 }

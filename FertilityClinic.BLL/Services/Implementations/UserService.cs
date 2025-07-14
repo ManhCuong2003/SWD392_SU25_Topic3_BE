@@ -212,5 +212,38 @@ namespace FertilityClinic.BLL.Services.Implementations
 
             return response;
         }
+        public async Task<List<UserResponse>> GetUsersByCurrentDoctorAsync(int userId)
+        {
+            // Lấy doctor dựa trên userId hiện tại
+            var doctor = await _unitOfWork.Doctors.GetDoctorByUserIdAsync(userId);
+            if (doctor == null)
+                throw new Exception("Doctor not found");
+
+            var appointments = await _unitOfWork.Appointments.GetAllAppointmentsAsync();
+
+            var users = appointments
+                .Where(a => a.DoctorId == doctor.DoctorId && a.User != null)
+                .Select(a => a.User)
+                .Distinct()
+                .ToList();
+
+            return users.Select(u => new UserResponse
+            {
+                UserId = u.UserId,
+                FullName = u.FullName ?? "",
+                Email = u.Email ?? "",
+                PhoneNumber = u.Phone ?? "",
+                Role = u.Role ?? "",
+                Gender = u.Gender ?? "",
+                DateOfBirth = u.DateOfBirth,
+                HealthInsuranceId = u.HealthInsuranceId ?? "",
+                NationalId = u.NationalId ?? "",
+                Address = u.Address ?? "",
+                CreatedAt = u.CreatedAt,
+                UpdatedAt = u.UpdatedAt,
+                IsMarried = u.IsMarried ?? false
+            }).ToList();
+        }
+
     }
 }
