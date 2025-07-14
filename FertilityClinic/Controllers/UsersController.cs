@@ -156,7 +156,7 @@ namespace FertilityClinic.Controllers
         //    return Ok(users);
         //}
         [Authorize(Roles = "Doctor")]
-        [HttpGet("api/users/get-all-user-by-appointments")]
+        [HttpGet("api/users/get-all-users-by-appointments")]
         public async Task<IActionResult> GetUsersByCurrentDoctor()
         {
             try
