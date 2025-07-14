@@ -82,7 +82,7 @@ namespace FertilityClinic.BLL.Services.Implementations
             };
             //validate pill name
             var existingPill = await _unitOfWork.Pills.GetPillsByNameAsync(pill.Name);
-            if (existingPill != null)
+            if (existingPill != null && existingPill.Any())
             {
                 throw new Exception("A pill with this name already exists.");
             }
@@ -110,7 +110,8 @@ namespace FertilityClinic.BLL.Services.Implementations
             if (!string.IsNullOrEmpty(updatePill.Name))
             {
                 pill.Name = updatePill.Name;
-                if (await _unitOfWork.Pills.GetPillsByNameAsync(pill.Name) != null)
+                if (await _unitOfWork.Pills.GetPillsByNameAsync(pill.Name) != null &&
+                    (await _unitOfWork.Pills.GetPillsByNameAsync(pill.Name)).Any())
                 {
                     throw new Exception("A pill with this name already exists.");
                 }

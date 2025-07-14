@@ -27,6 +27,7 @@ namespace FertilityClinic.DTO.Constants
             public const string GetAll = $"{BaseUser}/all";
             public const string GetById = $"{BaseUser}/{{id}}";
             public const string Update = $"{BaseUser}/update";
+            public const string TestDoctor = $"{BaseUser}/doctorAll";
             public const string Delete = $"{BaseUser}/delete/{{id}}";
             public const string HardDelete = $"{BaseUser}/delete-hard/{{userId}}";
             public const string GetByEmail = $"{BaseUser}/by-email/{{email}}";
@@ -36,12 +37,12 @@ namespace FertilityClinic.DTO.Constants
 
         public static class Doctor
         {
-            public const string BaseUser = $"{Base}/doctor";
+            public const string BaseDoctor = $"{Base}/doctor";
             public const string Create = $"{Base}/create/{{id}}";
-            public const string GetAll = $"{BaseUser}/all";
-            public const string GetById = $"{BaseUser}/{{id}}";
-            public const string Update = $"{BaseUser}/update";
-            public const string Delete = $"{BaseUser}/delete/{{id}}";
+            public const string GetAll = $"{BaseDoctor}/all";
+            public const string GetById = $"{BaseDoctor}/{{id}}";
+            public const string Update = $"{BaseDoctor}/update";
+            public const string Delete = $"{BaseDoctor}/delete/{{id}}";
         }
 
 

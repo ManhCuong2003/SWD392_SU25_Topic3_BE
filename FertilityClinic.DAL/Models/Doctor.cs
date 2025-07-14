@@ -14,10 +14,11 @@ namespace FertilityClinic.DAL.Models
         public string Avatar { get; set; }
         public string Specialization { get; set; }
         public string Degree { get; set; }
-        //public string Certifications { get; set; }
+        public List<string> Experience { get; set; } = new List<string>();
         public int ExperienceYears { get; set; }
         public string Bio { get; set; }
         public List<string> Education { get; set; } = new List<string>();
+        public bool Status { get; set; } = true; // true for active, false for inactive
         public virtual User User { get; set; }
         public virtual ICollection<Prescription> Prescriptions { get; set; }
         public ICollection<TreatmentProcess> TreatmentProcesses { get; set; }
