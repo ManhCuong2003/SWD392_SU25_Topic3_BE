@@ -212,43 +212,46 @@ namespace FertilityClinic.BLL.Services.Implementations
 
             return response;
         }
-        public async Task<List<UserResponse>> GetUsersByCurrentDoctorAsync(int userId)
+        public async Task<List<AppointmentResponse>> GetUsersByCurrentDoctorAsync(int userId)
         {
-            // Lấy doctor dựa trên userId hiện tại
             var doctor = await _unitOfWork.Doctors.GetDoctorByUserIdAsync(userId);
             if (doctor == null)
                 throw new Exception("Doctor not found");
 
             var appointments = await _unitOfWork.Appointments.GetAllAppointmentsAsync();
 
-            var users = appointments
+            var result = appointments
                 .Where(a => a.DoctorId == doctor.DoctorId && a.User != null)
-                .Select(a => a.User)
-                .Distinct()
+                .Select(a => new AppointmentResponse
+                {
+                    AppointmentId = a.AppointmentId,
+                    AppointmentDate = a.AppointmentDate,
+                    AppointmentTime = a.AppointmentTime,
+                    Status = a.Status,
+                    CreatedAt = a.CreatedAt,
+
+                    PatientName = a.User.FullName ?? "",
+                    PatientDOB = a.User.DateOfBirth,
+                    PatientGender = a.User.Gender ?? "",
+                    PhoneNumber = a.User.Phone ?? "",
+
+                    PartnerName = a.Partner?.FullName ?? "",
+                    PartnerDOB = a.Partner?.DateOfBirth,
+                    PartnerGender = a.Partner?.Gender ?? "",
+
+                    DoctorName = doctor.User.FullName ?? "",
+
+                    MethodName = "", // Nếu có thể lấy từ method thì thêm ở đây
+                    MethodPrice = 0,
+                    TreatmentMethodId = 0
+                })
                 .ToList();
 
-            // ✅ Nếu không có user nào được tìm thấy trong cuộc hẹn
-            if (users == null || users.Count == 0)
+            if (result.Count == 0)
                 throw new Exception("Bác sĩ hiện chưa có cuộc hẹn nào");
 
-            return users.Select(u => new UserResponse
-            {
-                UserId = u.UserId,
-                FullName = u.FullName ?? "",
-                Email = u.Email ?? "",
-                PhoneNumber = u.Phone ?? "",
-                Role = u.Role ?? "",
-                Gender = u.Gender ?? "",
-                DateOfBirth = u.DateOfBirth,
-                HealthInsuranceId = u.HealthInsuranceId ?? "",
-                NationalId = u.NationalId ?? "",
-                Address = u.Address ?? "",
-                CreatedAt = u.CreatedAt,
-                UpdatedAt = u.UpdatedAt,
-                IsMarried = u.IsMarried ?? false
-            }).ToList();
+            return result;
         }
-
 
     }
 }
