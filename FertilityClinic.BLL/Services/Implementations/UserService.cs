@@ -212,7 +212,7 @@ namespace FertilityClinic.BLL.Services.Implementations
 
             return response;
         }
-        public async Task<List<AppointmentResponse>> GetUsersByCurrentDoctorAsync(int userId)
+        public async Task<List<UserResponse>> GetUsersByCurrentDoctorAsync(int userId)
         {
             var doctor = await _unitOfWork.Doctors.GetDoctorByUserIdAsync(userId);
             if (doctor == null)
@@ -222,28 +222,31 @@ namespace FertilityClinic.BLL.Services.Implementations
 
             var result = appointments
                 .Where(a => a.DoctorId == doctor.DoctorId && a.User != null)
-                .Select(a => new AppointmentResponse
+                .Select(a => new UserResponse
                 {
-                    AppointmentId = a.AppointmentId,
-                    AppointmentDate = a.AppointmentDate,
-                    AppointmentTime = a.AppointmentTime,
-                    Status = a.Status,
-                    CreatedAt = a.CreatedAt,
-
-                    PatientName = a.User.FullName ?? "",
-                    PatientDOB = a.User.DateOfBirth,
-                    PatientGender = a.User.Gender ?? "",
+                    UserId = a.User.UserId,
+                    FullName = a.User.FullName ?? "",
+                    Email = a.User.Email ?? "",
                     PhoneNumber = a.User.Phone ?? "",
-
-                    PartnerName = a.Partner?.FullName ?? "",
-                    PartnerDOB = a.Partner?.DateOfBirth,
-                    PartnerGender = a.Partner?.Gender ?? "",
-
-                    DoctorName = doctor.User.FullName ?? "",
-
-                    MethodName = "", // Nếu có thể lấy từ method thì thêm ở đây
-                    MethodPrice = 0,
-                    TreatmentMethodId = 0
+                    DateOfBirth = a.User.DateOfBirth,
+                    HealthInsuranceId = a.User.HealthInsuranceId ?? "",
+                    NationalId = a.User.NationalId ?? "",
+                    Address = a.User.Address ?? "",
+                    Gender = a.User.Gender ?? "",
+                    IsMarried = a.User.IsMarried ?? false,
+                    Partner = a.Partner != null ? new PartnerResponse
+                    {
+                        PartnerId = a.Partner.PartnerId,
+                        FullName = a.Partner.FullName ?? "",
+                        DateOfBirth = a.Partner.DateOfBirth,
+                        Gender = a.Partner.Gender ?? "",
+                        Phone = a.Partner.Phone ?? "",
+                        NationalId = a.Partner.NationalId ?? "",
+                        HealthInsuranceId = a.Partner.HealthInsuranceId ?? ""
+                    } : null,
+                    // Thêm thông tin cuộc hẹn vào response
+                    AppointmentDate = a.AppointmentDate,
+                    AppointmentTime = a.AppointmentTime
                 })
                 .ToList();
 
@@ -252,6 +255,5 @@ namespace FertilityClinic.BLL.Services.Implementations
 
             return result;
         }
-
     }
 }
