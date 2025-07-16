@@ -32,6 +32,7 @@ namespace FertilityClinic.DAL
         public DbSet<AppointmentHistory> AppointmentHistories { get; set; }
         public DbSet<Pills> Pills { get; set; }
         public DbSet<Prescription> Prescriptions { get; set; }
+        public DbSet<PrescriptionItem> PrescriptionItems { get; set; }
         public DbSet<Notification> Notifications { get; set; }
         public DbSet<Blog> Blogs { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -47,11 +48,11 @@ namespace FertilityClinic.DAL
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<Prescription>()
-            .HasOne(p => p.Pill)
-            .WithMany(p => p.Prescriptions)
-            .HasForeignKey(p => p.PillId)
-            .OnDelete(DeleteBehavior.Restrict);
+            modelBuilder.Entity<PrescriptionItem>()
+                .HasOne(i => i.Pill)
+                .WithMany(p => p.PrescriptionItems)
+                .HasForeignKey(i => i.PillId)
+                .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<Prescription>()
                 .HasOne(p => p.Doctor)
@@ -59,11 +60,11 @@ namespace FertilityClinic.DAL
                 .HasForeignKey(p => p.DoctorId)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            modelBuilder.Entity<Prescription>()
+           /* modelBuilder.Entity<Prescription>()
                 .HasOne(p => p.Appointment)
                 .WithMany(a => a.Prescriptions)
                 .HasForeignKey(p => p.AppointmentId)
-                .OnDelete(DeleteBehavior.Restrict);
+                .OnDelete(DeleteBehavior.Restrict);*/
 
             modelBuilder.Entity<Prescription>()
                 .HasOne(p => p.User)
@@ -183,9 +184,9 @@ namespace FertilityClinic.DAL
             // LabTestResult configurations
             modelBuilder.Entity<LabTestResult>(entity =>
             {
-                entity.HasOne(l => l.Doctor)
+                entity.HasOne(l => l.User)
                     .WithMany(d => d.LabTestResults)
-                    .HasForeignKey(l => l.DoctorId)
+                    .HasForeignKey(l => l.UserId)
                     .OnDelete(DeleteBehavior.NoAction);
 
                 /*entity.HasOne(l => l.LabTestSchedule)

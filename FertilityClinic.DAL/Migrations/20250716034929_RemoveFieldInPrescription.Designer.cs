@@ -4,6 +4,7 @@ using FertilityClinic.DAL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FertilityClinic.DAL.Migrations
 {
     [DbContext(typeof(FertilityClinicDbContext))]
-    partial class FertilityClinicDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250716034929_RemoveFieldInPrescription")]
+    partial class RemoveFieldInPrescription
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -632,9 +635,6 @@ namespace FertilityClinic.DAL.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<string>("TrackingMode")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<int>("TreatmentMethodId")
                         .HasColumnType("int");
 
@@ -875,13 +875,13 @@ namespace FertilityClinic.DAL.Migrations
 
             modelBuilder.Entity("FertilityClinic.DAL.Models.LabTestResult", b =>
                 {
-                    b.HasOne("FertilityClinic.DAL.Models.User", "User")
+                    b.HasOne("FertilityClinic.DAL.Models.Doctor", "Doctor")
                         .WithMany("LabTestResults")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.Navigation("User");
+                    b.Navigation("Doctor");
                 });
 
             modelBuilder.Entity("FertilityClinic.DAL.Models.Notification", b =>
@@ -1000,6 +1000,8 @@ namespace FertilityClinic.DAL.Migrations
 
                     b.Navigation("InseminationSchedules");
 
+                    b.Navigation("LabTestResults");
+
                     b.Navigation("Prescriptions");
 
                     b.Navigation("Reviews");
@@ -1038,8 +1040,6 @@ namespace FertilityClinic.DAL.Migrations
                     b.Navigation("Doctor");
 
                     b.Navigation("GetAppointmentHistories");
-
-                    b.Navigation("LabTestResults");
 
                     b.Navigation("Notifications");
 

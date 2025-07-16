@@ -24,7 +24,7 @@ namespace FertilityClinic.DAL.Models
         public ICollection<TreatmentProcess> TreatmentProcesses { get; set; }
         public ICollection<InjectionSchedule> InjectionSchedules { get; set; }
         //public ICollection<LabTestSchedule> LabTestSchedules { get; set; }
-        public ICollection<LabTestResult> LabTestResults { get; set; }
+        //public ICollection<LabTestResult> LabTestResults { get; set; }
         public ICollection<InseminationSchedule> InseminationSchedules { get; set; }
         public ICollection<InseminationResult> InseminationResults { get; set; }
         public ICollection<Appointment> Appointments { get; set; }

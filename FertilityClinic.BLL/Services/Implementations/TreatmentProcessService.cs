@@ -39,6 +39,7 @@ namespace FertilityClinic.BLL.Services.Implementations
                 DoctorId = doctorId,
                 ProcessName = request.ProcessName ?? "Chưa cập nhập",
                 Notes = request.Notes ?? "Chưa cập nhập",
+                TrackingMode = request.TrackingMode ?? "Chưa cập nhập",
                 CreatedAt = DateTime.UtcNow
             };
             await _unitOfWork.TreatmentProcesses.AddAsync(treatmentProcess);
@@ -53,6 +54,7 @@ namespace FertilityClinic.BLL.Services.Implementations
                 TreatmentMethodName = treatmentMethod.MethodName,
                 ProcessName = request.ProcessName,
                 Notes = request.Notes,
+                TrackingMode = request.TrackingMode,
                 CreatedAt = treatmentProcess.CreatedAt
             };
             
@@ -86,6 +88,7 @@ namespace FertilityClinic.BLL.Services.Implementations
                 TreatmentProcessId = tp.TreatmentProcessId,
                 ProcessName = tp.ProcessName,
                 Notes = tp.Notes,
+                TrackingMode = tp.TrackingMode,
                 CreatedAt = tp.CreatedAt
             }).ToList();
         }
@@ -105,6 +108,7 @@ namespace FertilityClinic.BLL.Services.Implementations
                 TreatmentProcessId = treatmentProcess.TreatmentProcessId,
                 ProcessName = treatmentProcess.ProcessName,
                 Notes = treatmentProcess.Notes,
+                TrackingMode = treatmentProcess.TrackingMode ?? "Unknown",
                 CreatedAt = treatmentProcess.CreatedAt,
             };
         }
@@ -119,7 +123,8 @@ namespace FertilityClinic.BLL.Services.Implementations
                 treatmentProcess.ProcessName = request.ProcessName;
             if(!string.IsNullOrEmpty(request.Notes))
                 treatmentProcess.Notes = request.Notes;
-
+            if(!string.IsNullOrEmpty(request.TrackingMode))
+                treatmentProcess.TrackingMode = request.TrackingMode;
             _unitOfWork.TreatmentProcesses.Update(treatmentProcess);
             await _unitOfWork.SaveAsync();
 
@@ -134,6 +139,7 @@ namespace FertilityClinic.BLL.Services.Implementations
                 TreatmentMethodId = treatmentProcess.TreatmentMethodId,
                 ProcessName = request.ProcessName ?? treatmentProcess.ProcessName,
                 Notes = request.Notes ?? treatmentProcess.Notes,
+                TrackingMode = request.TrackingMode ?? treatmentProcess.TrackingMode,
                 CreatedAt = treatmentProcess.CreatedAt
             };
         }
