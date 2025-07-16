@@ -110,6 +110,16 @@ namespace FertilityClinic.DAL.Repositories.Implementations
 
             return await query.AnyAsync();
         }
+        public async Task<List<Appointment>> GetAppointmentsByUserIdAsync(int userId)
+        {
+            return await _context.Appointments
+                .Where(a => a.UserId == userId)
+                .Include(a => a.User)
+                .Include(a => a.Partner)
+                .Include(a => a.Doctor).ThenInclude(d => d.User)
+                .ToListAsync();
+        }
+
     }
 
 }

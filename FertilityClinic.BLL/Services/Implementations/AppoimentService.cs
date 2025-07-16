@@ -96,9 +96,11 @@ namespace FertilityClinic.BLL.Services.Implementations
                 AppointmentId = newAppointment.AppointmentId,  // Add this
                 PatientName = user.FullName,
                 PatientDOB = user.DateOfBirth,
+                PatientGender = user.Gender,
                 PhoneNumber = user.Phone,
                 PartnerName = partner.FullName,
                 PartnerDOB = partner.DateOfBirth,
+                PartnerGender = partner.Gender,
                 DoctorName = doctor.User.FullName,
                 AppointmentDate = newAppointment.AppointmentDate,
                 AppointmentTime = newAppointment.AppointmentTime,
@@ -133,10 +135,12 @@ namespace FertilityClinic.BLL.Services.Implementations
                 AppointmentId = a.AppointmentId,
                 PatientName = a.User.FullName,
                 PatientDOB = a.User.DateOfBirth,
+                PatientGender = a.User.Gender,
                 PhoneNumber = a.User.Phone,
                 //MethodName = "methodname",
                 PartnerName = a.Partner.FullName,
                 PartnerDOB = a.Partner.DateOfBirth,
+                PartnerGender = a.Partner.Gender,
                 DoctorName = a.User.FullName,
                 AppointmentDate = a.AppointmentDate,
                 AppointmentTime = a.AppointmentTime,
@@ -185,9 +189,11 @@ namespace FertilityClinic.BLL.Services.Implementations
                 AppointmentId = appointment.AppointmentId,
                 PatientName = user.FullName,
                 PatientDOB = user.DateOfBirth,
+                PatientGender = user.Gender,
                 PhoneNumber = user.Phone,
                 PartnerName = partner.FullName,
                 PartnerDOB = partner.DateOfBirth,
+                PartnerGender = partner.Gender,
                 DoctorName = doctor.User.FullName,
                 AppointmentDate = appointment.AppointmentDate,
                 AppointmentTime = appointment.AppointmentTime,
@@ -240,10 +246,12 @@ namespace FertilityClinic.BLL.Services.Implementations
                 UserId = user.UserId,
                 PatientName = user.FullName,
                 PatientDOB = user.DateOfBirth,
+                PatientGender = user.Gender,
                 PhoneNumber = user.Phone,
                 //MethodName = "methodName",
                 PartnerName = partner.FullName,
                 PartnerDOB = partner.DateOfBirth,
+                PartnerGender = partner.Gender,
                 DoctorName = doctor.User.FullName,
                 AppointmentDate = existingAppointment.AppointmentDate,
                 AppointmentTime = existingAppointment.AppointmentTime,
@@ -260,16 +268,44 @@ namespace FertilityClinic.BLL.Services.Implementations
             {
                 PatientName = existingAppointment.User.FullName,
                 PatientDOB = existingAppointment.User.DateOfBirth,
+                PatientGender = existingAppointment.User.Gender,
                 PhoneNumber = existingAppointment.User.Phone,
                 //MethodName = "methodname",
                 PartnerName = existingAppointment.Partner.FullName,
                 PartnerDOB = existingAppointment.Partner.DateOfBirth,
+                PartnerGender = existingAppointment.Partner.Gender,
                 DoctorName = existingAppointment.User.FullName,
                 AppointmentDate = existingAppointment.AppointmentDate,
                 AppointmentTime = existingAppointment.AppointmentTime,
                 Status = existingAppointment.Status,
                 CreatedAt = existingAppointment.CreatedAt
             };
+        }
+        public async Task<List<AppointmentResponse>> GetAppointmentsByUserIdAsync(int userId)
+        {
+            var appointments = await _unitOfWork.Appointments.GetAppointmentsByUserIdAsync(userId);
+
+            if (appointments == null || !appointments.Any())
+            {
+                throw new Exception("No appointments found for this user.");
+            }
+
+            return appointments.Select(a => new AppointmentResponse
+            {
+                AppointmentId = a.AppointmentId,
+                PatientName = a.User.FullName,
+                PatientDOB = a.User.DateOfBirth,
+                PatientGender = a.User.Gender,
+                PhoneNumber = a.User.Phone,
+                PartnerName = a.Partner?.FullName,
+                PartnerDOB = a.Partner?.DateOfBirth,
+                PartnerGender = a.Partner?.Gender,
+                DoctorName = a.Doctor?.User?.FullName ?? "Unknown",
+                AppointmentDate = a.AppointmentDate,
+                AppointmentTime = a.AppointmentTime,
+                Status = a.Status,
+                CreatedAt = a.CreatedAt
+            }).ToList();
         }
 
     }

@@ -1,4 +1,5 @@
-﻿using FertilityClinic.BLL.Services.Interfaces;
+﻿using System.Security.Claims;
+using FertilityClinic.BLL.Services.Interfaces;
 using FertilityClinic.DTO.Constants;
 using FertilityClinic.DTO.Requests;
 using Microsoft.AspNetCore.Authorization;
@@ -146,13 +147,29 @@ namespace FertilityClinic.Controllers
             }
 
         }
-        [Authorize(Roles = "Admin, User")]
-        [HttpGet]
-        [Route(APIEndPoints.Users.GetAllPatients)]
-        public async Task<IActionResult> GetAllPatients()
+        //[Authorize(Roles = "Admin, User")]
+        //[HttpGet]
+        //[Route(APIEndPoints.Users.GetAllPatients)]
+        //public async Task<IActionResult> GetAllPatients()
+        //{
+        //    var users = await _userService.GetAllPatientAsync();
+        //    return Ok(users);
+        //}
+        [Authorize(Roles = "Doctor")]
+        [HttpGet("api/users/get-all-users-by-appointments")]
+        public async Task<IActionResult> GetUsersByCurrentDoctor()
         {
-            var users = await _userService.GetAllPatientAsync();
-            return Ok(users);
+            try
+            {
+                var userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value ?? "0");
+                var users = await _userService.GetUsersByCurrentDoctorAsync(userId);
+                return Ok(users);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { message = ex.Message });
+            }
         }
+
     }
 }

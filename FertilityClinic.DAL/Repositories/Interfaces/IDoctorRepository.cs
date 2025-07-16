@@ -15,5 +15,6 @@ namespace FertilityClinic.DAL.Repositories.Interfaces
         Task<bool> CreateDoctorAsync(Doctor doctor);
         Task<Doctor> UpdateDoctorAsync(Doctor doctor);
         Task<bool> DeleteDoctorAsync(int id);
+        Task<Doctor?> GetDoctorByUserIdAsync(int userId);
     }
 }

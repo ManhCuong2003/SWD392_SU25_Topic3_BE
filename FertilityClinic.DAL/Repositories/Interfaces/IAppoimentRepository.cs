@@ -17,6 +17,7 @@ namespace FertilityClinic.DAL.Repositories.Interfaces
         Task<bool> IsAppointmentTimeConflictAsync(int doctorId, DateOnly appointmentDate, TimeOnly appointmentTime, int? excludeAppointmentId = null);
         Task<bool> IsPatientHasAppointmentOnDateAsync(int userId, DateOnly appointmentDate, int? excludeAppointmentId = null);
         Task<bool> IsTimeSlotConflictAsync(int doctorId, DateOnly appointmentDate, TimeOnly appointmentTime, int bufferMinutes = 30, int? excludeAppointmentId = null);
+        Task<List<Appointment>> GetAppointmentsByUserIdAsync(int userId);
 
     }
 }

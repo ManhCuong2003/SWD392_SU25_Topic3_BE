@@ -16,5 +16,7 @@ namespace FertilityClinic.BLL.Services.Interfaces
         Task<List<AppointmentResponse>> GetAllAppointmentsAsync();
         Task<AppointmentResponse> GetAppointmentByIdAsync(int appointmentId);
         Task<AppointmentResponse> UpdateAppointmentAsync(int id, UpdateAppointmentRequest appointment);
+        Task<List<AppointmentResponse>> GetAppointmentsByUserIdAsync(int userId);
+
     }
 }

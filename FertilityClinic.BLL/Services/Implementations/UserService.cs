@@ -212,44 +212,46 @@ namespace FertilityClinic.BLL.Services.Implementations
 
             return response;
         }
-
-        public async Task<List<GetAllPatientsResponse>> GetAllPatientAsync()
+        public async Task<List<AppointmentResponse>> GetUsersByCurrentDoctorAsync(int userId)
         {
-            var users = await _unitOfWork.Users.GetAllActiveUsersAsync();
+            var doctor = await _unitOfWork.Doctors.GetDoctorByUserIdAsync(userId);
+            if (doctor == null)
+                throw new Exception("Doctor not found");
 
-            var patients = users
-                .Where(u => u.Role != null && u.Role.Equals("User", StringComparison.OrdinalIgnoreCase))
-                .Select(user => new GetAllPatientsResponse
+            var appointments = await _unitOfWork.Appointments.GetAllAppointmentsAsync();
+
+            var result = appointments
+                .Where(a => a.DoctorId == doctor.DoctorId && a.User != null)
+                .Select(a => new AppointmentResponse
                 {
-                    UserId = user.UserId,
-                    FullName = user.FullName ?? "",
-                    Email = user.Email ?? "",
-                    PhoneNumber = user.Phone ?? "",
-                    Role = user.Role ?? "",
-                    Gender = user.Gender ?? "",
-                    DateOfBirth = user.DateOfBirth,
-                    HealthInsuranceId = user.HealthInsuranceId ?? "",
-                    NationalId = user.NationalId ?? "",
-                    CreatedAt = user.CreatedAt,
-                    UpdatedAt = user.UpdatedAt,
-                    IsMarried = user.IsMarried ?? false,
-                    Address = user.Address ?? "",
-                    Partner = user.IsMarried == true && user.Partner != null
-                        ? new PartnerResponse
-                        {
-                            PartnerId = user.PartnerId,
-                            FullName = user.Partner.FullName ?? "",
-                            DateOfBirth = user.Partner.DateOfBirth,
-                            Gender = user.Partner.Gender ?? "",
-                            Phone = user.Partner.Phone ?? "",
-                            NationalId = user.Partner.NationalId ?? "",
-                            HealthInsuranceId = user.Partner.HealthInsuranceId ?? ""
-                        }
-                        : null
-                }).ToList();
+                    AppointmentId = a.AppointmentId,
+                    AppointmentDate = a.AppointmentDate,
+                    AppointmentTime = a.AppointmentTime,
+                    Status = a.Status,
+                    CreatedAt = a.CreatedAt,
 
-            return patients;
+                    PatientName = a.User.FullName ?? "",
+                    PatientDOB = a.User.DateOfBirth,
+                    PatientGender = a.User.Gender ?? "",
+                    PhoneNumber = a.User.Phone ?? "",
+
+                    PartnerName = a.Partner?.FullName ?? "",
+                    PartnerDOB = a.Partner?.DateOfBirth,
+                    PartnerGender = a.Partner?.Gender ?? "",
+
+                    DoctorName = doctor.User.FullName ?? "",
+
+                    MethodName = "", // Nếu có thể lấy từ method thì thêm ở đây
+                    MethodPrice = 0,
+                    TreatmentMethodId = 0
+                })
+                .ToList();
+
+            if (result.Count == 0)
+                throw new Exception("Bác sĩ hiện chưa có cuộc hẹn nào");
+
+            return result;
         }
-        
+
     }
 }
