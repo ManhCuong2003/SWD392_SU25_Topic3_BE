@@ -11,16 +11,7 @@ namespace FertilityClinic.DTO.Responses
     public class AppointmentResponse
     {
         public int AppointmentId { get; set; }
-        public int TreatmentMethodId { get; set; }
-        public string PatientName { get; set; }
-        public DateOnly? PatientDOB { get; set; }
-        public string PatientGender { get; set; }
-        public string PhoneNumber { get; set; }
-        public string MethodName { get; set; }
-        public float MethodPrice { get; set; }
-        public string PartnerName { get; set; }
-        public DateOnly? PartnerDOB { get; set; }
-        public string PartnerGender { get; set; }
+        public UserResponse User { get; set; }
         public string DoctorName { get; set; }
         [Required]
         [Column(TypeName = "date")]

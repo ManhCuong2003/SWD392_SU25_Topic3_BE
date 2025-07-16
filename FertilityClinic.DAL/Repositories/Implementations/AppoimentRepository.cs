@@ -39,6 +39,7 @@ namespace FertilityClinic.DAL.Repositories.Implementations
         {
             return await _context.Appointments
                 .Include(a => a.Doctor)
+                .ThenInclude(b => b.User)
                 .Include(a => a.User)
                 .Include(a => a.Partner)
                 .ToListAsync();
