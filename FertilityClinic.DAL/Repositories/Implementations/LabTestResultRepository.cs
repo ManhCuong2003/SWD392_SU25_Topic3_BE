@@ -39,7 +39,7 @@ namespace FertilityClinic.DAL.Repositories.Implementations
         {
             return await _context.LabTestResults
                 //.Include(ltr => ltr.LabTestSchedule)
-                .Include(ltr => ltr.Doctor)
+                .Include(ltr => ltr.User)
                 .ToListAsync();
         }
 
@@ -47,7 +47,7 @@ namespace FertilityClinic.DAL.Repositories.Implementations
         {
             return await _context.LabTestResults
                 //.Include(ltr => ltr.LabTestSchedule)
-                .Include(ltr => ltr.Doctor)
+                .Include(ltr => ltr.User)
                 .FirstOrDefaultAsync(ltr => ltr.LabTestResultId == labTestResultId);
         }
     }

@@ -9,8 +9,8 @@ namespace FertilityClinic.DAL.Models
     public class LabTestResult
     {
         public int LabTestResultId { get; set; }
-        public int LabTestScheduleId { get; set; }
-        public int DoctorId { get; set; }
+        //public int LabTestScheduleId { get; set; }
+        public int UserId { get; set; }
         public string? Name { get; set; }
         public string? Result { get; set; }
         public string? Normal { get; set; }
@@ -19,6 +19,6 @@ namespace FertilityClinic.DAL.Models
         public DateTime Date { get; set; }
         
         //public  virtual LabTestSchedule? LabTestSchedule { get; set; }
-        public  virtual Doctor? Doctor { get; set; }
+        public  virtual User? User { get; set; }
     }
 }

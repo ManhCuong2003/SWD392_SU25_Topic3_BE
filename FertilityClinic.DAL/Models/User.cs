@@ -32,5 +32,6 @@ namespace FertilityClinic.DAL.Models
         public virtual Doctor? Doctor { get; set; }
         public ICollection<Notification>? Notifications { get; set; }
         public ICollection<Blog>? Blogs { get; set; }
+        public ICollection<LabTestResult> LabTestResults { get; set; }
     }
 }

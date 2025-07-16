@@ -19,12 +19,12 @@ namespace FertilityClinic.BLL.Services.Implementations
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<LabTestResultResponse> CreateLabTestResultAsync(LabTestResultRequest labTestResult, int docterId)
+        public async Task<LabTestResultResponse> CreateLabTestResultAsync(LabTestResultRequest labTestResult, int userId)
         {
             var newLabTestResult = new LabTestResult
             {
                 //LabTestScheduleId = labTestScheduleId,
-                DoctorId = docterId,
+                UserId = userId,
                 Name = labTestResult.Name,
                 Result = labTestResult.Result,
                 Normal = labTestResult.Normal,
@@ -38,8 +38,8 @@ namespace FertilityClinic.BLL.Services.Implementations
             return new LabTestResultResponse
             {
                 LabTestResultId = newLabTestResult.LabTestResultId,
-                LabTestScheduleId = newLabTestResult.LabTestScheduleId,
-                DoctorId = newLabTestResult.DoctorId,
+                //LabTestScheduleId = newLabTestResult.LabTestScheduleId,
+                UserId = newLabTestResult.UserId,
                 Name = newLabTestResult.Name,
                 Result = newLabTestResult.Result,
                 Normal = newLabTestResult.Normal,
@@ -71,8 +71,8 @@ namespace FertilityClinic.BLL.Services.Implementations
             return labTestResults.Select(result => new LabTestResultResponse
             {
                 LabTestResultId = result.LabTestResultId,
-                LabTestScheduleId = result.LabTestScheduleId,
-                DoctorId = result.DoctorId,
+                //LabTestScheduleId = result.LabTestScheduleId,
+                UserId = result.UserId,
                 Name = result.Name,
                 Result = result.Result,
                 Normal = result.Normal,
@@ -91,12 +91,12 @@ namespace FertilityClinic.BLL.Services.Implementations
                 throw new Exception("Lab Test Result not found");
             }
             //var labTestSchedule = await _unitOfWork.LabTestSchedules.GetByIdAsync(labTestResult.LabTestScheduleId);
-            var doctor = await _unitOfWork.Doctors.GetByIdAsync(labTestResult.DoctorId);
+            var doctor = await _unitOfWork.Users.GetByIdAsync(labTestResult.UserId);
             return new LabTestResultResponse
             {
                 LabTestResultId = labTestResult.LabTestResultId,
-                LabTestScheduleId = labTestResult.LabTestScheduleId,
-                DoctorId = labTestResult.DoctorId,
+                //LabTestScheduleId = labTestResult.LabTestScheduleId,
+                UserId = labTestResult.UserId,
                 Name = labTestResult.Name,
                 Result = labTestResult.Result,
                 Normal = labTestResult.Normal,

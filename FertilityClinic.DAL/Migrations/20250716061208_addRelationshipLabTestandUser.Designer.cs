@@ -4,6 +4,7 @@ using FertilityClinic.DAL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FertilityClinic.DAL.Migrations
 {
     [DbContext(typeof(FertilityClinicDbContext))]
-    partial class FertilityClinicDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250716061208_addRelationshipLabTestandUser")]
+    partial class addRelationshipLabTestandUser
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -94,20 +97,12 @@ namespace FertilityClinic.DAL.Migrations
                     b.Property<DateOnly?>("PartnerDOB")
                         .HasColumnType("date");
 
-                    b.Property<string>("PartnerGender")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("PartnerName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateOnly?>("PatientDOB")
                         .HasColumnType("date");
-
-                    b.Property<string>("PatientGender")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PatientName")
                         .IsRequired()
@@ -640,9 +635,6 @@ namespace FertilityClinic.DAL.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<string>("TrackingMode")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<int>("TreatmentMethodId")
                         .HasColumnType("int");
 
@@ -762,7 +754,6 @@ namespace FertilityClinic.DAL.Migrations
                     b.HasIndex("PrescriptionId");
 
                     b.ToTable("PrescriptionItems");
-
                 });
 
             modelBuilder.Entity("FertilityClinic.DAL.Models.Appointment", b =>

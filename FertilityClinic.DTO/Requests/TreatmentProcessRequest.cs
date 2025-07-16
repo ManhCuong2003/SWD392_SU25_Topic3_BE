@@ -10,5 +10,6 @@ namespace FertilityClinic.DTO.Requests
     {
         public string ProcessName { get; set; }
         public string Notes { get; set; }
+        public string TrackingMode { get; set; }
     }
 }

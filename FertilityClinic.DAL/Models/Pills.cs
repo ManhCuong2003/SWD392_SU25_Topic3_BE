@@ -28,6 +28,6 @@ namespace FertilityClinic.DAL.Models
         public DateTime? UpdatedAt { get; set; }
 
         // Navigation properties
-        public virtual ICollection<Prescription> Prescriptions { get; set; } = new List<Prescription>();
+        public virtual ICollection<PrescriptionItem> PrescriptionItems { get; set; }
     }
 }
