@@ -10,6 +10,8 @@ using FertilityClinic.DAL.UnitOfWork;
 using FertilityClinic.DTO.Requests;
 using FertilityClinic.DTO.Responses;
 using Microsoft.AspNetCore.Mvc;
+using static FertilityClinic.DTO.Constants.APIEndPoints;
+using Doctor = FertilityClinic.DAL.Models.Doctor;
 
 namespace FertilityClinic.BLL.Services.Implementations
 {
@@ -35,7 +37,8 @@ namespace FertilityClinic.BLL.Services.Implementations
 
                 ExperienceYears = request.ExperienceYear, // Note: property name difference
                 Bio = request.Bio,
-                Education = request.Education ?? new List<string>()
+                Education = request.Education ?? new List<string>(),
+                Status = true // Default status is active
             };
             
             user.Role = "Doctor";
@@ -54,7 +57,8 @@ namespace FertilityClinic.BLL.Services.Implementations
                 ExperienceYears = doctor.ExperienceYears,
                 Bio = doctor.Bio,
                 Education = doctor.Education,
-                Email = doctor.User.Email
+                Email = doctor.User.Email,
+                Status = doctor.Status
             };
         }        
 
@@ -89,6 +93,7 @@ namespace FertilityClinic.BLL.Services.Implementations
                 Bio = d.Bio,
                 Education = d.Education,
                 Email = d.User.Email,
+                Status = d.Status
             }).ToList();
         }
 
@@ -110,6 +115,7 @@ namespace FertilityClinic.BLL.Services.Implementations
                 Bio = doctor.Bio,
                 Education = doctor.Education,
                 Email = user.Email,
+                Status = doctor.Status
             };
             
         }
@@ -163,6 +169,7 @@ namespace FertilityClinic.BLL.Services.Implementations
                 ExperienceYears = doctor.ExperienceYears,
                 Bio = doctor.Bio,
                 Education = doctor.Education,
+                Status = doctor.Status
             };
         }
     }
