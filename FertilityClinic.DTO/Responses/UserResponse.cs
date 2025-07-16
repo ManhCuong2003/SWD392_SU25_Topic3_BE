@@ -26,8 +26,14 @@ namespace FertilityClinic.DTO.Responses
         [JsonIgnore]
         public DateTime UpdatedAt { get; set; }
         public PartnerResponse? Partner { get; set; }
+        [JsonIgnore]
         public DateOnly? AppointmentDate { get; set; }
+
+        [JsonIgnore]
         public TimeOnly? AppointmentTime { get; set; }
+
+        [JsonIgnore]
+        public int AppointmentId { get; set; }
 
     }
 }

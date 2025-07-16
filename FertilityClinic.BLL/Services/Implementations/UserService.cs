@@ -245,6 +245,7 @@ namespace FertilityClinic.BLL.Services.Implementations
                         HealthInsuranceId = a.Partner.HealthInsuranceId ?? ""
                     } : null,
                     // Thêm thông tin cuộc hẹn vào response
+                    AppointmentId = a.AppointmentId,
                     AppointmentDate = a.AppointmentDate,
                     AppointmentTime = a.AppointmentTime
                 })
