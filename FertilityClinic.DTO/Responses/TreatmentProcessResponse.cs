@@ -16,6 +16,7 @@ namespace FertilityClinic.DTO.Responses
         public string TreatmentMethodName { get; set; }
         public string ProcessName { get; set; }
         public string Notes { get; set; }
+        public string TrackingMode { get; set; }
         public DateTime CreatedAt { get; set; }
         
     }

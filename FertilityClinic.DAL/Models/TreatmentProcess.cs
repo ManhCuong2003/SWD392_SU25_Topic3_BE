@@ -28,7 +28,8 @@ namespace FertilityClinic.DAL.Models
             public string? ProcessName { get; set; }
     
             public string? Notes { get; set; }
-            public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+            public string? TrackingMode { get; set; }
+        public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
         public ICollection<InjectionSchedule>? InjectionSchedules { get; set; }
             public ICollection<InseminationSchedule>? InseminationSchedules { get; set; }
             //public ICollection<LabTestSchedule>? LabTestSchedules { get; set; }

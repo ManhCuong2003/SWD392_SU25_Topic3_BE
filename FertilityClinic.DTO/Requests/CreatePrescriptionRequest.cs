@@ -1,24 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FertilityClinic.DTO.Responses
+namespace FertilityClinic.DTO.Requests
 {
-    public class PrescriptionResponse
+    public class CreatePrescriptionRequest
     {
-        public int PrescriptionId { get; set; }
-        public string Status { get; set; }
-        public DateTime PrescribedDate { get; set; }
         public int DoctorId { get; set; }
         public int UserId { get; set; }
+        public string Status { get; set; }
 
-        public List<PrescriptionItemResponse> Items { get; set; }
+        public List<CreatePrescriptionItemDto> Items { get; set; }
     }
-
-    public class PrescriptionItemResponse
+    public class CreatePrescriptionItemDto
     {
         public int PillId { get; set; }
         public string Dosage { get; set; }
@@ -27,5 +23,4 @@ namespace FertilityClinic.DTO.Responses
         public int Quantity { get; set; }
         public string Instructions { get; set; }
     }
-
 }

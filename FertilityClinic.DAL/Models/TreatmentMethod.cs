@@ -34,7 +34,7 @@ namespace FertilityClinic.DAL.Models
 
     public ICollection<TreatmentProcess>? TreatmentProcesses { get; set; }
 
-    public virtual ICollection<Prescription> Prescriptions { get; set; } = new List<Prescription>();
+    
 
     }
 }

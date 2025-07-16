@@ -11,6 +11,7 @@ namespace FertilityClinic.DTO.Requests
         
         public string? ProcessName { get; set; } // Nullable to allow partial updates
         public string? Notes { get; set; } // Nullable to allow partial updates
-        
+        public string? TrackingMode { get; set; } // Nullable to allow partial updates
+
     }
 }

@@ -37,22 +37,22 @@ namespace FertilityClinic.DAL.Repositories.Implementations
         public async Task<IEnumerable<Prescription>> GetAllPrescriptionsAsync()
         {
             return await _context.Prescriptions
-                .Include(p => p.TreatmentMethod)
+                .Include(p => p.Items)
                 .Include(p => p.User)
                 .Include(p => p.Doctor)
-                .Include(p => p.Pill)
-                .Include(p => p.Appointment)
+                //.Include(p => p.PrescriptionItemId)
+                
                 .ToListAsync();
         }
 
         public async Task<Prescription?> GetPrescriptionByIdAsync(int id)
         {
             return await _context.Prescriptions
-                .Include(p => p.TreatmentMethod)
+                
                 .Include(p => p.User)
                 .Include(p => p.Doctor)
-                .Include(p => p.Pill)
-                .Include(p => p.Appointment)
+                //.Include(p => p.Pill)
+                
                 .FirstOrDefaultAsync(p => p.PrescriptionId == id);
         }
 
@@ -61,6 +61,14 @@ namespace FertilityClinic.DAL.Repositories.Implementations
             Update(prescription);
             await _context.SaveChangesAsync();
             return await GetPrescriptionByIdAsync(prescription.PrescriptionId) ?? prescription;
+        }
+
+        public async Task<Prescription> GetPrescriptionWithItemsAsync(int id)
+        {
+            return await _context.Prescriptions
+                .Include(p => p.Items)
+                .ThenInclude(i => i.Pill)
+                .FirstOrDefaultAsync(p => p.PrescriptionId == id);
         }
     }
 }

@@ -1,25 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FertilityClinic.DTO.Responses
+namespace FertilityClinic.DTO.Requests
 {
-    public class PrescriptionResponse
+    public class UpdatePrescriptionRequest
     {
-        public int PrescriptionId { get; set; }
         public string Status { get; set; }
         public DateTime PrescribedDate { get; set; }
-        public int DoctorId { get; set; }
-        public int UserId { get; set; }
+        public DateTime? StartDate { get; set; }
+        public DateTime? EndDate { get; set; }
 
-        public List<PrescriptionItemResponse> Items { get; set; }
+        public List<UpdatePrescriptionItemDto> Items { get; set; }
     }
 
-    public class PrescriptionItemResponse
+    public class UpdatePrescriptionItemDto
     {
+        public int? ItemId { get; set; } // Có thể null nếu là thuốc mới
         public int PillId { get; set; }
         public string Dosage { get; set; }
         public string Frequency { get; set; }

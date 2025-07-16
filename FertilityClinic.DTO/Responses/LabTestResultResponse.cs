@@ -9,8 +9,8 @@ namespace FertilityClinic.DTO.Responses
     public class LabTestResultResponse
     {
         public int LabTestResultId { get; set; }
-        public int LabTestScheduleId { get; set; }
-        public int DoctorId { get; set; }
+        //public int LabTestScheduleId { get; set; }
+        public int UserId { get; set; }
         public string? Name { get; set; }
         public string? Result { get; set; }
         public string? Normal { get; set; }
