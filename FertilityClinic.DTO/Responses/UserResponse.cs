@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace FertilityClinic.DTO.Responses
@@ -12,6 +13,7 @@ namespace FertilityClinic.DTO.Responses
         public string FullName { get; set; } = null!;
         public string Email { get; set; } = null!;
         public string PhoneNumber { get; set; } = null!;
+        [JsonIgnore]
         public string Role { get; set; } = null!;
         public DateOnly? DateOfBirth { get; set; } = null!;
         public string HealthInsuranceId { get; set; } = null!;
@@ -19,10 +21,13 @@ namespace FertilityClinic.DTO.Responses
         public string Address { get; set; } = null!;
         public string Gender { get; set; } = null!;
         public bool IsMarried { get; set; }
+        [JsonIgnore]
         public DateTime CreatedAt { get; set; }
+        [JsonIgnore]
         public DateTime UpdatedAt { get; set; }
-
         public PartnerResponse? Partner { get; set; }
+        public DateOnly? AppointmentDate { get; set; }
+        public TimeOnly? AppointmentTime { get; set; }
 
     }
 }
