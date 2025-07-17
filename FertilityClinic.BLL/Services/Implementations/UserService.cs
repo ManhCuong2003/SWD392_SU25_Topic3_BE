@@ -212,7 +212,7 @@ namespace FertilityClinic.BLL.Services.Implementations
 
             return response;
         }
-        public async Task<List<UserResponse>> GetUsersByCurrentDoctorAsync(int userId)
+        public async Task<List<UserAppointmentResponse>> GetUsersByCurrentDoctorAsync(int userId)
         {
             var doctor = await _unitOfWork.Doctors.GetDoctorByUserIdAsync(userId);
             if (doctor == null)
@@ -222,7 +222,7 @@ namespace FertilityClinic.BLL.Services.Implementations
 
             var result = appointments
                 .Where(a => a.DoctorId == doctor.DoctorId && a.User != null)
-                .Select(a => new UserResponse
+                .Select(a => new UserAppointmentResponse
                 {
                     UserId = a.User.UserId,
                     FullName = a.User.FullName ?? "",
