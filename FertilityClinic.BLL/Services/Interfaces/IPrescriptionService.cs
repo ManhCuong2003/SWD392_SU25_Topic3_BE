@@ -16,7 +16,7 @@ namespace FertilityClinic.BLL.Services.Interfaces
         Task<PrescriptionResponse> CreatePrescriptionAsync(CreatePrescriptionRequest request, int UserId);
         Task<PrescriptionResponse> UpdatePrescriptionAsync(int id,UpdatePrescriptionRequest request);
         Task<bool> DeletePrescriptionAsync(int id);
-        Task<List<PrescriptionResponse>> GetPrescriptionsByUserIdAsync(int userId);
+        Task<List<PrescriptionByUserResponse>> GetPrescriptionsByUserIdAsync(int userId);
 
     }
 }
