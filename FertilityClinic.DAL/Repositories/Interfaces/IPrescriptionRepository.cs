@@ -15,5 +15,6 @@ namespace FertilityClinic.DAL.Repositories.Interfaces
         Task<Prescription> UpdatePrescriptionAsync(Prescription prescription);
         Task<bool> DeletePrescriptionAsync(int id);
         Task<Prescription> GetPrescriptionWithItemsAsync(int id);
+        Task<List<Prescription>> GetPrescriptionsByUserIdAsync(int userId);
     }
 }

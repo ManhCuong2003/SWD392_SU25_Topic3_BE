@@ -157,6 +157,8 @@ namespace FertilityClinic.DTO.Constants
             public const string GetById = $"{BasePrescription}/{{id}}";
             public const string Update = $"{BasePrescription}/update";
             public const string Delete = $"{BasePrescription}/delete/{{id}}";
+            public const string GetByUserId = $"{BasePrescription}/user/{{userId}}";
+
         }
 
         public static class Review

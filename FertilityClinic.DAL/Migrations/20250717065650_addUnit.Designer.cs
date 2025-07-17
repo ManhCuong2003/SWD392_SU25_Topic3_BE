@@ -4,6 +4,7 @@ using FertilityClinic.DAL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FertilityClinic.DAL.Migrations
 {
     [DbContext(typeof(FertilityClinicDbContext))]
-    partial class FertilityClinicDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250717065650_addUnit")]
+    partial class addUnit
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -510,6 +513,9 @@ namespace FertilityClinic.DAL.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("DoctorId")
+                        .HasColumnType("int");
+
                     b.Property<DateTime?>("EndDate")
                         .HasColumnType("datetime2");
 
@@ -535,6 +541,8 @@ namespace FertilityClinic.DAL.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("PrescriptionId");
+
+                    b.HasIndex("DoctorId");
 
                     b.HasIndex("TreatmentMethodId");
 
@@ -905,6 +913,12 @@ namespace FertilityClinic.DAL.Migrations
 
             modelBuilder.Entity("FertilityClinic.DAL.Models.Prescription", b =>
                 {
+                    b.HasOne("FertilityClinic.DAL.Models.Doctor", "Doctor")
+                        .WithMany("Prescriptions")
+                        .HasForeignKey("DoctorId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
                     b.HasOne("FertilityClinic.DAL.Models.TreatmentMethod", "TreatmentMethod")
                         .WithMany()
                         .HasForeignKey("TreatmentMethodId")
@@ -916,6 +930,8 @@ namespace FertilityClinic.DAL.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
+
+                    b.Navigation("Doctor");
 
                     b.Navigation("TreatmentMethod");
 
@@ -996,6 +1012,8 @@ namespace FertilityClinic.DAL.Migrations
                     b.Navigation("InseminationResults");
 
                     b.Navigation("InseminationSchedules");
+
+                    b.Navigation("Prescriptions");
 
                     b.Navigation("Reviews");
 
