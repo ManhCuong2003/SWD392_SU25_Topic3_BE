@@ -1,4 +1,5 @@
 ﻿using FertilityClinic.DTO.Requests;
+using FertilityClinic.DTO.Requests.FertilityClinic.DTO.Requests;
 using FertilityClinic.DTO.Responses;
 using System;
 using System.Collections.Generic;
@@ -12,9 +13,10 @@ namespace FertilityClinic.BLL.Services.Interfaces
     {
         Task<List<PrescriptionResponse>> GetAllPrescriptionsAsync();
         Task<PrescriptionResponse?> GetPrescriptionByIdAsync(int id);
-        Task<PrescriptionResponse> CreatePrescriptionAsync(CreatePrescriptionRequest request);
-        Task<PrescriptionResponse> UpdatePrescriptionAsync(int id, UpdatePrescriptionRequest request);
+        Task<PrescriptionResponse> CreatePrescriptionAsync(CreatePrescriptionRequest request, int UserId);
+        Task<PrescriptionResponse> UpdatePrescriptionAsync(int id /*UpdatePrescriptionRequest request*/);
         Task<bool> DeletePrescriptionAsync(int id);
+        Task<List<PrescriptionResponse>> GetPrescriptionsByUserIdAsync(int userId);
 
     }
 }

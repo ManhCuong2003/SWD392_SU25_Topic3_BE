@@ -25,34 +25,34 @@ namespace FertilityClinic.DAL.Repositories.Implementations
 
         public async Task<bool> DeletePrescriptionAsync(int id)
         {
-            var prescription = await _context.Prescriptions.FindAsync(id);
+            var prescription = await _context.Prescriptions
+                .Include(p => p.Items)
+                .FirstOrDefaultAsync(p => p.PrescriptionId == id);
+
             if (prescription == null)
-            {
                 return false;
-            }
-            Remove(prescription);
+
+            _context.PrescriptionItems.RemoveRange(prescription.Items);
+            _context.Prescriptions.Remove(prescription);
             return await _context.SaveChangesAsync() > 0;
         }
+
 
         public async Task<IEnumerable<Prescription>> GetAllPrescriptionsAsync()
         {
             return await _context.Prescriptions
+                .Include(p => p.TreatmentMethod)
                 .Include(p => p.Items)
-                .Include(p => p.User)
-                .Include(p => p.Doctor)
-                //.Include(p => p.PrescriptionItemId)
-                
+                    .ThenInclude(i => i.Pill)
                 .ToListAsync();
         }
 
         public async Task<Prescription?> GetPrescriptionByIdAsync(int id)
         {
             return await _context.Prescriptions
-                
-                .Include(p => p.User)
-                .Include(p => p.Doctor)
-                //.Include(p => p.Pill)
-                
+                .Include(p => p.TreatmentMethod)
+                .Include(p => p.Items)
+                .ThenInclude(i => i.Pill)
                 .FirstOrDefaultAsync(p => p.PrescriptionId == id);
         }
 
@@ -69,6 +69,16 @@ namespace FertilityClinic.DAL.Repositories.Implementations
                 .Include(p => p.Items)
                 .ThenInclude(i => i.Pill)
                 .FirstOrDefaultAsync(p => p.PrescriptionId == id);
+        }
+
+        public async Task<List<Prescription>> GetPrescriptionsByUserIdAsync(int userId)
+        {
+            return await _context.Prescriptions
+                .Where(p => p.UserId == userId)
+                .Include(p => p.TreatmentMethod)
+                .Include(p => p.Items)
+                    .ThenInclude(i => i.Pill)
+                .ToListAsync();
         }
     }
 }

@@ -54,11 +54,11 @@ namespace FertilityClinic.DAL
                 .HasForeignKey(i => i.PillId)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            modelBuilder.Entity<Prescription>()
+           /* modelBuilder.Entity<Prescription>()
                 .HasOne(p => p.Doctor)
                 .WithMany(d => d.Prescriptions)
                 .HasForeignKey(p => p.DoctorId)
-                .OnDelete(DeleteBehavior.Restrict);
+                .OnDelete(DeleteBehavior.Restrict);*/
 
            /* modelBuilder.Entity<Prescription>()
                 .HasOne(p => p.Appointment)

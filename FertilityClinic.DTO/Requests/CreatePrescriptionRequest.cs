@@ -6,21 +6,28 @@ using System.Threading.Tasks;
 
 namespace FertilityClinic.DTO.Requests
 {
-    public class CreatePrescriptionRequest
-    {
-        public int DoctorId { get; set; }
-        public int UserId { get; set; }
-        public string Status { get; set; }
+    using System.Collections.Generic;
 
-        public List<CreatePrescriptionItemDto> Items { get; set; }
-    }
-    public class CreatePrescriptionItemDto
+    namespace FertilityClinic.DTO.Requests
     {
-        public int PillId { get; set; }
-        public string Dosage { get; set; }
-        public string Frequency { get; set; }
-        public string Duration { get; set; }
-        public int Quantity { get; set; }
-        public string Instructions { get; set; }
+        public class CreatePrescriptionRequest
+        {
+            
+            public int TreatmentMethodId { get; set; }
+
+            //public string? Status { get; set; }
+            public string? Monitoring { get; set; }
+
+            public List<CreatePrescriptionItemDto>? Medications { get; set; }
+        }
+
+        public class CreatePrescriptionItemDto
+        {
+            public int PillId { get; set; }
+            public string? Unit { get; set; }
+            public string? Dosage { get; set; }
+            public int? Quantity { get; set; }
+        }
     }
+
 }

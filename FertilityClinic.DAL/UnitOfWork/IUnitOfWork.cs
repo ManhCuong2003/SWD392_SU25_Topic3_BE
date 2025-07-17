@@ -27,6 +27,7 @@ namespace FertilityClinic.DAL.UnitOfWork
         IReviewRepository Reviews { get; }
         INotificationRepository Notifications { get; }
         IBlogRepository Blogs { get; }
+        
         Task<int> SaveAsync();
     }
 }
