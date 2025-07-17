@@ -12,6 +12,9 @@ namespace FertilityClinic.DTO.Responses
     {
         public int AppointmentId { get; set; }
         public UserResponse User { get; set; }
+        //public int TreatmentMethodId { get; set; }
+        //public string MethodName { get; set; } 
+        //public float MethodPrice { get; set; }
         public string DoctorName { get; set; }
         [Required]
         [Column(TypeName = "date")]

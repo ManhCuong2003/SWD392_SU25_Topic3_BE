@@ -13,7 +13,6 @@ namespace FertilityClinic.DTO.Responses
     public string PatientName { get; set; }
     public DateOnly? PatientDOB { get; set; }
     public string PhoneNumber { get; set; }
-    public string MethodName { get; set; }
     public string PartnerName { get; set; }
     public DateOnly? PartnerDOB { get; set; }
     public string DoctorName { get; set; }
