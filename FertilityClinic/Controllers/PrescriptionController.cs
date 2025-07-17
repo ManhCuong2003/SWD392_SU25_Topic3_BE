@@ -1,6 +1,7 @@
 ﻿using FertilityClinic.BLL.Services.Implementations;
 using FertilityClinic.BLL.Services.Interfaces;
 using FertilityClinic.DTO.Requests;
+using FertilityClinic.DTO.Requests.FertilityClinic.DTO.Requests;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -19,9 +20,9 @@ namespace FertilityClinic.Controllers
 
         [Authorize(Roles = "Admin, Doctor")]
         [HttpPost("api/Prescriptions/Create")]
-        public async Task<IActionResult> CreatePrescription([FromBody] CreatePrescriptionRequest request)
+        public async Task<IActionResult> CreatePrescription([FromBody] CreatePrescriptionRequest request, int UserId)
         {
-            var result = await _prescriptionService.CreatePrescriptionAsync(request);
+            var result = await _prescriptionService.CreatePrescriptionAsync(request, UserId);
             return Ok(result); // trả về PrescriptionResponse
         }
 
@@ -52,7 +53,7 @@ namespace FertilityClinic.Controllers
             return Ok(result); // trả về PrescriptionResponse
         }
 
-        [Authorize(Roles = "Admin, Doctor")]
+        /*[Authorize(Roles = "Admin, Doctor")]
         [HttpPut("api/Prescriptions/Update")]
         public async Task<IActionResult> UpdatePrescription(int id, [FromBody] UpdatePrescriptionRequest request)
         {
@@ -66,7 +67,7 @@ namespace FertilityClinic.Controllers
                 return BadRequest($"Error updating prescription: {ex.Message}");
             }
         }
-
+        */
         [Authorize(Roles = "Admin, Doctor")]
         [HttpDelete("api/Prescriptions/Delete")]
         public async Task<IActionResult> DeletePrescription(int id)
@@ -85,5 +86,14 @@ namespace FertilityClinic.Controllers
                 return BadRequest($"Error deleting prescription: {ex.Message}");
             }
         }
+
+        [Authorize(Roles = "Admin, Doctor")]
+        [HttpGet("api/Prescriptions/user/{userId}")]
+        public async Task<IActionResult> GetPrescriptionsByUserId(int userId)
+        {
+            var result = await _prescriptionService.GetPrescriptionsByUserIdAsync(userId);
+            return Ok(result);
+        }
+
     }
 }

@@ -20,7 +20,7 @@ namespace FertilityClinic.DAL.Models
         public List<string> Education { get; set; } = new List<string>();
         public bool Status { get; set; } = true; // true for active, false for inactive
         public virtual User User { get; set; }
-        public virtual ICollection<Prescription> Prescriptions { get; set; }
+        
         public ICollection<TreatmentProcess> TreatmentProcesses { get; set; }
         public ICollection<InjectionSchedule> InjectionSchedules { get; set; }
         //public ICollection<LabTestSchedule> LabTestSchedules { get; set; }
