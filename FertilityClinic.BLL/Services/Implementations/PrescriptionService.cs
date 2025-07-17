@@ -261,14 +261,14 @@ namespace FertilityClinic.BLL.Services.Implementations
         }
 
 
-        public async Task<List<PrescriptionResponse>> GetPrescriptionsByUserIdAsync(int userId)
+        public async Task<List<PrescriptionByUserResponse>> GetPrescriptionsByUserIdAsync(int userId)
         {
             var prescriptions = await _unitOfWork.Prescriptions.GetPrescriptionsByUserIdAsync(userId);
 
-            return prescriptions.Select(p => new PrescriptionResponse
+            return prescriptions.Select(p => new PrescriptionByUserResponse
             {
                 PrescriptionId = p.PrescriptionId,
-                MethodName = p.TreatmentMethod?.MethodName ?? "",
+                TreatmentMethodId = p.TreatmentMethodId,
                 Monitoring = p.Monitoring,
                 Medications = p.Items.Select(i => new PrescriptionItemResponse
                 {
