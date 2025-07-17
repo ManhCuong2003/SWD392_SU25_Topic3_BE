@@ -180,11 +180,86 @@ namespace FertilityClinic.BLL.Services.Implementations
             return response;
         }
 
-
-        public Task<PrescriptionResponse> UpdatePrescriptionAsync(int id)
+        public async Task<PrescriptionResponse> UpdatePrescriptionAsync(int id, UpdatePrescriptionRequest request)
         {
-            throw new NotImplementedException();
+            var prescription = await _unitOfWork.Prescriptions.GetPrescriptionWithItemsAsync(id);
+            if (prescription == null)
+                throw new Exception("Đơn thuốc không tồn tại.");
+
+            // Kiểm tra TreatmentMethod mới có tồn tại không (nếu có cập nhật)
+            if (request.TreatmentMethodId.HasValue)
+            {
+                var method = await _unitOfWork.TreatmentMethods.GetByIdAsync(request.TreatmentMethodId.Value);
+                if (method == null)
+                    throw new Exception("Phương pháp điều trị không hợp lệ.");
+                prescription.TreatmentMethodId = request.TreatmentMethodId.Value;
+            }
+
+            // Cập nhật monitoring nếu có
+            if (!string.IsNullOrWhiteSpace(request.Monitoring))
+                prescription.Monitoring = request.Monitoring;
+
+            // Nếu cập nhật thuốc mới
+            if (request.Medications != null && request.Medications.Any())
+            {
+                // Xoá tất cả thuốc cũ
+                _context.PrescriptionItems.RemoveRange(prescription.Items);
+
+                // Thêm thuốc mới
+                var newItems = new List<PrescriptionItem>();
+                foreach (var m in request.Medications)
+                {
+                    if (m.PillId <= 0)
+                        throw new Exception("PillId không hợp lệ.");
+
+                    if (string.IsNullOrWhiteSpace(m.Dosage))
+                        throw new Exception("Thiếu liều dùng cho thuốc.");
+
+                    if (m.Quantity == null || m.Quantity <= 0)
+                        throw new Exception("Số lượng thuốc phải lớn hơn 0.");
+
+                    if (string.IsNullOrWhiteSpace(m.Unit))
+                        throw new Exception("Thiếu đơn vị thuốc.");
+
+                    var pill = await _unitOfWork.Pills.GetPillByIdAsync(m.PillId);
+                    if (pill == null)
+                        throw new Exception($"Thuốc với ID {m.PillId} không tồn tại.");
+
+                    newItems.Add(new PrescriptionItem
+                    {
+                        PrescriptionId = id,
+                        PillId = m.PillId,
+                        Dosage = m.Dosage,
+                        Quantity = m.Quantity.Value,
+                        Unit = m.Unit
+                    });
+                }
+
+                prescription.Items = newItems;
+            }
+
+            await _unitOfWork.SaveAsync();
+
+            // Lấy lại prescription để build response
+            var updated = await _unitOfWork.Prescriptions.GetPrescriptionWithItemsAsync(prescription.PrescriptionId);
+            if (updated == null)
+                throw new Exception("Không thể lấy đơn thuốc sau khi cập nhật.");
+
+            return new PrescriptionResponse
+            {
+                PrescriptionId = updated.PrescriptionId,
+                MethodName = updated.TreatmentMethod?.MethodName ?? "",
+                Monitoring = updated.Monitoring,
+                Medications = updated.Items.Select(i => new PrescriptionItemResponse
+                {
+                    Name = i.Pill?.Name ?? "",
+                    Unit = i.Pill?.Unit ?? "",
+                    Quantity = i.Quantity,
+                    Usage = i.Dosage
+                }).ToList()
+            };
         }
+
 
         public async Task<List<PrescriptionResponse>> GetPrescriptionsByUserIdAsync(int userId)
         {

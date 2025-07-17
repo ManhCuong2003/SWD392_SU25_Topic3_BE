@@ -53,7 +53,7 @@ namespace FertilityClinic.Controllers
             return Ok(result); // trả về PrescriptionResponse
         }
 
-        /*[Authorize(Roles = "Admin, Doctor")]
+        [Authorize(Roles = "Admin, Doctor")]
         [HttpPut("api/Prescriptions/Update")]
         public async Task<IActionResult> UpdatePrescription(int id, [FromBody] UpdatePrescriptionRequest request)
         {
@@ -67,7 +67,7 @@ namespace FertilityClinic.Controllers
                 return BadRequest($"Error updating prescription: {ex.Message}");
             }
         }
-        */
+        
         [Authorize(Roles = "Admin, Doctor")]
         [HttpDelete("api/Prescriptions/Delete")]
         public async Task<IActionResult> DeletePrescription(int id)
