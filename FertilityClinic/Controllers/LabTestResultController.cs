@@ -14,7 +14,7 @@ namespace FertilityClinic.Controllers
         {
             _labTestResultService = labTestResultService;
         }
-
+        [Authorize(Roles = "Admin,Doctor")]
         [HttpGet("GetAllLabTestResults")]
 
         public async Task<IActionResult> GetAllLabTestResults()
@@ -34,7 +34,7 @@ namespace FertilityClinic.Controllers
                 });
             }
         }
-
+        [Authorize(Roles = "Admin,Doctor")]
         [HttpGet("GetLabTestResultById/{id}")]
 
         public async Task<IActionResult> GetLabTestResultById(int id)
@@ -63,7 +63,7 @@ namespace FertilityClinic.Controllers
                 });
             }
         }
-
+        [Authorize(Roles = "Admin,Doctor")]
         [HttpPost("CreateLabTestResult")]
         public async Task<IActionResult> CreateLabTestResult(int userId, [FromBody] LabTestResultRequest labTestResultRequest)
         {
@@ -90,7 +90,7 @@ namespace FertilityClinic.Controllers
                 });
             }
         }
-
+        [Authorize(Roles = "Admin,Doctor")]
         [HttpDelete("DeleteLabTestResult/{id}")]
         public async Task<IActionResult> DeleteLabTestResult(int id)
         {
@@ -117,5 +117,13 @@ namespace FertilityClinic.Controllers
                 });
             }
         }
+        [Authorize(Roles = "Admin,Doctor,User")]
+        [HttpGet("GetByUserId/User/{userId}")]
+        public async Task<IActionResult> GetByUserId(int userId)
+        {
+            var result = await _labTestResultService.GetLabTestResultsByUserIdAsync(userId);
+            return Ok(result);
+        }
+
     }
 }

@@ -87,7 +87,7 @@ namespace FertilityClinic.Controllers
             }
         }
 
-        [Authorize(Roles = "Admin, Doctor")]
+        [Authorize(Roles = "Admin, Doctor, User")]
         [HttpGet("api/Prescriptions/user/{userId}")]
         public async Task<IActionResult> GetPrescriptionsByUserId(int userId)
         {

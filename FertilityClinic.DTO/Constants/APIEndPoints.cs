@@ -121,6 +121,8 @@ namespace FertilityClinic.DTO.Constants
             public const string GetById = $"{BaseLabTestResult}/{{labTestResultId}}";
             public const string Update = $"{BaseLabTestResult}/update/{{id}}";
             public const string Delete = $"{BaseLabTestResult}/delete/{{id}}";
+            public const string GetByUserId = $"{BaseLabTestResult}/user/{{userId}}";
+
         }
         public static class InseminationSchedule
         {
