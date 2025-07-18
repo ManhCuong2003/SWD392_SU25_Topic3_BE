@@ -8,6 +8,7 @@ namespace FertilityClinic.DTO.Responses
 {
     public class PrescriptionItemResponse
     {
+        public int? MedicationId { get; set; }
         public string? Name { get; set; }
         public string? Unit { get; set; }
         public int? Quantity { get; set; }
