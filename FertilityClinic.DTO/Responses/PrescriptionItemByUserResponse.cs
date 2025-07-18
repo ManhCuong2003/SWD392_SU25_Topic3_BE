@@ -10,7 +10,7 @@ namespace FertilityClinic.DTO.Responses
     {
         public int PrescriptionId { get; set; }
         //public string? Status { get; set; }
-
+        //public int? MedicationId { get; set; }
         public int? TreatmentMethodId { get; set; }
         public string? Monitoring { get; set; }
 

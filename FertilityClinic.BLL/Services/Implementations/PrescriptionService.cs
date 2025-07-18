@@ -269,9 +269,11 @@ namespace FertilityClinic.BLL.Services.Implementations
             {
                 PrescriptionId = p.PrescriptionId,
                 TreatmentMethodId = p.TreatmentMethodId,
+                
                 Monitoring = p.Monitoring,
                 Medications = p.Items.Select(i => new PrescriptionItemResponse
                 {
+                    MedicationId = i.PillId,
                     Name = i.Pill?.Name ?? "",
                     Unit = i.Pill?.Unit ?? "",
                     Quantity = i.Quantity,
