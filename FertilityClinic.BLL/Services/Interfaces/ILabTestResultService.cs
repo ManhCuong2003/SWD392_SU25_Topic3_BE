@@ -13,7 +13,8 @@ namespace FertilityClinic.BLL.Services.Interfaces
         Task<List<LabTestResultResponse>> GetAllLabTestResultsAsync();
         Task<LabTestResultResponse> GetLabTestResultByIdAsync(int id);
         Task<LabTestResultResponse> CreateLabTestResultAsync(LabTestResultRequest labTestResult, int userId);
-       
+        Task<List<LabTestResultResponse>> GetLabTestResultsByUserIdAsync(int userId);
+
         Task<bool> DeleteLabTestResultAsync(int id);
     }
 }

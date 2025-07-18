@@ -105,5 +105,24 @@ namespace FertilityClinic.BLL.Services.Implementations
                 Date = labTestResult.Date
             };
         }
+
+        public async Task<List<LabTestResultResponse>> GetLabTestResultsByUserIdAsync(int userId)
+        {
+            var results = await _unitOfWork.LabTestResults.GetLabTestResultsByUserIdAsync(userId);
+
+            return results.Select(r => new LabTestResultResponse
+            {
+                LabTestResultId = r.LabTestResultId,
+                UserId = r.UserId,
+                Name = r.Name,
+                Result = r.Result,
+                Normal = r.Normal,
+                Unit = r.Unit,
+                Bold = r.Bold,
+                Date = r.Date
+            }).ToList();
+        }
+
+
     }
 }
