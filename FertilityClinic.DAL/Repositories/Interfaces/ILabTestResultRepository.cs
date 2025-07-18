@@ -17,5 +17,7 @@ namespace FertilityClinic.DAL.Repositories.Interfaces
          Task<bool> DeleteLabTestResultAsync(int labTestResultId);
         Task<IEnumerable<LabTestResult>> GetLabTestResultsByUserIdAsync(int userId);
 
+        Task<LabTestResult?> GetByUserIdAsync(int userId);
+
     }
 }

@@ -9,6 +9,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
+
 namespace FertilityClinic.BLL.Services.Implementations
 {
     public class LabTestResultService : ILabTestResultService
@@ -21,6 +23,8 @@ namespace FertilityClinic.BLL.Services.Implementations
 
         public async Task<LabTestResultResponse> CreateLabTestResultAsync(LabTestResultRequest labTestResult, int userId)
         {
+            
+
             var newLabTestResult = new LabTestResult
             {
                 //LabTestScheduleId = labTestScheduleId,
@@ -54,12 +58,16 @@ namespace FertilityClinic.BLL.Services.Implementations
             var labTestResult = await _unitOfWork.LabTestResults.GetByIdAsync(id);
             if (labTestResult == null)
             {
-                throw new Exception("Lab Test Result not found");
+                throw new KeyNotFoundException($"Lab test result with ID {id} not found.");
             }
+
             _unitOfWork.LabTestResults.Remove(labTestResult);
-            await _unitOfWork.SaveAsync();
-            return true;
+            var result = await _unitOfWork.SaveAsync();
+            return result > 0;
         }
+
+
+
 
         public async Task<List<LabTestResultResponse>> GetAllLabTestResultsAsync()
         {
@@ -122,6 +130,47 @@ namespace FertilityClinic.BLL.Services.Implementations
                 Date = r.Date
             }).ToList();
         }
+        public async Task<LabTestResultResponse> UpdateLabTestResultAsync(int id, LabTestResultUpdateRequest request)
+        {
+            var labTestResult = await _unitOfWork.LabTestResults.GetByIdAsync(id);
+            if (labTestResult == null)
+                throw new KeyNotFoundException("Lab Test Result not found");
+
+            if (!string.IsNullOrWhiteSpace(request.Name))
+                labTestResult.Name = request.Name.Trim();
+
+            if (!string.IsNullOrWhiteSpace(request.Result))
+                labTestResult.Result = request.Result.Trim();
+
+            if (!string.IsNullOrWhiteSpace(request.Normal))
+                labTestResult.Normal = request.Normal.Trim();
+
+            if (!string.IsNullOrWhiteSpace(request.Unit))
+                labTestResult.Unit = request.Unit.Trim();
+
+            if (request.Bold.HasValue)
+                labTestResult.Bold = request.Bold.Value;
+
+            if (request.Date.HasValue && request.Date.Value != default)
+                labTestResult.Date = request.Date.Value;
+
+            _unitOfWork.LabTestResults.Update(labTestResult);
+            await _unitOfWork.SaveAsync();
+
+            return new LabTestResultResponse
+            {
+                LabTestResultId = labTestResult.LabTestResultId,
+                UserId = labTestResult.UserId,
+                Name = labTestResult.Name,
+                Result = labTestResult.Result,
+                Normal = labTestResult.Normal,
+                Unit = labTestResult.Unit,
+                Bold = labTestResult.Bold,
+                Date = labTestResult.Date
+            };
+        }
+
+
 
 
     }

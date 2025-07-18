@@ -15,8 +15,8 @@ namespace FertilityClinic.DAL.Models
         public string? Result { get; set; }
         public string? Normal { get; set; }
         public string? Unit { get; set; }
-        public bool Bold { get; set; } = false;
-        public DateTime Date { get; set; }
+        public bool? Bold { get; set; } = false;
+        public DateTime? Date { get; set; }
         
         //public  virtual LabTestSchedule? LabTestSchedule { get; set; }
         public  virtual User? User { get; set; }
