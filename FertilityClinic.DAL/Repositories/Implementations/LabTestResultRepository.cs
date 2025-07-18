@@ -59,6 +59,11 @@ namespace FertilityClinic.DAL.Repositories.Implementations
                 .Include(r => r.User)
                 .ToListAsync();
         }
+        public async Task<LabTestResult?> GetByUserIdAsync(int userId)
+        {
+            return await _context.LabTestResults
+                                 .FirstOrDefaultAsync(l => l.UserId == userId);
+        }
 
     }
 }

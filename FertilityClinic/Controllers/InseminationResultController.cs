@@ -1,4 +1,5 @@
 ﻿using FertilityClinic.BLL.Services.Interfaces;
+using FertilityClinic.DTO.Constants;
 using FertilityClinic.DTO.Requests;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -15,7 +16,8 @@ namespace FertilityClinic.Controllers
             _inseminationResultService = inseminationResultService;
         }
 
-        [HttpGet("GetAllInseminationResults")]
+        
+        [HttpGet(APIEndPoints.InseminationResult.GetAll)]
         public async Task<IActionResult> GetAllInseminationResults()
         {
             try
@@ -34,7 +36,7 @@ namespace FertilityClinic.Controllers
             }
         }
 
-        [HttpGet("GetInseminationResultById/{id}")]
+        [HttpGet(APIEndPoints.InseminationResult.GetById)]
         public async Task<IActionResult> GetInseminationResultById(int id)
         {
             try
@@ -61,7 +63,7 @@ namespace FertilityClinic.Controllers
             }
         }
 
-        [HttpPost("CreateInseminationResult/{inseminationScheduleId}/{doctorId}")]
+        [HttpPost("api/CreateInseminationResult/{inseminationScheduleId}/{doctorId}")]
         public async Task<IActionResult> CreateInseminationResult(int inseminationScheduleId, int doctorId, [FromBody] InseminationResultRequest request)
         {
             if (request == null)
@@ -88,7 +90,7 @@ namespace FertilityClinic.Controllers
             }
         }
 
-        [HttpDelete("DeleteInseminationResult/{id}")]
+        [HttpDelete("api/DeleteInseminationResult/{id}")]
 
         public async Task<IActionResult> DeleteInseminationResult(int id)
         {

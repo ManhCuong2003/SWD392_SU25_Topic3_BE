@@ -4,18 +4,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FertilityClinic.DTO.Responses
+namespace FertilityClinic.DTO.Requests
 {
-    public class LabTestResultResponse
+    public class LabTestResultUpdateRequest
     {
-        public int LabTestResultId { get; set; }
-        //public int LabTestScheduleId { get; set; }
-        public int UserId { get; set; }
+        //public int UserId { get; set; }
         public string? Name { get; set; }
         public string? Result { get; set; }
         public string? Normal { get; set; }
         public string? Unit { get; set; }
-        public bool? Bold { get; set; } = false;
+        public bool? Bold { get; set; }
         public DateTime? Date { get; set; }
     }
 }
